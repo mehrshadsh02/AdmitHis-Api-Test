@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from utils_ui import wait_for_spinner_to_hide, handle_sweetalert, navigate_to_inpatients
+
 
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
@@ -18,7 +20,7 @@ driver.get("http://192.168.5.19:8019")
 
 driver.add_cookie({
     "name": "token",
-    "value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjYxZmQ4ZmIyLWJkYjMtNDQ2NS04MjRlLTJhM2Y2MTg2MmQ2MCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjIiLCJOUElEIjoiIiwidXNpbmYiOiJSRVEyY0R1MjcxNEN3RWZGU0hEMTVmazhoeTRUM09UalJoNS9ibWZ3OHR0K0FUWjNPVlV4THUrdm1VUnRnQW8zQ3RKV2Nmc1hVVUMzaUUzRXRyTWJsd1V0NjAwQW9nQ0RaZFVjVnNDS0thUXVPaVNZTUJEUGJEQW9ZVUpKNGx4NiIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTMyNTU3NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.m-lOF9OKBTSIQJ8ho83v6DfPSWtK0GJP2sVeWUYrI9I"
+    "value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjBiMDg1Zjk4LWMwMmEtNDUyZC05ZmExLTRhMjE4Y2Q4NmQzOSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjIiLCJOUElEIjoiIiwidXNpbmYiOiJ1R1Zmb3Q0K1lEd3ZoSkhnODRGSWlTeGEyZW1xeEZkbkV5SGxlZ2k0cjN4Z3VEei9lQkl5azdWNENuOTQrdUFZdjJuN3JtS21QcFprRVlING0wcEx0d1JRbVBrYVBCZC9XdHVFdjAzU3laQjliaWZnKzUvbmZPZ2EraGh2aWdUNyIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTM5MzU4NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.KRj1B3dKlOSaRKbCaR7kkpIBm_2uAwcIpZZcBMsMXKo"
 })
 driver.refresh()
 
@@ -200,34 +202,16 @@ Save_Btn = wait.until(
     EC.element_to_be_clickable((By.CSS_SELECTOR, "button.btn-saveFile"))
 )
 Save_Btn.click()
-wait.until(EC.invisibility_of_element_located(
-    (By.CSS_SELECTOR, "div.back-spenner.ng-star-inserted"))
-)
-try:
-    wait.until(EC.invisibility_of_element_located(
-        (By.CSS_SELECTOR, "div.back-spenner.ng-star-inserted"))
-    )
-except TimeoutException:
-    # تست تشخیصی:
-    spinners = driver.find_elements(By.CSS_SELECTOR, "div.back-spenner")
-    print(f"Spinner count at timeout: {len(spinners)}")
-    if spinners:
-        print("Spinner HTML:", spinners[0].get_attribute("outerHTML"))
-    else:
-        print("Spinner not found but still TimeoutException!")
-    raise
 
-#  صبر میکنیم تا دکمه لغو خودش بیاد بالا
-# wait.until(EC.visibility_of_element_located(
-#     (By.CSS_SELECTOR, "div.swal2-popup.swal2-modal")
-# ))
+wait_for_spinner_to_hide(driver)
+handle_sweetalert(driver)
+navigate_to_inpatients(driver)
 
 Deny_Btn = wait.until(
     EC.element_to_be_clickable((By.CSS_SELECTOR, "button.swal2-deny.swal2-styled"))
 )
-# Deny_Btn.click()
 
-#   کمی breathing room برای انیمیشن SweetAlert بگذار
+#   کمی breathing room برای انیمیشن SweetAlert میزاریم
 WebDriverWait(driver, 3).until(
     EC.element_to_be_clickable((By.CSS_SELECTOR, "button.swal2-deny.swal2-styled"))
 )
@@ -246,3 +230,20 @@ wait.until(EC.invisibility_of_element_located(
 wait.until(EC.invisibility_of_element_located(
     (By.CSS_SELECTOR, "div.back-spenner.ng-star-inserted"))
 )
+
+#  آیتم منوی بیماران بستری را پیدا میکنیم
+menu_inpatient = wait.until(
+    EC.element_to_be_clickable((By.XPATH, "//img[@src='assets/icons/inpatient.svg']/ancestor::a"))
+)
+
+# برای اطمینان از کلیک ثبت‌شده تحت انیمیشن Angular، از ActionChains استفاده کن
+ActionChains(driver)\
+    .move_to_element(menu_inpatient)\
+    .pause(0.2)\
+    .click()\
+    .perform()
+
+# حالا انتظار برای بارگذاری صفحه بیماران بستری (مثلاً یکی از تیترهای شناخته‌شده)
+wait.until(EC.visibility_of_element_located(
+    (By.XPATH, "//h5[contains(text(),'بیماران بستری')]")
+))
