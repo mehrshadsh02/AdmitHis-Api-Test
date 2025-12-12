@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-13T01:00:55.739272" rpa="false" schemaversion="5">
+<suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
+<suite id="s1-s1" name="AdmitHis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot">
+<kw name="Create HIS Session" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-13T01:00:56.000241" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>HIS</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=${False}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-13T01:00:55.999862" elapsed="0.000816"/>
+</kw>
+<status status="PASS" start="2025-12-13T01:00:55.998999" elapsed="0.001847"/>
+</kw>
+<test id="s1-s1-t1" name="26- Search Inpatient" line="791">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-13T01:00:56.006921" level="INFO">&amp;{headers} = { Authorization=bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1h...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<arg>Accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-13T01:00:56.005860" elapsed="0.001600"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-13T01:00:56.009653" level="INFO">${body} = {'firstName': '', 'lastName': '', 'grandPaName': '', 'fatherName': '', 'nationalCode': '', 'ward': '0', 'admissionReason': None, 'doctorId': '0', 'admitId': '0', 'electronicNumber': '0', 'hospitalNumb...</msg>
+<var>${body}</var>
+<arg>firstName=</arg>
+<arg>lastName=</arg>
+<arg>grandPaName=</arg>
+<arg>fatherName=</arg>
+<arg>nationalCode=</arg>
+<arg>ward=0</arg>
+<arg>admissionReason=${None}</arg>
+<arg>doctorId=0</arg>
+<arg>admitId=0</arg>
+<arg>electronicNumber=0</arg>
+<arg>hospitalNumber=0</arg>
+<arg>dateFrom=2025/12/12</arg>
+<arg>dateTo=2025/12/12</arg>
+<arg>status=0</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-13T01:00:56.009087" elapsed="0.000715"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-13T01:00:57.575144" level="INFO">POST Request : url=http://192.168.5.19:1600/api/Patient/SearchPreAdmits 
+ path_url=/api/Patient/SearchPreAdmits 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJHam5ma3lqbWFjSk96bU84N1NBYTAxdVlLK0NTMkFleFc5ZVpnRkZnUXFyMFAwNDVJUkZFTEtnNVUrSHpIMkFzSmY3RXpVQk9BZ2tsRHlVaVcybFhtdE53bkZCSGdUVlVIZHNzdXd1ZjZaamFIaDc1UDJzMHZpaFlqd2dYYkJVNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTU5Mjc2MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.pgkeGjZ2rCxWAZrpo0IidJFY0OZVp0b4w4i3XEwrYGo', 'Cookie': 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJHam5ma3lqbWFjSk96bU84N1NBYTAxdVlLK0NTMkFleFc5ZVpnRkZnUXFyMFAwNDVJUkZFTEtnNVUrSHpIMkFzSmY3RXpVQk9BZ2tsRHlVaVcybFhtdE53bkZCSGdUVlVIZHNzdXd1ZjZaamFIaDc1UDJzMHZpaFlqd2dYYkJVNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTU5Mjc2MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.pgkeGjZ2rCxWAZrpo0IidJFY0OZVp0b4w4i3XEwrYGo', 'Content-Length': '274', 'Content-Type': 'application/json'} 
+ body=b'{"firstName": "", "lastName": "", "grandPaName": "", "fatherName": "", "nationalCode": "", "ward": "0", "admissionReason": null, "doctorId": "0", "admitId": "0", "electronicNumber": "0", "hospitalNumber": "0", "dateFrom": "2025/12/12", "dateTo": "2025/12/12", "status": "0"}' 
+ </msg>
+<msg time="2025-12-13T01:00:57.575788" level="INFO">POST Response : url=http://192.168.5.19:1600/api/Patient/SearchPreAdmits 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '716', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'Deny', 'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Download-Options': 'noopen', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Security-Policy': "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self';media-src 'self';font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content;report-uri /report", 'Content-Security-Policy-Report-Only': "default-src 'self';img-src 'self';media-src 'self'", 'X-Security': 'on', 'Date': 'Fri, 12 Dec 2025 21:30:57 GMT'} 
+ body=[{"firstName":"مهرشاد","lastName":"شيخ الاسلامي","fatherName":"مهرداد","motherName":"","grandPaName":"","momGrandPaName":"","nationalCode":"1520554001","doctorName":"Siavash Siavash","wardName":"اطفال 2","roomNo":null,"bedNo":0,"age":"23سال       ","status":"","electronicNumber":683676,"sex":"مرد       ","hospitalFileID":147979,"pishpardaght":"10000","hospitalizationTime":"1404/09/21","admitID":356084,"wardId":201,"isPreAdmit":true,"hisLiveMessage":null,"dischargeDate":null,"passport":null,"isUnder28Days":false,"getNewHid":false,"cancelHid":false,"updateHid":false,"hid":null,"followedAdmitId":null,"nextPayable":0,"doctorTotalCost":0,"totalPayment":0,"admissionReason":null}] 
+ </msg>
+<msg time="2025-12-13T01:00:57.576283" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>url=/api/Patient/SearchPreAdmits</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-13T01:00:56.010421" elapsed="1.566081"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-13T01:00:57.578496" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.577737" elapsed="0.001111"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-13T01:00:57.579777" level="INFO">${json} = [{'firstName': 'مهرشاد', 'lastName': 'شيخ الاسلامي', 'fatherName': 'مهرداد', 'motherName': '', 'grandPaName': '', 'momGrandPaName': '', 'nationalCode': '1520554001', 'doctorName': 'Siavash Siavash', '...</msg>
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.579213" elapsed="0.000658"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance($json, list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.580350" elapsed="0.000531"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-12-13T01:00:57.581710" level="INFO">Length is 1.</msg>
+<msg time="2025-12-13T01:00:57.581957" level="INFO">${count} = 1</msg>
+<var>${count}</var>
+<arg>${json}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.581339" elapsed="0.000736"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-13T01:00:57.582948" level="INFO">Returned inpatient count: 1</msg>
+<arg>Returned inpatient count: ${count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.582566" elapsed="0.000558"/>
+</kw>
+<if>
+<branch type="IF" condition="${count} &gt; 0">
+<for flavor="IN">
+<iter>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>firstName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.584898" elapsed="0.000603"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>lastName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.585715" elapsed="0.000409"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>fatherName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.586315" elapsed="0.000275"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>motherName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.586705" elapsed="0.000201"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>grandPaName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.587016" elapsed="0.000235"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>momGrandPaName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.587445" elapsed="0.000229"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>nationalCode</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.587781" elapsed="0.000178"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>doctorName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.588065" elapsed="0.000185"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>wardName</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.588357" elapsed="0.000176"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>roomNo</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.588636" elapsed="0.000189"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>bedNo</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.588930" elapsed="0.000181"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>age</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.589213" elapsed="0.000245"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>status</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.589617" elapsed="0.000250"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>electronicNumber</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.589973" elapsed="0.000203"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>sex</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.590307" elapsed="0.000193"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>hospitalFileID</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.590610" elapsed="0.000197"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>pishpardaght</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.590933" elapsed="0.000207"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>hospitalizationTime</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.591290" elapsed="0.000277"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>admitID</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.591678" elapsed="0.000219"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>wardId</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.592005" elapsed="0.000219"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>isPreAdmit</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.592321" elapsed="0.000162"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>dischargeDate</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.592605" elapsed="0.000208"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>passport</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.592914" elapsed="0.000172"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>isUnder28Days</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.593191" elapsed="0.000161"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>getNewHid</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.593444" elapsed="0.000152"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>cancelHid</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.593784" elapsed="0.000162"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>updateHid</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.594036" elapsed="0.000138"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>hid</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.594255" elapsed="0.000137"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>followedAdmitId</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.594479" elapsed="0.000136"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>nextPayable</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.594699" elapsed="0.000141"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>doctorTotalCost</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.594922" elapsed="0.000133"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>totalPayment</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.595136" elapsed="0.000130"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>admissionReason</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.595348" elapsed="0.000140"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>$item["admitID"] &gt; 0</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-12-13T01:00:57.595574" elapsed="0.000214"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2025-12-13T01:00:57.596162" level="FAIL">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</msg>
+<arg>isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2025-12-13T01:00:57.595880" elapsed="0.004554">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+</kw>
+<var name="${item}">{'firstName': 'مهرشاد', 'lastName': 'شيخ الاسلامي', 'fatherName': 'مهرداد', 'motherName': '', 'grandPaName': '', 'momGrandPaName': '', 'nationalCode': '1520554001', 'doctorName': 'Siavash Siavash', 'w...</var>
+<status status="FAIL" start="2025-12-13T01:00:57.584642" elapsed="0.015934">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+</iter>
+<var>${item}</var>
+<value>@{json}</value>
+<status status="FAIL" start="2025-12-13T01:00:57.584121" elapsed="0.016545">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+</for>
+<status status="FAIL" start="2025-12-13T01:00:57.583739" elapsed="0.017027">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+</branch>
+<status status="FAIL" start="2025-12-13T01:00:57.583688" elapsed="0.017170">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+</if>
+<doc>جستجوی بیماران بستری</doc>
+<tag>API_Patient</tag>
+<tag>METHOD_POST</tag>
+<status status="FAIL" start="2025-12-13T01:00:56.000943" elapsed="1.600629">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+</test>
+<status status="FAIL" start="2025-12-13T01:00:55.773467" elapsed="1.833263"/>
+</suite>
+<status status="FAIL" start="2025-12-13T01:00:55.750658" elapsed="1.867306"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">API_Patient</stat>
+<stat pass="0" fail="1" skip="0">METHOD_POST</stat>
+</tag>
+<suite>
+<stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>
+<stat name="AdmitHis" id="s1-s1" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitHis</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-12-13T01:00:55.732839" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot' on line 1: Singular section headers like '*** Setting ****' are deprecated. Use plural format like '*** Settings ***' instead.</msg>
+</errors>
+</robot>

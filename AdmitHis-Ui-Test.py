@@ -20,7 +20,7 @@ driver.get("http://192.168.5.19:8019")
 
 driver.add_cookie({
     "name": "token",
-    "value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjBiMDg1Zjk4LWMwMmEtNDUyZC05ZmExLTRhMjE4Y2Q4NmQzOSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjIiLCJOUElEIjoiIiwidXNpbmYiOiJ1R1Zmb3Q0K1lEd3ZoSkhnODRGSWlTeGEyZW1xeEZkbkV5SGxlZ2k0cjN4Z3VEei9lQkl5azdWNENuOTQrdUFZdjJuN3JtS21QcFprRVlING0wcEx0d1JRbVBrYVBCZC9XdHVFdjAzU3laQjliaWZnKzUvbmZPZ2EraGh2aWdUNyIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTM5MzU4NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.KRj1B3dKlOSaRKbCaR7kkpIBm_2uAwcIpZZcBMsMXKo"
+    "value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImY2NTAyMjg2LTI2MzktNDQzMi1hYzVkLTBlZjg0YTg5YzZjNCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjIiLCJOUElEIjoiIiwidXNpbmYiOiIxWmJvc3FKODJGdHhpOGFkMWIvT29XL01QcWtLL2xTekN2Z1I4bjQvcEpiWnA0WlkxbEtiUElwaWFnY3BMNU9JSmw3Q1QrOStSdWFhZWtrNFk1RFByeHY0N0RwZWcwdnRvYXcvMGdDT1RTRmFYSW5VQndEcHRqMWhoYk1oeDgzViIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTQxNTMyOCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.uX18Ml_gCIEoJOOmv-ROlqMXJXynv2KGtgu3Kk9-W7I"
 })
 driver.refresh()
 
@@ -207,21 +207,21 @@ wait_for_spinner_to_hide(driver)
 handle_sweetalert(driver)
 navigate_to_inpatients(driver)
 
-Deny_Btn = wait.until(
-    EC.element_to_be_clickable((By.CSS_SELECTOR, "button.swal2-deny.swal2-styled"))
-)
+# Deny_Btn = wait.until(
+#     EC.element_to_be_clickable((By.CSS_SELECTOR, "button.swal2-deny.swal2-styled"))
+# )
 
 #   کمی breathing room برای انیمیشن SweetAlert میزاریم
-WebDriverWait(driver, 3).until(
-    EC.element_to_be_clickable((By.CSS_SELECTOR, "button.swal2-deny.swal2-styled"))
-)
-
-#  اجرای کلیک به‌صورت واقعی با ActionChains (فوق‌العاده برای overlayها)
-ActionChains(driver)\
-    .move_to_element(Deny_Btn)\
-    .pause(0.3)\
-    .click()\
-    .perform()
+# WebDriverWait(driver, 3).until(
+#     EC.element_to_be_clickable((By.CSS_SELECTOR, "button.swal2-deny.swal2-styled"))
+# )
+#
+# #  اجرای کلیک به‌صورت واقعی با ActionChains (فوق‌العاده برای overlayها)
+# ActionChains(driver)\
+#     .move_to_element(Deny_Btn)\
+#     .pause(0.3)\
+#     .click()\
+#     .perform()
 
 # منتظر شو Alert و Spinner ناپدید بشن
 wait.until(EC.invisibility_of_element_located(
@@ -236,14 +236,46 @@ menu_inpatient = wait.until(
     EC.element_to_be_clickable((By.XPATH, "//img[@src='assets/icons/inpatient.svg']/ancestor::a"))
 )
 
-# برای اطمینان از کلیک ثبت‌شده تحت انیمیشن Angular، از ActionChains استفاده کن
-ActionChains(driver)\
-    .move_to_element(menu_inpatient)\
-    .pause(0.2)\
-    .click()\
-    .perform()
+ActionChains(driver).move_to_element(menu_inpatient).pause(0.2).click().perform()
 
-# حالا انتظار برای بارگذاری صفحه بیماران بستری (مثلاً یکی از تیترهای شناخته‌شده)
-wait.until(EC.visibility_of_element_located(
-    (By.XPATH, "//h5[contains(text(),'بیماران بستری')]")
-))
+# تیتر صفحه (نسخه صحیح طبق HTML واقعی شما)
+header_inpatients = wait.until(
+    EC.visibility_of_element_located((
+        By.XPATH,
+        "(//span[contains(@class,'title-header')][contains(text(),'بیماران بستری')])[1]"
+    ))
+)
+
+print("✅ Inpatients header detected.")
+
+# صبر برای لود کامل جدول/گرید داخلی
+wait_for_spinner_to_hide(driver)
+print("✅ Inpatients page fully stabilized.")
+
+
+# --- مرحله 2 : زدن تیک preadmit ---
+checkbox = wait.until(
+    EC.element_to_be_clickable((By.CSS_SELECTOR, "#mat-checkbox-5-input + span"))
+)
+
+ActionChains(driver).move_to_element(checkbox).pause(0.2).click().perform()
+print("✅ Preadmit checkbox selected.")
+
+wait_for_spinner_to_hide(driver)
+
+
+# --- مرحله 3 : دکمه ویرایش ---
+edit_btn = wait.until(
+    EC.element_to_be_clickable(
+        (By.XPATH, "//button[contains(@class,'btn-action')]//mat-icon[normalize-space()='edit']")
+    )
+)
+
+ActionChains(driver).move_to_element(edit_btn).pause(0.2).click().perform()
+print("✅ Edit clicked.")
+
+# ورود به صفحه ویرایش
+wait.until(
+    EC.visibility_of_element_located((By.XPATH, "//h5[contains(text(),'ویرایش')]"))
+)
+print("✅ Edit page loaded.")

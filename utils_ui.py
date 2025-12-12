@@ -38,11 +38,18 @@ def handle_sweetalert(driver, timeout=15):
 # ️⃣ ناوبری به بیماران بستری
 def navigate_to_inpatients(driver, timeout=30):
     wait = WebDriverWait(driver, timeout)
+
     menu_inpatient = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//img[@src='assets/icons/inpatient.svg']/ancestor::a"))
+        EC.element_to_be_clickable(
+            (By.XPATH, "//img[@src='assets/icons/inpatient.svg']/ancestor::a")
+        )
     )
     ActionChains(driver).move_to_element(menu_inpatient).pause(0.2).click().perform()
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//h5[contains(text(),'بیماران بستری')]")
-    ))
+
+    wait.until(
+        EC.visibility_of_element_located(
+            (By.XPATH, "(//span[contains(@class,'title-header') and contains(text(),'بیماران بستری')])[1]")
+        )
+    )
+
     print("✅ Navigated to 'بیماران بستری' page successfully.")

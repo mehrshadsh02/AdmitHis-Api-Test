@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="RobotProjectPreferences">
-    <option name="robotLanguageServerPython" value="D:\Test-Project\AdmitHis_Api-Test\.venv\Scripts\python.exe " />
+    <option name="robotLanguageServerPython" value="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Scripts\python.exe " />
     <option name="robotLanguageServerArgs" value="[&quot;-vv&quot;, &quot;--log-file=~/robotframework_ls.log&quot;]" />
   </component>
 </project>
