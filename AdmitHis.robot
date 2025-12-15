@@ -13,13 +13,21 @@ ${FILING_URL}       http://192.168.5.19:8019/filing
 
 ${CHROME_DRIVER}    C:/chromedriver.exe
 
-${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJHam5ma3lqbWFjSk96bU84N1NBYTAxdVlLK0NTMkFleFc5ZVpnRkZnUXFyMFAwNDVJUkZFTEtnNVUrSHpIMkFzSmY3RXpVQk9BZ2tsRHlVaVcybFhtdE53bkZCSGdUVlVIZHNzdXd1ZjZaamFIaDc1UDJzMHZpaFlqd2dYYkJVNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTU5Mjc2MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.pgkeGjZ2rCxWAZrpo0IidJFY0OZVp0b4w4i3XEwrYGo
+${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxNDA4MTFjLTRkMWEtNGNiNy04ZjkzLWNmNjc4ZGE1NjNmOCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiI3RW43cTNWNW5Rbm0vaWdvOWVMSmdnVWlNOG1lOFlSZWl6Y0ljTVBMdWpINWhxb1hUM1BjY2VteDJVRVJ1MGJIQ1dON3B0UzNXWXZ6QzNsYjdzZUV0NzR6b3FQcGUxblFZeHJIeW9WZC9oNnpSQ1JJaFhPaVpNdEZiOEhBWHFpRiIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTg0Mzc3NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.x6zonkiqPmjYuzK_c6ErNfFL9007DzXkfbsKNn_BHF4
 
-${COOKIE_TOKEN}  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJHam5ma3lqbWFjSk96bU84N1NBYTAxdVlLK0NTMkFleFc5ZVpnRkZnUXFyMFAwNDVJUkZFTEtnNVUrSHpIMkFzSmY3RXpVQk9BZ2tsRHlVaVcybFhtdE53bkZCSGdUVlVIZHNzdXd1ZjZaamFIaDc1UDJzMHZpaFlqd2dYYkJVNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTU5Mjc2MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.pgkeGjZ2rCxWAZrpo0IidJFY0OZVp0b4w4i3XEwrYGo
+${COOKIE_TOKEN}  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxNDA4MTFjLTRkMWEtNGNiNy04ZjkzLWNmNjc4ZGE1NjNmOCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiI3RW43cTNWNW5Rbm0vaWdvOWVMSmdnVWlNOG1lOFlSZWl6Y0ljTVBMdWpINWhxb1hUM1BjY2VteDJVRVJ1MGJIQ1dON3B0UzNXWXZ6QzNsYjdzZUV0NzR6b3FQcGUxblFZeHJIeW9WZC9oNnpSQ1JJaFhPaVpNdEZiOEhBWHFpRiIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTg0Mzc3NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.x6zonkiqPmjYuzK_c6ErNfFL9007DzXkfbsKNn_BHF4
 
 ${GLOBAL_SPINNER}     css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop
 
 ${nationalCode}    1520554001
+
+${firstName}    مهرشاد
+
+${lastName}     شیخ الاسلامی    
+
+${fatherName}   مهرداد
+
+${FileFormationID}  666415 
 
 *** Keywords ***
 
@@ -68,6 +76,7 @@ Select From Ng Select
 
 Fill Input By Id
     [Arguments]    ${id}    ${value}
+    Wait For Page Ready
     Wait For Spinner Hidden
     Wait Until Element Is Visible    id=${id}
     Clear Element Text    id=${id}
@@ -303,7 +312,7 @@ Wait For Page Ready
     [Documentation]   وارد کردن کد ملی بیمار و استعلام کد ملی
     [Tags]    UI_Test    
 
-    Fill Input By Id         mat-input-3            1520554001
+    Fill Input By Id         mat-input-3            ${nationalCode}
     Click Element Safe       id=button-addon3
 
 10-Get Person From Ditas
@@ -316,7 +325,7 @@ Wait For Page Ready
     ...    Cookie=${COOKIE_TOKEN}
 
     &{body}=    Create Dictionary
-    ...    nationalCode=1520554001
+    ...    nationalCode=${nationalCode}
     ...    passport=
     ...    birthDate=
     ...    triageId=0
@@ -328,7 +337,7 @@ Wait For Page Ready
     ...    json=&{body}
 
     Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API: GetPersonFromDitas | nationalCode=1520554001
+    ...    Fail    ❌ NO RESPONSE | API: GetPersonFromDitas | nationalCode=${nationalCode}
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
@@ -336,11 +345,11 @@ Wait For Page Ready
 
     ${json}=    To Json    ${resp.content}
 
-    ${nationalCode}=    Evaluate    $json['data']['fileFormation']['nationalCode']
+    ${nationalCode_Ditas}=    Evaluate    $json['data']['fileFormation']['nationalCode']
 
     Should Be Equal
-    ...    ${nationalCode}    1520554001
-    ...    msg=❌ DATA MISMATCH | NationalCode mismatch | Expected: 1520554001 | Actual: ${nationalCode}
+    ...    ${nationalCode_Ditas}    ${nationalCode}
+    ...    msg=❌ DATA MISMATCH | NationalCode mismatch | Expected: ${nationalCode} | Actual: ${nationalCode}
 
     Log To Console    ✅ PASS | DITAS data fetched successfully | NationalCode=${nationalCode}
 
@@ -376,7 +385,7 @@ Wait For Page Ready
     ...    Accept=application/json
 
     &{body}=    Create Dictionary
-    ...    nationalCode=1520554001
+    ...    nationalCode=${nationalCode}
     ...    fileformationId=0
 
     ${resp}=    POST On Session
@@ -405,15 +414,14 @@ Wait For Page Ready
     ...    Cookie=${COOKIE_TOKEN}
 
     &{checkDto}=    Create Dictionary
-    ...    nationalCode=3031855256
-    ...    fatherName=علی
-    ...    firstName=مهری
-    ...    lastName=مونس زاده شيرواني
-    # --- Alternative test data ---
-    # ...    nationalCode=1520554001
-    # ...    fatherName=مهرداد
-    # ...    firstName=مهرشاد
-    # ...    lastName=شیخ الاسلامی
+    # ...    nationalCode=3031855256
+    # ...    fatherName=علی
+    # ...    firstName=مهری
+    # ...    lastName=مونس زاده شيرواني
+    ...    nationalCode=${nationalCode}
+    ...    fatherName=${fatherName}
+    ...    firstName=${firstname}
+    ...    lastName=${lastname}
 
     &{body}=    Create Dictionary
     ...    checkDoublingDto=&{checkDto}
@@ -636,11 +644,11 @@ Wait For Page Ready
     Should Contain    ${resp.text}    Exception    msg=خطای سرور رخ داده (تأیید باگ)
 
     # سناریو ۲: بدون نام و نام خانوادگی (name و familyName الزامی‌اند)
-    ${resp}=    POST On Session    HIS    /api/Filing/AddFiling    json={"filingDto":{"fileFormation":{"nationalCode":"1520554001"},"hisAdmitDto":{"physicianID":993,"wardIdIn":204}}}    headers=${headers}    expected_status=anything
+    ${resp}=    POST On Session    HIS    /api/Filing/AddFiling    json={"filingDto":{"fileFormation":{"nationalCode":"${nationalCode}"},"hisAdmitDto":{"physicianID":993,"wardIdIn":204}}}    headers=${headers}    expected_status=anything
     Status Should Be    500    ${resp}    msg=باگ: عدم ارسال name/familyName باید 400 بدهد، نه 500
 
     # سناریو ۳: بدون physicianID و wardIdIn (الزامی در پذیرش)
-    ${resp}=    POST On Session    HIS    /api/Filing/AddFiling    json={"filingDto":{"fileFormation":{"nationalCode":"1520554001","name":"تست","familyName":"تست"},"hisAdmitDto":{}}}    headers=${headers}    expected_status=anything
+    ${resp}=    POST On Session    HIS    /api/Filing/AddFiling    json={"filingDto":{"fileFormation":{"nationalCode":"${nationalCode}","name":"تست","familyName":"تست"},"hisAdmitDto":{}}}    headers=${headers}    expected_status=anything
     Status Should Be    500    ${resp}    msg=باگ: عدم ارسال physicianID/wardIdIn باید 400 بدهد، نه 500
 
     Log To Console    \nباگ تأیید شد: API به‌جای 400 Bad Request، خطای 500 Internal Server Error برمی‌گرداند
@@ -656,7 +664,7 @@ Wait For Page Ready
     ...    Accept=application/json
 
     &{body}=    Create Dictionary
-    ...    nationalCode=1520554001
+    ...    nationalCode=${nationalCode}
     ...    fileformationId=0
 
     ${resp}=    POST On Session
@@ -869,3 +877,31 @@ Wait For Page Ready
             # ...    and $item["nationalCode"].isdigit())
         END
     END     
+
+
+27-UI - Edit Preadmit Patient
+    [Documentation]     ویرایش بیمار preadmit
+    [Tags]      UI_Test
+
+    Start Browser With Token
+    Go To Filing Page
+    Wait For Page Ready
+    Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a 
+    Wait For Page Ready 
+    Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
+    Wait For Page Ready
+    Fill Input By Id      mat-input-4     	1131971019
+    Click Element Safe    css=button.mat-tooltip-trigger.btn.btn-warning
+    Wait For Page Ready   
+    Click Element Safe    css=button.mat-tooltip-trigger.btn-action.ng-star-inserted 
+    Wait For Page Ready
+    Click Element Safe    css=button.mat-tooltip-trigger.btn.btn-edit1   
+    Wait For Page Ready
+    Select From Ng Select    wardfileld             اطفال 2 - تخت خالی (33)
+    Select From Ng Select    doctorField             Siavash Siavash
+    Wait For Page Ready
+    Click Element Safe     css=button.btn-saveFile
+    Wait For Page Ready
+    Click Element Safe    css=button.swal2-deny.swal2-styled
+
+     

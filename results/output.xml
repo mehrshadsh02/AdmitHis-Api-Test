@@ -1,343 +1,399 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-13T01:00:55.739272" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-16T00:00:58.960481" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
 <suite id="s1-s1" name="AdmitHis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot">
 <kw name="Create HIS Session" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-12-13T01:00:56.000241" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-12-16T00:00:59.169311" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${BASE_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-12-13T01:00:55.999862" elapsed="0.000816"/>
+<status status="PASS" start="2025-12-16T00:00:59.169033" elapsed="0.000523"/>
 </kw>
-<status status="PASS" start="2025-12-13T01:00:55.998999" elapsed="0.001847"/>
+<status status="PASS" start="2025-12-16T00:00:59.168237" elapsed="0.001453"/>
 </kw>
-<test id="s1-s1-t1" name="26- Search Inpatient" line="791">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-12-13T01:00:56.006921" level="INFO">&amp;{headers} = { Authorization=bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1h...</msg>
-<var>&amp;{headers}</var>
-<arg>Authorization=${AUTH_BEARER}</arg>
-<arg>Cookie=${COOKIE_TOKEN}</arg>
-<arg>Accept=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-12-13T01:00:56.005860" elapsed="0.001600"/>
+<test id="s1-s1-t1" name="27-UI - Edit Preadmit Patient" line="882">
+<kw name="Start Browser With Token">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:00:59.181755" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
+<arg>${FILING_URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-12-16T00:00:59.181338" elapsed="4.076559"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-12-13T01:00:56.009653" level="INFO">${body} = {'firstName': '', 'lastName': '', 'grandPaName': '', 'fatherName': '', 'nationalCode': '', 'ward': '0', 'admissionReason': None, 'doctorId': '0', 'admitId': '0', 'electronicNumber': '0', 'hospitalNumb...</msg>
-<var>${body}</var>
-<arg>firstName=</arg>
-<arg>lastName=</arg>
-<arg>grandPaName=</arg>
-<arg>fatherName=</arg>
-<arg>nationalCode=</arg>
-<arg>ward=0</arg>
-<arg>admissionReason=${None}</arg>
-<arg>doctorId=0</arg>
-<arg>admitId=0</arg>
-<arg>electronicNumber=0</arg>
-<arg>hospitalNumber=0</arg>
-<arg>dateFrom=2025/12/12</arg>
-<arg>dateTo=2025/12/12</arg>
-<arg>status=0</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-12-13T01:00:56.009087" elapsed="0.000715"/>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-12-16T00:01:03.258208" elapsed="0.040876"/>
 </kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-12-13T01:00:57.575144" level="INFO">POST Request : url=http://192.168.5.19:1600/api/Patient/SearchPreAdmits 
- path_url=/api/Patient/SearchPreAdmits 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJHam5ma3lqbWFjSk96bU84N1NBYTAxdVlLK0NTMkFleFc5ZVpnRkZnUXFyMFAwNDVJUkZFTEtnNVUrSHpIMkFzSmY3RXpVQk9BZ2tsRHlVaVcybFhtdE53bkZCSGdUVlVIZHNzdXd1ZjZaamFIaDc1UDJzMHZpaFlqd2dYYkJVNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTU5Mjc2MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.pgkeGjZ2rCxWAZrpo0IidJFY0OZVp0b4w4i3XEwrYGo', 'Cookie': 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjM1OGI1OGFlLWRlZGEtNGQ1YS1hNWY1LTBhYWJkYjAyYmNmMCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJHam5ma3lqbWFjSk96bU84N1NBYTAxdVlLK0NTMkFleFc5ZVpnRkZnUXFyMFAwNDVJUkZFTEtnNVUrSHpIMkFzSmY3RXpVQk9BZ2tsRHlVaVcybFhtdE53bkZCSGdUVlVIZHNzdXd1ZjZaamFIaDc1UDJzMHZpaFlqd2dYYkJVNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTU5Mjc2MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.pgkeGjZ2rCxWAZrpo0IidJFY0OZVp0b4w4i3XEwrYGo', 'Content-Length': '274', 'Content-Type': 'application/json'} 
- body=b'{"firstName": "", "lastName": "", "grandPaName": "", "fatherName": "", "nationalCode": "", "ward": "0", "admissionReason": null, "doctorId": "0", "admitId": "0", "electronicNumber": "0", "hospitalNumber": "0", "dateFrom": "2025/12/12", "dateTo": "2025/12/12", "status": "0"}' 
- </msg>
-<msg time="2025-12-13T01:00:57.575788" level="INFO">POST Response : url=http://192.168.5.19:1600/api/Patient/SearchPreAdmits 
- status=200, reason=OK 
- headers={'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '716', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'Deny', 'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Download-Options': 'noopen', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Security-Policy': "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self';media-src 'self';font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content;report-uri /report", 'Content-Security-Policy-Report-Only': "default-src 'self';img-src 'self';media-src 'self'", 'X-Security': 'on', 'Date': 'Fri, 12 Dec 2025 21:30:57 GMT'} 
- body=[{"firstName":"مهرشاد","lastName":"شيخ الاسلامي","fatherName":"مهرداد","motherName":"","grandPaName":"","momGrandPaName":"","nationalCode":"1520554001","doctorName":"Siavash Siavash","wardName":"اطفال 2","roomNo":null,"bedNo":0,"age":"23سال       ","status":"","electronicNumber":683676,"sex":"مرد       ","hospitalFileID":147979,"pishpardaght":"10000","hospitalizationTime":"1404/09/21","admitID":356084,"wardId":201,"isPreAdmit":true,"hisLiveMessage":null,"dischargeDate":null,"passport":null,"isUnder28Days":false,"getNewHid":false,"cancelHid":false,"updateHid":false,"hid":null,"followedAdmitId":null,"nextPayable":0,"doctorTotalCost":0,"totalPayment":0,"admissionReason":null}] 
- </msg>
-<msg time="2025-12-13T01:00:57.576283" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>HIS</arg>
-<arg>url=/api/Patient/SearchPreAdmits</arg>
-<arg>headers=&amp;{headers}</arg>
-<arg>json=${body}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-12-13T01:00:56.010421" elapsed="1.566081"/>
+<kw name="Add Cookie" owner="SeleniumLibrary">
+<arg>token</arg>
+<arg>${COOKIE_TOKEN}</arg>
+<doc>Adds a cookie to your current session.</doc>
+<status status="PASS" start="2025-12-16T00:01:03.299289" elapsed="0.005993"/>
 </kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-13T01:00:57.578496" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${resp.status_code}</arg>
-<arg>200</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.577737" elapsed="0.001111"/>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2025-12-16T00:01:03.305497" elapsed="0.136357"/>
 </kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-12-13T01:00:57.579777" level="INFO">${json} = [{'firstName': 'مهرشاد', 'lastName': 'شيخ الاسلامي', 'fatherName': 'مهرداد', 'motherName': '', 'grandPaName': '', 'momGrandPaName': '', 'nationalCode': '1520554001', 'doctorName': 'Siavash Siavash', '...</msg>
-<var>${json}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.579213" elapsed="0.000658"/>
+<doc>باز کردن کروم + تزریق کوکی token</doc>
+<status status="PASS" start="2025-12-16T00:00:59.180719" elapsed="4.261285"/>
 </kw>
-<kw name="Should Be True" owner="BuiltIn">
-<arg>isinstance($json, list)</arg>
-<doc>Fails if the given condition is not true.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.580350" elapsed="0.000531"/>
+<kw name="Go To Filing Page">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:03.442922" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
+<arg>${FILING_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-12-16T00:01:03.442751" elapsed="0.048012"/>
 </kw>
-<kw name="Get Length" owner="BuiltIn">
-<msg time="2025-12-13T01:00:57.581710" level="INFO">Length is 1.</msg>
-<msg time="2025-12-13T01:00:57.581957" level="INFO">${count} = 1</msg>
-<var>${count}</var>
-<arg>${json}</arg>
-<doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.581339" elapsed="0.000736"/>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2025-12-16T00:01:03.490943" elapsed="0.079512"/>
 </kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2025-12-13T01:00:57.582948" level="INFO">Returned inpatient count: 1</msg>
-<arg>Returned inpatient count: ${count}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.582566" elapsed="0.000558"/>
+<doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
+<status status="PASS" start="2025-12-16T00:01:03.442409" elapsed="0.128312"/>
 </kw>
-<if>
-<branch type="IF" condition="${count} &gt; 0">
-<for flavor="IN">
-<iter>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>firstName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.584898" elapsed="0.000603"/>
+<kw name="Wait For Page Ready">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:06.888674" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-24.png"&gt;&lt;img src="selenium-screenshot-24.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-16T00:01:06.889001" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2025-12-16T00:01:03.572181" elapsed="3.328967">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>lastName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.585715" elapsed="0.000409"/>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-16T00:01:03.571865" elapsed="3.329482"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>fatherName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.586315" elapsed="0.000275"/>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:06.901540" elapsed="0.009256"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>motherName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.586705" elapsed="0.000201"/>
+<status status="PASS" start="2025-12-16T00:01:03.571308" elapsed="3.339767"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>grandPaName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.587016" elapsed="0.000235"/>
+<kw name="Click Element Safe">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:06.913901" elapsed="0.011113"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>momGrandPaName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.587445" elapsed="0.000229"/>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2025-12-16T00:01:06.913212" elapsed="0.011955"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>nationalCode</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.587781" elapsed="0.000178"/>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:06.925301" elapsed="0.021890"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>doctorName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.588065" elapsed="0.000185"/>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2025-12-16T00:01:06.947618" elapsed="0.027027"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>wardName</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.588357" elapsed="0.000176"/>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2025-12-16T00:01:06.974934" elapsed="0.290731"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>roomNo</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.588636" elapsed="0.000189"/>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:07.266879" level="INFO">Clicking element 'xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-16T00:01:07.266131" elapsed="0.081445"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>bedNo</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.588930" elapsed="0.000181"/>
+<arg>xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a</arg>
+<status status="PASS" start="2025-12-16T00:01:06.912252" elapsed="0.435511"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>age</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.589213" elapsed="0.000245"/>
+<kw name="Wait For Page Ready">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:10.573458" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-25.png"&gt;&lt;img src="selenium-screenshot-25.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-16T00:01:10.573955" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2025-12-16T00:01:07.349691" elapsed="3.236080">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>status</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.589617" elapsed="0.000250"/>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-16T00:01:07.349303" elapsed="3.237032"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>electronicNumber</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.589973" elapsed="0.000203"/>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:10.586706" elapsed="0.013169"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>sex</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.590307" elapsed="0.000193"/>
+<status status="PASS" start="2025-12-16T00:01:07.348447" elapsed="3.251607"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>hospitalFileID</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.590610" elapsed="0.000197"/>
+<kw name="Click Element Safe">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:10.601328" elapsed="1.647735"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>pishpardaght</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.590933" elapsed="0.000207"/>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2025-12-16T00:01:10.601056" elapsed="1.648159"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>hospitalizationTime</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.591290" elapsed="0.000277"/>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:12.249757" elapsed="0.029299"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>admitID</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.591678" elapsed="0.000219"/>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2025-12-16T00:01:12.279538" elapsed="0.035091"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>wardId</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.592005" elapsed="0.000219"/>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2025-12-16T00:01:12.315000" elapsed="0.292810"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>isPreAdmit</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.592321" elapsed="0.000162"/>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:12.609029" level="INFO">Clicking element 'xpath=//span[contains(@class,'mat-checkbox-inner-container')]'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-16T00:01:12.608280" elapsed="0.076696"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>dischargeDate</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.592605" elapsed="0.000208"/>
+<arg>xpath=//span[contains(@class,'mat-checkbox-inner-container')]</arg>
+<status status="PASS" start="2025-12-16T00:01:10.600530" elapsed="2.084629"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>passport</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.592914" elapsed="0.000172"/>
+<kw name="Wait For Page Ready">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:15.830442" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-26.png"&gt;&lt;img src="selenium-screenshot-26.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-16T00:01:15.830696" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2025-12-16T00:01:12.686162" elapsed="3.152545">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>isUnder28Days</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.593191" elapsed="0.000161"/>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-16T00:01:12.685953" elapsed="3.152945"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>getNewHid</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.593444" elapsed="0.000152"/>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:15.839081" elapsed="0.009342"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>cancelHid</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.593784" elapsed="0.000162"/>
+<status status="PASS" start="2025-12-16T00:01:12.685517" elapsed="3.163277"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>updateHid</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.594036" elapsed="0.000138"/>
+<kw name="Fill Input By Id">
+<kw name="Wait For Page Ready">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:18.966057" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-27.png"&gt;&lt;img src="selenium-screenshot-27.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-16T00:01:18.966384" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2025-12-16T00:01:15.850606" elapsed="3.121906">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>hid</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.594255" elapsed="0.000137"/>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-16T00:01:15.850363" elapsed="3.122428"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>followedAdmitId</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.594479" elapsed="0.000136"/>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:18.973139" elapsed="0.009418"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>nextPayable</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.594699" elapsed="0.000141"/>
+<status status="PASS" start="2025-12-16T00:01:15.850014" elapsed="3.132704"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>doctorTotalCost</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.594922" elapsed="0.000133"/>
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:18.983207" elapsed="0.007758"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>totalPayment</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.595136" elapsed="0.000130"/>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2025-12-16T00:01:18.982919" elapsed="0.008276"/>
 </kw>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<arg>${item}</arg>
-<arg>admissionReason</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.595348" elapsed="0.000140"/>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=${id}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:18.991420" elapsed="0.021036"/>
 </kw>
-<kw name="Should Be True" owner="BuiltIn">
-<arg>$item["admitID"] &gt; 0</arg>
-<doc>Fails if the given condition is not true.</doc>
-<status status="PASS" start="2025-12-13T01:00:57.595574" elapsed="0.000214"/>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>id=${id}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.012826" elapsed="0.038588"/>
 </kw>
-<kw name="Should Be True" owner="BuiltIn">
-<msg time="2025-12-13T01:00:57.596162" level="FAIL">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</msg>
-<arg>isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10</arg>
-<doc>Fails if the given condition is not true.</doc>
-<status status="FAIL" start="2025-12-13T01:00:57.595880" elapsed="0.004554">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:19.052289" level="INFO">Typing text '1131971019' into text field 'id=mat-input-4'.</msg>
+<arg>id=${id}</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.051747" elapsed="0.120689"/>
 </kw>
-<var name="${item}">{'firstName': 'مهرشاد', 'lastName': 'شيخ الاسلامي', 'fatherName': 'مهرداد', 'motherName': '', 'grandPaName': '', 'momGrandPaName': '', 'nationalCode': '1520554001', 'doctorName': 'Siavash Siavash', 'w...</var>
-<status status="FAIL" start="2025-12-13T01:00:57.584642" elapsed="0.015934">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
-</iter>
-<var>${item}</var>
-<value>@{json}</value>
-<status status="FAIL" start="2025-12-13T01:00:57.584121" elapsed="0.016545">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
-</for>
-<status status="FAIL" start="2025-12-13T01:00:57.583739" elapsed="0.017027">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
-</branch>
-<status status="FAIL" start="2025-12-13T01:00:57.583688" elapsed="0.017170">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
-</if>
-<doc>جستجوی بیماران بستری</doc>
-<tag>API_Patient</tag>
-<tag>METHOD_POST</tag>
-<status status="FAIL" start="2025-12-13T01:00:56.000943" elapsed="1.600629">'isinstance($item["nationalCode"], int)and len($item["nationalCode"]) == 10' should be true.</status>
+<arg>mat-input-4</arg>
+<arg>1131971019</arg>
+<status status="PASS" start="2025-12-16T00:01:15.849447" elapsed="3.323273"/>
+</kw>
+<kw name="Click Element Safe">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.174155" elapsed="0.009329"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2025-12-16T00:01:19.173783" elapsed="0.009859"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.183771" elapsed="0.015605"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.199843" elapsed="0.018399"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.218460" elapsed="0.278183"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:19.498010" level="INFO">Clicking element 'css=button.mat-tooltip-trigger.btn.btn-warning'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.497247" elapsed="0.101854"/>
+</kw>
+<arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
+<status status="PASS" start="2025-12-16T00:01:19.173179" elapsed="0.426113"/>
+</kw>
+<kw name="Wait For Page Ready">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:22.732405" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-28.png"&gt;&lt;img src="selenium-screenshot-28.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-16T00:01:22.732995" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2025-12-16T00:01:19.600497" elapsed="3.141642">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-16T00:01:19.600263" elapsed="3.142304"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:22.743048" elapsed="0.014259"/>
+</kw>
+<status status="PASS" start="2025-12-16T00:01:19.599803" elapsed="3.157698"/>
+</kw>
+<kw name="Click Element Safe">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-16T00:01:22.759624" elapsed="0.011880"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2025-12-16T00:01:22.758937" elapsed="0.013061"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<msg time="2025-12-16T00:01:28.033933" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-29.png"&gt;&lt;img src="selenium-screenshot-29.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-16T00:01:28.034528" level="FAIL">Element 'css=button.mat-tooltip-trigger.btn-action.ng-star-inserted' not visible after 5 seconds.</msg>
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-12-16T00:01:22.772180" elapsed="5.270863">Element 'css=button.mat-tooltip-trigger.btn-action.ng-star-inserted' not visible after 5 seconds.</status>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="NOT RUN" start="2025-12-16T00:01:28.043370" elapsed="0.000193"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="NOT RUN" start="2025-12-16T00:01:28.043757" elapsed="0.000169"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-12-16T00:01:28.044124" elapsed="0.000160"/>
+</kw>
+<arg>css=button.mat-tooltip-trigger.btn-action.ng-star-inserted</arg>
+<status status="FAIL" start="2025-12-16T00:01:22.758058" elapsed="5.286737">Element 'css=button.mat-tooltip-trigger.btn-action.ng-star-inserted' not visible after 5 seconds.</status>
+</kw>
+<kw name="Wait For Page Ready">
+<status status="NOT RUN" start="2025-12-16T00:01:28.045487" elapsed="0.000136"/>
+</kw>
+<kw name="Click Element Safe">
+<arg>css=button.mat-tooltip-trigger.btn.btn-edit1</arg>
+<status status="NOT RUN" start="2025-12-16T00:01:28.046303" elapsed="0.000388"/>
+</kw>
+<kw name="Wait For Page Ready">
+<status status="NOT RUN" start="2025-12-16T00:01:28.047429" elapsed="0.000358"/>
+</kw>
+<kw name="Select From Ng Select">
+<arg>wardfileld</arg>
+<arg>اطفال 2 - تخت خالی (33)</arg>
+<status status="NOT RUN" start="2025-12-16T00:01:28.048284" elapsed="0.000138"/>
+</kw>
+<kw name="Select From Ng Select">
+<arg>doctorField</arg>
+<arg>Siavash Siavash</arg>
+<status status="NOT RUN" start="2025-12-16T00:01:28.048906" elapsed="0.000343"/>
+</kw>
+<kw name="Wait For Page Ready">
+<status status="NOT RUN" start="2025-12-16T00:01:28.049679" elapsed="0.000133"/>
+</kw>
+<kw name="Click Element Safe">
+<arg>css=button.btn-saveFile</arg>
+<status status="NOT RUN" start="2025-12-16T00:01:28.050270" elapsed="0.000135"/>
+</kw>
+<kw name="Wait For Page Ready">
+<status status="NOT RUN" start="2025-12-16T00:01:28.050709" elapsed="0.000167"/>
+</kw>
+<kw name="Click Element Safe">
+<arg>css=button.swal2-deny.swal2-styled</arg>
+<status status="NOT RUN" start="2025-12-16T00:01:28.051539" elapsed="0.000354"/>
+</kw>
+<doc>ویرایش بیمار preadmit</doc>
+<tag>UI_Test</tag>
+<status status="FAIL" start="2025-12-16T00:00:59.169768" elapsed="28.882965">Element 'css=button.mat-tooltip-trigger.btn-action.ng-star-inserted' not visible after 5 seconds.</status>
 </test>
-<status status="FAIL" start="2025-12-13T01:00:55.773467" elapsed="1.833263"/>
+<status status="FAIL" start="2025-12-16T00:00:59.001177" elapsed="29.101877"/>
 </suite>
-<status status="FAIL" start="2025-12-13T01:00:55.750658" elapsed="1.867306"/>
+<status status="FAIL" start="2025-12-16T00:00:58.970030" elapsed="29.153467"/>
 </suite>
 <statistics>
 <total>
 <stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1" skip="0">API_Patient</stat>
-<stat pass="0" fail="1" skip="0">METHOD_POST</stat>
+<stat pass="0" fail="1" skip="0">UI_Test</stat>
 </tag>
 <suite>
 <stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>
@@ -345,6 +401,6 @@
 </suite>
 </statistics>
 <errors>
-<msg time="2025-12-13T01:00:55.732839" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot' on line 1: Singular section headers like '*** Setting ****' are deprecated. Use plural format like '*** Settings ***' instead.</msg>
+<msg time="2025-12-16T00:00:58.953086" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot' on line 1: Singular section headers like '*** Setting ****' are deprecated. Use plural format like '*** Settings ***' instead.</msg>
 </errors>
 </robot>
