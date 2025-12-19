@@ -1,4 +1,4 @@
-*** Setting ****
+*** Settings ****
 Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
@@ -13,9 +13,9 @@ ${FILING_URL}       http://192.168.5.19:8019/filing
 
 ${CHROME_DRIVER}    C:/chromedriver.exe
 
-${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxNDA4MTFjLTRkMWEtNGNiNy04ZjkzLWNmNjc4ZGE1NjNmOCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiI3RW43cTNWNW5Rbm0vaWdvOWVMSmdnVWlNOG1lOFlSZWl6Y0ljTVBMdWpINWhxb1hUM1BjY2VteDJVRVJ1MGJIQ1dON3B0UzNXWXZ6QzNsYjdzZUV0NzR6b3FQcGUxblFZeHJIeW9WZC9oNnpSQ1JJaFhPaVpNdEZiOEhBWHFpRiIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTg0Mzc3NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.x6zonkiqPmjYuzK_c6ErNfFL9007DzXkfbsKNn_BHF4
+${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk
 
-${COOKIE_TOKEN}  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxNDA4MTFjLTRkMWEtNGNiNy04ZjkzLWNmNjc4ZGE1NjNmOCIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiI3RW43cTNWNW5Rbm0vaWdvOWVMSmdnVWlNOG1lOFlSZWl6Y0ljTVBMdWpINWhxb1hUM1BjY2VteDJVRVJ1MGJIQ1dON3B0UzNXWXZ6QzNsYjdzZUV0NzR6b3FQcGUxblFZeHJIeW9WZC9oNnpSQ1JJaFhPaVpNdEZiOEhBWHFpRiIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NTg0Mzc3NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.x6zonkiqPmjYuzK_c6ErNfFL9007DzXkfbsKNn_BHF4
+${COOKIE_TOKEN}  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk
 
 ${GLOBAL_SPINNER}     css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop
 
@@ -27,7 +27,25 @@ ${lastName}     شیخ الاسلامی
 
 ${fatherName}   مهرداد
 
-${FileFormationID}  666415 
+${FileFormationID}  683676 
+
+${Admit_ID}    356115
+
+${INT_365}=          Convert To Integer    365
+${INT_912}=          Convert To Integer    912
+${INT_363}=          Convert To Integer    363
+${INT_201}=          Convert To Integer    201
+${INT_993}=          Convert To Integer    993
+${INT_6}=            Convert To Integer    6
+${INT_147979}=       Convert To Integer    147979
+${INT_683676}=       Convert To Integer    683676
+${INT_370}=          Convert To Integer    370
+${INT_5}=            Convert To Integer    5
+${INT_3}=            Convert To Integer    3
+${INT_393}=          Convert To Integer    393
+${INT_18}=           Convert To Integer    18
+${INT_422}=          Convert To Integer    422
+
 
 *** Keywords ***
 
@@ -102,6 +120,14 @@ Wait For Page Ready
     ...    ${GLOBAL_SPINNER}
     ...    ${timeout}      
 
+Normalize Integer Fields
+    [Arguments]    ${dict}    @{int_keys}
+    FOR    ${key}    IN    @{int_keys}
+        ${value}=    Get From Dictionary    ${dict}    ${key}
+        ${value}=    Convert To Integer    ${value}
+        Set To Dictionary    ${dict}    ${key}=${value}
+    END  
+
 
 *** Test Cases ***
 
@@ -112,7 +138,6 @@ Wait For Page Ready
     Go To Filing Page
     Wait For Spinner Hidden
     Log To Console    ---- DONE ----
-
 
 2-Get All Jobs
     [Documentation]    دریافت لیست کامل شغل‌ها
@@ -311,9 +336,12 @@ Wait For Page Ready
 9-UI-Enter national code of patiant
     [Documentation]   وارد کردن کد ملی بیمار و استعلام کد ملی
     [Tags]    UI_Test    
-
+    
+    
+    Wait For Page Ready
     Fill Input By Id         mat-input-3            ${nationalCode}
     Click Element Safe       id=button-addon3
+    Wait For Page Ready
 
 10-Get Person From Ditas
     [Documentation]    دریافت اطلاعات شخص از ديتاس با کدملی
@@ -485,6 +513,7 @@ Wait For Page Ready
     [Documentation]    پر کردن اطلاعات مورد نیاز بیمار 
     [Tags]    UI_Test
 
+    Wait For Page Ready
     Select From Ng Select    maritalStatus           مجرد
     Select From Ng Select    insurRelation           خود فرد
 
@@ -506,6 +535,8 @@ Wait For Page Ready
 15-UI - Assign Ward And Doctor And Prepayment
     [Documentation]    انتخاب بخش و پزشک بیمار preadmit
     [Tags]    UI_Test
+
+    Wait For Page Ready
     Select From Ng Select    wardfileld             اطفال 2 - تخت خالی (33)
     Select From Ng Select    doctorField             Siavash Siavash
     Select From Ng Select    responsiblePatient     خود فرد
@@ -625,34 +656,73 @@ Wait For Page Ready
     [Tags]    UI_Test
 
     Click Element Safe     css=button.btn-saveFile
+    Wait For Page Ready
 
-19-Add Filing Validation Bug Test
-    [Documentation]    بررسی باگ: API در صورت عدم ارسال فیلدهای اجباری به جای 400، خطای سرور 500 برمی‌گرداند
-    ...    Expected: باید 400 Bad Request با پیام اعتبارسنجی برگردد
-    ...    Actual: 500 Internal Server Error (Bug)
-    [Tags]    API_Filing  METHOD_POST  500InsteadOf400 
+19-Add Filing Validation Bug - Empty NationalCode
+    [Documentation]    BUG-1247 - Empty nationalCode causes 500 instead of 400
+    [Tags]    API    NEGATIVE    VALIDATION    BUG_1247
 
     ${headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
-    ...    Content-Type=application/json
     ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    AID=777
+    ...    Origin=http://192.168.5.19:8019
+    ...    Referer=http://192.168.5.19:8019/
 
-    # سناریو ۱: بدون کد ملی (nationalCode الزامی است)
-    ${resp}=    POST On Session    HIS    /api/Filing/AddFiling    json={"filingDto":{"fileFormation":{"name":"تست","familyName":"تست"},"hisAdmitDto":{"physicianID":993,"wardIdIn":204}}}    headers=${headers}    expected_status=anything
-    Status Should Be    500    ${resp}    msg=باگ: عدم ارسال nationalCode باید 400 بدهد، نه 500
-    Should Contain    ${resp.text}    Exception    msg=خطای سرور رخ داده (تأیید باگ)
+    ${fileFormation}=    Create Dictionary
+    ...    name=مهرشاد
+    ...    familyName=شیخ الاسلامی
+    ...    fatherName=مهرداد
+    ...    nationalCode=${EMPTY}
+    ...    birthDate=2002/07/07
+    ...    sex=365
+    ...    nationality=912
+    ...    maritalStatus=363
+    ...    mobileNo=09383509316
+    ...    birthPlace=363
+    ...    addressLine=dfgdfgdfgd
+    ...    hospitalFileID=147979
+    ...    fileFormationId=683676
+    ...    isNationalCodeRequired=${True}
 
-    # سناریو ۲: بدون نام و نام خانوادگی (name و familyName الزامی‌اند)
-    ${resp}=    POST On Session    HIS    /api/Filing/AddFiling    json={"filingDto":{"fileFormation":{"nationalCode":"${nationalCode}"},"hisAdmitDto":{"physicianID":993,"wardIdIn":204}}}    headers=${headers}    expected_status=anything
-    Status Should Be    500    ${resp}    msg=باگ: عدم ارسال name/familyName باید 400 بدهد، نه 500
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=683676
+    ...    wardIdIn=201
+    ...    physicianID=993
+    ...    admissionType=370
+    ...    patientClass=5
+    ...    priority=3
+    ...    entranceType=393
+    ...    admissionReason=دل درد
+    ...    insuranceID=6
+    ...    insuranceNO=0019208291
+    ...    insuranceExpDate=2026/01/05
+    ...    sponsor=خود فرد
+    ...    maritalStatus=363
+    ...    admitDate=2025/12/19
+    ...    admitTime=17:40
 
-    # سناریو ۳: بدون physicianID و wardIdIn (الزامی در پذیرش)
-    ${resp}=    POST On Session    HIS    /api/Filing/AddFiling    json={"filingDto":{"fileFormation":{"nationalCode":"${nationalCode}","name":"تست","familyName":"تست"},"hisAdmitDto":{}}}    headers=${headers}    expected_status=anything
-    Status Should Be    500    ${resp}    msg=باگ: عدم ارسال physicianID/wardIdIn باید 400 بدهد، نه 500
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=422
+    ...    wasInEmergency=${False}
 
-    Log To Console    \nباگ تأیید شد: API به‌جای 400 Bad Request، خطای 500 Internal Server Error برمی‌گرداند
-    Log    BUG-1247: AddFiling returns 500 instead of 400 on missing required fields    level=WARN
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${resp}=    POST On Session
+    ...    HIS
+    ...    url=/api/Filing/EditFiling
+    ...    headers=${headers}
+    ...    json=${body}
+    ...    expected_status=anything
+
+    Should Be Equal As Integers    ${resp.status_code}    500
+
 
 20-Check Patient Debt
     [Documentation]    بررسی بدهی بیمار
@@ -699,6 +769,7 @@ Wait For Page Ready
     # Go To Filing Page
     Wait For Page Ready
     Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a   
+    Wait For Page Ready
 
 23-Get All Name Inpatient Ward
     [Documentation]    دریافت لیست بخش ها به هماره تخت های خالی
@@ -795,6 +866,7 @@ Wait For Page Ready
     # Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a  
     Wait For Page Ready
     Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
+    Wait For Page Ready
 
 26- Search Inpatient 
     [Documentation]   جستجوی بیماران بستری
@@ -883,14 +955,14 @@ Wait For Page Ready
     [Documentation]     ویرایش بیمار preadmit
     [Tags]      UI_Test
 
-    Start Browser With Token
-    Go To Filing Page
-    Wait For Page Ready
-    Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a 
-    Wait For Page Ready 
-    Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
-    Wait For Page Ready
-    Fill Input By Id      mat-input-4     	1131971019
+    # Start Browser With Token
+    # Go To Filing Page
+    # Wait For Page Ready
+    # Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a 
+    # Wait For Page Ready 
+    # Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
+    # Wait For Page Ready
+    Fill Input By Id      mat-input-56     	1520554001
     Click Element Safe    css=button.mat-tooltip-trigger.btn.btn-warning
     Wait For Page Ready   
     Click Element Safe    css=button.mat-tooltip-trigger.btn-action.ng-star-inserted 
@@ -903,5 +975,220 @@ Wait For Page Ready
     Click Element Safe     css=button.btn-saveFile
     Wait For Page Ready
     Click Element Safe    css=button.swal2-deny.swal2-styled
+    Wait For Page Ready 
+    Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
+    Wait For Page Ready
 
-     
+28- Edit Filing PreAdmit
+    [Documentation]  ویرایش Filing بیمار و اعتبارسنجی پاسخ
+    [Tags]    API_Filing    METHOD_POST  
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    ...    Content-Type=application/json
+
+
+    ${fileFormation}=    Create Dictionary
+    ...    name=مهرشاد
+    ...    nameEn= 
+    ...    middleName=شيخ الاسلامي - مهرشاد
+    ...    familyName=شيخ الاسلامي
+    ...    familyEnName= 
+    ...    fatherName=مهرداد
+    ...    grandPaName= 
+    ...    motherName= 
+    ...    momGrandPaName= 
+    ...    unknownType=${0}
+    ...    passportType=${0}
+    ...    maritalStatus=${363}
+    ...    cityId=${363}
+    ...    relegiousStatus=مسلمان
+    ...    residencePermit=${False}
+    ...    nationalCode=1520554001
+    ...    parentNationalCode= 
+    ...    identityCode= 
+    ...    nationality=${912}
+    ...    passportNumber= 
+    ...    sex=${365}
+    ...    sexString=مرد
+    ...    email= 
+    ...    mobileNo=09383509316
+    ...    birthPlace=${363}
+    ...    birthPlaceOut= 
+    ...    birthDate=2002/07/07
+    ...    maritalStatusString=مجرد
+    ...    nationalityTitle=ایرانی
+    ...    birthPlaceString=تهران
+    ...    image= 
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo= 
+    ...    postalCode= 
+    ...    unknown=${False}
+    ...    hospitalFileID=${147979}
+    ...    sensitivity= 
+    ...    contagion= 
+    ...    note1= 
+    ...    note2= 
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=${0}
+    ...    fileFormationId=${683676}
+    ...    husbandName= 
+    ...    husbandLastName= 
+    ...    triageId=${0}
+    ...    isNationalCodeRequired=${True}
+    ...    AgeUnit=سال
+
+    ${hisAdmitDto}=    Create Dictionary
+    ...     fileFormationID=${683676}
+    ...     inquiryUId=52c30e55-d8be-4b0c-baff-8ec115514ac6
+    ...     admitDate=1404/09/26
+    ...     admitTime= 
+    ...     isDischarged=${False}
+    ...     dischargeDate= 
+    ...     dischargeTime= 
+    ...     dischargeStep=${0}
+    ...     dischargeDebt=${0}
+    ...     wardIdIn=${201}
+    ...     wardName= 
+    ...     physicianID=${993}
+    ...     recommender= 
+    ...     admissionType=${370}
+    ...     patientClass=${5}
+    ...     priority=${3}
+    ...     ability=${0}
+    ...     limitation1=${False}
+    ...     limitation2=${False}
+    ...     limitation3=${False}
+    ...     limitation4=${False}
+    ...     limitation5=${False}
+    ...     bPolice=${True}
+    ...     bCutting=${True}
+    ...     bDischarge=${True}
+    ...     bSurgery=${True}
+    ...     bUsingFile=${True}
+    ...     admissionReason=دل درد
+    ...     entranceType=${393}
+    ...     emsId=${0}
+    ...     krokiCode=${0}
+    ...     diagnosis=(4شکستگیT14.8
+    ...     diagnosisId=${13308}
+    ...     insuranceID=${6}
+    ...     insurPageNo=${0}
+    ...     insurSerialNO= 
+    ...     recomendationNo= 
+    ...     insurMax=${0}
+    ...     pishPardaght=${10000}
+    ...     pishPardaghtDoctor=${0}
+    ...     doctorTotalCost=${0}
+    ...     referenceDoctorID=${0}
+    ...     insuranceNO=0019208291
+    ...     insuranceExpDate=2026/01/05
+    ...     sponsor=خود فرد
+    ...     degree=${0}
+    ...     shebaNo= 
+    ...     maritalStatus=${363}
+    ...     job= 
+    ...     jobId=${0}
+    ...     homeCity=تهران
+    ...     homeZone= 
+    ...     homeAddress=dfgdfgdfgd
+    ...     homePhone1=09383509316
+    ...     homePhone2= 
+    ...     homePostCode= 
+    ...     workPlaceName= 
+    ...     workCity= 
+    ...     workAddress= 
+    ...     workPhone1= 
+    ...     workPhone2= 
+    ...     workFax= 
+    ...     workPostCode= 
+    ...     familyFullName=مهرشاد شيخ الاسلامي
+    ...     familyRelationship= 
+    ...     familyCity=تهران
+    ...     familyAddress=dfgdfgdfgd
+    ...     familyPhone1=09383586316
+    ...     familyPhone2= 
+    ...     familyPostCode= 
+    ...     husbandNCode= 
+    ...     husbandFirstName= 
+    ...     husbandLastName= 
+    ...     husbandBirthDate=${None} 
+    ...     husbandIdentityNo= 
+    ...     husbandIssuePlaceID=${363}
+    ...     husbandJobID=${0}
+    ...     husbandNationalityID=${912}
+    ...     husbandPassportID= 
+    ...     tourismId=${0}
+    ...     isPregnant=${False}
+    ...     iD_Admit=${356115}
+    ...     bedId=${0}
+    ...     bedNo= 
+    ...     referal=${None} 
+    ...     referalCenter=${0}
+    ...     operationDate=${None} 
+    ...     operationTime= 
+    ...     sendToWardDate= 
+    ...     sendToWardTime= 
+    ...     isInfantUnder28Days=${False}
+    ...     supRecomendationNo= 
+
+    
+    ${filing_dto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+    ...    insuranceNote= 
+    ...    insur_Relation=${18}
+    ...    lastInsuranceKind=${422}
+    ...    lastInsuranceDate=${None} 
+    ...    insur2ID=${0}
+    ...    insur2No=${0}
+    ...    insur2Max=${0}
+    ...    wasInEmergency=${FALSE}
+ 
+    ${body}=     Create Dictionary
+    ...    filingDto=${filing_dto}
+
+    ${resp}=    POST On Session
+    ...    HIS
+    ...    url=/api/Filing/EditFiling
+    ...    headers=&{headers}
+    ...    json=${body}
+    ...    expected_status=any
+    
+    Should Be Equal As Integers    ${resp.status_code}    200    msg=ارور AgeUnit میده اما توی body هیچ فیلدی برای این ارسال نمیشود | Actual:${resp.status_code}
+
+    # Preview
+    ${json}=    Set Variable    ${resp.json()}
+    
+    Should Be True    ${json['isSuccess']}
+    Should Be Equal As Integers    ${json['statusCode']}    200
+    Should Be Equal    ${json['data']}    ${TRUE}
+    Should Be Equal    ${json['message']}    Success
+
+
+29-UI - Cancel Preadmit 
+    [Documentation]   لغو پذیرش preadmit
+    [Tags]    UI_Test    
+
+    # Start Browser With Token
+    # Go To Filing Page
+    # Wait For Page Ready
+    # Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a 
+    # Wait For Page Ready 
+    # Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
+    # Wait For Page Ready
+    # Fill Input By Id      mat-input-55     	${nationalCode}
+    Input Text            xpath=//input[@formcontrolname='nationalCode']    ${nationalCode}
+    Click Element Safe    css=button.mat-tooltip-trigger.btn.btn-warning
+    Wait For Page Ready   
+    Click Element Safe    xpath=//button[not(@hidden) and .//mat-icon[normalize-space(.)='cancel']]
+    Wait For Page Ready
+    Click Element Safe    xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']
+    
