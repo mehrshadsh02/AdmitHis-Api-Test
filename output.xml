@@ -1,158 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-19T21:50:05.182627" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-19T23:14:22.613679" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
 <suite id="s1-s1" name="AdmitHis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot">
-<kw name="Create HIS Session" type="SETUP">
+<kw name="Create AdmitHIS Session" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-12-19T21:50:05.365382" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-12-19T23:14:22.799062" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
-<arg>${BASE_URL}</arg>
+<arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-12-19T21:50:05.365200" elapsed="0.000455"/>
+<status status="PASS" start="2025-12-19T23:14:22.798758" elapsed="0.000447"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:50:05.364664" elapsed="0.001083"/>
+<status status="PASS" start="2025-12-19T23:14:22.798210" elapsed="0.001081"/>
 </kw>
-<test id="s1-s1-t1" name="1-UI-Open Filing Page" line="134">
-<kw name="Start Browser With Token">
+<test id="s1-s1-t1" name="1-UI-Open Filing Page" line="167">
+<kw name="Start Browser AdmitHis With Token">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:05.366693" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
-<arg>${FILING_URL}</arg>
+<msg time="2025-12-19T23:14:22.800192" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
+<arg>${AdmitHis_App_URL}</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-12-19T21:50:05.366551" elapsed="17.750897"/>
+<status status="PASS" start="2025-12-19T23:14:22.800053" elapsed="4.056804"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.117709" elapsed="0.046208"/>
+<status status="PASS" start="2025-12-19T23:14:26.857181" elapsed="0.025553"/>
 </kw>
 <kw name="Add Cookie" owner="SeleniumLibrary">
 <arg>token</arg>
 <arg>${COOKIE_TOKEN}</arg>
 <doc>Adds a cookie to your current session.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.164104" elapsed="0.008362"/>
+<status status="PASS" start="2025-12-19T23:14:26.883059" elapsed="0.010722"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.172613" elapsed="0.148031"/>
+<status status="PASS" start="2025-12-19T23:14:26.894053" elapsed="0.318819"/>
 </kw>
 <doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="PASS" start="2025-12-19T21:50:05.366375" elapsed="17.954407"/>
+<status status="PASS" start="2025-12-19T23:14:22.799878" elapsed="4.413169"/>
 </kw>
-<kw name="Go To Filing Page">
+<kw name="Go To AdmitHis Page">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:23.321671" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
-<arg>${FILING_URL}</arg>
+<msg time="2025-12-19T23:14:27.214255" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
+<arg>${AdmitHis_App_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.321524" elapsed="0.078502"/>
+<status status="PASS" start="2025-12-19T23:14:27.214040" elapsed="0.100954"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.400172" elapsed="0.088152"/>
+<status status="PASS" start="2025-12-19T23:14:27.315193" elapsed="0.135180"/>
 </kw>
 <doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
-<status status="PASS" start="2025-12-19T21:50:23.321205" elapsed="0.167458"/>
+<status status="PASS" start="2025-12-19T23:14:27.213625" elapsed="0.236936"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.489245" elapsed="0.008414"/>
+<status status="PASS" start="2025-12-19T23:14:27.452443" elapsed="0.014126"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:50:23.488956" elapsed="0.008808"/>
+<status status="PASS" start="2025-12-19T23:14:27.451136" elapsed="0.015579"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>---- DONE ----</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.498007" elapsed="0.000207"/>
+<status status="PASS" start="2025-12-19T23:14:27.467057" elapsed="0.000442"/>
 </kw>
 <doc>باز  کردن صفحه پذیرش بستری</doc>
 <tag>STEP_01_Open_Browser</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2025-12-19T21:50:05.365803" elapsed="18.132597"/>
+<status status="PASS" start="2025-12-19T23:14:22.799346" elapsed="4.668487"/>
 </test>
-<test id="s1-s1-t2" name="9-UI-Enter national code of patiant" line="336">
+<test id="s1-s1-t2" name="9-UI-Enter national code of patiant" line="369">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:26.637725" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:50:26.638041" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:14:30.596943" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-48.png"&gt;&lt;img src="selenium-screenshot-48.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:14:30.597185" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:50:23.499846" elapsed="3.142196">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:14:27.471493" elapsed="3.128159">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:50:23.499656" elapsed="3.142623"/>
+<status status="PASS" start="2025-12-19T23:14:27.471115" elapsed="3.128665"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:26.642577" elapsed="0.010644"/>
+<status status="PASS" start="2025-12-19T23:14:30.599934" elapsed="0.012211"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:50:23.499369" elapsed="3.154065"/>
+<status status="PASS" start="2025-12-19T23:14:27.469410" elapsed="3.142869"/>
 </kw>
 <kw name="Fill Input By Id">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:29.816334" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:50:29.816547" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:14:33.828787" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-49.png"&gt;&lt;img src="selenium-screenshot-49.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:14:33.829100" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:50:26.655595" elapsed="3.163300">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:14:30.613570" elapsed="3.217682">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:50:26.655263" elapsed="3.163932"/>
+<status status="PASS" start="2025-12-19T23:14:30.613450" elapsed="3.218043"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:29.819506" elapsed="0.011899"/>
+<status status="PASS" start="2025-12-19T23:14:33.831788" elapsed="0.014770"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:50:26.654782" elapsed="3.176713"/>
+<status status="PASS" start="2025-12-19T23:14:30.613194" elapsed="3.233453"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:29.832185" elapsed="0.008798"/>
+<status status="PASS" start="2025-12-19T23:14:33.846944" elapsed="0.012813"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:50:29.831695" elapsed="0.009501"/>
+<status status="PASS" start="2025-12-19T23:14:33.846768" elapsed="0.013096"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:29.841463" elapsed="0.852724"/>
+<status status="PASS" start="2025-12-19T23:14:33.859999" elapsed="1.130579"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:30.694354" elapsed="0.039160"/>
+<status status="PASS" start="2025-12-19T23:14:34.990758" elapsed="0.256217"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:30.733911" level="INFO">Typing text '1520554001' into text field 'id=mat-input-3'.</msg>
+<msg time="2025-12-19T23:14:35.247390" level="INFO">Typing text '1520554001' into text field 'id=mat-input-3'.</msg>
 <arg>id=${id}</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:30.733673" elapsed="0.144547"/>
+<status status="PASS" start="2025-12-19T23:14:35.247149" elapsed="0.179182"/>
 </kw>
 <arg>mat-input-3</arg>
 <arg>${nationalCode}</arg>
-<status status="PASS" start="2025-12-19T21:50:26.653969" elapsed="4.225121"/>
+<status status="PASS" start="2025-12-19T23:14:30.612723" elapsed="4.813775"/>
 </kw>
 <kw name="Click Element Safe">
 <kw name="Wait For Spinner Hidden">
@@ -160,87 +160,87 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:30.881593" elapsed="8.291176"/>
+<status status="PASS" start="2025-12-19T23:14:35.427611" elapsed="9.006279"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:50:30.881293" elapsed="8.291700"/>
+<status status="PASS" start="2025-12-19T23:14:35.427351" elapsed="9.006749"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:39.173324" elapsed="0.029515"/>
+<status status="PASS" start="2025-12-19T23:14:44.434253" elapsed="0.022921"/>
 </kw>
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2025-12-19T21:50:39.203198" elapsed="0.029918"/>
+<status status="PASS" start="2025-12-19T23:14:44.457319" elapsed="0.025671"/>
 </kw>
 <kw name="Scroll Element Into View" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="PASS" start="2025-12-19T21:50:39.233467" elapsed="0.272872"/>
+<status status="PASS" start="2025-12-19T23:14:44.483142" elapsed="0.272015"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:39.507285" level="INFO">Clicking element 'id=button-addon3'.</msg>
+<msg time="2025-12-19T23:14:44.755566" level="INFO">Clicking element 'id=button-addon3'.</msg>
 <arg>${locator}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:39.506762" elapsed="0.079478"/>
+<status status="PASS" start="2025-12-19T23:14:44.755380" elapsed="0.087471"/>
 </kw>
 <arg>id=button-addon3</arg>
-<status status="PASS" start="2025-12-19T21:50:30.880237" elapsed="8.706128"/>
+<status status="PASS" start="2025-12-19T23:14:35.426938" elapsed="9.416022"/>
 </kw>
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:42.765153" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:50:42.765445" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:14:48.012904" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-50.png"&gt;&lt;img src="selenium-screenshot-50.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:14:48.013366" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:50:39.587101" elapsed="3.180250">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:14:44.843727" elapsed="3.170344">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:50:39.586973" elapsed="3.180631"/>
+<status status="PASS" start="2025-12-19T23:14:44.843605" elapsed="3.170555"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:42.767889" elapsed="0.013984"/>
+<status status="PASS" start="2025-12-19T23:14:48.014271" elapsed="0.015201"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:50:39.586683" elapsed="3.195393"/>
+<status status="PASS" start="2025-12-19T23:14:44.843281" elapsed="3.186294"/>
 </kw>
 <doc>وارد کردن کد ملی بیمار و استعلام کد ملی</doc>
 <tag>UI_Test</tag>
-<status status="PASS" start="2025-12-19T21:50:23.498928" elapsed="19.283605"/>
+<status status="PASS" start="2025-12-19T23:14:27.468408" elapsed="20.561473"/>
 </test>
-<test id="s1-s1-t3" name="14-UI - Fill Filing Form (Patient Info)" line="512">
+<test id="s1-s1-t3" name="14-UI - Fill Filing Form (Patient Info)" line="545">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:45.962753" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:50:45.962894" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:14:51.199236" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-51.png"&gt;&lt;img src="selenium-screenshot-51.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:14:51.199372" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:50:42.785545" elapsed="3.178032">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:14:48.031320" elapsed="3.168742">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:50:42.785244" elapsed="3.178427"/>
+<status status="PASS" start="2025-12-19T23:14:48.031169" elapsed="3.168997"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:45.963795" elapsed="0.008322"/>
+<status status="PASS" start="2025-12-19T23:14:51.200285" elapsed="0.014026"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:50:42.784673" elapsed="3.187547"/>
+<status status="PASS" start="2025-12-19T23:14:48.030949" elapsed="3.183451"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -248,57 +248,57 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:45.973164" elapsed="6.825143"/>
+<status status="PASS" start="2025-12-19T23:14:51.215254" elapsed="6.423733"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:50:45.972914" elapsed="6.825592"/>
+<status status="PASS" start="2025-12-19T23:14:51.215108" elapsed="6.423976"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:52.798761" elapsed="0.025364"/>
+<status status="PASS" start="2025-12-19T23:14:57.639194" elapsed="0.024622"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:52.824558" level="INFO">Clicking element 'css=ng-select[formcontrolname='maritalStatus']'.</msg>
+<msg time="2025-12-19T23:14:57.664481" level="INFO">Clicking element 'css=ng-select[formcontrolname='maritalStatus']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:52.824288" elapsed="0.069788"/>
+<status status="PASS" start="2025-12-19T23:14:57.664042" elapsed="0.089063"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:52.894272" elapsed="0.021167"/>
+<status status="PASS" start="2025-12-19T23:14:57.753327" elapsed="0.028477"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:52.915881" level="INFO">Typing text 'مجرد' into text field 'css=ng-select[formcontrolname='maritalStatus'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:14:57.782272" level="INFO">Typing text 'مجرد' into text field 'css=ng-select[formcontrolname='maritalStatus'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:52.915621" elapsed="0.070933"/>
+<status status="PASS" start="2025-12-19T23:14:57.781999" elapsed="0.095179"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:52.986759" elapsed="0.018028"/>
+<status status="PASS" start="2025-12-19T23:14:57.877347" elapsed="0.024058"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:53.005167" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'مجرد')]'.</msg>
+<msg time="2025-12-19T23:14:57.902183" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'مجرد')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.004950" elapsed="0.060934"/>
+<status status="PASS" start="2025-12-19T23:14:57.901721" elapsed="0.094365"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:53.066462" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='maritalStatus'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:50:53.341561" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:50:53.341713" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:14:57.996640" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='maritalStatus'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:14:58.305346" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:14:58.305454" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.066057" elapsed="0.296628"/>
+<status status="PASS" start="2025-12-19T23:14:57.996267" elapsed="0.325908"/>
 </kw>
 <arg>maritalStatus</arg>
 <arg>مجرد</arg>
-<status status="PASS" start="2025-12-19T21:50:45.972643" elapsed="7.390202"/>
+<status status="PASS" start="2025-12-19T23:14:51.214813" elapsed="7.107465"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -306,302 +306,302 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.363861" elapsed="0.009958"/>
+<status status="PASS" start="2025-12-19T23:14:58.323129" elapsed="0.010893"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:50:53.363701" elapsed="0.010253"/>
+<status status="PASS" start="2025-12-19T23:14:58.322970" elapsed="0.011143"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.374105" elapsed="0.029027"/>
+<status status="PASS" start="2025-12-19T23:14:58.334211" elapsed="0.019441"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:53.403555" level="INFO">Clicking element 'css=ng-select[formcontrolname='insurRelation']'.</msg>
+<msg time="2025-12-19T23:14:58.354021" level="INFO">Clicking element 'css=ng-select[formcontrolname='insurRelation']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.403278" elapsed="0.071094"/>
+<status status="PASS" start="2025-12-19T23:14:58.353803" elapsed="0.077863"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.474535" elapsed="0.019588"/>
+<status status="PASS" start="2025-12-19T23:14:58.431843" elapsed="0.020785"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:53.494781" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='insurRelation'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:14:58.453005" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='insurRelation'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.494402" elapsed="0.074596"/>
+<status status="PASS" start="2025-12-19T23:14:58.452775" elapsed="0.099915"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.569156" elapsed="0.017376"/>
+<status status="PASS" start="2025-12-19T23:14:58.552917" elapsed="0.024691"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:53.586904" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
+<msg time="2025-12-19T23:14:58.577941" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.586681" elapsed="0.050118"/>
+<status status="PASS" start="2025-12-19T23:14:58.577748" elapsed="0.071980"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:53.637389" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='insurRelation'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:50:53.926946" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:50:53.927262" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:14:58.650230" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='insurRelation'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:14:58.954541" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:14:58.954631" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.637013" elapsed="0.314915"/>
+<status status="PASS" start="2025-12-19T23:14:58.649882" elapsed="0.343092"/>
 </kw>
 <arg>insurRelation</arg>
 <arg>خود فرد</arg>
-<status status="PASS" start="2025-12-19T21:50:53.363385" elapsed="0.588643"/>
+<status status="PASS" start="2025-12-19T23:14:58.322625" elapsed="0.670526"/>
 </kw>
 <kw name="Fill Input By Id">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:57.298662" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-5.png"&gt;&lt;img src="selenium-screenshot-5.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:50:57.298922" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:15:02.171475" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-52.png"&gt;&lt;img src="selenium-screenshot-52.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:15:02.171792" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:50:53.952986" elapsed="3.347811">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:14:58.994543" elapsed="3.178376">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:50:53.952874" elapsed="3.348162"/>
+<status status="PASS" start="2025-12-19T23:14:58.994355" elapsed="3.178781"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:57.301329" elapsed="0.011418"/>
+<status status="PASS" start="2025-12-19T23:15:02.173439" elapsed="0.012070"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:50:53.952693" elapsed="3.360274"/>
+<status status="PASS" start="2025-12-19T23:14:58.994034" elapsed="3.191564"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:57.313758" elapsed="0.010801"/>
+<status status="PASS" start="2025-12-19T23:15:02.185897" elapsed="0.010592"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:50:57.313271" elapsed="0.011475"/>
+<status status="PASS" start="2025-12-19T23:15:02.185718" elapsed="0.010982"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:50:57.324998" elapsed="0.024335"/>
+<status status="PASS" start="2025-12-19T23:15:02.196943" elapsed="0.021649"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:57.349491" elapsed="0.041706"/>
+<status status="PASS" start="2025-12-19T23:15:02.218782" elapsed="0.054834"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:50:57.391573" level="INFO">Typing text '09383509316' into text field 'id=mat-input-31'.</msg>
+<msg time="2025-12-19T23:15:02.273991" level="INFO">Typing text '09383509316' into text field 'id=mat-input-31'.</msg>
 <arg>id=${id}</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:50:57.391350" elapsed="0.089524"/>
+<status status="PASS" start="2025-12-19T23:15:02.273764" elapsed="0.134843"/>
 </kw>
 <arg>mat-input-31</arg>
 <arg>09383509316</arg>
-<status status="PASS" start="2025-12-19T21:50:53.952400" elapsed="3.528660"/>
+<status status="PASS" start="2025-12-19T23:14:58.993593" elapsed="3.415119"/>
 </kw>
 <kw name="Fill Input By Id">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:00.610573" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-6.png"&gt;&lt;img src="selenium-screenshot-6.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:51:00.610710" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:15:05.656576" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-53.png"&gt;&lt;img src="selenium-screenshot-53.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:15:05.656834" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:50:57.482481" elapsed="3.129052">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:15:02.410146" elapsed="3.247567">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:50:57.482302" elapsed="3.129392"/>
+<status status="PASS" start="2025-12-19T23:15:02.409989" elapsed="3.247937"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:00.611842" elapsed="0.011519"/>
+<status status="PASS" start="2025-12-19T23:15:05.658119" elapsed="0.011529"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:50:57.481989" elapsed="3.141582"/>
+<status status="PASS" start="2025-12-19T23:15:02.409654" elapsed="3.260156"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:00.624245" elapsed="0.011121"/>
+<status status="PASS" start="2025-12-19T23:15:05.670422" elapsed="0.015614"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:00.623825" elapsed="0.011629"/>
+<status status="PASS" start="2025-12-19T23:15:05.670105" elapsed="0.016145"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:00.635568" elapsed="0.015201"/>
+<status status="PASS" start="2025-12-19T23:15:05.686461" elapsed="0.026633"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:00.650971" elapsed="0.023196"/>
+<status status="PASS" start="2025-12-19T23:15:05.713244" elapsed="0.037665"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:00.674622" level="INFO">Typing text 'dfgdfgdfgd' into text field 'id=mat-input-34'.</msg>
+<msg time="2025-12-19T23:15:05.751294" level="INFO">Typing text 'dfgdfgdfgd' into text field 'id=mat-input-34'.</msg>
 <arg>id=${id}</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:00.674323" elapsed="0.076723"/>
+<status status="PASS" start="2025-12-19T23:15:05.751064" elapsed="0.110882"/>
 </kw>
 <arg>mat-input-34</arg>
 <arg>dfgdfgdfgd</arg>
-<status status="PASS" start="2025-12-19T21:50:57.481524" elapsed="3.269625"/>
+<status status="PASS" start="2025-12-19T23:15:02.409202" elapsed="3.452848"/>
 </kw>
 <kw name="Fill Input By Id">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:03.905479" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-7.png"&gt;&lt;img src="selenium-screenshot-7.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:51:03.905720" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:15:09.160225" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-54.png"&gt;&lt;img src="selenium-screenshot-54.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:15:09.160388" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:00.752107" elapsed="3.155802">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:15:05.863033" elapsed="3.298147">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:00.751997" elapsed="3.156137"/>
+<status status="PASS" start="2025-12-19T23:15:05.862925" elapsed="3.298362"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:03.908418" elapsed="0.011582"/>
+<status status="PASS" start="2025-12-19T23:15:09.161421" elapsed="0.010577"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:51:00.751807" elapsed="3.168401"/>
+<status status="PASS" start="2025-12-19T23:15:05.862740" elapsed="3.309385"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:03.920983" elapsed="0.010571"/>
+<status status="PASS" start="2025-12-19T23:15:09.172604" elapsed="0.010616"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:03.920509" elapsed="0.011143"/>
+<status status="PASS" start="2025-12-19T23:15:09.172296" elapsed="0.011022"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:03.931771" elapsed="0.022629"/>
+<status status="PASS" start="2025-12-19T23:15:09.183444" elapsed="0.017592"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:03.954543" elapsed="0.028421"/>
+<status status="PASS" start="2025-12-19T23:15:09.201197" elapsed="0.019717"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:03.983721" level="INFO">Typing text 'مهرشاد شیخ الاسلامی' into text field 'id=mat-input-35'.</msg>
+<msg time="2025-12-19T23:15:09.221758" level="INFO">Typing text 'مهرشاد شیخ الاسلامی' into text field 'id=mat-input-35'.</msg>
 <arg>id=${id}</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:03.983241" elapsed="0.104031"/>
+<status status="PASS" start="2025-12-19T23:15:09.221066" elapsed="0.108969"/>
 </kw>
 <arg>mat-input-35</arg>
 <arg>مهرشاد شیخ الاسلامی</arg>
-<status status="PASS" start="2025-12-19T21:51:00.751477" elapsed="3.335899"/>
+<status status="PASS" start="2025-12-19T23:15:05.862388" elapsed="3.467750"/>
 </kw>
 <kw name="Fill Input By Id">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:07.221159" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-8.png"&gt;&lt;img src="selenium-screenshot-8.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:51:07.221428" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:15:12.701576" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-55.png"&gt;&lt;img src="selenium-screenshot-55.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:15:12.701777" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:04.088575" elapsed="3.134643">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:15:09.331350" elapsed="3.371726">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:04.088408" elapsed="3.135021"/>
+<status status="PASS" start="2025-12-19T23:15:09.331159" elapsed="3.372075"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.223695" elapsed="0.012247"/>
+<status status="PASS" start="2025-12-19T23:15:12.703466" elapsed="0.007707"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:51:04.088147" elapsed="3.147998"/>
+<status status="PASS" start="2025-12-19T23:15:09.330905" elapsed="3.380439"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.236916" elapsed="0.013003"/>
+<status status="PASS" start="2025-12-19T23:15:12.712044" elapsed="0.006959"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:07.236441" elapsed="0.013685"/>
+<status status="PASS" start="2025-12-19T23:15:12.711614" elapsed="0.007550"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.250384" elapsed="0.022610"/>
+<status status="PASS" start="2025-12-19T23:15:12.719347" elapsed="0.017784"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.273139" elapsed="0.028327"/>
+<status status="PASS" start="2025-12-19T23:15:12.737283" elapsed="0.028145"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:07.301841" level="INFO">Typing text '09383586316' into text field 'id=mat-input-36'.</msg>
+<msg time="2025-12-19T23:15:12.765842" level="INFO">Typing text '09383586316' into text field 'id=mat-input-36'.</msg>
 <arg>id=${id}</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.301617" elapsed="0.084235"/>
+<status status="PASS" start="2025-12-19T23:15:12.765601" elapsed="0.092217"/>
 </kw>
 <arg>mat-input-36</arg>
 <arg>09383586316</arg>
-<status status="PASS" start="2025-12-19T21:51:04.087779" elapsed="3.298171"/>
+<status status="PASS" start="2025-12-19T23:15:09.330584" elapsed="3.527354"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.386651" elapsed="0.005324"/>
+<status status="PASS" start="2025-12-19T23:15:12.858907" elapsed="0.006029"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:07.386399" elapsed="0.005665"/>
+<status status="PASS" start="2025-12-19T23:15:12.858550" elapsed="0.006473"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=button-addon2</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.392267" elapsed="0.012131"/>
+<status status="PASS" start="2025-12-19T23:15:12.865227" elapsed="0.012053"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:07.404986" level="INFO">Clicking element 'id=button-addon2'.</msg>
+<msg time="2025-12-19T23:15:12.877779" level="INFO">Clicking element 'id=button-addon2'.</msg>
 <arg>id=button-addon2</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.404798" elapsed="0.051216"/>
+<status status="PASS" start="2025-12-19T23:15:12.877601" elapsed="0.048293"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -609,57 +609,57 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.457210" elapsed="0.007510"/>
+<status status="PASS" start="2025-12-19T23:15:12.926854" elapsed="0.006132"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:07.456902" elapsed="0.007925"/>
+<status status="PASS" start="2025-12-19T23:15:12.926677" elapsed="0.006408"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.465031" elapsed="0.015250"/>
+<status status="PASS" start="2025-12-19T23:15:12.933193" elapsed="0.016816"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:07.480931" level="INFO">Clicking element 'css=ng-select[formcontrolname='firstRecognition']'.</msg>
+<msg time="2025-12-19T23:15:12.950377" level="INFO">Clicking element 'css=ng-select[formcontrolname='firstRecognition']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.480535" elapsed="0.058019"/>
+<status status="PASS" start="2025-12-19T23:15:12.950157" elapsed="0.063306"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.538710" elapsed="0.016623"/>
+<status status="PASS" start="2025-12-19T23:15:13.013712" elapsed="0.033213"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:07.555727" level="INFO">Typing text 'شکستگی' into text field 'css=ng-select[formcontrolname='firstRecognition'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:15:13.047343" level="INFO">Typing text 'شکستگی' into text field 'css=ng-select[formcontrolname='firstRecognition'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.555493" elapsed="0.242544"/>
+<status status="PASS" start="2025-12-19T23:15:13.047095" elapsed="0.250609"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.798263" elapsed="0.020955"/>
+<status status="PASS" start="2025-12-19T23:15:13.299590" elapsed="0.032974"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:07.819739" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'شکستگی')]'.</msg>
+<msg time="2025-12-19T23:15:13.333253" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'شکستگی')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.819382" elapsed="0.062973"/>
+<status status="PASS" start="2025-12-19T23:15:13.332936" elapsed="0.119736"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:07.882898" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='firstRecognition'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:51:08.158744" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:51:08.158856" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:15:13.453423" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='firstRecognition'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:15:13.761383" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:15:13.761588" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:51:07.882530" elapsed="0.288159"/>
+<status status="PASS" start="2025-12-19T23:15:13.452937" elapsed="0.325176"/>
 </kw>
 <arg>firstRecognition</arg>
 <arg>شکستگی</arg>
-<status status="PASS" start="2025-12-19T21:51:07.456483" elapsed="0.714402"/>
+<status status="PASS" start="2025-12-19T23:15:12.926325" elapsed="0.851961"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -667,57 +667,57 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.171958" elapsed="0.009992"/>
+<status status="PASS" start="2025-12-19T23:15:13.779528" elapsed="0.013765"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:08.171722" elapsed="0.010330"/>
+<status status="PASS" start="2025-12-19T23:15:13.779241" elapsed="0.014397"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.182162" elapsed="0.018642"/>
+<status status="PASS" start="2025-12-19T23:15:13.794057" elapsed="0.029801"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:08.201374" level="INFO">Clicking element 'css=ng-select[formcontrolname='howToRefer']'.</msg>
+<msg time="2025-12-19T23:15:13.824709" level="INFO">Clicking element 'css=ng-select[formcontrolname='howToRefer']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.201036" elapsed="0.058511"/>
+<status status="PASS" start="2025-12-19T23:15:13.824205" elapsed="0.063509"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.259828" elapsed="0.015381"/>
+<status status="PASS" start="2025-12-19T23:15:13.887864" elapsed="0.015743"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:08.275717" level="INFO">Typing text 'وسیله شخصی' into text field 'css=ng-select[formcontrolname='howToRefer'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:15:13.903989" level="INFO">Typing text 'وسیله شخصی' into text field 'css=ng-select[formcontrolname='howToRefer'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.275434" elapsed="0.085697"/>
+<status status="PASS" start="2025-12-19T23:15:13.903759" elapsed="0.068368"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.361333" elapsed="0.015116"/>
+<status status="PASS" start="2025-12-19T23:15:13.972309" elapsed="0.014411"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:08.377460" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'وسیله شخصی')]'.</msg>
+<msg time="2025-12-19T23:15:13.987261" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'وسیله شخصی')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.377158" elapsed="0.039535"/>
+<status status="PASS" start="2025-12-19T23:15:13.987005" elapsed="0.043556"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:08.417238" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='howToRefer'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:51:08.710166" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:51:08.710249" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:15:14.031311" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='howToRefer'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:15:14.353746" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:15:14.353809" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.416874" elapsed="0.313588"/>
+<status status="PASS" start="2025-12-19T23:15:14.030751" elapsed="0.344218"/>
 </kw>
 <arg>howToRefer</arg>
 <arg>وسیله شخصی</arg>
-<status status="PASS" start="2025-12-19T21:51:08.171337" elapsed="0.559234"/>
+<status status="PASS" start="2025-12-19T23:15:13.778749" elapsed="0.596371"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -725,86 +725,86 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.731529" elapsed="0.008612"/>
+<status status="PASS" start="2025-12-19T23:15:14.376908" elapsed="0.006690"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:08.731343" elapsed="0.008892"/>
+<status status="PASS" start="2025-12-19T23:15:14.376597" elapsed="0.007097"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.740341" elapsed="0.027741"/>
+<status status="PASS" start="2025-12-19T23:15:14.383815" elapsed="0.017868"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:08.768731" level="INFO">Clicking element 'css=ng-select[formcontrolname='causeOfHospitalization']'.</msg>
+<msg time="2025-12-19T23:15:14.402022" level="INFO">Clicking element 'css=ng-select[formcontrolname='causeOfHospitalization']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.768347" elapsed="0.062078"/>
+<status status="PASS" start="2025-12-19T23:15:14.401825" elapsed="0.080090"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.830648" elapsed="0.012439"/>
+<status status="PASS" start="2025-12-19T23:15:14.482070" elapsed="0.031892"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:08.843740" level="INFO">Typing text 'دل درد' into text field 'css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:15:14.514695" level="INFO">Typing text 'دل درد' into text field 'css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.843351" elapsed="0.086939"/>
+<status status="PASS" start="2025-12-19T23:15:14.514271" elapsed="0.146834"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.930597" elapsed="0.025022"/>
+<status status="PASS" start="2025-12-19T23:15:14.661266" elapsed="0.015030"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:08.955999" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'دل درد')]'.</msg>
+<msg time="2025-12-19T23:15:14.676660" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'دل درد')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:08.955773" elapsed="0.063710"/>
+<status status="PASS" start="2025-12-19T23:15:14.676450" elapsed="0.042840"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:09.020216" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:51:09.328107" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:51:09.328172" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:15:14.719852" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:15:15.021133" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:15:15.021196" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:51:09.019726" elapsed="0.324840"/>
+<status status="PASS" start="2025-12-19T23:15:14.719490" elapsed="0.318309"/>
 </kw>
 <arg>causeOfHospitalization</arg>
 <arg>دل درد</arg>
-<status status="PASS" start="2025-12-19T21:51:08.731002" elapsed="0.613724"/>
+<status status="PASS" start="2025-12-19T23:15:14.376232" elapsed="0.661737"/>
 </kw>
 <doc>پر کردن اطلاعات مورد نیاز بیمار</doc>
 <tag>UI_Test</tag>
-<status status="PASS" start="2025-12-19T21:50:42.783602" elapsed="26.561507"/>
+<status status="PASS" start="2025-12-19T23:14:48.030589" elapsed="27.007857"/>
 </test>
-<test id="s1-s1-t4" name="15-UI - Assign Ward And Doctor And Prepayment" line="535">
+<test id="s1-s1-t4" name="15-UI - Assign Ward And Doctor And Prepayment" line="568">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:12.497813" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-9.png"&gt;&lt;img src="selenium-screenshot-9.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:51:12.497970" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:15:18.176715" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-56.png"&gt;&lt;img src="selenium-screenshot-56.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:15:18.176954" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:09.347364" elapsed="3.151504">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:15:15.040839" elapsed="3.137914">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:09.347195" elapsed="3.151787"/>
+<status status="PASS" start="2025-12-19T23:15:15.040641" elapsed="3.138334"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.499140" elapsed="0.010656"/>
+<status status="PASS" start="2025-12-19T23:15:18.179277" elapsed="0.008373"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:51:09.346843" elapsed="3.163157"/>
+<status status="PASS" start="2025-12-19T23:15:15.040254" elapsed="3.147505"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -812,57 +812,57 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.510945" elapsed="0.009837"/>
+<status status="PASS" start="2025-12-19T23:15:18.188680" elapsed="0.010019"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:12.510793" elapsed="0.010142"/>
+<status status="PASS" start="2025-12-19T23:15:18.188470" elapsed="0.010436"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.521054" elapsed="0.023515"/>
+<status status="PASS" start="2025-12-19T23:15:18.199139" elapsed="0.025671"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:12.545925" level="INFO">Clicking element 'css=ng-select[formcontrolname='wardfileld']'.</msg>
+<msg time="2025-12-19T23:15:18.225837" level="INFO">Clicking element 'css=ng-select[formcontrolname='wardfileld']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.545420" elapsed="0.049444"/>
+<status status="PASS" start="2025-12-19T23:15:18.225301" elapsed="0.054504"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.595018" elapsed="0.014395"/>
+<status status="PASS" start="2025-12-19T23:15:18.279956" elapsed="0.015565"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:12.609850" level="INFO">Typing text 'اطفال 2 - تخت خالی (33)' into text field 'css=ng-select[formcontrolname='wardfileld'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:15:18.295888" level="INFO">Typing text 'اطفال 2 - تخت خالی (33)' into text field 'css=ng-select[formcontrolname='wardfileld'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.609612" elapsed="0.098376"/>
+<status status="PASS" start="2025-12-19T23:15:18.295665" elapsed="0.117142"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.708151" elapsed="0.013105"/>
+<status status="PASS" start="2025-12-19T23:15:18.412997" elapsed="0.022971"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:12.721605" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اطفال 2 - تخت خالی (33)')]'.</msg>
+<msg time="2025-12-19T23:15:18.436496" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اطفال 2 - تخت خالی (33)')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.721400" elapsed="0.041322"/>
+<status status="PASS" start="2025-12-19T23:15:18.436175" elapsed="0.051888"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:12.763506" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='wardfileld'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:51:13.057637" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:51:13.057701" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:15:18.489122" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='wardfileld'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:15:18.781138" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:15:18.781220" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:51:12.762900" elapsed="0.327120"/>
+<status status="PASS" start="2025-12-19T23:15:18.488403" elapsed="0.306172"/>
 </kw>
 <arg>wardfileld</arg>
 <arg>اطفال 2 - تخت خالی (33)</arg>
-<status status="PASS" start="2025-12-19T21:51:12.510510" elapsed="0.579635"/>
+<status status="PASS" start="2025-12-19T23:15:18.188117" elapsed="0.606583"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -870,57 +870,57 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:13.091571" elapsed="2.939718"/>
+<status status="PASS" start="2025-12-19T23:15:18.795690" elapsed="4.020065"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:13.091387" elapsed="2.940130"/>
+<status status="PASS" start="2025-12-19T23:15:18.795399" elapsed="4.020583"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.031788" elapsed="0.031810"/>
+<status status="PASS" start="2025-12-19T23:15:22.816318" elapsed="0.033205"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.064435" level="INFO">Clicking element 'css=ng-select[formcontrolname='doctorField']'.</msg>
+<msg time="2025-12-19T23:15:22.850319" level="INFO">Clicking element 'css=ng-select[formcontrolname='doctorField']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.063931" elapsed="0.095378"/>
+<status status="PASS" start="2025-12-19T23:15:22.849841" elapsed="0.076967"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.159570" elapsed="0.029283"/>
+<status status="PASS" start="2025-12-19T23:15:22.926958" elapsed="0.019507"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.189220" level="INFO">Typing text 'Siavash Siavash' into text field 'css=ng-select[formcontrolname='doctorField'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:15:22.946849" level="INFO">Typing text 'Siavash Siavash' into text field 'css=ng-select[formcontrolname='doctorField'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.188998" elapsed="0.110511"/>
+<status status="PASS" start="2025-12-19T23:15:22.946616" elapsed="0.100920"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.299914" elapsed="0.017112"/>
+<status status="PASS" start="2025-12-19T23:15:23.047693" elapsed="0.018364"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.317398" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'Siavash Siavash')]'.</msg>
+<msg time="2025-12-19T23:15:23.066417" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'Siavash Siavash')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.317177" elapsed="0.041771"/>
+<status status="PASS" start="2025-12-19T23:15:23.066210" elapsed="0.044065"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.360505" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='doctorField'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:51:16.656374" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:51:16.656457" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:15:23.110986" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='doctorField'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:15:23.395669" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:15:23.395739" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.359405" elapsed="0.313335"/>
+<status status="PASS" start="2025-12-19T23:15:23.110506" elapsed="0.302280"/>
 </kw>
 <arg>doctorField</arg>
 <arg>Siavash Siavash</arg>
-<status status="PASS" start="2025-12-19T21:51:13.090995" elapsed="3.581844"/>
+<status status="PASS" start="2025-12-19T23:15:18.795036" elapsed="4.617951"/>
 </kw>
 <kw name="Select From Ng Select">
 <kw name="Wait For Spinner Hidden">
@@ -928,260 +928,285 @@
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.674021" elapsed="0.011357"/>
+<status status="PASS" start="2025-12-19T23:15:23.413997" elapsed="0.006440"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:16.673728" elapsed="0.011764"/>
+<status status="PASS" start="2025-12-19T23:15:23.413834" elapsed="0.006701"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.685619" elapsed="0.021646"/>
+<status status="PASS" start="2025-12-19T23:15:23.420645" elapsed="0.022001"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.707659" level="INFO">Clicking element 'css=ng-select[formcontrolname='responsiblePatient']'.</msg>
+<msg time="2025-12-19T23:15:23.443063" level="INFO">Clicking element 'css=ng-select[formcontrolname='responsiblePatient']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.707430" elapsed="0.050937"/>
+<status status="PASS" start="2025-12-19T23:15:23.442821" elapsed="0.056785"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.758518" elapsed="0.014979"/>
+<status status="PASS" start="2025-12-19T23:15:23.499762" elapsed="0.019123"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.773869" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='responsiblePatient'] input[type='text']'.</msg>
+<msg time="2025-12-19T23:15:23.519298" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='responsiblePatient'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.773643" elapsed="0.060276"/>
+<status status="PASS" start="2025-12-19T23:15:23.519058" elapsed="0.075626"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.834101" elapsed="0.014810"/>
+<status status="PASS" start="2025-12-19T23:15:23.594863" elapsed="0.014617"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.849268" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
+<msg time="2025-12-19T23:15:23.609839" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.849060" elapsed="0.040773"/>
+<status status="PASS" start="2025-12-19T23:15:23.609631" elapsed="0.038371"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:16.890420" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='responsiblePatient'] input[type='text'] element.</msg>
-<msg time="2025-12-19T21:51:17.184374" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2025-12-19T21:51:17.184434" level="INFO">Releasing special key TAB.</msg>
+<msg time="2025-12-19T23:15:23.648549" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='responsiblePatient'] input[type='text'] element.</msg>
+<msg time="2025-12-19T23:15:23.947374" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-12-19T23:15:23.947459" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2025-12-19T21:51:16.890056" elapsed="0.312507"/>
+<status status="PASS" start="2025-12-19T23:15:23.648188" elapsed="0.317808"/>
 </kw>
 <arg>responsiblePatient</arg>
 <arg>خود فرد</arg>
-<status status="PASS" start="2025-12-19T21:51:16.673269" elapsed="0.529482"/>
+<status status="PASS" start="2025-12-19T23:15:23.413491" elapsed="0.552651"/>
 </kw>
 <kw name="Fill Input By Id">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:20.375253" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-10.png"&gt;&lt;img src="selenium-screenshot-10.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:51:20.375572" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:15:27.147749" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-57.png"&gt;&lt;img src="selenium-screenshot-57.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:15:27.147932" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:17.203775" elapsed="3.173289">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:15:23.967531" elapsed="3.181305">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:17.203668" elapsed="3.173511"/>
+<status status="PASS" start="2025-12-19T23:15:23.967403" elapsed="3.181542"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.377377" elapsed="0.010002"/>
+<status status="PASS" start="2025-12-19T23:15:27.149083" elapsed="0.011316"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:51:17.203488" elapsed="3.184107"/>
+<status status="PASS" start="2025-12-19T23:15:23.967159" elapsed="3.193395"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.388365" elapsed="0.010504"/>
+<status status="PASS" start="2025-12-19T23:15:27.161405" elapsed="0.011157"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:20.387890" elapsed="0.011204"/>
+<status status="PASS" start="2025-12-19T23:15:27.160834" elapsed="0.011984"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.399367" elapsed="0.025536"/>
+<status status="PASS" start="2025-12-19T23:15:27.173038" elapsed="0.024042"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.425066" elapsed="0.032896"/>
+<status status="PASS" start="2025-12-19T23:15:27.197399" elapsed="0.039121"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:20.458563" level="INFO">Typing text '10000' into text field 'id=mat-input-40'.</msg>
+<msg time="2025-12-19T23:15:27.237573" level="INFO">Typing text '10000' into text field 'id=mat-input-40'.</msg>
 <arg>id=${id}</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.458207" elapsed="0.048703"/>
+<status status="PASS" start="2025-12-19T23:15:27.236877" elapsed="0.069389"/>
 </kw>
 <arg>mat-input-40</arg>
 <arg>10000</arg>
-<status status="PASS" start="2025-12-19T21:51:17.203172" elapsed="3.304043"/>
+<status status="PASS" start="2025-12-19T23:15:23.966662" elapsed="3.339704"/>
 </kw>
 <doc>انتخاب بخش و پزشک بیمار preadmit</doc>
 <tag>UI_Test</tag>
-<status status="PASS" start="2025-12-19T21:51:09.345964" elapsed="11.161791"/>
+<status status="PASS" start="2025-12-19T23:15:15.039454" elapsed="12.267187"/>
 </test>
-<test id="s1-s1-t5" name="18-UI - Save Admission Filing" line="654">
+<test id="s1-s1-t5" name="18-UI - Save Admission Filing" line="687">
 <kw name="Click Element Safe">
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.509247" elapsed="0.004567"/>
+<status status="PASS" start="2025-12-19T23:15:27.308245" elapsed="0.004421"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:20.509038" elapsed="0.004859"/>
+<status status="PASS" start="2025-12-19T23:15:27.308073" elapsed="0.004668"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.513997" elapsed="0.015280"/>
+<status status="PASS" start="2025-12-19T23:15:27.312838" elapsed="0.013092"/>
 </kw>
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.529680" elapsed="0.016061"/>
+<status status="PASS" start="2025-12-19T23:15:27.326226" elapsed="0.019329"/>
 </kw>
 <kw name="Scroll Element Into View" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.545893" elapsed="0.283324"/>
+<status status="PASS" start="2025-12-19T23:15:27.345703" elapsed="0.296657"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:20.830117" level="INFO">Clicking element 'css=button.btn-saveFile'.</msg>
+<msg time="2025-12-19T23:15:27.643164" level="INFO">Clicking element 'css=button.btn-saveFile'.</msg>
 <arg>${locator}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.829620" elapsed="0.094902"/>
+<status status="PASS" start="2025-12-19T23:15:27.642722" elapsed="0.099314"/>
 </kw>
 <arg>css=button.btn-saveFile</arg>
-<status status="PASS" start="2025-12-19T21:51:20.508757" elapsed="0.415863"/>
+<status status="PASS" start="2025-12-19T23:15:27.307848" elapsed="0.434285"/>
 </kw>
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:24.081504" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-11.png"&gt;&lt;img src="selenium-screenshot-11.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:51:24.081684" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2025-12-19T23:15:30.952764" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-58.png"&gt;&lt;img src="selenium-screenshot-58.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-19T23:15:30.953129" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:20.925382" elapsed="3.158947">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2025-12-19T23:15:27.742911" elapsed="3.212885">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:20.925259" elapsed="3.159306"/>
+<status status="PASS" start="2025-12-19T23:15:27.742787" elapsed="3.213231"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:24.084858" elapsed="0.012824"/>
+<status status="PASS" start="2025-12-19T23:15:30.956208" elapsed="0.009478"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:51:20.924961" elapsed="3.172859"/>
+<status status="PASS" start="2025-12-19T23:15:27.742449" elapsed="3.223328"/>
 </kw>
 <doc>سیو کردن پذیرش preadmit</doc>
 <tag>UI_Test</tag>
-<status status="PASS" start="2025-12-19T21:51:20.508284" elapsed="3.589897"/>
+<status status="PASS" start="2025-12-19T23:15:27.307432" elapsed="3.658626"/>
 </test>
-<test id="s1-s1-t6" name="21-UI - deny admit print page" line="758">
+<test id="s1-s1-t6" name="21-UI - deny admit print page" line="791">
 <kw name="Click Element Safe">
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-19T21:51:24.099525" elapsed="4.274573"/>
+<status status="PASS" start="2025-12-19T23:15:30.967381" elapsed="11.498081"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-19T21:51:24.099386" elapsed="4.274835"/>
+<status status="PASS" start="2025-12-19T23:15:30.967213" elapsed="11.498353"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:33.682950" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-12.png"&gt;&lt;img src="selenium-screenshot-12.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-19T21:51:33.683212" level="FAIL">Element 'css=button.swal2-deny.swal2-styled' not visible after 5 seconds.</msg>
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-12-19T21:51:28.374367" elapsed="5.310612">Element 'css=button.swal2-deny.swal2-styled' not visible after 5 seconds.</status>
+<status status="PASS" start="2025-12-19T23:15:42.465723" elapsed="0.022143"/>
 </kw>
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="NOT RUN" start="2025-12-19T21:51:33.685358" elapsed="0.000073"/>
+<status status="PASS" start="2025-12-19T23:15:42.488082" elapsed="0.028150"/>
 </kw>
 <kw name="Scroll Element Into View" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="NOT RUN" start="2025-12-19T21:51:33.685634" elapsed="0.000055"/>
+<status status="PASS" start="2025-12-19T23:15:42.516386" elapsed="0.289463"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-12-19T23:15:42.806725" level="INFO">Clicking element 'css=button.swal2-deny.swal2-styled'.</msg>
 <arg>${locator}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-19T21:51:33.685891" elapsed="0.000052"/>
+<status status="PASS" start="2025-12-19T23:15:42.806240" elapsed="0.109844"/>
 </kw>
 <arg>css=button.swal2-deny.swal2-styled</arg>
-<status status="FAIL" start="2025-12-19T21:51:24.099189" elapsed="9.587138">Element 'css=button.swal2-deny.swal2-styled' not visible after 5 seconds.</status>
+<status status="PASS" start="2025-12-19T23:15:30.966971" elapsed="11.949212"/>
 </kw>
 <doc>لغو پرینت برگه پذیرش</doc>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-19T21:51:24.098747" elapsed="9.588429">Element 'css=button.swal2-deny.swal2-styled' not visible after 5 seconds.</status>
+<status status="PASS" start="2025-12-19T23:15:30.966546" elapsed="11.950028"/>
 </test>
-<test id="s1-s1-t7" name="22-UI - go to inpatient list" line="764">
+<test id="s1-s1-t7" name="21-UI - Open Cash Web" line="797">
+<kw name="Switch To Cash App">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-12-19T23:15:42.919292" level="INFO">Opening url 'http://192.168.5.19:8075/admit'</msg>
+<arg>${Cash_App_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-12-19T23:15:42.918908" elapsed="0.135242"/>
+</kw>
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>8075</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2025-12-19T23:15:43.054414" elapsed="3.070394"/>
+</kw>
+<status status="PASS" start="2025-12-19T23:15:42.918510" elapsed="3.206428"/>
+</kw>
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-19T23:15:46.126165" elapsed="0.011095"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2025-12-19T23:15:46.125907" elapsed="0.011565"/>
+</kw>
+<tag>UI_Test</tag>
+<status status="PASS" start="2025-12-19T23:15:42.917696" elapsed="3.220276"/>
+</test>
+<test id="s1-s1-t8" name="22-UI - go to inpatient list" line="802">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:34.001778" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7218a88e5
-	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
-	0x7ff721bc0640
-	0x7ff721bbaf80
-	0x7ff721bd96e6
-	0x7ff7218c5de4
-	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
-	0x7ff9a3cce8d7
-	0x7ff9a5f8c53c
-</msg>
-<msg time="2025-12-19T21:51:34.002365" level="FAIL">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
-from disconnected: not connected to DevTools
-  (Session info: chrome=143.0.7499.41); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.308224" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
 	0x7ff72168165d
-	0x7ff72166d202
-	0x7ff7216927af
-	0x7ff721709a29
-	0x7ff72172a5c2
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
+	0x7ff721bc0640
+	0x7ff721bbaf80
+	0x7ff721bd96e6
+	0x7ff7218c5de4
+	0x7ff7218ced8c
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
+	0x7ff9a3cce8d7
+	0x7ff9a5f8c53c
+</msg>
+<msg time="2025-12-19T23:15:48.309487" level="FAIL">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7218a88e5
+	0x7ff7218a8940
+	0x7ff72168165d
+	0x7ff72172b6da
 	0x7ff7216cac29
 	0x7ff7216cba93
 	0x7ff721bc0640
@@ -1198,18 +1223,15 @@ Symbols not available. Dumping unresolved backtrace:
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:33.690388" elapsed="0.314296">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
-from disconnected: not connected to DevTools
-  (Session info: chrome=143.0.7499.41); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:46.139838" elapsed="2.172623">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
 	0x7ff72168165d
-	0x7ff72166d202
-	0x7ff7216927af
-	0x7ff721709a29
-	0x7ff72172a5c2
+	0x7ff72172b6da
 	0x7ff7216cac29
 	0x7ff7216cba93
 	0x7ff721bc0640
@@ -1228,196 +1250,204 @@ Symbols not available. Dumping unresolved backtrace:
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:33.690108" elapsed="0.314676"/>
+<status status="PASS" start="2025-12-19T23:15:46.139627" elapsed="2.172950"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:34.006655" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.326798" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.007116" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.327473" level="FAIL">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-19T21:51:34.004908" elapsed="0.003628">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.312705" elapsed="0.017167">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
-<status status="FAIL" start="2025-12-19T21:51:33.689579" elapsed="0.319094">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:46.139244" elapsed="2.190948">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
 <kw name="Click Element Safe">
 <arg>xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.009144" elapsed="0.000057"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.330676" elapsed="0.000058"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.009419" elapsed="0.000026"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.331129" elapsed="0.000054"/>
 </kw>
 <doc>رفتن به لیست بیماران بستری</doc>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-19T21:51:33.688640" elapsed="0.321014">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:46.138588" elapsed="2.192973">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </test>
-<test id="s1-s1-t8" name="25-UI - Load Preadmit Patient List" line="859">
+<test id="s1-s1-t9" name="25-UI - Load Preadmit Patient List" line="897">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:34.012880" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.354556" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.013342" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.355249" level="FAIL">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:34.010991" elapsed="0.004018">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.334184" elapsed="0.023763">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
@@ -1426,197 +1456,205 @@ Symbols not available. Dumping unresolved backtrace:
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:34.010880" elapsed="0.004236"/>
+<status status="PASS" start="2025-12-19T23:15:48.334021" elapsed="0.024145"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:34.016989" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.368885" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.017558" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.370286" level="FAIL">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-19T21:51:34.015237" elapsed="0.004347">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.358414" elapsed="0.016411">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
-<status status="FAIL" start="2025-12-19T21:51:34.010655" elapsed="0.009098">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.333692" elapsed="0.041569">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
 <kw name="Click Element Safe">
 <arg>xpath=//span[contains(@class,'mat-checkbox-inner-container')]</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.020132" elapsed="0.000059"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.375875" elapsed="0.000085"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.020429" elapsed="0.000030"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.376316" elapsed="0.000055"/>
 </kw>
 <doc>لیست بیماران preadmit</doc>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-19T21:51:34.010284" elapsed="0.010429">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.332951" elapsed="0.043728">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </test>
-<test id="s1-s1-t9" name="27-UI - Edit Preadmit Patient" line="954">
+<test id="s1-s1-t10" name="27-UI - Edit Preadmit Patient" line="992">
 <kw name="Fill Input By Id">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:34.024839" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.394532" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.025413" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.395259" level="FAIL">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-19T21:51:34.022745" elapsed="0.004730">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.379784" elapsed="0.018711">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
@@ -1625,495 +1663,512 @@ Symbols not available. Dumping unresolved backtrace:
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-19T21:51:34.022639" elapsed="0.004947"/>
+<status status="PASS" start="2025-12-19T23:15:48.378974" elapsed="0.019658"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:34.029634" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.413435" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.030270" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.414184" level="FAIL">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-19T21:51:34.027709" elapsed="0.004862">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.398855" elapsed="0.017412">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
-<status status="FAIL" start="2025-12-19T21:51:34.022465" elapsed="0.010508">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.378582" elapsed="0.037845">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="NOT RUN" start="2025-12-19T21:51:34.033130" elapsed="0.000030"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.416562" elapsed="0.000026"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-19T21:51:34.033248" elapsed="0.000020"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.416673" elapsed="0.000022"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-19T21:51:34.033334" elapsed="0.000018"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.416762" elapsed="0.000019"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
 <arg>id=${id}</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-19T21:51:34.033414" elapsed="0.000017"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.416843" elapsed="0.000025"/>
 </kw>
 <arg>mat-input-56</arg>
 <arg>1520554001</arg>
-<status status="FAIL" start="2025-12-19T21:51:34.022157" elapsed="0.011354">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.378074" elapsed="0.038871">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
 <kw name="Click Element Safe">
 <arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.033840" elapsed="0.000029"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.417220" elapsed="0.000060"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.034204" elapsed="0.000049"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.417643" elapsed="0.000048"/>
 </kw>
 <kw name="Click Element Safe">
 <arg>css=button.mat-tooltip-trigger.btn-action.ng-star-inserted</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.034524" elapsed="0.000023"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.417957" elapsed="0.000038"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.034719" elapsed="0.000020"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.418265" elapsed="0.000035"/>
 </kw>
 <kw name="Click Element Safe">
 <arg>css=button.mat-tooltip-trigger.btn.btn-edit1</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.034908" elapsed="0.000025"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.418600" elapsed="0.000030"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.035096" elapsed="0.000017"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.418784" elapsed="0.000023"/>
 </kw>
 <kw name="Select From Ng Select">
 <arg>wardfileld</arg>
 <arg>اطفال 2 - تخت خالی (33)</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.035269" elapsed="0.000019"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.418968" elapsed="0.000023"/>
 </kw>
 <kw name="Select From Ng Select">
 <arg>doctorField</arg>
 <arg>Siavash Siavash</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.035455" elapsed="0.000016"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.419134" elapsed="0.000020"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.035806" elapsed="0.000018"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.419345" elapsed="0.000020"/>
 </kw>
 <kw name="Click Element Safe">
 <arg>css=button.btn-saveFile</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.035999" elapsed="0.000018"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.419509" elapsed="0.000030"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.036168" elapsed="0.000018"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.419741" elapsed="0.000038"/>
 </kw>
 <kw name="Click Element Safe">
 <arg>css=button.swal2-deny.swal2-styled</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.036509" elapsed="0.000036"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.419974" elapsed="0.000033"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.036735" elapsed="0.000027"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.420213" elapsed="0.000033"/>
 </kw>
 <kw name="Click Element Safe">
 <arg>xpath=//span[contains(@class,'mat-checkbox-inner-container')]</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.036912" elapsed="0.000022"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.420446" elapsed="0.000036"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.037186" elapsed="0.000032"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.420665" elapsed="0.000035"/>
 </kw>
 <doc>ویرایش بیمار preadmit</doc>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-19T21:51:34.021547" elapsed="0.015892">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.377559" elapsed="0.043378">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </test>
-<test id="s1-s1-t10" name="29-UI - Cancel Preadmit" line="1176">
+<test id="s1-s1-t11" name="29-UI - Cancel Preadmit" line="1214">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-19T21:51:34.038612" level="INFO">Typing text '1520554001' into text field 'xpath=//input[@formcontrolname='nationalCode']'.</msg>
-<msg time="2025-12-19T21:51:34.040162" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.423222" level="INFO">Typing text '1520554001' into text field 'xpath=//input[@formcontrolname='nationalCode']'.</msg>
+<msg time="2025-12-19T23:15:48.441455" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.040577" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.442153" level="FAIL">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
 <arg>xpath=//input[@formcontrolname='nationalCode']</arg>
 <arg>${nationalCode}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-12-19T21:51:34.038421" elapsed="0.003498">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.422490" elapsed="0.022432">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </kw>
 <kw name="Click Element Safe">
 <arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.042236" elapsed="0.000047"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.445409" elapsed="0.000041"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.042521" elapsed="0.000039"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.445714" elapsed="0.000040"/>
 </kw>
 <kw name="Click Element Safe">
 <arg>xpath=//button[not(@hidden) and .//mat-icon[normalize-space(.)='cancel']]</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.042788" elapsed="0.000038"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.445961" elapsed="0.000033"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-19T21:51:34.043030" elapsed="0.000035"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.446301" elapsed="0.000133"/>
 </kw>
 <kw name="Click Element Safe">
 <arg>xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']</arg>
-<status status="NOT RUN" start="2025-12-19T21:51:34.043289" elapsed="0.000041"/>
+<status status="NOT RUN" start="2025-12-19T23:15:48.446664" elapsed="0.000032"/>
 </kw>
 <doc>لغو پذیرش preadmit</doc>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-19T21:51:34.038106" elapsed="0.005481">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<status status="FAIL" start="2025-12-19T23:15:48.421603" elapsed="0.025335">UnexpectedAlertPresentException: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </status>
 </test>
-<status status="FAIL" start="2025-12-19T21:50:05.205313" elapsed="88.839179"/>
+<status status="FAIL" start="2025-12-19T23:14:22.636429" elapsed="85.811643"/>
 </suite>
-<status status="FAIL" start="2025-12-19T21:50:05.184129" elapsed="88.861367"/>
+<status status="FAIL" start="2025-12-19T23:14:22.614920" elapsed="85.834012"/>
 </suite>
 <statistics>
 <total>
-<stat pass="5" fail="5" skip="0">All Tests</stat>
+<stat pass="7" fail="4" skip="0">All Tests</stat>
 </total>
 <tag>
 <stat pass="1" fail="0" skip="0">STEP_01_Open_Browser</stat>
-<stat pass="5" fail="5" skip="0">UI_Test</stat>
+<stat pass="7" fail="4" skip="0">UI_Test</stat>
 </tag>
 <suite>
-<stat name="AdmitHis-Test" id="s1" pass="5" fail="5" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis" id="s1-s1" pass="5" fail="5" skip="0">AdmitHis-Test.AdmitHis</stat>
+<stat name="AdmitHis-Test" id="s1" pass="7" fail="4" skip="0">AdmitHis-Test</stat>
+<stat name="AdmitHis" id="s1-s1" pass="7" fail="4" skip="0">AdmitHis-Test.AdmitHis</stat>
 </suite>
 </statistics>
 <errors>
-<msg time="2025-12-19T21:51:34.001778" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.308224" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.006655" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.326798" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.012880" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.354556" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.016989" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.368885" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.024839" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.394532" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.029634" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.413435" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>
-<msg time="2025-12-19T21:51:34.040162" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+<msg time="2025-12-19T23:15:48.441455" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Alert Text: Enter MAC Address (17 characters)
+Message: unexpected alert open: {Alert text : Enter MAC Address (17 characters)}
+  (Session info: chrome=143.0.7499.41)
 Stacktrace:
 Symbols not available. Dumping unresolved backtrace:
 	0x7ff7218a88e5
 	0x7ff7218a8940
-	0x7ff721681465
-	0x7ff7216c9d83
-	0x7ff721701ee2
-	0x7ff7216fc500
-	0x7ff7216fb6f0
-	0x7ff72164b325
+	0x7ff72168165d
+	0x7ff72172b6da
+	0x7ff7216cac29
+	0x7ff7216cba93
 	0x7ff721bc0640
 	0x7ff721bbaf80
 	0x7ff721bd96e6
 	0x7ff7218c5de4
 	0x7ff7218ced8c
-	0x7ff721649cb8
-	0x7ff721d1f008
+	0x7ff7218b2004
+	0x7ff7218b21b5
+	0x7ff721897ee2
 	0x7ff9a3cce8d7
 	0x7ff9a5f8c53c
 </msg>

@@ -4,20 +4,26 @@ Library           Collections
 Library           OperatingSystem
 Library           SeleniumLibrary
 
-Suite Setup       Create HIS Session
+Suite Setup       Create AdmitHIS Session
 
 *** Variables ***
-${BASE_URL}       http://192.168.5.19:1600
+${AdmitHis_Api_URL}       http://192.168.5.19:1600
 
-${FILING_URL}       http://192.168.5.19:8019/filing
+${AdmitHis_App_URL}       http://192.168.5.19:8019/filing
+
+${Cash_App_URL}       http://192.168.5.19:8075/admit
+
+${BROWSER}        chrome
 
 ${CHROME_DRIVER}    C:/chromedriver.exe
 
 ${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk
 
-${COOKIE_TOKEN}  eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk
+${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk
 
 ${GLOBAL_SPINNER}     css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop
+
+${CASH_MAC}    AC-9E-17-4E-BE-36
 
 ${nationalCode}    1520554001
 
@@ -31,39 +37,68 @@ ${FileFormationID}  683676
 
 ${Admit_ID}    356115
 
-${INT_365}=          Convert To Integer    365
-${INT_912}=          Convert To Integer    912
-${INT_363}=          Convert To Integer    363
-${INT_201}=          Convert To Integer    201
-${INT_993}=          Convert To Integer    993
-${INT_6}=            Convert To Integer    6
-${INT_147979}=       Convert To Integer    147979
-${INT_683676}=       Convert To Integer    683676
-${INT_370}=          Convert To Integer    370
-${INT_5}=            Convert To Integer    5
-${INT_3}=            Convert To Integer    3
-${INT_393}=          Convert To Integer    393
-${INT_18}=           Convert To Integer    18
-${INT_422}=          Convert To Integer    422
 
 
 *** Keywords ***
 
-Create HIS Session
-    Create Session    HIS    ${BASE_URL}    verify=${False}
-
-Start Browser With Token
+Create AdmitHIS Session
+    Create Session    HIS    ${AdmitHis_Api_URL}   verify=${False}
+    
+# َAdmit_His  
+Start Browser AdmitHis With Token
     [Documentation]    باز کردن کروم + تزریق کوکی token
-    Open Browser    ${FILING_URL}    chrome
+    Open Browser    ${AdmitHis_App_URL}    chrome
     Maximize Browser Window
     Add Cookie    token    ${COOKIE_TOKEN}
     Reload Page
 
-Go To Filing Page
+Go To AdmitHis Page
     [Documentation]    رفتن مستقیم به صفحه پذیرش بستری
-    Go To    ${FILING_URL}
+    Go To    ${AdmitHis_App_URL}
     Reload Page
 
+# Cash
+
+Switch To Cash App
+    Go To    ${Cash_App_URL}
+    Wait Until Location Contains    8075
+    
+
+Start Browser Cash With Token
+    [Documentation]   باز کردن صندوق وب
+    Open Browser    ${Cash_App_URL}    chrome
+    Maximize Browser Window
+    Add Cookie    token    ${COOKIE_TOKEN}
+    Reload Page
+
+Go To Cash Page
+    [Documentation]    باز کردن صندوق وب
+    Go To    ${Cash_App_URL}
+    Reload Page
+
+Open Cash Application Safe
+    [Documentation]    Open Cash UI safely with token + MAC bypass
+    Open Browser    about:blank    ${BROWSER}
+    Maximize Browser Window
+
+    Inject Cash Context
+    Go To    ${Cash_App_URL}
+
+    Handle MAC Prompt If Exists
+    Wait For Spinner Hidden
+
+Inject Cash Context
+    Execute Javascript    document.cookie = "token=${COOKIE_TOKEN}; path=/";
+    Execute Javascript    document.cookie = "mac=${CASH_MAC}; path=/";
+    Execute Javascript    localStorage.setItem("mac", "${CASH_MAC}");
+    Execute Javascript    localStorage.setItem("lang", "fa");
+    Execute Javascript    localStorage.setItem("country", "IR");
+
+Handle MAC Prompt If Exists
+    Run Keyword And Ignore Error
+    ...    Handle Alert    action=ACCEPT    prompt=${CASH_MAC}
+
+# General
 Wait For Spinner Hidden
     [Documentation]    صبر کردن تا loading Angular ناپدید شود
     Wait Until Element Is Not Visible    css=div.back-spenner.ng-star-inserted    1000
@@ -134,8 +169,8 @@ Normalize Integer Fields
 1-UI-Open Filing Page
     [Documentation]   باز  کردن صفحه پذیرش بستری
     [Tags]    STEP_01_Open_Browser    UI_Test    
-    Start Browser With Token
-    Go To Filing Page
+    Start Browser AdmitHis With Token
+    Go To AdmitHis Page
     Wait For Spinner Hidden
     Log To Console    ---- DONE ----
 
@@ -761,12 +796,17 @@ Normalize Integer Fields
 
     Click Element Safe    css=button.swal2-deny.swal2-styled
 
+21-UI - Open Cash Web
+    [Tags]    UI_Test
+    Switch To Cash App
+    Wait For Spinner Hidden
+
 22-UI - go to inpatient list
     [Documentation]    رفتن به لیست بیماران بستری 
     [Tags]    UI_Test    
     
-    # Start Browser With Token
-    # Go To Filing Page
+    # Start Browser AdmitHis With Token
+    # Go To AdmitHis Page
     Wait For Page Ready
     Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a   
     Wait For Page Ready
@@ -860,8 +900,8 @@ Normalize Integer Fields
     [Documentation]    لیست بیماران preadmit 
     [Tags]    UI_Test   
     
-    # Start Browser With Token
-    # Go To Filing Page
+    # Start Browser AdmitHis With Token
+    # Go To AdmitHis Page
     # Wait For Page Ready
     # Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a  
     Wait For Page Ready
@@ -955,8 +995,8 @@ Normalize Integer Fields
     [Documentation]     ویرایش بیمار preadmit
     [Tags]      UI_Test
 
-    # Start Browser With Token
-    # Go To Filing Page
+    # Start Browser AdmitHis With Token
+    # Go To AdmitHis Page
     # Wait For Page Ready
     # Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a 
     # Wait For Page Ready 
@@ -1177,8 +1217,8 @@ Normalize Integer Fields
     [Documentation]   لغو پذیرش preadmit
     [Tags]    UI_Test    
 
-    # Start Browser With Token
-    # Go To Filing Page
+    # Start Browser AdmitHis With Token
+    # Go To AdmitHis Page
     # Wait For Page Ready
     # Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a 
     # Wait For Page Ready 

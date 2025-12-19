@@ -1,145 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-19T21:48:38.294076" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-19T23:00:40.643420" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
 <suite id="s1-s1" name="AdmitHis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot">
-<kw name="Create HIS Session" type="SETUP">
+<kw name="Create AdmitHIS Session" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-12-19T21:48:38.500918" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-12-19T23:00:40.841616" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
-<arg>${BASE_URL}</arg>
+<arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-12-19T21:48:38.500630" elapsed="0.000551"/>
+<status status="PASS" start="2025-12-19T23:00:40.841307" elapsed="0.000554"/>
 </kw>
-<status status="PASS" start="2025-12-19T21:48:38.499849" elapsed="0.001471"/>
+<status status="PASS" start="2025-12-19T23:00:40.840485" elapsed="0.001519"/>
 </kw>
-<test id="s1-s1-t1" name="19-Add Filing Validation Bug - Empty NationalCode" line="661">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-12-19T21:48:38.505778" level="INFO">${headers} = {'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZ...</msg>
-<var>${headers}</var>
-<arg>Authorization=${AUTH_BEARER}</arg>
-<arg>Cookie=${COOKIE_TOKEN}</arg>
-<arg>Accept=application/json</arg>
-<arg>Content-Type=application/json</arg>
-<arg>AID=777</arg>
-<arg>Origin=http://192.168.5.19:8019</arg>
-<arg>Referer=http://192.168.5.19:8019/</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-12-19T21:48:38.505333" elapsed="0.000668"/>
+<test id="s1-s1-t1" name="21-UI - Open Cash Web" line="797">
+<kw name="Switch To Cash App">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-12-19T23:00:40.846581" level="INFO">Opening url 'http://192.168.5.19:8075/admit'</msg>
+<msg time="2025-12-19T23:00:40.846780" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<msg time="2025-12-19T23:00:40.847296" level="FAIL">No browser is open.</msg>
+<arg>${Cash_App_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="FAIL" start="2025-12-19T23:00:40.846373" elapsed="0.005189">No browser is open.</status>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-12-19T21:48:38.507279" level="INFO">${fileFormation} = {'name': 'مهرشاد', 'familyName': 'شیخ الاسلامی', 'fatherName': 'مهرداد', 'nationalCode': '', 'birthDate': '2002/07/07', 'sex': '365', 'nationality': '912', 'maritalStatus': '363', 'mobileNo': '0938350...</msg>
-<var>${fileFormation}</var>
-<arg>name=مهرشاد</arg>
-<arg>familyName=شیخ الاسلامی</arg>
-<arg>fatherName=مهرداد</arg>
-<arg>nationalCode=${EMPTY}</arg>
-<arg>birthDate=2002/07/07</arg>
-<arg>sex=365</arg>
-<arg>nationality=912</arg>
-<arg>maritalStatus=363</arg>
-<arg>mobileNo=09383509316</arg>
-<arg>birthPlace=363</arg>
-<arg>addressLine=dfgdfgdfgd</arg>
-<arg>hospitalFileID=147979</arg>
-<arg>fileFormationId=683676</arg>
-<arg>isNationalCodeRequired=${True}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-12-19T21:48:38.506495" elapsed="0.000890"/>
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>8075</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="NOT RUN" start="2025-12-19T23:00:40.851759" elapsed="0.000102"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-12-19T21:48:38.508112" level="INFO">${hisAdmitDto} = {'fileFormationID': '683676', 'wardIdIn': '201', 'physicianID': '993', 'admissionType': '370', 'patientClass': '5', 'priority': '3', 'entranceType': '393', 'admissionReason': 'دل درد', 'insuranceID': ...</msg>
-<var>${hisAdmitDto}</var>
-<arg>fileFormationID=683676</arg>
-<arg>wardIdIn=201</arg>
-<arg>physicianID=993</arg>
-<arg>admissionType=370</arg>
-<arg>patientClass=5</arg>
-<arg>priority=3</arg>
-<arg>entranceType=393</arg>
-<arg>admissionReason=دل درد</arg>
-<arg>insuranceID=6</arg>
-<arg>insuranceNO=0019208291</arg>
-<arg>insuranceExpDate=2026/01/05</arg>
-<arg>sponsor=خود فرد</arg>
-<arg>maritalStatus=363</arg>
-<arg>admitDate=2025/12/19</arg>
-<arg>admitTime=17:40</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-12-19T21:48:38.507752" elapsed="0.000470"/>
+<status status="FAIL" start="2025-12-19T23:00:40.845977" elapsed="0.006026">No browser is open.</status>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-12-19T21:48:38.508866" level="INFO">${filingDto} = {'fileFormation': {'name': 'مهرشاد', 'familyName': 'شیخ الاسلامی', 'fatherName': 'مهرداد', 'nationalCode': '', 'birthDate': '2002/07/07', 'sex': '365', 'nationality': '912', 'maritalStatus': '363', 'm...</msg>
-<var>${filingDto}</var>
-<arg>fileFormation=${fileFormation}</arg>
-<arg>hisAdmitDto=${hisAdmitDto}</arg>
-<arg>insur_Relation=18</arg>
-<arg>lastInsuranceKind=422</arg>
-<arg>wasInEmergency=${False}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-12-19T21:48:38.508550" elapsed="0.000400"/>
+<kw name="Wait For Spinner Hidden">
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="NOT RUN" start="2025-12-19T23:00:40.852281" elapsed="0.000088"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-12-19T21:48:38.509579" level="INFO">${body} = {'filingDto': {'fileFormation': {'name': 'مهرشاد', 'familyName': 'شیخ الاسلامی', 'fatherName': 'مهرداد', 'nationalCode': '', 'birthDate': '2002/07/07', 'sex': '365', 'nationality': '912', 'maritalStat...</msg>
-<var>${body}</var>
-<arg>filingDto=${filingDto}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-12-19T21:48:38.509255" elapsed="0.000420"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-12-19T21:48:41.570657" level="INFO">POST Request : url=http://192.168.5.19:1600/api/Filing/EditFiling 
- path_url=/api/Filing/EditFiling 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk', 'Cookie': 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk', 'Content-Type': 'application/json', 'AID': '777', 'Origin': 'http://192.168.5.19:8019', 'Referer': 'http://192.168.5.19:8019/', 'Content-Length': '1005'} 
- body=b'{"filingDto": {"fileFormation": {"name": "\\u0645\\u0647\\u0631\\u0634\\u0627\\u062f", "familyName": "\\u0634\\u06cc\\u062e \\u0627\\u0644\\u0627\\u0633\\u0644\\u0627\\u0645\\u06cc", "fatherName": "\\u0645\\u0647\\u0631\\u062f\\u0627\\u062f", "nationalCode": "", "birthDate": "2002/07/07", "sex": "365", "nationality": "912", "maritalStatus": "363", "mobileNo": "09383509316", "birthPlace": "363", "addressLine": "dfgdfgdfgd", "hospitalFileID": "147979", "fileFormationId": "683676", "isNationalCodeRequired": true}, "hisAdmitDto": {"fileFormationID": "683676", "wardIdIn": "201", "physicianID": "993", "admissionType": "370", "patientClass": "5", "priority": "3", "entranceType": "393", "admissionReason": "\\u062f\\u0644 \\u062f\\u0631\\u062f", "insuranceID": "6", "insuranceNO": "0019208291", "insuranceExpDate": "2026/01/05", "sponsor": "\\u062e\\u0648\\u062f \\u0641\\u0631\\u062f", "maritalStatus": "363", "admitDate": "2025/12/19", "admitTime": "17:40"}, "insur_Relation": "18", "lastInsuranceKind": "422", "wasInEmergency": false}}' 
- </msg>
-<msg time="2025-12-19T21:48:41.571937" level="INFO">POST Response : url=http://192.168.5.19:1600/api/Filing/EditFiling 
- status=500, reason=Internal Server Error 
- headers={'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json', 'Expires': '-1', 'Vary': 'Origin', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Origin': 'http://192.168.5.19:8019', 'Access-Control-Expose-Headers': 'SFRX,XSRF-TOKEN,SigningCertificate,ActiveSignatureSettings,NeedToSignDigests,Digests', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'Deny', 'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Download-Options': 'noopen', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Security-Policy': "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self';media-src 'self';font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content;report-uri /report", 'Content-Security-Policy-Report-Only': "default-src 'self';img-src 'self';media-src 'self'", 'X-Security': 'on', 'Date': 'Fri, 19 Dec 2025 18:18:41 GMT'} 
- body={"isSuccess":false,"statusCode":500,"message":""} 
- </msg>
-<msg time="2025-12-19T21:48:41.572519" level="INFO">${resp} = &lt;Response [500]&gt;</msg>
-<var>${resp}</var>
-<arg>HIS</arg>
-<arg>url=/api/Filing/EditFiling</arg>
-<arg>headers=${headers}</arg>
-<arg>json=${body}</arg>
-<arg>expected_status=anything</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-12-19T21:48:38.509924" elapsed="3.062841"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-12-19T21:48:41.576053" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${resp.status_code}</arg>
-<arg>500</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-12-19T21:48:41.574207" elapsed="0.002332"/>
-</kw>
-<doc>BUG-1247 - Empty nationalCode causes 500 instead of 400</doc>
-<tag>API</tag>
-<tag>BUG_1247</tag>
-<tag>NEGATIVE</tag>
-<tag>VALIDATION</tag>
-<status status="PASS" start="2025-12-19T21:48:38.501397" elapsed="3.076124"/>
+<tag>UI_Test</tag>
+<status status="FAIL" start="2025-12-19T23:00:40.842145" elapsed="0.010450">No browser is open.</status>
 </test>
-<status status="PASS" start="2025-12-19T21:48:38.323642" elapsed="3.261699"/>
+<status status="FAIL" start="2025-12-19T23:00:40.670904" elapsed="0.185069"/>
 </suite>
-<status status="PASS" start="2025-12-19T21:48:38.299150" elapsed="3.290749"/>
+<status status="FAIL" start="2025-12-19T23:00:40.648203" elapsed="0.210203"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">API</stat>
-<stat pass="1" fail="0" skip="0">BUG_1247</stat>
-<stat pass="1" fail="0" skip="0">NEGATIVE</stat>
-<stat pass="1" fail="0" skip="0">VALIDATION</stat>
+<stat pass="0" fail="1" skip="0">UI_Test</stat>
 </tag>
 <suite>
-<stat name="AdmitHis-Test" id="s1" pass="1" fail="0" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis" id="s1-s1" pass="1" fail="0" skip="0">AdmitHis-Test.AdmitHis</stat>
+<stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>
+<stat name="AdmitHis" id="s1-s1" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitHis</stat>
 </suite>
 </statistics>
 <errors>
