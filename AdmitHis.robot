@@ -17,9 +17,9 @@ ${BROWSER}        chrome
 
 ${CHROME_DRIVER}    C:/chromedriver.exe
 
-${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk
+${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxMDgxOWIzLTdlZTktNDkyYS04MWJkLTdlMzAwMjliZGVlYyIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJCa1BMbU1QTUN5SGNKWGV3SC8xTnRYZlUzT2ZzZlB3eGhSOHBqaVFSR2hFSnA2RmdEQ0lqbHB6d1Y1Nzd6V3NwOHMrUDJNSkZvQlBKNFIyUkVaUjZ4ejN4aVBSRGRUWTY0bUZ1dTYyUHduYjFVc21KUzRrbG1JQWZMSkhLWXhNayIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjI4NTk0NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.s50jO9qvq8mYNESEKeTXcbDwjw2p3sitlCjhKKxNugw
 
-${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6ImRiNmU0OWJlLWVmYzYtNDU5Zi1iNjUwLTI4NGZlNzQyMGRhMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ5QzJNUGw3V2MvYWV5eXR6Vkk2L0wwOUVkTm9OREhLNUZleHpEMHNyRkE0MjUrZTc4UTVpak94c0hyN1cycm1EMjRwU0dWZXNmdjV2c0lhV2w4WkQyY0p1NHA3dTBrMkRLaEZibkRqaHgrQ2JmcDJiN1FpOG1zSEdWeG1Td09aNCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjE4ODU1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.EmmB7eND3xR3yg6ZQlBEcrFvrCgUXJ8UVhidsw0IaMk
+${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxMDgxOWIzLTdlZTktNDkyYS04MWJkLTdlMzAwMjliZGVlYyIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJCa1BMbU1QTUN5SGNKWGV3SC8xTnRYZlUzT2ZzZlB3eGhSOHBqaVFSR2hFSnA2RmdEQ0lqbHB6d1Y1Nzd6V3NwOHMrUDJNSkZvQlBKNFIyUkVaUjZ4ejN4aVBSRGRUWTY0bUZ1dTYyUHduYjFVc21KUzRrbG1JQWZMSkhLWXhNayIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjI4NTk0NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.s50jO9qvq8mYNESEKeTXcbDwjw2p3sitlCjhKKxNugw
 
 ${GLOBAL_SPINNER}     css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop
 
@@ -57,6 +57,10 @@ Go To AdmitHis Page
     Go To    ${AdmitHis_App_URL}
     Reload Page
 
+Switch To AdmitHis App
+    Go To    ${AdmitHis_App_URL}
+    Wait Until Location Contains    8019    
+
 # Cash
 
 Switch To Cash App
@@ -67,36 +71,14 @@ Switch To Cash App
 Start Browser Cash With Token
     [Documentation]   باز کردن صندوق وب
     Open Browser    ${Cash_App_URL}    chrome
-    Maximize Browser Window
     Add Cookie    token    ${COOKIE_TOKEN}
+    Maximize Browser Window
     Reload Page
 
 Go To Cash Page
     [Documentation]    باز کردن صندوق وب
     Go To    ${Cash_App_URL}
     Reload Page
-
-Open Cash Application Safe
-    [Documentation]    Open Cash UI safely with token + MAC bypass
-    Open Browser    about:blank    ${BROWSER}
-    Maximize Browser Window
-
-    Inject Cash Context
-    Go To    ${Cash_App_URL}
-
-    Handle MAC Prompt If Exists
-    Wait For Spinner Hidden
-
-Inject Cash Context
-    Execute Javascript    document.cookie = "token=${COOKIE_TOKEN}; path=/";
-    Execute Javascript    document.cookie = "mac=${CASH_MAC}; path=/";
-    Execute Javascript    localStorage.setItem("mac", "${CASH_MAC}");
-    Execute Javascript    localStorage.setItem("lang", "fa");
-    Execute Javascript    localStorage.setItem("country", "IR");
-
-Handle MAC Prompt If Exists
-    Run Keyword And Ignore Error
-    ...    Handle Alert    action=ACCEPT    prompt=${CASH_MAC}
 
 # General
 Wait For Spinner Hidden
@@ -798,8 +780,22 @@ Normalize Integer Fields
 
 21-UI - Open Cash Web
     [Tags]    UI_Test
+
+    Wait For Page Ready
     Switch To Cash App
+    Wait For Page Ready
     Wait For Spinner Hidden
+    Input Text                          xpath=//input[@formcontrolname='nationalCode']    ${nationalCode}
+    Wait For Page Ready
+    Click Element Safe                  css=button.mat-tooltip-trigger.btn.btn-warning
+    Wait For Page Ready 
+    Wait Until Element Is Visible       xpath=//tr[td[contains(text(),${nationalCode})]]    30s
+    Double Click Element                xpath=//tr[td[contains(text(),${nationalCode})]]
+    Wait Until Element Is Visible       xpath=//button[normalize-space(text())='پرداخت']    30s
+    Click Button                        xpath=//button[normalize-space(text())='پرداخت']
+    Wait For Page Ready
+    Click Element Safe                  xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']
+
 
 22-UI - go to inpatient list
     [Documentation]    رفتن به لیست بیماران بستری 
@@ -808,6 +804,7 @@ Normalize Integer Fields
     # Start Browser AdmitHis With Token
     # Go To AdmitHis Page
     Wait For Page Ready
+    Switch To AdmitHis App
     Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a   
     Wait For Page Ready
 
