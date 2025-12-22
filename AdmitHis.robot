@@ -1,4 +1,4 @@
-*** Settings ****
+*** Settings ***
 Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
@@ -158,35 +158,6 @@ Select From Ng Select
     ...    css=ng-select[formcontrolname='${formcontrol}'] input[type='text']
     ...    TAB
 
-Fill Input By Id
-    [Arguments]    ${locator}    ${value}
-    [Documentation]    Fill input field safely - supports both ID and XPath locators
-    ...                ID example: mat-input-56
-    ...                XPath example: //input[@formcontrolname='nationalCode']
-
-    Wait For Page Ready
-    Wait For Spinner Hidden
-
-    # Detect locator type and prepare final locator
-    ${final_locator}=    Set Variable    ${locator}
-    ${is_xpath}=    Evaluate    '//' in ${locator}
-
-    IF    ${is_xpath}
-        # It's already an XPath
-        Log    Using XPath locator: ${locator}
-    ELSE
-        # Assume it's an ID
-        ${final_locator}=    Set Variable    id=${locator}
-        Log    Using ID locator: ${locator}
-    END
-
-    # Wait for element and fill
-    Wait Until Element Is Visible    ${final_locator}    30s
-    Clear Element Text    ${final_locator}
-    Input Text    ${final_locator}    ${value}
-
-    Log    ✓ Successfully filled input with value: ${value}  
-
 Click Element Safe
     [Arguments]    ${locator}
     Wait For Spinner Hidden
@@ -206,15 +177,6 @@ Wait For Page Ready
     Wait Until Element Is Not Visible
     ...    ${GLOBAL_SPINNER}
     ...    ${timeout}      
-
-Normalize Integer Fields
-    [Arguments]    ${dict}    @{int_keys}
-    FOR    ${key}    IN    @{int_keys}
-        ${value}=    Get From Dictionary    ${dict}    ${key}
-        ${value}=    Convert To Integer    ${value}
-        Set To Dictionary    ${dict}    ${key}=${value}
-    END  
-
 
 *** Test Cases ***
 

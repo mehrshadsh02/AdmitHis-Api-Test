@@ -1,199 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-21T00:24:12.741404" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-22T23:46:24.608637" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
 <suite id="s1-s1" name="AdmitHis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot">
 <kw name="Create AdmitHIS Session" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-12-21T00:24:12.950032" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2025-12-22T23:46:24.831871" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-12-21T00:24:12.949750" elapsed="0.000523"/>
+<status status="PASS" start="2025-12-22T23:46:24.831566" elapsed="0.000557"/>
 </kw>
-<status status="PASS" start="2025-12-21T00:24:12.948902" elapsed="0.001500"/>
+<status status="PASS" start="2025-12-22T23:46:24.830796" elapsed="0.001459"/>
 </kw>
-<test id="s1-s1-t1" name="21-UI - Open Cash Web" line="781">
-<kw name="Start Browser Cash With Token">
+<test id="s1-s1-t1" name="1-UI-Open Filing Page" line="183">
+<kw name="Start Browser AdmitHis With Token">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-12-21T00:24:12.956905" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8075/admit'.</msg>
-<arg>${Cash_App_URL}</arg>
+<msg time="2025-12-22T23:46:24.836682" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
+<arg>${AdmitHis_App_URL}</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-12-21T00:24:12.956541" elapsed="2.406332"/>
-</kw>
-<kw name="Add Cookie" owner="SeleniumLibrary">
-<msg time="2025-12-21T00:24:15.456774" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-12-21T00:24:15.457360" level="FAIL">UnexpectedAlertPresentException: Alert Text: Token Not Found
-Message: unexpected alert open: {Alert text : Token Not Found}
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff6659a88e5
-	0x7ff6659a8940
-	0x7ff66578165d
-	0x7ff66582b6da
-	0x7ff6657cac29
-	0x7ff6657cba93
-	0x7ff665cc0640
-	0x7ff665cbaf80
-	0x7ff665cd96e6
-	0x7ff6659c5de4
-	0x7ff6659ced8c
-	0x7ff6659b2004
-	0x7ff6659b21b5
-	0x7ff665997ee2
-	0x7ffed29ee8d7
-	0x7ffed4cac53c
-</msg>
-<arg>token</arg>
-<arg>${COOKIE_TOKEN}</arg>
-<doc>Adds a cookie to your current session.</doc>
-<status status="FAIL" start="2025-12-21T00:24:15.363072" elapsed="0.102811">UnexpectedAlertPresentException: Alert Text: Token Not Found
-Message: unexpected alert open: {Alert text : Token Not Found}
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff6659a88e5
-	0x7ff6659a8940
-	0x7ff66578165d
-	0x7ff66582b6da
-	0x7ff6657cac29
-	0x7ff6657cba93
-	0x7ff665cc0640
-	0x7ff665cbaf80
-	0x7ff665cd96e6
-	0x7ff6659c5de4
-	0x7ff6659ced8c
-	0x7ff6659b2004
-	0x7ff6659b21b5
-	0x7ff665997ee2
-	0x7ffed29ee8d7
-	0x7ffed4cac53c
-</status>
+<status status="PASS" start="2025-12-22T23:46:24.836369" elapsed="2.860854"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.466099" elapsed="0.000117"/>
+<status status="PASS" start="2025-12-22T23:46:27.697571" elapsed="0.030582"/>
+</kw>
+<kw name="Add Cookie" owner="SeleniumLibrary">
+<arg>token</arg>
+<arg>${COOKIE_TOKEN}</arg>
+<doc>Adds a cookie to your current session.</doc>
+<status status="PASS" start="2025-12-22T23:46:27.728381" elapsed="0.005795"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.466309" elapsed="0.000064"/>
+<status status="PASS" start="2025-12-22T23:46:27.734388" elapsed="0.159055"/>
 </kw>
-<doc>باز کردن صندوق وب</doc>
-<status status="FAIL" start="2025-12-21T00:24:12.956097" elapsed="2.510399">UnexpectedAlertPresentException: Alert Text: Token Not Found
-Message: unexpected alert open: {Alert text : Token Not Found}
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff6659a88e5
-	0x7ff6659a8940
-	0x7ff66578165d
-	0x7ff66582b6da
-	0x7ff6657cac29
-	0x7ff6657cba93
-	0x7ff665cc0640
-	0x7ff665cbaf80
-	0x7ff665cd96e6
-	0x7ff6659c5de4
-	0x7ff6659ced8c
-	0x7ff6659b2004
-	0x7ff6659b21b5
-	0x7ff665997ee2
-	0x7ffed29ee8d7
-	0x7ffed4cac53c
-</status>
+<doc>باز کردن کروم + تزریق کوکی token</doc>
+<status status="PASS" start="2025-12-22T23:46:24.835990" elapsed="3.057670"/>
 </kw>
-<kw name="Go To Cash Page">
-<doc>باز کردن صندوق وب</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.467156" elapsed="0.000254"/>
+<kw name="Go To AdmitHis Page">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-12-22T23:46:27.894622" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
+<arg>${AdmitHis_App_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-12-22T23:46:27.894445" elapsed="0.056450"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2025-12-22T23:46:27.951131" elapsed="0.086652"/>
+</kw>
+<doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
+<status status="PASS" start="2025-12-22T23:46:27.894106" elapsed="0.143832"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-12-22T23:46:28.038787" elapsed="0.012332"/>
+</kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.467884" elapsed="0.000205"/>
+<status status="PASS" start="2025-12-22T23:46:28.038447" elapsed="0.013172"/>
 </kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>xpath=//input[@formcontrolname='nationalCode']</arg>
-<arg>${nationalCode}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.468359" elapsed="0.000082"/>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>---- DONE ----</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-22T23:46:28.052202" elapsed="0.000605"/>
 </kw>
-<kw name="Click Element Safe">
-<arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
-<status status="NOT RUN" start="2025-12-21T00:24:15.468616" elapsed="0.000066"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-21T00:24:15.468823" elapsed="0.000063"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//tr[td[contains(text(),${nationalCode})]]</arg>
-<arg>30s</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.469007" elapsed="0.000069"/>
-</kw>
-<kw name="Double Click Element" owner="SeleniumLibrary">
-<arg>xpath=//tr[td[contains(text(),${nationalCode})]]</arg>
-<doc>Double clicks the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.469206" elapsed="0.000063"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//button[normalize-space(text())='پرداخت']</arg>
-<arg>30s</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.469396" elapsed="0.000070"/>
-</kw>
-<kw name="Click Button" owner="SeleniumLibrary">
-<arg>xpath=//button[normalize-space(text())='پرداخت']</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-21T00:24:15.469655" elapsed="0.000067"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-21T00:24:15.469865" elapsed="0.000063"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']</arg>
-<status status="NOT RUN" start="2025-12-21T00:24:15.470060" elapsed="0.000059"/>
-</kw>
+<doc>باز  کردن صفحه پذیرش بستری</doc>
+<tag>STEP_01_Open_Browser</tag>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-21T00:24:12.950474" elapsed="2.519815">UnexpectedAlertPresentException: Alert Text: Token Not Found
-Message: unexpected alert open: {Alert text : Token Not Found}
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff6659a88e5
-	0x7ff6659a8940
-	0x7ff66578165d
-	0x7ff66582b6da
-	0x7ff6657cac29
-	0x7ff6657cba93
-	0x7ff665cc0640
-	0x7ff665cbaf80
-	0x7ff665cd96e6
-	0x7ff6659c5de4
-	0x7ff6659ced8c
-	0x7ff6659b2004
-	0x7ff6659b21b5
-	0x7ff665997ee2
-	0x7ffed29ee8d7
-	0x7ffed4cac53c
-</status>
+<status status="PASS" start="2025-12-22T23:46:24.832330" elapsed="3.221159"/>
 </test>
-<status status="FAIL" start="2025-12-21T00:24:12.776687" elapsed="2.705773"/>
+<status status="PASS" start="2025-12-22T23:46:24.645934" elapsed="3.420806"/>
 </suite>
-<status status="FAIL" start="2025-12-21T00:24:12.746227" elapsed="2.740764"/>
+<status status="PASS" start="2025-12-22T23:46:24.613761" elapsed="3.461166"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1" skip="0">UI_Test</stat>
+<stat pass="1" fail="0" skip="0">STEP_01_Open_Browser</stat>
+<stat pass="1" fail="0" skip="0">UI_Test</stat>
 </tag>
 <suite>
-<stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis" id="s1-s1" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitHis</stat>
+<stat name="AdmitHis-Test" id="s1" pass="1" fail="0" skip="0">AdmitHis-Test</stat>
+<stat name="AdmitHis" id="s1-s1" pass="1" fail="0" skip="0">AdmitHis-Test.AdmitHis</stat>
 </suite>
 </statistics>
 <errors>
+<msg time="2025-12-22T23:46:24.821649" level="ERROR">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot' on line 6: Initializing library 'SeleniumLibrary' with arguments [ screenshot_on_failure=False ] failed: ValueError: Invalid time string 'screenshot_on_failure=False'.
+Traceback (most recent call last):
+  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\__init__.py", line 631, in __init__
+    self.timeout = _convert_timeout(timeout)
+                   ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\utils\types.py", line 42, in _convert_timeout
+    return timestr_to_secs(timeout)
+  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\robot\utils\robottime.py", line 58, in timestr_to_secs
+    raise ValueError(f"Invalid time string '{timestr}'.")
+ValueError: Invalid time string 'screenshot_on_failure=False'.</msg>
 </errors>
 </robot>
