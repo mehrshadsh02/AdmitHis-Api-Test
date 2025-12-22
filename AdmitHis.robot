@@ -3,6 +3,8 @@ Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
 Library           SeleniumLibrary
+Library           SeleniumLibrary    screenshot_on_failure=False
+
 
 Suite Setup       Create AdmitHIS Session
 
@@ -17,13 +19,11 @@ ${BROWSER}        chrome
 
 ${CHROME_DRIVER}    C:/chromedriver.exe
 
-${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxMDgxOWIzLTdlZTktNDkyYS04MWJkLTdlMzAwMjliZGVlYyIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJCa1BMbU1QTUN5SGNKWGV3SC8xTnRYZlUzT2ZzZlB3eGhSOHBqaVFSR2hFSnA2RmdEQ0lqbHB6d1Y1Nzd6V3NwOHMrUDJNSkZvQlBKNFIyUkVaUjZ4ejN4aVBSRGRUWTY0bUZ1dTYyUHduYjFVc21KUzRrbG1JQWZMSkhLWXhNayIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjI4NTk0NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.s50jO9qvq8mYNESEKeTXcbDwjw2p3sitlCjhKKxNugw
+${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6Ijc0YzcwOGU5LTVkMTEtNDAxMC05ZmFiLTM5ZjUxZDc4MmM0YiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxNzIuMjYuNTkuNyIsIk5QSUQiOiIiLCJ1c2luZiI6IjA2SzB6UUdFeTlNRmFKK0xobzRWdFl4bEowcVcwcktZVTgyUkRSbEtEQ0g2RkhNVk96STJJZGF6Z09DNmp1enNCOTBGMDkyS3RQNjVDNWhDQ2ZReU5ma28zRzg0czB0S242NDZhdG5IUHZYazV0S05MYkh1T1pCTFE0QmRNZVlQIiwiQ0lEIjoiIiwiQUlEIjoiMTAwIiwiQ2VudGVyTmFtZSI6ItmF2LHaqdiyINiq2YfYsdin2YYiLCJVc2VyRW1haWxBZGRyZXNzIjoiIiwiRHluYW1pY1Blcm1pc3Npb25LZXkiOiIzMjM5NjAzOGZjYTAxY2I2OWQyYzQ0YjA5NjQ2MjRkMWZlNDYxYzk3ODBjZmZjN2Y5NTU4MmE4YWE5NzdjMmExIiwiSWRsZXRpbWUiOiIyNDAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiY2hlY2siLCJyb2xlIl0sIlJvbGVJZCI6MTE5NSwiZXhwIjoxNzY2NDQ4MzQ5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojc3NDAvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNjU4LyJ9.vweE9jfBq4xhu_QHkCrL3JwjcdZY1XZUtiSbQ4QYkJU
 
-${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjkxMDgxOWIzLTdlZTktNDkyYS04MWJkLTdlMzAwMjliZGVlYyIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJCa1BMbU1QTUN5SGNKWGV3SC8xTnRYZlUzT2ZzZlB3eGhSOHBqaVFSR2hFSnA2RmdEQ0lqbHB6d1Y1Nzd6V3NwOHMrUDJNSkZvQlBKNFIyUkVaUjZ4ejN4aVBSRGRUWTY0bUZ1dTYyUHduYjFVc21KUzRrbG1JQWZMSkhLWXhNayIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjI4NTk0NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.s50jO9qvq8mYNESEKeTXcbDwjw2p3sitlCjhKKxNugw
+${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6Ijc0YzcwOGU5LTVkMTEtNDAxMC05ZmFiLTM5ZjUxZDc4MmM0YiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxNzIuMjYuNTkuNyIsIk5QSUQiOiIiLCJ1c2luZiI6IjA2SzB6UUdFeTlNRmFKK0xobzRWdFl4bEowcVcwcktZVTgyUkRSbEtEQ0g2RkhNVk96STJJZGF6Z09DNmp1enNCOTBGMDkyS3RQNjVDNWhDQ2ZReU5ma28zRzg0czB0S242NDZhdG5IUHZYazV0S05MYkh1T1pCTFE0QmRNZVlQIiwiQ0lEIjoiIiwiQUlEIjoiMTAwIiwiQ2VudGVyTmFtZSI6ItmF2LHaqdiyINiq2YfYsdin2YYiLCJVc2VyRW1haWxBZGRyZXNzIjoiIiwiRHluYW1pY1Blcm1pc3Npb25LZXkiOiIzMjM5NjAzOGZjYTAxY2I2OWQyYzQ0YjA5NjQ2MjRkMWZlNDYxYzk3ODBjZmZjN2Y5NTU4MmE4YWE5NzdjMmExIiwiSWRsZXRpbWUiOiIyNDAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiY2hlY2siLCJyb2xlIl0sIlJvbGVJZCI6MTE5NSwiZXhwIjoxNzY2NDQ4MzQ5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojc3NDAvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNjU4LyJ9.vweE9jfBq4xhu_QHkCrL3JwjcdZY1XZUtiSbQ4QYkJU
 
 ${GLOBAL_SPINNER}     css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop
-
-${CASH_MAC}    AC-9E-17-4E-BE-36
 
 ${nationalCode}    1520554001
 
@@ -59,13 +59,17 @@ Go To AdmitHis Page
 
 Switch To AdmitHis App
     Go To    ${AdmitHis_App_URL}
-    Wait Until Location Contains    8019    
+    Wait Until Location Contains    8019  
+    Wait For Spinner Hidden
+    Wait For Page Ready  
 
 # Cash
 
 Switch To Cash App
     Go To    ${Cash_App_URL}
     Wait Until Location Contains    8075
+    Wait For Spinner Hidden
+    Wait For Page Ready
     
 
 Start Browser Cash With Token
@@ -79,6 +83,51 @@ Go To Cash Page
     [Documentation]    باز کردن صندوق وب
     Go To    ${Cash_App_URL}
     Reload Page
+
+Cash Pay Patient By National Code
+    [Arguments]    ${nationalCode}
+    [Documentation]    Open Cash App, search patient by national code and complete payment flow
+
+    Wait For Page Ready
+    Switch To Cash App
+    Wait For Page Ready
+    Wait For Spinner Hidden
+
+    Input Text
+    ...    xpath=//input[@formcontrolname='nationalCode']
+    ...    ${nationalCode}
+
+    Wait For Page Ready
+
+    Click Element Safe
+    ...    xpath=//button[contains(@class,'btn-warning') and .//mat-icon[.='search']]
+
+    Wait For Page Ready
+    Wait For Spinner Hidden
+
+    ${row_xpath}=    Set Variable
+    ...    //tr[.//td[contains(normalize-space(), '${nationalCode}')]]
+
+    Wait Until Keyword Succeeds
+    ...    3x
+    ...    5s
+    ...    Element Should Be Visible
+    ...    ${row_xpath}
+
+    Double Click Element    ${row_xpath}
+
+    Wait Until Element Is Visible
+    ...    xpath=//button[normalize-space(text())='پرداخت']
+    ...    30s
+
+    Click Element Safe
+    ...    xpath=//button[normalize-space(text())='پرداخت']
+
+    Wait For Page Ready
+
+    Click Element Safe
+    ...    xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']
+
 
 # General
 Wait For Spinner Hidden
@@ -110,12 +159,33 @@ Select From Ng Select
     ...    TAB
 
 Fill Input By Id
-    [Arguments]    ${id}    ${value}
+    [Arguments]    ${locator}    ${value}
+    [Documentation]    Fill input field safely - supports both ID and XPath locators
+    ...                ID example: mat-input-56
+    ...                XPath example: //input[@formcontrolname='nationalCode']
+
     Wait For Page Ready
     Wait For Spinner Hidden
-    Wait Until Element Is Visible    id=${id}
-    Clear Element Text    id=${id}
-    Input Text    id=${id}    ${value}     
+
+    # Detect locator type and prepare final locator
+    ${final_locator}=    Set Variable    ${locator}
+    ${is_xpath}=    Evaluate    '//' in ${locator}
+
+    IF    ${is_xpath}
+        # It's already an XPath
+        Log    Using XPath locator: ${locator}
+    ELSE
+        # Assume it's an ID
+        ${final_locator}=    Set Variable    id=${locator}
+        Log    Using ID locator: ${locator}
+    END
+
+    # Wait for element and fill
+    Wait Until Element Is Visible    ${final_locator}    30s
+    Clear Element Text    ${final_locator}
+    Input Text    ${final_locator}    ${value}
+
+    Log    ✓ Successfully filled input with value: ${value}  
 
 Click Element Safe
     [Arguments]    ${locator}
@@ -353,10 +423,11 @@ Normalize Integer Fields
 9-UI-Enter national code of patiant
     [Documentation]   وارد کردن کد ملی بیمار و استعلام کد ملی
     [Tags]    UI_Test    
-    
-    
+        
     Wait For Page Ready
-    Fill Input By Id         mat-input-3            ${nationalCode}
+    Wait Until Element Is Visible    //input[@formcontrolname='nationalCode']    10s
+    Clear Element Text    //input[@formcontrolname='nationalCode']
+    Input Text         //input[@formcontrolname='nationalCode']     ${nationalCode}
     Click Element Safe       id=button-addon3
     Wait For Page Ready
 
@@ -534,10 +605,10 @@ Normalize Integer Fields
     Select From Ng Select    maritalStatus           مجرد
     Select From Ng Select    insurRelation           خود فرد
 
-    Fill Input By Id         mat-input-31            09383509316
-    Fill Input By Id         mat-input-34            dfgdfgdfgd
-    Fill Input By Id         mat-input-35            مهرشاد شیخ الاسلامی
-    Fill Input By Id         mat-input-36            09383586316
+    Input Text         //input[@formcontrolname='mobileNumber']    09383509316
+    Input Text         //input[@formcontrolname='address']    dfgdfgdfgd
+    Input Text         //input[@formcontrolname='accompanyfullName']     مهرشاد شیخ الاسلامی
+    Input Text         //input[@formcontrolname='accompanyMobileNumber']    09383586316
 
     Wait For Spinner Hidden
     Wait Until Element Is Visible    id=button-addon2
@@ -558,7 +629,7 @@ Normalize Integer Fields
     Select From Ng Select    doctorField             Siavash Siavash
     Select From Ng Select    responsiblePatient     خود فرد
 
-    Fill Input By Id         mat-input-40            10000
+    Input Text         //input[@formcontrolname='prepayment']             10000
 
 
 16-Get All Bed Number
@@ -778,23 +849,10 @@ Normalize Integer Fields
 
     Click Element Safe    css=button.swal2-deny.swal2-styled
 
-21-UI - Open Cash Web
+21-UI - Open Cash Web And Pay
     [Tags]    UI_Test
-
-    Wait For Page Ready
-    Switch To Cash App
-    Wait For Page Ready
-    Wait For Spinner Hidden
-    Input Text                          xpath=//input[@formcontrolname='nationalCode']    ${nationalCode}
-    Wait For Page Ready
-    Click Element Safe                  css=button.mat-tooltip-trigger.btn.btn-warning
-    Wait For Page Ready 
-    Wait Until Element Is Visible       xpath=//tr[td[contains(text(),${nationalCode})]]    30s
-    Double Click Element                xpath=//tr[td[contains(text(),${nationalCode})]]
-    Wait Until Element Is Visible       xpath=//button[normalize-space(text())='پرداخت']    30s
-    Click Button                        xpath=//button[normalize-space(text())='پرداخت']
-    Wait For Page Ready
-    Click Element Safe                  xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']
+    
+    Cash Pay Patient By National Code    ${nationalCode}
 
 
 22-UI - go to inpatient list
@@ -998,8 +1056,8 @@ Normalize Integer Fields
     # Click Element Safe    xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a 
     # Wait For Page Ready 
     # Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
-    # Wait For Page Ready
-    Fill Input By Id      mat-input-56     	1520554001
+    Wait For Page Ready
+    Input Text      //input[@formcontrolname='nationalCode']     	${nationalCode}
     Click Element Safe    css=button.mat-tooltip-trigger.btn.btn-warning
     Wait For Page Ready   
     Click Element Safe    css=button.mat-tooltip-trigger.btn-action.ng-star-inserted 
@@ -1011,9 +1069,9 @@ Normalize Integer Fields
     Wait For Page Ready
     Click Element Safe     css=button.btn-saveFile
     Wait For Page Ready
-    Click Element Safe    css=button.swal2-deny.swal2-styled
+    Click Element Safe     css=button.swal2-deny.swal2-styled
     Wait For Page Ready 
-    Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
+    Click Element Safe     xpath=//span[contains(@class,'mat-checkbox-inner-container')]
     Wait For Page Ready
 
 28- Edit Filing PreAdmit
@@ -1221,7 +1279,7 @@ Normalize Integer Fields
     # Wait For Page Ready 
     # Click Element Safe    xpath=//span[contains(@class,'mat-checkbox-inner-container')]
     # Wait For Page Ready
-    # Fill Input By Id      mat-input-55     	${nationalCode}
+    # Input Text      mat-input-55     	${nationalCode}
     Input Text            xpath=//input[@formcontrolname='nationalCode']    ${nationalCode}
     Click Element Safe    css=button.mat-tooltip-trigger.btn.btn-warning
     Wait For Page Ready   
