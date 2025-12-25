@@ -1,105 +1,234 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-22T23:46:24.608637" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-26T01:28:24.451446" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
-<suite id="s1-s1" name="AdmitHis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot">
-<kw name="Create AdmitHIS Session" type="SETUP">
+<suite id="s1-s1" name="AdmitRis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitRis.robot">
+<kw name="Create AdmitRis Session" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-12-22T23:46:24.831871" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>HIS</arg>
-<arg>${AdmitHis_Api_URL}</arg>
+<msg time="2025-12-26T01:28:24.646818" level="INFO">Creating Session using : alias=RIS, url=http://192.168.5.19:8023, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>RIS</arg>
+<arg>${AdmitRis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-12-22T23:46:24.831566" elapsed="0.000557"/>
+<status status="PASS" start="2025-12-26T01:28:24.646523" elapsed="0.000550"/>
 </kw>
-<status status="PASS" start="2025-12-22T23:46:24.830796" elapsed="0.001459"/>
+<status status="PASS" start="2025-12-26T01:28:24.645725" elapsed="0.001484"/>
 </kw>
-<test id="s1-s1-t1" name="1-UI-Open Filing Page" line="183">
-<kw name="Start Browser AdmitHis With Token">
+<test id="s1-s1-t1" name="1-UI-Open Filing Page" line="189">
+<kw name="Start Browser AdmitRis With Token">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-12-22T23:46:24.836682" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
-<arg>${AdmitHis_App_URL}</arg>
+<msg time="2025-12-26T01:28:24.652067" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<arg>about:blank</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-12-22T23:46:24.836369" elapsed="2.860854"/>
+<status status="PASS" start="2025-12-26T01:28:24.651717" elapsed="1.115889"/>
 </kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-12-22T23:46:27.697571" elapsed="0.030582"/>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-12-26T01:28:25.768157" level="INFO">Opening url 'http://192.168.5.19:1201'</msg>
+<arg>${AdmitRis_Base_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-12-26T01:28:25.767842" elapsed="1.466473"/>
 </kw>
 <kw name="Add Cookie" owner="SeleniumLibrary">
 <arg>token</arg>
 <arg>${COOKIE_TOKEN}</arg>
 <doc>Adds a cookie to your current session.</doc>
-<status status="PASS" start="2025-12-22T23:46:27.728381" elapsed="0.005795"/>
+<status status="PASS" start="2025-12-26T01:28:27.234530" elapsed="0.009315"/>
 </kw>
-<kw name="Reload Page" owner="SeleniumLibrary">
-<doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2025-12-22T23:46:27.734388" elapsed="0.159055"/>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-12-26T01:28:27.244332" level="INFO">Opening url 'http://192.168.5.19:8024/admit'</msg>
+<arg>${AdmitRis_App_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-12-26T01:28:27.244050" elapsed="15.289386"/>
 </kw>
 <doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="PASS" start="2025-12-22T23:46:24.835990" elapsed="3.057670"/>
+<status status="PASS" start="2025-12-26T01:28:24.651372" elapsed="17.882310"/>
 </kw>
-<kw name="Go To AdmitHis Page">
+<kw name="Go To AdmitRis Page">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-12-22T23:46:27.894622" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
-<arg>${AdmitHis_App_URL}</arg>
+<msg time="2025-12-26T01:28:42.534992" level="INFO">Opening url 'http://192.168.5.19:8024/admit'</msg>
+<msg time="2025-12-26T01:28:42.537981" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff60c5788e5
+	0x7ff60c578940
+	0x7ff60c35165d
+	0x7ff60c3291b1
+	0x7ff60c3d97e6
+	0x7ff60c3fa5c2
+	0x7ff60c39ac29
+	0x7ff60c39ba93
+	0x7ff60c890640
+	0x7ff60c88af80
+	0x7ff60c8a96e6
+	0x7ff60c595de4
+	0x7ff60c59ed8c
+	0x7ff60c582004
+	0x7ff60c5821b5
+	0x7ff60c567ee2
+	0x7fff629fe8d7
+	0x7fff633ec53c
+</msg>
+<msg time="2025-12-26T01:28:42.603747" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff60c5788e5
+	0x7ff60c578940
+	0x7ff60c35165d
+	0x7ff60c3291b1
+	0x7ff60c3d97e6
+	0x7ff60c3fa5c2
+	0x7ff60c39ac29
+	0x7ff60c39ba93
+	0x7ff60c890640
+	0x7ff60c88af80
+	0x7ff60c8a96e6
+	0x7ff60c595de4
+	0x7ff60c59ed8c
+	0x7ff60c582004
+	0x7ff60c5821b5
+	0x7ff60c567ee2
+	0x7fff629fe8d7
+	0x7fff633ec53c
+</msg>
+<arg>${AdmitRis_App_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-12-22T23:46:27.894445" elapsed="0.056450"/>
+<status status="FAIL" start="2025-12-26T01:28:42.534689" elapsed="0.092612">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff60c5788e5
+	0x7ff60c578940
+	0x7ff60c35165d
+	0x7ff60c3291b1
+	0x7ff60c3d97e6
+	0x7ff60c3fa5c2
+	0x7ff60c39ac29
+	0x7ff60c39ba93
+	0x7ff60c890640
+	0x7ff60c88af80
+	0x7ff60c8a96e6
+	0x7ff60c595de4
+	0x7ff60c59ed8c
+	0x7ff60c582004
+	0x7ff60c5821b5
+	0x7ff60c567ee2
+	0x7fff629fe8d7
+	0x7fff633ec53c
+</status>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2025-12-22T23:46:27.951131" elapsed="0.086652"/>
+<status status="NOT RUN" start="2025-12-26T01:28:42.627703" elapsed="0.000200"/>
 </kw>
-<doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
-<status status="PASS" start="2025-12-22T23:46:27.894106" elapsed="0.143832"/>
+<doc>رفتن مستقیم به صفحه پذیرش طب تصویری</doc>
+<status status="FAIL" start="2025-12-26T01:28:42.534128" elapsed="0.094013">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff60c5788e5
+	0x7ff60c578940
+	0x7ff60c35165d
+	0x7ff60c3291b1
+	0x7ff60c3d97e6
+	0x7ff60c3fa5c2
+	0x7ff60c39ac29
+	0x7ff60c39ba93
+	0x7ff60c890640
+	0x7ff60c88af80
+	0x7ff60c8a96e6
+	0x7ff60c595de4
+	0x7ff60c59ed8c
+	0x7ff60c582004
+	0x7ff60c5821b5
+	0x7ff60c567ee2
+	0x7fff629fe8d7
+	0x7fff633ec53c
+</status>
 </kw>
 <kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-22T23:46:28.038787" elapsed="0.012332"/>
-</kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-22T23:46:28.038447" elapsed="0.013172"/>
+<status status="NOT RUN" start="2025-12-26T01:28:42.628608" elapsed="0.000145"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>---- DONE ----</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-12-22T23:46:28.052202" elapsed="0.000605"/>
+<status status="NOT RUN" start="2025-12-26T01:28:42.629029" elapsed="0.000135"/>
 </kw>
-<doc>باز  کردن صفحه پذیرش بستری</doc>
+<doc>باز  کردن صفحه پذیرش طب تصویری</doc>
 <tag>STEP_01_Open_Browser</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2025-12-22T23:46:24.832330" elapsed="3.221159"/>
+<status status="FAIL" start="2025-12-26T01:28:24.647288" elapsed="17.982236">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff60c5788e5
+	0x7ff60c578940
+	0x7ff60c35165d
+	0x7ff60c3291b1
+	0x7ff60c3d97e6
+	0x7ff60c3fa5c2
+	0x7ff60c39ac29
+	0x7ff60c39ba93
+	0x7ff60c890640
+	0x7ff60c88af80
+	0x7ff60c8a96e6
+	0x7ff60c595de4
+	0x7ff60c59ed8c
+	0x7ff60c582004
+	0x7ff60c5821b5
+	0x7ff60c567ee2
+	0x7fff629fe8d7
+	0x7fff633ec53c
+</status>
 </test>
-<status status="PASS" start="2025-12-22T23:46:24.645934" elapsed="3.420806"/>
+<status status="FAIL" start="2025-12-26T01:28:24.478824" elapsed="18.179827"/>
 </suite>
-<status status="PASS" start="2025-12-22T23:46:24.613761" elapsed="3.461166"/>
+<status status="FAIL" start="2025-12-26T01:28:24.455857" elapsed="18.207153"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">STEP_01_Open_Browser</stat>
-<stat pass="1" fail="0" skip="0">UI_Test</stat>
+<stat pass="0" fail="1" skip="0">STEP_01_Open_Browser</stat>
+<stat pass="0" fail="1" skip="0">UI_Test</stat>
 </tag>
 <suite>
-<stat name="AdmitHis-Test" id="s1" pass="1" fail="0" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis" id="s1-s1" pass="1" fail="0" skip="0">AdmitHis-Test.AdmitHis</stat>
+<stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>
+<stat name="AdmitRis" id="s1-s1" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitRis</stat>
 </suite>
 </statistics>
 <errors>
-<msg time="2025-12-22T23:46:24.821649" level="ERROR">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot' on line 6: Initializing library 'SeleniumLibrary' with arguments [ screenshot_on_failure=False ] failed: ValueError: Invalid time string 'screenshot_on_failure=False'.
-Traceback (most recent call last):
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\__init__.py", line 631, in __init__
-    self.timeout = _convert_timeout(timeout)
-                   ~~~~~~~~~~~~~~~~^^^^^^^^^
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\utils\types.py", line 42, in _convert_timeout
-    return timestr_to_secs(timeout)
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\robot\utils\robottime.py", line 58, in timestr_to_secs
-    raise ValueError(f"Invalid time string '{timestr}'.")
-ValueError: Invalid time string 'screenshot_on_failure=False'.</msg>
+<msg time="2025-12-26T01:28:42.537981" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff60c5788e5
+	0x7ff60c578940
+	0x7ff60c35165d
+	0x7ff60c3291b1
+	0x7ff60c3d97e6
+	0x7ff60c3fa5c2
+	0x7ff60c39ac29
+	0x7ff60c39ba93
+	0x7ff60c890640
+	0x7ff60c88af80
+	0x7ff60c8a96e6
+	0x7ff60c595de4
+	0x7ff60c59ed8c
+	0x7ff60c582004
+	0x7ff60c5821b5
+	0x7ff60c567ee2
+	0x7fff629fe8d7
+	0x7fff633ec53c
+</msg>
 </errors>
 </robot>
