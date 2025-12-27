@@ -11,7 +11,7 @@ Suite Setup       Create AdmitRis Session
 *** Variables ***
 ${AdmitRis_Api_URL}       http://192.168.5.19:8023
 
-${AdmitRis_Base_URL}       http://192.168.5.19:1201
+${AdmitRis_Base_URL}       http://192.168.5.19:8024
 
 ${AdmitRis_App_URL}       http://192.168.5.19:8024/admit
 
@@ -21,9 +21,9 @@ ${BROWSER}        chrome
 
 ${CHROME_DRIVER}    C:/chromedriver.exe
 
-${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjJiYTRiZTdiLTU1NzctNGZkYS1hMzUxLWMxYjYzMTA1ODIyMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJweVY1cTFMaVFJd25GSkVSMVB4TmQzSWNvZVFla1BUVm83NDUySUtIajAzZ054MXZ2WmlDOEJabmpDckJJR3IxRzFhdnR6L1JWV1ZZL0dqSzJVT2dRVE93U1pIb1NlWjI0WlpCYTNldkZDZ0tBL3FNWmtJTTV1aXBJYlE0ZlViZyIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjcyMjg5MCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.yTOH6fGSnVarpYcvXxPkKqnT-JqOzn2fkaBkroc5kyQ
+${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjI4YjVkOGYzLTcwMmUtNDA1Ni1iYmQ3LTFiOGE5Y2M2ZDJjYiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJJclZ6czF4MTFMVVdnMk1sYWdEbTlEOTRtTGVuTDZzTXR0L2ZlQ2pjS05WM0dnQWV4YjlKOFhNMUJra0xJcTNITkR6RkRlaEpUQTZ4SlpQS3lmd0kwTWFvclpzUXJjMDI0ZmVwcDBBejI2cUUzY1BVeGp1SVlodjNHbFZRcUhIVSIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2Njg4NDQyNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.Khlh159Kem8yakjcAr7kk5WZIJn1FuTvq88icRv4M2c
 
-${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjJiYTRiZTdiLTU1NzctNGZkYS1hMzUxLWMxYjYzMTA1ODIyMSIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJweVY1cTFMaVFJd25GSkVSMVB4TmQzSWNvZVFla1BUVm83NDUySUtIajAzZ054MXZ2WmlDOEJabmpDckJJR3IxRzFhdnR6L1JWV1ZZL0dqSzJVT2dRVE93U1pIb1NlWjI0WlpCYTNldkZDZ0tBL3FNWmtJTTV1aXBJYlE0ZlViZyIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2NjcyMjg5MCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.yTOH6fGSnVarpYcvXxPkKqnT-JqOzn2fkaBkroc5kyQ
+${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjI4YjVkOGYzLTcwMmUtNDA1Ni1iYmQ3LTFiOGE5Y2M2ZDJjYiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJJclZ6czF4MTFMVVdnMk1sYWdEbTlEOTRtTGVuTDZzTXR0L2ZlQ2pjS05WM0dnQWV4YjlKOFhNMUJra0xJcTNITkR6RkRlaEpUQTZ4SlpQS3lmd0kwTWFvclpzUXJjMDI0ZmVwcDBBejI2cUUzY1BVeGp1SVlodjNHbFZRcUhIVSIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc2Njg4NDQyNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.Khlh159Kem8yakjcAr7kk5WZIJn1FuTvq88icRv4M2c
 
 ${GLOBAL_SPINNER}     css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop
 
@@ -45,17 +45,16 @@ ${Admit_ID}
 
 Create AdmitRis Session
     Create Session    RIS    ${AdmitRis_Api_URL}   verify=${False}
-    
+
 # َAdmit_Ris  
 Start Browser AdmitRis With Token
     [Documentation]    باز کردن کروم + تزریق کوکی token
-    Open Browser    about:blank    chrome
 
-    Go To    ${AdmitRis_Base_URL}
-
+    Open Browser    ${AdmitRis_Base_URL}    chrome
+    Wait For Page Ready
     Add Cookie    token    ${COOKIE_TOKEN}
+    Maximize Browser Window
 
-    Go To    ${AdmitRis_App_URL}
 
 Go To AdmitRis Page
     [Documentation]    رفتن مستقیم به صفحه پذیرش طب تصویری
@@ -186,10 +185,55 @@ Wait For Page Ready
 
 *** Test Cases ***
 
-1-UI-Open Filing Page
-    [Documentation]   باز  کردن صفحه پذیرش طب تصویری
-    [Tags]    STEP_01_Open_Browser    UI_Test    
+01-UI - Admit Ris Patient With NationalCode   
+    [Documentation]      پذیرش بیمار با کد ملی
+    [Tags]    UI_Test
+    
     Start Browser AdmitRis With Token
     Go To AdmitRis Page
-    Wait For Spinner Hidden
-    Log To Console    ---- DONE ----
+    Wait For Spinner Hidden    
+    Wait For Page Ready
+    Wait Until Element Is Visible    //input[@formcontrolname='nationalCode']    10s
+    Clear Element Text    //input[@formcontrolname='nationalCode']
+    Input Text         //input[@formcontrolname='nationalCode']     ${nationalCode}
+    Click Element Safe       xpath=//mat-icon[contains(@class,'btn-search')]
+    Wait For Page Ready
+    Select From Ng Select    therapistName   Siavash
+    Select From Ng Select    shift    صبح
+    Select From Ng Select    radiologist    سلدا
+    Select From Ng Select    mainComplaint    دل درد
+    Input Text    css=input[formcontrolname="medicalAllergy"]       استامینوفن    
+    Select From Ng Select    mainGroup    سونو
+    Wait Until Element Is Visible    css=button.btn-service    10s
+    Click Element Safe       xpath=//button[contains(@class,'btn-service')]
+    Wait Until Element Is Visible    css=input[formcontrolname="typeOfServices"]    10s
+    Input Text                      css=input[formcontrolname="typeOfServices"]    701520
+    Press Keys                      css=input[formcontrolname="typeOfServices"]    ENTER
+
+    ${row}=    Set Variable    xpath=//tr[.//td[contains(@class,'mat-column-salamatCode') and normalize-space(.)='701520']]
+
+    Wait Until Page Contains Element    ${row}    20s
+    Wait Until Element Is Visible        ${row}    5s
+    Double Click Element                 ${row}
+    Wait Until Element Is Visible    xpath=//mat-icon[normalize-space(.)='save']    10s
+    Click Element                   xpath=//mat-icon[normalize-space(.)='save']
+    Wait Until Element Is Visible    css=button.swal2-confirm    10s
+    Click Element                   css=button.swal2-confirm
+    Wait Until Element Is Visible
+    ...    xpath=//button[normalize-space(.)='چاپ']/parent::div
+    ...    10s
+
+    Wait Until Keyword Succeeds    10s    500ms
+    ...    Click Element
+    ...    xpath=//button[normalize-space(.)='چاپ']/parent::div//button[normalize-space(.)='انصراف']
+
+02-UI - Open Cash Web And Pay
+    [Tags]    UI_Test
+    
+    Cash Pay Patient By National Code    ${nationalCode}    
+
+03-UI - Edit Admit Ris Patient   
+    [Documentation]     ویرایش پذیرش رادیولوژی
+    [Tags]    UI_Test
+
+    Switch To AdmitRis App
