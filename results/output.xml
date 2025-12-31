@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2025-12-31T16:46:17.821060" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test">
 <suite id="s1-s1" name="AdmitRis" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitRis.robot">
 <kw name="Create AdmitRis Session" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
 <msg time="2025-12-31T16:46:18.197439" level="INFO">Creating Session using : alias=RIS, url=http://192.168.5.19:8023, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+=======
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-26T14:21:20.072231" rpa="false" schemaversion="5">
+<suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
+<suite id="s1-s1" name="AdmitRis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitRis.robot">
+<kw name="Create AdmitRis Session" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-26T14:21:20.274789" level="INFO">Creating Session using : alias=RIS, url=http://192.168.5.19:8023, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+>>>>>>> 68650e73c49ceb31be882bb9442f6b7b3d05c143
 <arg>RIS</arg>
 <arg>${AdmitRis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
+<<<<<<< HEAD
 <status status="PASS" start="2025-12-31T16:46:18.196787" elapsed="0.001037"/>
 </kw>
 <status status="PASS" start="2025-12-31T16:46:18.195552" elapsed="0.002478"/>
@@ -87,11 +97,50 @@ Symbols not available. Dumping unresolved backtrace:
 <status status="PASS" start="2025-12-31T16:46:19.963000" elapsed="0.015058"/>
 </kw>
 <status status="PASS" start="2025-12-31T16:46:19.857591" elapsed="0.120702"/>
+=======
+<status status="PASS" start="2025-12-26T14:21:20.274508" elapsed="0.000531"/>
+</kw>
+<status status="PASS" start="2025-12-26T14:21:20.273691" elapsed="0.001482"/>
+</kw>
+<test id="s1-s1-t1" name="1-UI-Open Filing Page" line="206">
+<kw name="Start Browser Landing With Token">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-12-26T14:21:20.279672" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<arg>about:blank</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-12-26T14:21:20.279424" elapsed="1.162219"/>
+>>>>>>> 68650e73c49ceb31be882bb9442f6b7b3d05c143
 </kw>
 <kw name="Add Cookie" owner="SeleniumLibrary">
+<msg time="2025-12-26T14:21:21.643679" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-26T14:21:21.644303" level="FAIL">InvalidCookieDomainException: Message: invalid cookie domain
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6b11b88e5
+	0x7ff6b11b8940
+	0x7ff6b0f91465
+	0x7ff6b104ffd4
+	0x7ff6b1011fda
+	0x7ff6b103ac97
+	0x7ff6b0fdac29
+	0x7ff6b0fdba93
+	0x7ff6b14d0640
+	0x7ff6b14caf80
+	0x7ff6b14e96e6
+	0x7ff6b11d5de4
+	0x7ff6b11ded8c
+	0x7ff6b11c2004
+	0x7ff6b11c21b5
+	0x7ff6b11a7ee2
+	0x7ffda53ae8d7
+	0x7ffda5b8c53c
+</msg>
 <arg>token</arg>
 <arg>${COOKIE_TOKEN}</arg>
 <doc>Adds a cookie to your current session.</doc>
+<<<<<<< HEAD
 <status status="PASS" start="2025-12-31T16:46:19.978475" elapsed="0.005850"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
@@ -114,6 +163,65 @@ Symbols not available. Dumping unresolved backtrace:
 </kw>
 <doc>رفتن مستقیم به صفحه پذیرش طب تصویری</doc>
 <status status="PASS" start="2025-12-31T16:46:20.029043" elapsed="0.314652"/>
+=======
+<status status="FAIL" start="2025-12-26T14:21:21.441982" elapsed="0.214833">InvalidCookieDomainException: Message: invalid cookie domain
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6b11b88e5
+	0x7ff6b11b8940
+	0x7ff6b0f91465
+	0x7ff6b104ffd4
+	0x7ff6b1011fda
+	0x7ff6b103ac97
+	0x7ff6b0fdac29
+	0x7ff6b0fdba93
+	0x7ff6b14d0640
+	0x7ff6b14caf80
+	0x7ff6b14e96e6
+	0x7ff6b11d5de4
+	0x7ff6b11ded8c
+	0x7ff6b11c2004
+	0x7ff6b11c21b5
+	0x7ff6b11a7ee2
+	0x7ffda53ae8d7
+	0x7ffda5b8c53c
+</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${Landing_Base_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-12-26T14:21:21.657147" elapsed="0.000255"/>
+</kw>
+<doc>باز کردن کروم + تزریق کوکی token</doc>
+<status status="FAIL" start="2025-12-26T14:21:20.279092" elapsed="1.378565">InvalidCookieDomainException: Message: invalid cookie domain
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6b11b88e5
+	0x7ff6b11b8940
+	0x7ff6b0f91465
+	0x7ff6b104ffd4
+	0x7ff6b1011fda
+	0x7ff6b103ac97
+	0x7ff6b0fdac29
+	0x7ff6b0fdba93
+	0x7ff6b14d0640
+	0x7ff6b14caf80
+	0x7ff6b14e96e6
+	0x7ff6b11d5de4
+	0x7ff6b11ded8c
+	0x7ff6b11c2004
+	0x7ff6b11c21b5
+	0x7ff6b11a7ee2
+	0x7ffda53ae8d7
+	0x7ffda5b8c53c
+</status>
+</kw>
+<kw name="Go To AdmitRis Page">
+<doc>رفتن مستقیم به صفحه پذیرش طب تصویری</doc>
+<status status="NOT RUN" start="2025-12-26T14:21:21.658541" elapsed="0.000276"/>
+>>>>>>> 68650e73c49ceb31be882bb9442f6b7b3d05c143
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
@@ -123,6 +231,7 @@ Symbols not available. Dumping unresolved backtrace:
 <status status="PASS" start="2025-12-31T16:46:20.345616" elapsed="0.018086"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<<<<<<< HEAD
 <status status="PASS" start="2025-12-31T16:46:20.344978" elapsed="0.019053"/>
 </kw>
 <kw name="Wait For Page Ready">
@@ -134,6 +243,14 @@ Symbols not available. Dumping unresolved backtrace:
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
 <status status="FAIL" start="2025-12-31T16:46:20.366721" elapsed="3.730144">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+=======
+<status status="NOT RUN" start="2025-12-26T14:21:21.659482" elapsed="0.000343"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>---- DONE ----</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-12-26T14:21:21.660620" elapsed="0.000360"/>
+>>>>>>> 68650e73c49ceb31be882bb9442f6b7b3d05c143
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
@@ -657,6 +774,7 @@ Symbols not available. Dumping unresolved backtrace:
 </kw>
 <doc>پذیرش بیمار با کد ملی</doc>
 <tag>UI_Test</tag>
+<<<<<<< HEAD
 <status status="PASS" start="2025-12-31T16:46:18.198199" elapsed="20.559534"/>
 </test>
 <test id="s1-s1-t2" name="02-UI - Open Cash Web And Pay" line="230">
@@ -1057,6 +1175,35 @@ Symbols not available. Dumping unresolved backtrace:
 <status status="PASS" start="2025-12-31T16:46:17.879984" elapsed="46.366558"/>
 </suite>
 <status status="PASS" start="2025-12-31T16:46:17.827934" elapsed="46.422899"/>
+=======
+<status status="FAIL" start="2025-12-26T14:21:20.275253" elapsed="1.386359">InvalidCookieDomainException: Message: invalid cookie domain
+  (Session info: chrome=143.0.7499.169)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6b11b88e5
+	0x7ff6b11b8940
+	0x7ff6b0f91465
+	0x7ff6b104ffd4
+	0x7ff6b1011fda
+	0x7ff6b103ac97
+	0x7ff6b0fdac29
+	0x7ff6b0fdba93
+	0x7ff6b14d0640
+	0x7ff6b14caf80
+	0x7ff6b14e96e6
+	0x7ff6b11d5de4
+	0x7ff6b11ded8c
+	0x7ff6b11c2004
+	0x7ff6b11c21b5
+	0x7ff6b11a7ee2
+	0x7ffda53ae8d7
+	0x7ffda5b8c53c
+</status>
+</test>
+<status status="FAIL" start="2025-12-26T14:21:20.103314" elapsed="1.577855"/>
+</suite>
+<status status="FAIL" start="2025-12-26T14:21:20.077896" elapsed="1.609421"/>
+>>>>>>> 68650e73c49ceb31be882bb9442f6b7b3d05c143
 </suite>
 <statistics>
 <total>
