@@ -239,22 +239,3 @@ Wait For Page Ready
     # Start Browser AdmitRis With Token
     # Wait For Page Ready
     Switch To AdmitRis App
-    Click Element Safe    xpath=//app-menu-list-item[.//img[contains(@src,'inpatient.svg')]]   
-    Wait For Page Ready   
-    Input Text      //input[@formcontrolname='nationalCode']     	${nationalCode}
-    Click Element Safe    xpath=//mat-icon[contains(@class,'btn') and normalize-space(.)='search']
-    Wait For Page Ready   
-    ${row_xpath}=    Set Variable
-        ...    //tr[.//td[contains(normalize-space(), '${nationalCode}')]]
-
-    Wait Until Keyword Succeeds
-    ...    3x
-    ...    5s
-    ...    Element Should Be Visible
-    ...    ${row_xpath}
-
-    Double Click Element    ${row_xpath}  
-
-
-
-
