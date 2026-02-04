@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 7.3.2 (Python 3.13.2 on win32)" name="Generator">
+<meta content="Robot Framework 7.4 (Python 3.13.5 on win32)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAqAAAAAAAAAAAAAAAAAAAALIAAAD/AAAA4AAAANwAAADcAAAA3AAAANwAAADcAAAA3AAAANwAAADcAAAA4AAAAP8AAACxAAAAAAAAAKYAAAD/AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAA/wAAAKkAAAD6AAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN8AAAD/AAAA+gAAAMMAAAAAAAAAAgAAAGsAAABrAAAAawAAAGsAAABrAAAAawAAAGsAAABrAAAADAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAIsAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAANEAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAAAAAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAFAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAADwAAAB8AAAAAAAAAGAAAABcAAAAAAAAAH8AAABKAAAAAAAAAAAAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAADCAAAA/wAAACkAAADqAAAA4QAAAAAAAAD7AAAA/wAAALAAAAAGAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAIwAAAP4AAAD/AAAA/wAAAGAAAAAAAAAAAAAAAMkAAAD/AAAAigAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAAAAAAAIAAAAcAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA2gAAAP8AAAD7AAAAywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AAAD/AAAAqwAAAP8AAACvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIAAAD/AAAAsgAAAAAAAAC5AAAA/wAAAMoAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMkAAAD/AAAAvAAAAAAAAAAAAAAAAAAAAKwAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAArQAAAAAAAAAAwAMAAIABAAAf+AAAP/wAAD/8AAAgBAAAP/wAAD/8AAA//AAAJIwAADHEAAA//AAAP/wAAB/4AACAAQAAwAMAAA==">
 <style media="all">
 :root {
@@ -116,15 +116,16 @@ select {
 #header {
     width: 65em;
     height: 3em;
-    margin: 20px 0 6px 0;
+    margin: 1em 0 0 0;
 }
 h1 {
     float: left;
-    margin: 0 0 0.5em 0;
+    margin: 0 0 1em 0;
     width: 75%;
 }
 h2 {
     clear: left;
+    margin: 1.5em 0 0.5em 0;
 }
 #generated {
     float: right;
@@ -168,7 +169,13 @@ h2 {
     background-color: var(--primary-color);
     border-radius: 3px;
 }
-.label.debug, .label.trace, .label.error, .label.keyword {
+/* https://stackoverflow.com/questions/75238633 */
+@supports (-moz-appearance: none) {
+    .label {
+        padding-top: 4px;
+    }
+}
+.label.debug, .label.trace, .label.error {
     letter-spacing: 0;
 }
 .label.pass, .label.fail, .label.error, .label.skip, .label.warn {
@@ -355,19 +362,6 @@ th.stats-col-graph:hover {
 [data-theme="light"] .dark-mode-icon {
     display: block;
 }
-@keyframes highlight {
-    0% {
-        background: var(--primary-color)
-    }
-    100% {
-        background: var(--target-color);
-    }
-}
-:target {
-    background: var(--target-color);
-    transition: background 0.3s;
-    animation: highlight 4s;
-}
 </style>
 <style media="all">
 /* Icons are from Open Iconic <https://useiconic.com/open/>.
@@ -384,36 +378,43 @@ th.stats-col-graph:hover {
     --elapsed-color: #999;
 }
 /* Containers */
-.suite, .test, #errors {
+.suite, .test, #errors, #errors .messages {
     border-color: #ccc; /* Fallback value */
     border-color: var(--secondary-color);
     border-width: 1px;
     border-style: solid;
-    padding: 0.3em 0.2em;
-    margin: 0.2em 0;
+    padding: 5px;
+    margin-top: 5px;
 }
 .test {
     border-style: dashed;
 }
-#errors, .messages {
+.messages {
     width: 100%;
     border-spacing: 0;
+    padding: 0 5px;
 }
 .children {
     display: none;
-    margin-left: 1.4em;
+    margin-left: 18px;
+    margin-top: 2px;
 }
-.suite, .test, .keyword {
-    margin-left: -0.2em;
+#errors .children {
+    margin-left: 22px;
 }
-#s1, .suite > .children > .keyword {
-    margin-left: 0;
+.suite, .test {
+    margin-left: -5px;
+}
+#s1, #errors {
+    margin: 0;
 }
 /* Suite, test and kw headers */
 .element-header {
+    display: flex;
+    align-items: center;
+    padding: 2px;
     border: 1px solid transparent;
     border-radius: 2px;
-    position: relative;
 }
 .element-header:hover {
     cursor: pointer;
@@ -423,17 +424,15 @@ th.stats-col-graph:hover {
     border-color: var(--secondary-color);
 }
 .element-header-toggle {
-    position: absolute;
-    left: 3px;
-    top: 5px;
+    margin: 0 4px 0 2px;
+    height: 11px;
+    width: 11px;
+    min-width: 11px;
+    background-size: 6px 6px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JChSkZz20AAAAGklEQVQI12NgQAKMDKzInP8IDhOqMk4G7AAANQwBE427PYUAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2Mmg4di0yaC04eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAzKSIgLz4KPC9zdmc+), none;
     filter: var(--icon-filter);
-    height: 10px;
-    width: 10px;
-    background-size: 6px 6px;
     border-color: #ccc; /* Fallback value */
     border-color: var(--icon-highlight);
     border-width: 1px;
@@ -441,67 +440,59 @@ th.stats-col-graph:hover {
     border-radius: 2px;
 }
 .closed > .element-header-toggle {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JCDHdVYtxAAAAM0lEQVQI103MMQqAMBQFwVHyITaB3P+W1sKzSBC3mW6hRFw0pUB5DvF1bu9FN0RM3X/wAk98CUnvFTakAAAAAElFTkSuQmCC);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0zIDB2M2gtM3YyaDN2M2gydi0zaDN2LTJoLTN2LTNoLTJ6IiAvPgo8L3N2Zz4=), none;
 }
 .element-header:hover > .element-header-toggle {
     background-color: #ccc; /* Fallback value */
     background-color: var(--icon-highlight);
 }
-.element-header-right:hover ~ .element-header-toggle {
+.element-header-menu:hover ~ .element-header-toggle {
     background-color: transparent;
 }
-.element-header-left {
-    padding: 3px 80px 3px 20px;
-}
-.element-header-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 3px;
+.element-header-menu {
+    margin: 0 2px 0 4px;
     cursor: default;
 }
-.element-header .label {
-    margin-right: 0.5em;
+.name, .arg, .assign {
+    margin-left: 7px;
+    white-space: pre-wrap;
 }
 .name {
     font-weight: bold;
-    white-space: pre-wrap;
-}
-.arg, .assign {
-    white-space: pre-wrap;
 }
 .elapsed {
-    float: right;
+    margin-left: auto;
+    padding-left: 0.5em;
     color: #666; /* Fallback value */
     color: var(--elapsed-color);
-    padding-left: 1em;
+    font-size: 0.9em;
+}
+/* https://stackoverflow.com/questions/75238633 */
+@supports (-moz-appearance: none) {
+    .name, .arg, .assign, .elapsed {
+        padding-top: 3px;
+    }
 }
 .link {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHlJREFUGJVtzrEJwmAQBtCn6ASuIKTIBhY2gmghBiJYB1udwk10B8FJbKMBcQFbtbkfJHrVwfu+4/idJR64Y9H7E3higj5O3S8Y44ApLnjhnXCNGhV2yNGggDJwiC02gavUbpDFvscRo4QdXOMKDHBufz3HLYKzNn4AbSkV3fncGQYAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik01Ljg4LjAzYy0uMTguMDEtLjM2LjAzLS41My4wOS0uMjcuMS0uNTMuMjUtLjc1LjQ3YS41LjUgMCAxIDAgLjY5LjY5Yy4xMS0uMTEuMjQtLjE3LjM4LS4yMi4zNS0uMTIuNzgtLjA3IDEuMDYuMjIuMzkuMzkuMzkgMS4wNCAwIDEuNDRsLTEuNSAxLjVjLS40NC40NC0uOC40OC0xLjA2LjQ3LS4yNi0uMDEtLjQxLS4xMy0uNDEtLjEzYS41LjUgMCAxIDAtLjUuODhzLjM0LjIyLjg0LjI1Yy41LjAzIDEuMi0uMTYgMS44MS0uNzhsMS41LTEuNWMuNzgtLjc4Ljc4LTIuMDQgMC0yLjgxLS4yOC0uMjgtLjYxLS40NS0uOTctLjUzLS4xOC0uMDQtLjM4LS4wNC0uNTYtLjAzem0tMiAyLjMxYy0uNS0uMDItMS4xOS4xNS0xLjc4Ljc1bC0xLjUgMS41Yy0uNzguNzgtLjc4IDIuMDQgMCAyLjgxLjU2LjU2IDEuMzYuNzIgMi4wNi40Ny4yNy0uMS41My0uMjUuNzUtLjQ3YS41LjUgMCAxIDAtLjY5LS42OWMtLjExLjExLS4yNC4xNy0uMzguMjItLjM1LjEyLS43OC4wNy0xLjA2LS4yMi0uMzktLjM5LS4zOS0xLjA0IDAtMS40NGwxLjUtMS41Yy40LS40Ljc1LS40NSAxLjAzLS40NC4yOC4wMS40Ny4wOS40Ny4wOWEuNS41IDAgMSAwIC40NC0uODhzLS4zNC0uMi0uODQtLjIyeiIKICAvPgo8L3N2Zz4=), none;
-    filter: var(--icon-filter);
 }
 .expand {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAADtJREFUGJVjYCACKDAwMByA0ljFDjAwMPxnYGB4ABVQgLL/Q+VQBB6gseGmIivCkERXhFUSWRFOSawAAEl7E3uv1iMcAAAAAElFTkSuQmCC);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0xLjUgMGwtMS41IDEuNSA0IDQgNC00LTEuNS0xLjUtMi41IDIuNS0yLjUtMi41eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz4KPC9zdmc+), none;
-    filter: var(--icon-filter);
 }
 .collapse {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAC5JREFUGJVjYCARNEAxTsn/UIyhCFkSQxG6ThQ+C5IpjWhG1yNb4YDFTdjEMAEACi8Q++9Y9TAAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik00IDBsLTQgNCAxLjUgMS41IDIuNS0yLjUgMi41IDIuNSAxLjUtMS41LTQtNHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMSkiIC8+Cjwvc3ZnPg==), none;
-    filter: var(--icon-filter);
 }
 .expand, .collapse, .link {
     float: left;
     display: block;
     visibility: hidden;
-    margin: 0 4px;
+    margin: 0 3px;
     height: 14px;
     width: 14px;
     background-size: 8px 8px;
     background-repeat: no-repeat;
     background-position: center;
+    filter: var(--icon-filter);
     border-color: #ccc; /* Fallback value */
     border-color: var(--icon-highlight);
     border-width: 1px;
@@ -519,23 +510,18 @@ th.stats-col-graph:hover {
     background-color: var(--icon-highlight);
 }
 /* Messages and errors */
+.message-row {
+    height: 20px;
+}
 .messages .time, .messages .message {
     font-family: monospace;
     font-size: 1.1em;
 }
-#errors .message {
-    font-family: monospace;
-    font-size: 1.2em;
-}
-.message-row {
-    height: 20px;
-}
-.time {
+.messages .time {
     width: 7.5em;
 }
-.error-time {
-    width: 11em;
-    font-size: 0.9em;
+#errors .time {
+    width: 12.5em;
     white-space: nowrap;
 }
 .level {
@@ -555,7 +541,6 @@ th.stats-col-graph:hover {
     background-position: center;
 }
 .message-row:hover .select-message div {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0MOzhWKZQOAAAASUlEQVQY032PsRHAIAwDX9BkicD+W8UMEqegAQJWKZ/+3sLZJhFGQEZzNaIa4ibh66En867VNaIeoP5WppNuIGoAlOm3g5VC1AdYeQv1BZPRSgAAAABJRU5ErkJggg==);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2MWg4di0xaC04em0wIDJ2MWg2di0xaC02em0wIDJ2MWg4di0xaC04em0wIDJ2MWg2di0xaC02eiIgLz4KPC9zdmc+), none;
     filter: var(--icon-filter);
     border-color: #ccc; /* Fallback value */
@@ -577,7 +562,6 @@ th.stats-col-graph:hover {
 .debug-message {
     display: table;
 }
-/* Metadata */
 .metadata {
     width: 100%;
     border-spacing: 0.2em;
@@ -596,6 +580,20 @@ th.stats-col-graph:hover {
 /* Custom styles for statistics */
 #total-stats tr:hover, #tag-stats tr:hover {
     cursor: default;
+}
+/* Target highlight */
+@keyframes highlight {
+    0% {
+        background: var(--primary-color)
+    }
+    100% {
+        background: var(--target-color);
+    }
+}
+:target {
+    background: var(--target-color);
+    transition: background 0.3s;
+    animation: highlight 4s;
 }
 </style>
 <style media="print">
@@ -741,7 +739,8 @@ function toggleElement(elementId, childrenNames) {
     children.toggle(100, '', function () {
         element.children('.element-header').toggleClass('closed');
     });
-    populateChildren(elementId, children, childrenNames);
+    if (childrenNames)
+        populateChildren(elementId, children, childrenNames);
 }
 function populateChildren(elementId, childElement, childrenNames) {
     if (!childElement.hasClass('populated')) {
@@ -1144,7 +1143,7 @@ window.model = (function () {
         kw.type = data.type;
         kw.template = 'keywordTemplate';
         kw.arguments = data.args;
-        kw.assign = data.assign + (data.assign ? ' =  ' : '');
+        kw.assign = data.assign;
         kw.tags = data.tags;
         kw.timeout = data.timeout;
         kw.populateKeywords = createIterablePopulator('Keyword');
@@ -1883,7 +1882,7 @@ function addStatistics() {
         '<th class="stats-col-elapsed">Elapsed</th>' +
         '<th class="stats-col-graph">Pass / Fail / Skip</th>';
     var statTable =
-        '<h2>{Test} Statistics</h2>' +
+        '<h2>Statistics</h2>' +
         '<table class="statistics" id="total-stats"><thead><tr>' +
         '<th class="stats-col-name">Total Statistics</th>' + statHeaders +
         '</tr></thead></table>' +
@@ -1893,7 +1892,7 @@ function addStatistics() {
         '<table class="statistics" id="suite-stats"><thead><tr>' +
         '<th class="stats-col-name">Statistics by Suite</th>' + statHeaders +
         '</tr></thead></table>';
-    $(testOrTask(statTable)).appendTo('#statistics-container');
+    $(statTable).appendTo('#statistics-container');
     util.map(['total', 'tag', 'suite'], addStatTable);
     addTooltipsToElapsedTimes();
     enableStatisticsSorter();
@@ -2074,25 +2073,25 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[0,0,11641],[[4,5,6,0,[],[0,28,8568],[],[[7,0,8,[9,10],[1,520,5440],[[0,11,0,0,12,0,0,0,[1,521,5135],[[0,13,14,0,15,16,0,0,[1,521,2692],[[521,2,17]]],[0,18,14,0,19,0,0,0,[1,3214,32],[]],[0,20,14,0,21,22,0,0,[1,3246,13],[]],[0,23,14,0,24,0,0,0,[1,3259,2397],[]]]],[0,25,0,0,26,0,0,0,[1,5657,281],[[0,27,14,0,28,29,0,0,[1,5657,73],[[5658,2,30]]],[0,23,14,0,24,0,0,0,[1,5731,206],[]]]],[0,31,0,0,32,0,0,0,[1,5938,19],[[0,33,14,0,34,35,0,0,[1,5939,18],[]]]],[0,36,37,0,38,39,0,0,[1,5958,1],[]]]],[40,0,41,[10],[0,5962,2492,42],[[0,43,0,0,0,0,0,0,[0,5964,2487],[[0,44,37,0,45,46,0,0,[1,5965,2476],[[0,47,14,0,48,49,0,0,[0,5966,2475],[[8429,3,51],[8432,5,42]]]]],[0,33,14,0,34,52,0,0,[0,8442,9],[[8445,3,51],[8446,5,42]]]]],[0,54,14,0,55,56,0,0,[3,8451,0],[]],[0,57,14,0,58,59,0,0,[3,8452,0],[]],[0,60,14,0,61,62,0,0,[3,8452,0],[]],[0,63,0,0,0,64,0,0,[3,8453,0],[]],[0,43,0,0,0,0,0,0,[3,8453,0],[]]]],[65,0,66,[10],[0,8455,25,42],[[0,43,0,0,0,0,0,0,[0,8456,19],[[0,44,37,0,45,46,0,0,[1,8456,9],[[0,47,14,0,48,49,0,0,[0,8457,9],[[8461,3,51],[8462,5,42]]]]],[0,33,14,0,34,52,0,0,[0,8466,9],[[8471,3,51],[8471,5,42]]]]],[0,69,0,0,0,70,0,0,[3,8476,0],[]],[0,69,0,0,0,71,0,0,[3,8476,0],[]],[0,60,14,0,61,72,0,0,[3,8477,0],[]],[0,60,14,0,61,73,0,0,[3,8477,0],[]],[0,60,14,0,61,74,0,0,[3,8477,0],[]],[0,60,14,0,61,75,0,0,[3,8477,0],[]],[0,31,0,0,32,0,0,0,[3,8478,0],[]],[0,54,14,0,55,76,0,0,[3,8478,0],[]],[0,77,14,0,78,76,0,0,[3,8479,0],[]],[0,69,0,0,0,79,0,0,[3,8479,0],[]],[0,69,0,0,0,80,0,0,[3,8480,0],[]],[0,69,0,0,0,81,0,0,[3,8480,0],[]]]],[82,0,83,[10],[0,8482,21,42],[[0,43,0,0,0,0,0,0,[0,8482,17],[[0,44,37,0,45,46,0,0,[1,8483,9],[[0,47,14,0,48,49,0,0,[0,8483,8],[[8488,3,51],[8489,5,42]]]]],[0,33,14,0,34,52,0,0,[0,8492,7],[[8496,3,51],[8497,5,42]]]]],[0,69,0,0,0,86,0,0,[3,8500,0],[]],[0,69,0,0,0,87,0,0,[3,8501,0],[]],[0,69,0,0,0,88,0,0,[3,8501,0],[]],[0,60,14,0,61,89,0,0,[3,8502,0],[]]]],[90,0,91,[10],[0,8504,8,42],[[0,63,0,0,0,92,0,0,[0,8504,7],[[0,31,0,0,32,0,0,0,[0,8504,5],[[0,33,14,0,34,35,0,0,[0,8505,5],[[8507,3,51],[8508,5,42]]]]],[0,54,14,0,55,94,0,0,[3,8510,0],[]],[0,95,14,0,96,94,0,0,[3,8510,0],[]],[0,97,14,0,98,94,0,0,[3,8510,0],[]],[0,77,14,0,78,94,0,0,[3,8511,0],[]]]],[0,43,0,0,0,0,0,0,[3,8511,0],[]]]],[99,0,100,[10],[0,8512,11,42],[[0,63,0,0,0,101,0,0,[0,8513,10],[[0,31,0,0,32,0,0,0,[0,8513,9],[[0,33,14,0,34,35,0,0,[0,8514,9],[[8517,3,51],[8519,5,42]]]]],[0,54,14,0,55,94,0,0,[3,8523,0],[]],[0,95,14,0,96,94,0,0,[3,8523,0],[]],[0,97,14,0,98,94,0,0,[3,8523,0],[]],[0,77,14,0,78,94,0,0,[3,8523,0],[]]]]]],[103,0,0,[10],[0,8524,16,42],[[0,104,0,0,105,106,0,0,[0,8525,15],[[0,43,0,0,0,0,0,0,[0,8525,13],[[0,44,37,0,45,46,0,0,[1,8525,5],[[0,47,14,0,48,49,0,0,[0,8525,5],[[8528,3,51],[8528,5,42]]]]],[0,33,14,0,34,52,0,0,[0,8531,7],[[8535,3,51],[8536,5,42]]]]],[0,109,0,0,0,0,0,0,[3,8538,0],[]],[0,43,0,0,0,0,0,0,[3,8538,0],[]],[0,31,0,0,32,0,0,0,[3,8538,0],[]],[0,60,14,0,61,110,0,0,[3,8539,0],[]],[0,43,0,0,0,0,0,0,[3,8539,0],[]],[0,63,0,0,0,111,0,0,[3,8539,0],[]],[0,43,0,0,0,0,0,0,[3,8539,0],[]],[0,31,0,0,32,0,0,0,[3,8539,0],[]],[0,112,37,0,113,114,115,0,[3,8539,0],[]],[0,116,37,0,117,118,0,0,[3,8539,0],[]],[0,119,14,0,120,115,0,0,[3,8539,0],[]],[0,54,14,0,55,121,0,0,[3,8539,0],[]],[0,63,0,0,0,122,0,0,[3,8539,0],[]],[0,43,0,0,0,0,0,0,[3,8540,0],[]],[0,63,0,0,0,123,0,0,[3,8540,0],[]]]]]],[124,0,125,[10],[0,8541,15,42],[[0,43,0,0,0,0,0,0,[0,8541,14],[[0,44,37,0,45,46,0,0,[1,8542,5],[[0,47,14,0,48,49,0,0,[0,8542,5],[[8544,3,51],[8545,5,42]]]]],[0,33,14,0,34,52,0,0,[0,8547,8],[[8551,3,51],[8552,5,42]]]]],[0,128,0,0,0,0,0,0,[3,8555,0],[]],[0,63,0,0,0,129,0,0,[3,8556,0],[]],[0,43,0,0,0,0,0,0,[3,8556,0],[]]]],[130,0,131,[10],[0,8557,14,42],[[0,43,0,0,0,0,0,0,[0,8557,11],[[0,44,37,0,45,46,0,0,[1,8558,5],[[0,47,14,0,48,49,0,0,[0,8558,5],[[8561,3,51],[8561,5,42]]]]],[0,33,14,0,34,52,0,0,[0,8563,5],[[8565,3,51],[8565,5,42]]]]],[0,63,0,0,0,134,0,0,[3,8570,0],[]],[0,43,0,0,0,0,0,0,[3,8570,0],[]]]],[135,0,136,[10],[0,8571,16,42],[[0,43,0,0,0,0,0,0,[0,8571,10],[[0,44,37,0,45,46,0,0,[1,8572,5],[[0,47,14,0,48,49,0,0,[0,8572,4],[[8574,3,51],[8574,5,42]]]]],[0,33,14,0,34,52,0,0,[0,8576,4],[[8579,3,51],[8579,5,42]]]]],[0,60,14,0,61,62,0,0,[3,8581,0],[]],[0,63,0,0,0,139,0,0,[3,8582,0],[]],[0,43,0,0,0,0,0,0,[3,8582,0],[]],[0,63,0,0,0,140,0,0,[3,8583,0],[]],[0,43,0,0,0,0,0,0,[3,8584,0],[]],[0,63,0,0,0,141,0,0,[3,8584,0],[]],[0,43,0,0,0,0,0,0,[3,8584,0],[]],[0,69,0,0,0,86,0,0,[3,8585,0],[]],[0,69,0,0,0,87,0,0,[3,8585,0],[]],[0,43,0,0,0,0,0,0,[3,8585,0],[]],[0,63,0,0,0,92,0,0,[3,8586,0],[]],[0,43,0,0,0,0,0,0,[3,8586,0],[]],[0,63,0,0,0,101,0,0,[3,8586,0],[]],[0,43,0,0,0,0,0,0,[3,8586,0],[]],[0,63,0,0,0,134,0,0,[3,8586,0],[]],[0,43,0,0,0,0,0,0,[3,8587,0],[]]]],[142,0,143,[10],[0,8588,7,42],[[0,60,14,0,61,110,0,0,[0,8588,5],[[8588,2,144],[8590,3,51],[8591,5,42]]],[0,63,0,0,0,139,0,0,[3,8593,0],[]],[0,43,0,0,0,0,0,0,[3,8594,0],[]],[0,63,0,0,0,146,0,0,[3,8594,0],[]],[0,43,0,0,0,0,0,0,[3,8594,0],[]],[0,63,0,0,0,123,0,0,[3,8594,0],[]]]]],[[1,147,0,0,0,0,0,0,[1,519,1],[[0,148,149,0,150,151,0,0,[1,520,0],[[520,2,152]]]]]],[11,1,10,0]],[153,154,155,0,[],[0,8596,3043],[],[[7,0,156,[9,10],[0,8606,3031,42],[[0,157,0,0,12,0,0,0,[0,8607,3028],[[0,13,14,0,15,158,0,0,[1,8608,3017],[[8608,2,159]]],[0,18,14,0,19,0,0,0,[0,11625,8],[[11630,3,51],[11631,5,42]]],[0,20,14,0,21,22,0,0,[3,11634,0],[]],[0,23,14,0,24,0,0,0,[3,11635,0],[]]]],[0,161,0,0,162,0,0,0,[3,11636,0],[]],[0,31,0,0,32,0,0,0,[3,11636,0],[]],[0,36,37,0,38,39,0,0,[3,11637,0],[]]]]],[[1,163,0,0,0,0,0,0,[1,8605,1],[[0,148,149,0,150,164,0,0,[1,8606,1],[[8606,2,165]]]]]],[1,0,1,0]]],[],[],[12,1,11,0]];
+window.output["suite"] = [1,2,3,0,[],[1,0,56772],[],[[4,0,5,[6,7,8,9],[1,288,5141],[[0,10,0,0,0,0,0,0,[1,289,1],[[0,11,12,0,13,14,0,0,[1,289,0],[[289,2,15]]]]],[0,16,0,0,17,0,0,0,[1,289,1896],[[0,18,12,0,19,20,0,0,[1,290,1708],[[290,2,21]]],[0,22,12,0,23,0,0,0,[1,1997,42],[]],[0,24,12,0,25,26,0,0,[1,2040,10],[]],[0,27,12,0,28,0,0,0,[1,2051,135],[]]]],[0,29,0,0,30,0,0,0,[1,2187,148],[[0,31,12,0,32,33,0,0,[1,2188,82],[[2189,2,34]]],[0,27,12,0,28,0,0,0,[1,2270,64],[]]]],[0,35,0,0,0,0,0,0,[1,2335,3062],[[0,36,37,0,38,39,0,0,[1,2336,3033],[[0,40,12,0,41,42,0,0,[0,2336,3033],[[5360,5,43]]]]],[0,44,12,0,45,46,0,0,[1,5370,27],[]]]],[0,47,0,0,48,0,0,0,[1,5398,28],[[0,44,12,0,45,49,0,0,[1,5400,27],[]]]],[0,50,37,0,51,52,0,0,[1,5427,1],[]]]],[53,0,54,[6,55,9],[1,5430,8869],[[0,10,0,0,0,0,0,0,[1,5432,1],[[0,11,12,0,13,14,0,0,[1,5432,0],[[5433,2,15]]]]],[0,35,0,0,0,0,0,0,[1,5434,3025],[[0,36,37,0,38,39,0,0,[1,5434,3016],[[0,40,12,0,41,42,0,0,[0,5435,3015],[[8449,5,43]]]]],[0,44,12,0,45,46,0,0,[1,8451,8],[]]]],[0,56,12,0,57,58,0,0,[1,8459,32],[]],[0,59,12,0,60,61,0,0,[1,8491,112],[]],[0,62,12,0,63,64,0,0,[1,8604,250],[[8604,2,65]]],[0,66,0,0,0,67,0,0,[1,8857,2346],[[0,47,0,0,48,0,0,0,[1,8857,1886],[[0,44,12,0,45,49,0,0,[1,8858,1886],[]]]],[0,56,12,0,57,68,0,0,[1,10744,19],[]],[0,69,12,0,70,68,0,0,[1,10762,21],[]],[0,71,12,0,72,68,0,0,[1,10784,269],[]],[0,73,12,0,74,68,0,0,[1,11054,149],[[11055,2,75]]]]],[0,35,0,0,0,0,0,0,[1,11203,3096],[[0,36,37,0,38,39,0,0,[1,11203,3070],[[0,40,12,0,41,42,0,0,[0,11204,3068],[[14266,5,43]]]]],[0,44,12,0,45,46,0,0,[1,14274,25],[]]]]]],[76,0,77,[6,78,9],[1,14301,13268],[[0,10,0,0,0,0,0,0,[1,14302,1],[[0,11,12,0,13,14,0,0,[1,14303,0],[[14303,2,15]]]]],[0,35,0,0,0,0,0,0,[1,14304,3148],[[0,36,37,0,38,39,0,0,[1,14305,3127],[[0,40,12,0,41,42,0,0,[0,14306,3126],[[17429,5,43]]]]],[0,44,12,0,45,46,0,0,[1,17432,20],[]]]],[0,79,0,0,0,80,0,0,[1,17452,5505],[[0,47,0,0,48,0,0,0,[1,17453,4728],[[0,44,12,0,45,49,0,0,[1,17454,4727],[]]]],[0,56,12,0,57,81,0,0,[1,22181,24],[]],[0,73,12,0,74,81,0,0,[1,22205,110],[[22206,2,82]]],[0,56,12,0,57,83,0,0,[1,22316,33],[]],[0,62,12,0,63,84,0,0,[1,22349,124],[[22350,2,85]]],[0,56,12,0,57,86,0,0,[1,22473,70],[]],[0,73,12,0,74,86,0,0,[1,22543,67],[[22543,2,87]]],[0,88,12,0,89,90,0,0,[1,22611,347],[[22613,2,91],[22937,2,92],[22937,2,93]]]]],[0,79,0,0,0,94,0,0,[1,22958,760],[[0,47,0,0,48,0,0,0,[1,22959,32],[[0,44,12,0,45,49,0,0,[1,22959,31],[]]]],[0,56,12,0,57,81,0,0,[1,22991,33],[]],[0,73,12,0,74,81,0,0,[1,23026,92],[[23027,2,95]]],[0,56,12,0,57,83,0,0,[1,23118,21],[]],[0,62,12,0,63,84,0,0,[1,23139,110],[[23140,2,96]]],[0,56,12,0,57,86,0,0,[1,23249,17],[]],[0,73,12,0,74,86,0,0,[1,23267,67],[[23267,2,97]]],[0,88,12,0,89,90,0,0,[1,23335,383],[[23335,2,98],[23670,2,92],[23671,2,93]]]]],[0,62,12,0,63,99,0,0,[1,23718,206],[[23718,2,100]]],[0,62,12,0,63,101,0,0,[1,23925,184],[[23925,2,102]]],[0,62,12,0,63,103,0,0,[1,24109,214],[[24109,2,104]]],[0,62,12,0,63,105,0,0,[1,24325,168],[[24325,2,106]]],[0,47,0,0,48,0,0,0,[1,24493,8],[[0,44,12,0,45,49,0,0,[1,24493,8],[]]]],[0,56,12,0,57,107,0,0,[1,24502,34],[]],[0,73,12,0,74,107,0,0,[1,24536,74],[[24537,2,108]]],[0,79,0,0,0,109,0,0,[1,24610,670],[[0,47,0,0,48,0,0,0,[1,24611,12],[[0,44,12,0,45,49,0,0,[1,24611,11],[]]]],[0,56,12,0,57,81,0,0,[1,24623,17],[]],[0,73,12,0,74,81,0,0,[1,24640,70],[[24640,2,110]]],[0,56,12,0,57,83,0,0,[1,24711,25],[]],[0,62,12,0,63,84,0,0,[1,24736,90],[[24737,2,111]]],[0,56,12,0,57,86,0,0,[1,24827,49],[]],[0,73,12,0,74,86,0,0,[1,24876,65],[[24876,2,112]]],[0,88,12,0,89,90,0,0,[1,24941,340],[[24942,2,113],[25246,2,92],[25246,2,93]]]]],[0,79,0,0,0,114,0,0,[1,25281,871],[[0,47,0,0,48,0,0,0,[1,25282,29],[[0,44,12,0,45,49,0,0,[1,25282,29],[]]]],[0,56,12,0,57,81,0,0,[1,25311,26],[]],[0,73,12,0,74,81,0,0,[1,25337,84],[[25338,2,115]]],[0,56,12,0,57,83,0,0,[1,25421,18],[]],[0,62,12,0,63,84,0,0,[1,25440,293],[[25440,2,116]]],[0,56,12,0,57,86,0,0,[1,25733,25],[]],[0,73,12,0,74,86,0,0,[1,25759,79],[[25759,2,117]]],[0,88,12,0,89,90,0,0,[1,25838,314],[[25839,2,118],[26138,2,92],[26138,2,93]]]]],[0,79,0,0,0,119,0,0,[1,26153,735],[[0,47,0,0,48,0,0,0,[1,26153,9],[[0,44,12,0,45,49,0,0,[1,26154,9],[]]]],[0,56,12,0,57,81,0,0,[1,26163,24],[]],[0,73,12,0,74,81,0,0,[1,26187,83],[[26187,2,120]]],[0,56,12,0,57,83,0,0,[1,26270,26],[]],[0,62,12,0,63,84,0,0,[1,26296,137],[[26296,2,121]]],[0,56,12,0,57,86,0,0,[1,26433,19],[]],[0,73,12,0,74,86,0,0,[1,26452,66],[[26452,2,122]]],[0,88,12,0,89,90,0,0,[1,26518,370],[[26518,2,123],[26836,2,92],[26837,2,93]]]]],[0,79,0,0,0,124,0,0,[1,26889,680],[[0,47,0,0,48,0,0,0,[1,26891,15],[[0,44,12,0,45,49,0,0,[1,26891,14],[]]]],[0,56,12,0,57,81,0,0,[1,26905,28],[]],[0,73,12,0,74,81,0,0,[1,26934,81],[[26934,2,125]]],[0,56,12,0,57,83,0,0,[1,27015,28],[]],[0,62,12,0,63,84,0,0,[1,27043,91],[[27043,2,126]]],[0,56,12,0,57,86,0,0,[1,27134,19],[]],[0,73,12,0,74,86,0,0,[1,27154,61],[[27154,2,127]]],[0,88,12,0,89,90,0,0,[1,27215,353],[[27216,2,128],[27544,2,92],[27544,2,93]]]]]]],[129,0,130,[6,131,9],[1,27571,5897],[[0,10,0,0,0,0,0,0,[1,27572,1],[[0,11,12,0,13,14,0,0,[1,27573,0],[[27573,2,15]]]]],[0,79,0,0,0,132,0,0,[1,27577,730],[[0,47,0,0,48,0,0,0,[1,27579,15],[[0,44,12,0,45,49,0,0,[1,27579,15],[]]]],[0,56,12,0,57,81,0,0,[1,27594,27],[]],[0,73,12,0,74,81,0,0,[1,27621,62],[[27622,2,133]]],[0,56,12,0,57,83,0,0,[1,27684,14],[]],[0,62,12,0,63,84,0,0,[1,27698,163],[[27698,2,134]]],[0,56,12,0,57,86,0,0,[1,27861,17],[]],[0,73,12,0,74,86,0,0,[1,27878,63],[[27878,2,135]]],[0,88,12,0,89,90,0,0,[1,27941,366],[[27942,2,136],[28270,2,92],[28270,2,93]]]]],[0,79,0,0,0,137,0,0,[1,28308,3806],[[0,47,0,0,48,0,0,0,[1,28309,3061],[[0,44,12,0,45,49,0,0,[1,28309,3060],[]]]],[0,56,12,0,57,81,0,0,[1,31371,32],[]],[0,73,12,0,74,81,0,0,[1,31403,72],[[31403,2,138]]],[0,56,12,0,57,83,0,0,[1,31475,22],[]],[0,62,12,0,63,84,0,0,[1,31498,200],[[31498,2,139]]],[0,56,12,0,57,86,0,0,[1,31698,18],[]],[0,73,12,0,74,86,0,0,[1,31716,52],[[31716,2,140]]],[0,88,12,0,89,90,0,0,[1,31767,347],[[31768,2,141],[32088,2,92],[32088,2,93]]]]],[0,79,0,0,0,142,0,0,[1,32117,750],[[0,47,0,0,48,0,0,0,[1,32117,30],[[0,44,12,0,45,49,0,0,[1,32118,29],[]]]],[0,56,12,0,57,81,0,0,[1,32147,23],[]],[0,73,12,0,74,81,0,0,[1,32170,104],[[32170,2,143]]],[0,56,12,0,57,83,0,0,[1,32274,22],[]],[0,62,12,0,63,84,0,0,[1,32296,127],[[32297,2,144]]],[0,56,12,0,57,86,0,0,[1,32424,15],[]],[0,73,12,0,74,86,0,0,[1,32439,50],[[32440,2,145]]],[0,88,12,0,89,90,0,0,[1,32490,377],[[32490,2,146],[32833,2,92],[32833,2,93]]]]],[0,79,0,0,0,147,0,0,[1,32868,596],[[0,47,0,0,48,0,0,0,[1,32869,11],[[0,44,12,0,45,49,0,0,[1,32870,10],[]]]],[0,56,12,0,57,81,0,0,[1,32882,22],[]],[0,73,12,0,74,81,0,0,[1,32904,56],[[32904,2,148]]],[0,56,12,0,57,83,0,0,[1,32960,14],[]],[0,62,12,0,63,84,0,0,[1,32974,84],[[32974,2,149]]],[0,56,12,0,57,86,0,0,[1,33058,13],[]],[0,73,12,0,74,86,0,0,[1,33072,51],[[33072,2,97]]],[0,88,12,0,89,90,0,0,[1,33123,342],[[33123,2,150],[33426,2,92],[33427,2,93]]]]]]],[151,0,152,[6,153,9],[1,33470,4067],[[0,66,0,0,0,154,0,0,[1,33471,482],[[0,47,0,0,48,0,0,0,[1,33471,12],[[0,44,12,0,45,49,0,0,[1,33472,11],[]]]],[0,56,12,0,57,68,0,0,[1,33483,34],[]],[0,69,12,0,70,68,0,0,[1,33518,21],[]],[0,71,12,0,72,68,0,0,[1,33539,305],[]],[0,73,12,0,74,68,0,0,[1,33845,107],[[33845,2,155]]]]],[0,66,0,0,0,156,0,0,[1,33953,498],[[0,47,0,0,48,0,0,0,[1,33953,27],[[0,44,12,0,45,49,0,0,[1,33953,27],[]]]],[0,56,12,0,57,68,0,0,[1,33980,28],[]],[0,69,12,0,70,68,0,0,[1,34008,36],[]],[0,71,12,0,72,68,0,0,[1,34045,308],[]],[0,73,12,0,74,68,0,0,[1,34354,97],[[34354,2,157]]]]],[0,35,0,0,0,0,0,0,[1,34451,3086],[[0,36,37,0,38,39,0,0,[1,34451,3077],[[0,40,12,0,41,42,0,0,[0,34452,3076],[[37524,5,43]]]]],[0,44,12,0,45,46,0,0,[1,37528,9],[]]]]]],[158,0,159,[6,160,9],[1,37538,19231],[[0,66,0,0,0,161,0,0,[1,37538,19228],[[0,47,0,0,48,0,0,0,[1,37539,18681],[[0,44,12,0,45,49,0,0,[1,37539,18680],[[56012,2,162]]]]],[0,56,12,0,57,68,0,0,[1,56220,24],[]],[0,69,12,0,70,68,0,0,[1,56244,29],[]],[0,71,12,0,72,68,0,0,[1,56273,274],[]],[0,73,12,0,74,68,0,0,[1,56547,220],[[56548,2,163]]]]]]]],[[1,164,0,0,0,0,0,0,[1,286,2],[[0,165,166,0,167,168,0,0,[1,287,0],[[287,2,169]]]]]],[6,6,0,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis-Test","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test","*.","*AdmitHis","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitHis.robot","*AdmitHis.robot","*1-UI-Open Filing Page","*<p>باز  کردن صفحه پذیرش بستری\x3c/p>","*STEP_01_Open_Browser","*UI_Test","*Start Browser AdmitHis With Token","*<p>باز کردن کروم + تزریق کوکی token\x3c/p>","*Open Browser","*SeleniumLibrary","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}    chrome","*Opening browser 'chrome' to base url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'.","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Add Cookie","*<p>Adds a cookie to your current session.\x3c/p>","*token    ${COOKIE_TOKEN}","*Reload Page","*<p>Simulates user reloading page.\x3c/p>","*Go To AdmitHis Page","*<p>رفتن مستقیم به صفحه پذیرش بستری\x3c/p>","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}","*Opening url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'","*Wait For Spinner Hidden","*<p>صبر کردن تا loading Angular ناپدید شود\x3c/p>","*Wait Until Element Is Not Visible","*<p>Waits until the element <code>locator\x3c/code> is not visible.\x3c/p>","*css=div.back-spenner.ng-star-inserted    1000","*Log To Console","*BuiltIn","*<p>Logs the given message to the console.\x3c/p>","*---- DONE ----","*9-UI-Enter national code of patiant","*<p>وارد کردن کد ملی بیمار و استعلام کد ملی\x3c/p>","eNpVz7FuwyAQBuC5foob28UCDLax1K0d28VD5wOOxIoDEbbj5O1rRW1Cxk/c/T/3HfvF7n+G4OL6ebF0mocYOviiacIddRAiTNsArLeJDmZMO5r/CDgmQncFO8aJXOFTPMISDiGuASilmDpYycB5oHVLmsHHJbgC4LXf8rciGIKPHdj9tkjvXFYlKxupdclr/Vb0M9rDnNBSV/TXo4njdEvBMw4jmpFK+FiOpyHsttJEUxzP5MA8ll7YpfG+QcGrtiX1ZC3Z3dxzXiv3MJHmhmfvWjdUZzaorMis0Aqd26CuHn1SsTrrE1Kib3PXus7yBVfKkcxNrrWZpWBMPpmb/D7REP3/T3MuGbWuuVuQtaqyxS8aMJfF","*Wait For Page Ready","*Run Keyword And Ignore Error","*<p>Runs the given keyword with the given arguments and ignores possible error.\x3c/p>","*Wait Until Page Contains Element    ${GLOBAL_SPINNER}    3","*Wait Until Page Contains Element","*<p>Waits until the element <code>locator\x3c/code> appears on the current page.\x3c/p>","*${GLOBAL_SPINNER}    3","*s1-s1-t2-k1-k1-k1","eNpVz0FuwyAQBdB1fYrZpd1YBoNtLHXV7qpKlXyCAYbEigMRtuPm9kVRm9Dl0/DnDx903UK0sHvD87JGgi/cEwwmEvn5EJYdmLBOFnxYQBPE1UPw4HCc0uMePmmeU6BPc5hXc4Bt9DZsPSwY97T8EnCKhPYKZgoz2cLFcILVH33YPFCMIfawkYbLSNutyYXV2wLgeUj7x1Q4ehd6MIcUpFcm6rIqW6FUyRr1UgwLmuMS0VBfDNeTDtN824KXdCbqiUp4X0/n0e9TaaQ5TBeyoB+hp+q7da5FzuquI/nPSlR3M8dYI+3DRIppls2VaqnJrFEanlmi4Sq3RlU/+oSsmqyPC4Guy92oJtvPmZSWRG6ynckseFWJf2Y6/x9vif7uU4yJijrb3s3JGFmb4gdMOaVZ","*${GLOBAL_SPINNER}    ${timeout}","*s1-s1-t2-k1-k2","*Wait Until Element Is Visible","*<p>Waits until the element <code>locator\x3c/code> is visible.\x3c/p>","*//input[@formcontrolname='nationalCode']    10s","*Clear Element Text","*<p>Clears the value of the text-input-element identified by <code>locator\x3c/code>.\x3c/p>","*//input[@formcontrolname='nationalCode']","*Input Text","*<p>Types the given <code>text\x3c/code> into the text field identified by <code>locator\x3c/code>.\x3c/p>","*//input[@formcontrolname='nationalCode']    ${nationalCode}","*Click Element Safe","*id=button-addon3","*14-UI - Fill Filing Form (Patient Info)","*<p>پر کردن اطلاعات مورد نیاز بیمار\x3c/p>","*s1-s1-t3-k1-k1-k1","*s1-s1-t3-k1-k2","*Select From Ng Select","*maritalStatus    مجرد","*insurRelation    خود فرد","*//input[@formcontrolname='mobileNumber']    09383509316","*//input[@formcontrolname='address']    dfgdfgdfgd","*//input[@formcontrolname='accompanyfullName']    مهرشاد شیخ الاسلامی","*//input[@formcontrolname='accompanyMobileNumber']    09383586316","*id=button-addon2","*Click Element","*<p>Click the element identified by <code>locator\x3c/code>.\x3c/p>","*firstRecognition    شکستگی","*howToRefer    وسیله شخصی","*causeOfHospitalization    دل درد","*15-UI - Assign Ward And Doctor And Prepayment","*<p>انتخاب بخش و پزشک بیمار preadmit\x3c/p>","*s1-s1-t4-k1-k1-k1","*s1-s1-t4-k1-k2","*wardfileld    اطفال 2 - تخت خالی (33)","*doctorField    Siavash Siavash","*responsiblePatient    خود فرد","*//input[@formcontrolname='prepayment']    10000","*18-UI - Save Admission Filing","*<p>سیو کردن پذیرش preadmit\x3c/p>","*css=button.btn-saveFile","*s1-s1-t5-k1-k1-k1","*${locator}","*Wait Until Element Is Enabled","*<p>Waits until the element <code>locator\x3c/code> is enabled.\x3c/p>","*Scroll Element Into View","*<p>Scrolls the element identified by <code>locator\x3c/code> into view.\x3c/p>","*21-UI - deny admit print page","*<p>لغو پرینت برگه پذیرش\x3c/p>","*css=button.swal2-deny.swal2-styled","*s1-s1-t6-k1-k1-k1","*21-UI - Open Cash Web And Pay","*Cash Pay Patient By National Code","*<p>Open Cash App, search patient by national code and complete payment flow\x3c/p>","*${nationalCode}","*s1-s1-t7-k1-k1-k1-k1","*s1-s1-t7-k1-k1-k2","*Switch To Cash App","*xpath=//input[@formcontrolname='nationalCode']    ${nationalCode}","*xpath=//button[contains(@class,'btn-warning') and .//mat-icon[.='search']]","*Set Variable","*<p>Returns the given values which can then be assigned to a variables.\x3c/p>","*//tr[.//td[contains(normalize-space(), '${nationalCode}')]]","*${row_xpath}","*Wait Until Keyword Succeeds","*<p>Runs the specified keyword and retries if it fails.\x3c/p>","*3x    5s    Element Should Be Visible    ${row_xpath}","*Double Click Element","*<p>Double clicks the element identified by <code>locator\x3c/code>.\x3c/p>","*xpath=//button[normalize-space(text())='پرداخت']    30s","*xpath=//button[normalize-space(text())='پرداخت']","*xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']","*22-UI - go to inpatient list","*<p>رفتن به لیست بیماران بستری\x3c/p>","*s1-s1-t8-k1-k1-k1","*s1-s1-t8-k1-k2","*Switch To AdmitHis App","*xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a","*25-UI - Load Preadmit Patient List","*<p>لیست بیماران preadmit\x3c/p>","*s1-s1-t9-k1-k1-k1","*s1-s1-t9-k1-k2","*xpath=//span[contains(@class,'mat-checkbox-inner-container')]","*27-UI - Edit Preadmit Patient","*<p>ویرایش بیمار preadmit\x3c/p>","*s1-s1-t10-k1-k1-k1","*s1-s1-t10-k1-k2","*css=button.mat-tooltip-trigger.btn.btn-warning","*css=button.mat-tooltip-trigger.btn-action.ng-star-inserted","*css=button.mat-tooltip-trigger.btn.btn-edit1","*29-UI - Cancel Preadmit","*<p>لغو پذیرش preadmit\x3c/p>","*Typing text '1520554001' into text field 'xpath=//input[@formcontrolname='nationalCode']'.","*s1-s1-t11-k1","*xpath=//button[not(@hidden) and .//mat-icon[normalize-space(.)='cancel']]","*Create AdmitHIS Session","*Create Session","*RequestsLibrary","*<p>Create Session: create a HTTP session to a server\x3c/p>","*HIS    ${AdmitHis_Api_URL}    verify=${False}","*Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 ","*AdmitRis","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitRis.robot","*AdmitRis.robot","*<p>باز  کردن صفحه پذیرش طب تصویری\x3c/p>","*Start Browser AdmitRis With Token","*${AdmitRis_App_URL}    chrome","*Opening browser 'chrome' to base url '<a href=\"http://192.168.5.19:8024/admit\">http://192.168.5.19:8024/admit\x3c/a>'.","*s1-s2-t1-k1-k2","*Go To AdmitRis Page","*<p>رفتن مستقیم به صفحه پذیرش طب تصویری\x3c/p>","*Create AdmitRis Session","*RIS    ${AdmitRis_Api_URL}    verify=${False}","*Creating Session using : alias=RIS, url=http://192.168.5.19:8023, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 ","eNq1Uk1Lw0AQvfdXDL2kBRvwEyn0IKgoeBAsXlxdtum0jm52y84kUkV/u5s0pSWIIOocksxkd957M+8sBB+AHMzIIiSnQ3VtlqVxU3Ud/BNmwuqC+GSak6j6GbPBGHmTpcFPvCTgHVhyCEdDuHQkZCy9kpvH4iSYsITkBi06KvKrVSGBF5JHMGFe5OiE4Q44C4iOH71o7/TMkC0Cjs6NZYR7qHKcDuHW2ALPKt4VUhlxpiCUI7CECjD5pk2SdsbBZDgx2TP0cs8CAbMID5mxFqxh6Q87AOfVNLo/mEZaoitVlKaYBAeL2N/MkVVLtNKa4nC0ThfL7k4zsP3dnWoD618RHoDRztJKlS8ERqAz70oMoptSr3n368Ot+GjFwzr+U1ghZFnJcoG8pe1gbyWtRb9mHVCK4OrVxc1p8Zox421lf0a2tmhDsf6uQLZoHh7XNFtUViwNRfdtPNebdb803Vtz+T1Ju/3O7zz6CdwvSoY=","eNq1Uk1Lw0AQvfdXDL2khTbgJ1LwIKgoeBAtXlxdtum0Hd3slp1JpIr+djdpxBJEEHUOSWayO++9mXcSgg9ADmZkEZLjkbo0q9K4qboM/gEzYXVGfDTNSVT9jNlwjNxkV8Rp8BMvCXgHlhzC/gjOHQkZS8/k5rE4CSasILlGi46K/GJdSOCJZAEmzIscnTDcAmcB0fHCi/ZOzwzZIuDhqbGMcAdVjtMR3Bhb4EnFu0IqI84UhHIEllABJt+0SdLOOJgMJyZ7hF7uWSBgFuEhM9aCNSz9UQfgtJpG9wfTSEt0pYrSFJPgcBn7mzmyaolWWlMcjtbpctUdNAPb2RpUG/j4FeEBGO0srVT5QuAQdOZdiUF0U+o17359uBVvrbj/iP8UVghZVrJaIm9o291eS2vRr1kHlCK4enVxc1q8Zsx4U9mfka0t2lCsvyuQDZp7BzXNFpU1S0PRfZ+e6826X5rupbn8mqTdfud3Hn0H/YtKkA=="]);
+window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis","*D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test\\AdmitHis.robot","*AdmitHis.robot","*13-UI - Open Filling Page","*<p>باز  کردن صفحه پذیرش بستری\x3c/p>","*inpatient","*Open_Browser","*step13","*UI_Test","*Disable Screenshots","*Register Keyword To Run On Failure","*SeleniumLibrary","*<p>Sets the keyword to execute, when a SeleniumLibrary keyword fails.\x3c/p>","*NONE","*No keyword will be run on failure.","*Start Browser AdmitHis With Token","*<p>باز کردن کروم + تزریق کوکی token\x3c/p>","*Open Browser","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}    chrome","*Opening browser 'chrome' to base url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'.","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Add Cookie","*<p>Adds a cookie to your current session.\x3c/p>","*token    ${COOKIE_TOKEN}","*Reload Page","*<p>Simulates user reloading page.\x3c/p>","*Go To AdmitHis Page","*<p>رفتن مستقیم به صفحه پذیرش بستری\x3c/p>","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}","*Opening url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'","*Wait For Page Ready","*Run Keyword And Ignore Error","*BuiltIn","*<p>Runs the given keyword with the given arguments and ignores possible error.\x3c/p>","*Wait Until Page Contains Element    ${GLOBAL_SPINNER}    3","*Wait Until Page Contains Element","*<p>Waits until the element <code>locator\x3c/code> appears on the current page.\x3c/p>","*${GLOBAL_SPINNER}    3","*Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.","*Wait Until Element Is Not Visible","*<p>Waits until the element <code>locator\x3c/code> is not visible.\x3c/p>","*${GLOBAL_SPINNER}    ${timeout}","*Wait For Spinner Hidden","*<p>صبر کردن تا loading Angular ناپدید شود\x3c/p>","*css=div.back-spenner.ng-star-inserted    1000","*Log To Console","*<p>Logs the given message to the console.\x3c/p>","*---- DONE ----","*14- Enter national code of inpatient","*<p>وارد کردن کد ملی بیمار و استعلام کد ملی\x3c/p>","*step14","*Wait Until Element Is Visible","*<p>Waits until the element <code>locator\x3c/code> is visible.\x3c/p>","*//input[@formcontrolname='nationalCode']    10s","*Clear Element Text","*<p>Clears the value of the text-input-element identified by <code>locator\x3c/code>.\x3c/p>","*//input[@formcontrolname='nationalCode']","*Input Text","*<p>Types the given <code>text\x3c/code> into the text field identified by <code>locator\x3c/code>.\x3c/p>","*//input[@formcontrolname='nationalCode']    ${nationalCode}","*Typing text '1520554001' into text field '//input[@formcontrolname='nationalCode']'.","*Click Element Safe","*id=button-addon3","*${locator}","*Wait Until Element Is Enabled","*<p>Waits until the element <code>locator\x3c/code> is enabled.\x3c/p>","*Scroll Element Into View","*<p>Scrolls the element identified by <code>locator\x3c/code> into view.\x3c/p>","*Click Element","*<p>Click the element identified by <code>locator\x3c/code>.\x3c/p>","*Clicking element 'id=button-addon3'.","*15-UI - Fill inpatient Info","*<p>پر کردن اطلاعات مورد نیاز بیمار\x3c/p>","*step15","*Select From Ng Select","*maritalStatus    مجرد","*css=ng-select[formcontrolname='${formcontrol}']","*Clicking element 'css=ng-select[formcontrolname='maritalStatus']'.","*css=ng-select[formcontrolname='${formcontrol}'] input[type='text']","*css=ng-select[formcontrolname='${formcontrol}'] input[type='text']    ${value}","*Typing text 'مجرد' into text field 'css=ng-select[formcontrolname='maritalStatus'] input[type='text']'.","*xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'مجرد')]'.","*Press Keys","*<p>Simulates the user pressing key(s) to an element or on the active browser.\x3c/p>","*css=ng-select[formcontrolname='${formcontrol}'] input[type='text']    TAB","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='maritalStatus'] input[type='text'] element.","*Pressing special key TAB to element.","*Releasing special key TAB.","*insurRelation    خود فرد","*Clicking element 'css=ng-select[formcontrolname='insurRelation']'.","*Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='insurRelation'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='insurRelation'] input[type='text'] element.","*//input[@formcontrolname='mobileNumber']    09383509316","*Typing text '09383509316' into text field '//input[@formcontrolname='mobileNumber']'.","*//input[@formcontrolname='address']    dfgdfgdfgd","*Typing text 'dfgdfgdfgd' into text field '//input[@formcontrolname='address']'.","*//input[@formcontrolname='accompanyfullName']    مهرشاد شیخ الاسلامی","*Typing text 'مهرشاد شیخ الاسلامی' into text field '//input[@formcontrolname='accompanyfullName']'.","*//input[@formcontrolname='accompanyMobileNumber']    09383586316","*Typing text '09383586316' into text field '//input[@formcontrolname='accompanyMobileNumber']'.","*id=button-addon2","*Clicking element 'id=button-addon2'.","*patientClass    بستری","*Clicking element 'css=ng-select[formcontrolname='patientClass']'.","*Typing text 'بستری' into text field 'css=ng-select[formcontrolname='patientClass'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'بستری')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='patientClass'] input[type='text'] element.","*firstRecognition    شکستگی","*Clicking element 'css=ng-select[formcontrolname='firstRecognition']'.","*Typing text 'شکستگی' into text field 'css=ng-select[formcontrolname='firstRecognition'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'شکستگی')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='firstRecognition'] input[type='text'] element.","*howToRefer    وسیله شخصی","*Clicking element 'css=ng-select[formcontrolname='howToRefer']'.","*Typing text 'وسیله شخصی' into text field 'css=ng-select[formcontrolname='howToRefer'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'وسیله شخصی')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='howToRefer'] input[type='text'] element.","*causeOfHospitalization    دل درد","*Clicking element 'css=ng-select[formcontrolname='causeOfHospitalization']'.","*Typing text 'دل درد' into text field 'css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'دل درد')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text'] element.","*16-UI - Assign Ward And Doctor","*<p>انتخاب بخش و پزشک بیمار preadmit\x3c/p>","*step16","*wardfileld    اطفال 2 - تخت خالی (33)","*Clicking element 'css=ng-select[formcontrolname='wardfileld']'.","*Typing text 'اطفال 2 - تخت خالی (33)' into text field 'css=ng-select[formcontrolname='wardfileld'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اطفال 2 - تخت خالی (33)')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='wardfileld'] input[type='text'] element.","*bedNum    اتاق1 - تخت عمومي - تخت18","*Clicking element 'css=ng-select[formcontrolname='bedNum']'.","*Typing text 'اتاق1 - تخت عمومي - تخت18' into text field 'css=ng-select[formcontrolname='bedNum'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اتاق1 - تخت عمومي - تخت18')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='bedNum'] input[type='text'] element.","*doctorField    Siavash Siavash","*Clicking element 'css=ng-select[formcontrolname='doctorField']'.","*Typing text 'Siavash Siavash' into text field 'css=ng-select[formcontrolname='doctorField'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'Siavash Siavash')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='doctorField'] input[type='text'] element.","*responsiblePatient    خود فرد","*Clicking element 'css=ng-select[formcontrolname='responsiblePatient']'.","*Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='responsiblePatient'] input[type='text']'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='responsiblePatient'] input[type='text'] element.","*17-UI - Save Admission Filing","*<p>سیو کردن پذیرش preadmit\x3c/p>","*step17","*css=button.btn-saveFile","*Clicking element 'css=button.btn-saveFile'.","*css=button.swal2-confirm.swal2-styled","*Clicking element 'css=button.swal2-confirm.swal2-styled'.","*18-UI - deny admit print page","*<p>لغو پرینت برگه پذیرش\x3c/p>","*step18","*css=button.swal2-deny.swal2-styled","*Suppressing StaleElementReferenceException from Selenium.","*Clicking element 'css=button.swal2-deny.swal2-styled'.","*Create AdmitHIS Session","*Create Session","*RequestsLibrary","*<p>Create Session: create a HTTP session to a server\x3c/p>","*HIS    ${AdmitHis_Api_URL}    verify=${False}","*Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 "]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:11","fail":11,"label":"All Tests","pass":1,"skip":0}],[{"elapsed":"00:00:08","fail":1,"label":"STEP_01_Open_Browser","pass":1,"skip":0},{"elapsed":"00:00:11","fail":11,"label":"UI_Test","pass":1,"skip":0}],[{"elapsed":"00:00:12","fail":11,"id":"s1","label":"AdmitHis-Test","name":"AdmitHis-Test","pass":1,"skip":0},{"elapsed":"00:00:09","fail":10,"id":"s1-s1","label":"AdmitHis-Test.AdmitHis","name":"AdmitHis","pass":1,"skip":0},{"elapsed":"00:00:03","fail":1,"id":"s1-s2","label":"AdmitHis-Test.AdmitRis","name":"AdmitRis","pass":0,"skip":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:56","fail":0,"label":"All Tests","pass":6,"skip":0}],[{"elapsed":"00:00:56","fail":0,"label":"inpatient","pass":6,"skip":0},{"elapsed":"00:00:05","fail":0,"label":"Open_Browser","pass":1,"skip":0},{"elapsed":"00:00:05","fail":0,"label":"step13","pass":1,"skip":0},{"elapsed":"00:00:09","fail":0,"label":"step14","pass":1,"skip":0},{"elapsed":"00:00:13","fail":0,"label":"step15","pass":1,"skip":0},{"elapsed":"00:00:06","fail":0,"label":"step16","pass":1,"skip":0},{"elapsed":"00:00:04","fail":0,"label":"step17","pass":1,"skip":0},{"elapsed":"00:00:19","fail":0,"label":"step18","pass":1,"skip":0},{"elapsed":"00:00:56","fail":0,"label":"UI_Test","pass":6,"skip":0}],[{"elapsed":"00:00:57","fail":0,"id":"s1","label":"AdmitHis","name":"AdmitHis","pass":6,"skip":0}]];
 </script>
 <script type="text/javascript">
-window.output["errors"] = [[517,4,166],[8429,3,51,50],[8445,3,51,53],[8461,3,51,67],[8471,3,51,68],[8488,3,51,84],[8496,3,51,85],[8507,3,51,93],[8517,3,51,102],[8528,3,51,107],[8535,3,51,108],[8544,3,51,126],[8551,3,51,127],[8561,3,51,132],[8565,3,51,133],[8574,3,51,137],[8579,3,51,138],[8590,3,51,145],[8604,4,167],[11630,3,51,160]];
+window.output["errors"] = [];
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1766659077209;
+window.output["baseMillis"] = 1770242149665;
 </script>
 <script type="text/javascript">
-window.output["generated"] = 11681;
+window.output["generated"] = 56806;
 </script>
 <script type="text/javascript">
 window.output["expand_keywords"] = null;
@@ -2154,8 +2153,9 @@ function addErrors() {
     var errors = window.testdata.errorIterator();
     if (errors.hasNext()) {
         $.tmpl('errorHeaderTemplate').appendTo($('body'));
-        drawErrorsRecursively(errors, $('#errors'));
+        drawErrorsRecursively(errors, $('#errors .messages'));
     }
+    toggleElement('errors');
 }
 
 function drawErrorsRecursively(errors, target) {
@@ -2189,7 +2189,7 @@ function makeElementVisible(id) {
 }
 
 function addExecutionLog(main) {
-    $('body').append($(testOrTask('<h2>{Test} Execution Log</h2>')),
+    $('body').append('<h2>Execution Log</h2>',
                      $.tmpl('suiteTemplate', main));
 }
 </script>
@@ -2234,20 +2234,31 @@ function addExecutionLog(main) {
 </script>
 
 <script type="text/x-jquery-tmpl" id="errorHeaderTemplate">
-  <h2>{{= testOrTask('{Test}')}} Execution Errors</h2>
-  <table id="errors"></table>
+  <h2>Execution Errors</h2>
+  <div id="errors">
+    <div class="element-header closed" onclick="toggleElement('errors')">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label error">ERRORS</div>
+      <div class="name">Errors and warnings during execution</div>
+    </div>
+    <div class="children">
+      <table class="messages"></table>
+    </div>
+  </div>
 </script>
 
 <script type="text/x-jquery-tmpl" id="errorTemplate">
   <tr id="${id}" class="message-row">
-    <td class="error-time">
+    <td class="time">
       {{if link}}
       <a onclick="makeElementVisible('${link}')" href="#${link}" title="Link to details">${date} ${time}</a>
       {{else}}
       ${date} ${time}
       {{/if}}
     </td>
-    <td class="${level.toLowerCase()} level"><span class="label ${level.toLowerCase()}">${level}</span></td>
+    <td class="${level.toLowerCase()} level">
+      <span class="label ${level.toLowerCase()}">${level}</span>
+    </td>
     <td class="message">{{html text}}</td>
     <td class="select-message" onclick="javascript:selectMessage('${id}')" title="Select message text">
       <div></div>
@@ -2257,18 +2268,18 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="suiteTemplate">
   <div id="${id}" class="suite">
-    <div class="element-header closed" onclick="toggleSuite('${id}')">
-      <div class="element-header-left" title="SUITE  {{html name}}  [${status}]">
-        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="label ${status.toLowerCase()}">SUITE</span>
-        <span class="name">{{html name}}</span>
-      </div>
-      <div class="element-header-right" onclick="stopPropagation(event)" title="">
+    <div class="element-header closed" onclick="toggleSuite('${id}')"
+         title="SUITE  {{html name}}  [${status}]">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label ${status.toLowerCase()}">SUITE</div>
+      <div class="name">{{html name}}</div>
+      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
+      <div class="element-header-menu" onclick="stopPropagation(event)" title="">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" title="Link to this suite" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+        <a class="link" onclick="makeElementVisible('${id}')"
+           title="Link to this suite" href="#${id}"></a>
       </div>
-      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -2319,18 +2330,18 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="testTemplate">
   <div id="${id}" class="test">
-    <div class="element-header closed" onclick="toggleTest('${id}')">
-      <div class="element-header-left" title="{{= testOrTask('{TEST}')}}  {{html name}}  [${status}]">
-        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="label ${status.toLowerCase()}">{{= testOrTask('{TEST}')}}</span>
-        <span class="name">{{html name}}</span>
-      </div>
-      <div class="element-header-right" onclick="stopPropagation(event)" title="">
+    <div class="element-header closed" onclick="toggleTest('${id}')"
+         title="{{= testOrTask('{TEST}')}}  {{html name}}  [${status}]">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label ${status.toLowerCase()}">{{= testOrTask('{TEST}')}}</div>
+      <div class="name">{{html name}}</div>
+      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
+      <div class="element-header-menu" onclick="stopPropagation(event)" title="">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" title="Link to this {{= testOrTask('{test}')}}" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+        <a class="link" href="#${id}" onclick="makeElementVisible('${id}')"
+           title="Link to this {{= testOrTask('{test}')}}"></a>
       </div>
-      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -2377,21 +2388,20 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="keywordTemplate">
   <div id="${id}" class="keyword">
-    <div class="element-header closed" onclick="toggleKeyword('${id}')">
-      <div class="element-header-left" title="${type}  {{if name}}{{html fullName}}  {{/if}}[${status}]">
-        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="label ${status.toLowerCase()}">${type}</span>
-        <span class="assign">{{html assign}}</span>
-        <span class="name"><span class="parent-name">{{html libname}}{{if libname}} . {{/if}}</span>{{html name}}</span>
-        &nbsp;
-        <span class="arg">{{html arguments}}</span>
-      </div>
-      <div class="element-header-right" onclick="stopPropagation(event)">
+    <div class="element-header closed" onclick="toggleKeyword('${id}')"
+         title="${type}  {{if name}}{{html fullName}}  {{/if}}[${status}]">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label ${status.toLowerCase()}">${type}</div>
+      {{if assign}}<div class="assign">{{html assign}}&nbsp;=</div>{{/if}}
+      <div class="name">{{if libname}}<span class="parent-name">{{html libname}} . </span>{{/if}}{{html name}}</div>
+      <div class="arg">{{html arguments}}</div>
+      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
+      <div class="element-header-menu" onclick="stopPropagation(event)">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" title="Link to this item" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+        <a class="link" onclick="makeElementVisible('${id}')"
+           title="Link to this item" href="#${id}"></a>
       </div>
-      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata keyword-metadata">

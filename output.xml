@@ -1,2992 +1,1074 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2025-12-25T14:07:57.207421" rpa="false" schemaversion="5">
-<suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
-<suite id="s1-s1" name="AdmitHis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot">
+<robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2026-02-05T01:25:49.663171" rpa="false" schemaversion="5">
+<suite id="s1" name="AdmitHis" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitHis.robot">
 <kw name="Create AdmitHIS Session" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-12-25T14:07:57.729056" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-02-05T01:25:49.952467" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-12-25T14:07:57.728794" elapsed="0.000450"/>
+<status status="PASS" start="2026-02-05T01:25:49.952174" elapsed="0.000498"/>
 </kw>
-<status status="PASS" start="2025-12-25T14:07:57.728033" elapsed="0.001328"/>
+<status status="PASS" start="2026-02-05T01:25:49.951149" elapsed="0.001636"/>
 </kw>
-<test id="s1-s1-t1" name="1-UI-Open Filing Page" line="183">
+<test id="s1-t1" name="13-UI - Open Filling Page" line="395">
+<kw name="Disable Screenshots">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:25:49.953944" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-05T01:25:49.953799" elapsed="0.000203"/>
+</kw>
+<status status="PASS" start="2026-02-05T01:25:49.953555" elapsed="0.000520"/>
+</kw>
 <kw name="Start Browser AdmitHis With Token">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:07:57.730356" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
+<msg time="2026-02-05T01:25:49.954843" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
 <arg>${AdmitHis_App_URL}</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-12-25T14:07:57.730177" elapsed="2.692023"/>
+<status status="PASS" start="2026-02-05T01:25:49.954667" elapsed="1.707578"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-12-25T14:08:00.422761" elapsed="0.031670"/>
+<status status="PASS" start="2026-02-05T01:25:51.662439" elapsed="0.042243"/>
 </kw>
 <kw name="Add Cookie" owner="SeleniumLibrary">
 <arg>token</arg>
 <arg>${COOKIE_TOKEN}</arg>
 <doc>Adds a cookie to your current session.</doc>
-<status status="PASS" start="2025-12-25T14:08:00.454811" elapsed="0.012681"/>
+<status status="PASS" start="2026-02-05T01:25:51.705009" elapsed="0.010324"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2025-12-25T14:08:00.468034" elapsed="2.396659"/>
+<status status="PASS" start="2026-02-05T01:25:51.715590" elapsed="0.134849"/>
 </kw>
 <doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="PASS" start="2025-12-25T14:07:57.729946" elapsed="5.135041"/>
+<status status="PASS" start="2026-02-05T01:25:49.954446" elapsed="1.896176"/>
 </kw>
 <kw name="Go To AdmitHis Page">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:02.866901" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
+<msg time="2026-02-05T01:25:51.853577" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
 <arg>${AdmitHis_App_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-12-25T14:08:02.866429" elapsed="0.073418"/>
+<status status="PASS" start="2026-02-05T01:25:51.853212" elapsed="0.081778"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2025-12-25T14:08:02.940147" elapsed="0.205665"/>
+<status status="PASS" start="2026-02-05T01:25:51.935163" elapsed="0.064429"/>
 </kw>
 <doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
-<status status="PASS" start="2025-12-25T14:08:02.865635" elapsed="0.280506"/>
+<status status="PASS" start="2026-02-05T01:25:51.852232" elapsed="0.147534"/>
+</kw>
+<kw name="Wait For Page Ready">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:25:55.025177" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-05T01:25:52.000968" elapsed="3.032583">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-05T01:25:52.000567" elapsed="3.033420"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:25:55.034509" elapsed="0.027283"/>
+</kw>
+<status status="PASS" start="2026-02-05T01:25:52.000231" elapsed="3.061991"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2025-12-25T14:08:03.147808" elapsed="0.017994"/>
+<status status="PASS" start="2026-02-05T01:25:55.064581" elapsed="0.026859"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2025-12-25T14:08:03.147007" elapsed="0.019184"/>
+<status status="PASS" start="2026-02-05T01:25:55.063417" elapsed="0.028251"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>---- DONE ----</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-12-25T14:08:03.167308" elapsed="0.000812"/>
+<status status="PASS" start="2026-02-05T01:25:55.092250" elapsed="0.001034"/>
 </kw>
 <doc>باز  کردن صفحه پذیرش بستری</doc>
-<tag>STEP_01_Open_Browser</tag>
+<tag>inpatient</tag>
+<tag>Open_Browser</tag>
+<tag>step13</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2025-12-25T14:07:57.729438" elapsed="5.439504"/>
+<status status="PASS" start="2026-02-05T01:25:49.952875" elapsed="5.141024"/>
 </test>
-<test id="s1-s1-t2" name="9-UI-Enter national code of patiant" line="385">
+<test id="s1-t2" name="14- Enter national code of inpatient" line="406">
+<kw name="Disable Screenshots">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:25:55.097569" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-05T01:25:55.097258" elapsed="0.000444"/>
+</kw>
+<status status="PASS" start="2026-02-05T01:25:55.096698" elapsed="0.001264"/>
+</kw>
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.638476" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.640849" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
+<msg time="2026-02-05T01:25:58.113728" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-25T14:08:03.175166" elapsed="2.475346">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="FAIL" start="2026-02-05T01:25:55.100251" elapsed="3.014943">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-25T14:08:03.174298" elapsed="2.476402"/>
+<status status="PASS" start="2026-02-05T01:25:55.099403" elapsed="3.015948"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.653840" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.654843" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.650914" elapsed="0.008670">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:25:58.115527" elapsed="0.007691"/>
 </kw>
-<status status="FAIL" start="2025-12-25T14:08:03.172628" elapsed="2.487377">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:25:55.098660" elapsed="3.024687"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>//input[@formcontrolname='nationalCode']</arg>
 <arg>10s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.660480" elapsed="0.000057"/>
+<status status="PASS" start="2026-02-05T01:25:58.123677" elapsed="0.031632"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>//input[@formcontrolname='nationalCode']</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.660885" elapsed="0.000042"/>
+<status status="PASS" start="2026-02-05T01:25:58.156402" elapsed="0.111881"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:25:58.268997" level="INFO">Typing text '1520554001' into text field '//input[@formcontrolname='nationalCode']'.</msg>
 <arg>//input[@formcontrolname='nationalCode']</arg>
 <arg>${nationalCode}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.661247" elapsed="0.000061"/>
+<status status="PASS" start="2026-02-05T01:25:58.268654" elapsed="0.250371"/>
 </kw>
 <kw name="Click Element Safe">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:25:58.522702" elapsed="1.885777"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:25:58.522249" elapsed="1.886341"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:00.408733" elapsed="0.018572"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-05T01:26:00.427475" elapsed="0.021187"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-05T01:26:00.448830" elapsed="0.269247"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:00.719515" level="INFO">Clicking element 'id=button-addon3'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:00.718655" elapsed="0.148617"/>
+</kw>
 <arg>id=button-addon3</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.661679" elapsed="0.000065"/>
+<status status="PASS" start="2026-02-05T01:25:58.521519" elapsed="2.345870"/>
 </kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.662163" elapsed="0.000080"/>
-</kw>
-<doc>وارد کردن کد ملی بیمار و استعلام کد ملی</doc>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:03.170531" elapsed="2.492178">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</test>
-<test id="s1-s1-t3" name="14-UI - Fill Filing Form (Patient Info)" line="562">
 <kw name="Wait For Page Ready">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.670435" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.671279" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
+<msg time="2026-02-05T01:26:03.931161" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.665551" elapsed="0.008569">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="FAIL" start="2026-02-05T01:26:00.869001" elapsed="3.068456">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-25T14:08:05.665336" elapsed="0.008963"/>
+<status status="PASS" start="2026-02-05T01:26:00.868136" elapsed="3.069814"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.679560" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.680352" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.674647" elapsed="0.009222">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:03.938692" elapsed="0.024673"/>
 </kw>
-<status status="FAIL" start="2025-12-25T14:08:05.664938" elapsed="0.019233">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:00.867720" elapsed="3.096070"/>
+</kw>
+<doc>وارد کردن کد ملی بیمار و استعلام کد ملی</doc>
+<tag>inpatient</tag>
+<tag>step14</tag>
+<tag>UI_Test</tag>
+<status status="PASS" start="2026-02-05T01:25:55.095436" elapsed="8.868972"/>
+</test>
+<test id="s1-t3" name="15-UI - Fill inpatient Info" line="418">
+<kw name="Disable Screenshots">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:03.968138" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-05T01:26:03.967859" elapsed="0.000400"/>
+</kw>
+<status status="PASS" start="2026-02-05T01:26:03.967332" elapsed="0.001093"/>
+</kw>
+<kw name="Wait For Page Ready">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:07.094344" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-05T01:26:03.970741" elapsed="3.125649">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-05T01:26:03.969566" elapsed="3.127031"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:07.096862" elapsed="0.019507"/>
+</kw>
+<status status="PASS" start="2026-02-05T01:26:03.969041" elapsed="3.147529"/>
 </kw>
 <kw name="Select From Ng Select">
-<arg>maritalStatus</arg>
-<arg>مجرد</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.684666" elapsed="0.000045"/>
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:07.118699" elapsed="4.727042"/>
 </kw>
-<kw name="Select From Ng Select">
-<arg>insurRelation</arg>
-<arg>خود فرد</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.685116" elapsed="0.000035"/>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:07.118242" elapsed="4.727683"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:11.846161" elapsed="0.024004"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:11.870601" level="INFO">Clicking element 'css=ng-select[formcontrolname='maritalStatus']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:11.870342" elapsed="0.110282"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:11.980883" elapsed="0.033313"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:12.014976" level="INFO">Typing text 'مجرد' into text field 'css=ng-select[formcontrolname='maritalStatus'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.014494" elapsed="0.123635"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.138421" elapsed="0.069627"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:12.208452" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'مجرد')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.208220" elapsed="0.067443"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:12.277859" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='maritalStatus'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:12.602244" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:12.602339" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.275978" elapsed="0.346615"/>
+</kw>
+<arg>maritalStatus</arg>
+<arg>مجرد</arg>
+<status status="PASS" start="2026-02-05T01:26:07.117312" elapsed="5.505439"/>
+</kw>
+<kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.624236" elapsed="0.030873"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:12.623820" elapsed="0.031530"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.655569" elapsed="0.032867"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:12.691521" level="INFO">Clicking element 'css=ng-select[formcontrolname='insurRelation']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.690846" elapsed="0.092208"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.783226" elapsed="0.020862"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:12.804510" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='insurRelation'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.804256" elapsed="0.109789"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.914394" elapsed="0.017486"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:12.932285" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.932051" elapsed="0.067278"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:12.999913" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='insurRelation'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:13.335462" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:13.335647" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:12.999502" elapsed="0.383212"/>
+</kw>
+<arg>insurRelation</arg>
+<arg>خود فرد</arg>
+<status status="PASS" start="2026-02-05T01:26:12.623260" elapsed="0.759575"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:13.383486" level="INFO">Typing text '09383509316' into text field '//input[@formcontrolname='mobileNumber']'.</msg>
 <arg>//input[@formcontrolname='mobileNumber']</arg>
 <arg>09383509316</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.685552" elapsed="0.000059"/>
+<status status="PASS" start="2026-02-05T01:26:13.383175" elapsed="0.205684"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:13.590179" level="INFO">Typing text 'dfgdfgdfgd' into text field '//input[@formcontrolname='address']'.</msg>
 <arg>//input[@formcontrolname='address']</arg>
 <arg>dfgdfgdfgd</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.686052" elapsed="0.000033"/>
+<status status="PASS" start="2026-02-05T01:26:13.589831" elapsed="0.183506"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:13.774413" level="INFO">Typing text 'مهرشاد شیخ الاسلامی' into text field '//input[@formcontrolname='accompanyfullName']'.</msg>
 <arg>//input[@formcontrolname='accompanyfullName']</arg>
 <arg>مهرشاد شیخ الاسلامی</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.686247" elapsed="0.000026"/>
+<status status="PASS" start="2026-02-05T01:26:13.774038" elapsed="0.214446"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:13.989820" level="INFO">Typing text '09383586316' into text field '//input[@formcontrolname='accompanyMobileNumber']'.</msg>
 <arg>//input[@formcontrolname='accompanyMobileNumber']</arg>
 <arg>09383586316</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.686493" elapsed="0.000029"/>
+<status status="PASS" start="2026-02-05T01:26:13.989503" elapsed="0.167662"/>
 </kw>
 <kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.158122" elapsed="0.007772"/>
+</kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.686813" elapsed="0.000031"/>
+<status status="PASS" start="2026-02-05T01:26:14.157660" elapsed="0.008419"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=button-addon2</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.687147" elapsed="0.000067"/>
+<status status="PASS" start="2026-02-05T01:26:14.166904" elapsed="0.034101"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:14.201621" level="INFO">Clicking element 'id=button-addon2'.</msg>
 <arg>id=button-addon2</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.687776" elapsed="0.000038"/>
+<status status="PASS" start="2026-02-05T01:26:14.201330" elapsed="0.073684"/>
 </kw>
 <kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.276000" elapsed="0.011405"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:14.275790" elapsed="0.012007"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.288101" elapsed="0.016752"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:14.305271" level="INFO">Clicking element 'css=ng-select[formcontrolname='patientClass']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.305038" elapsed="0.070156"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.375844" elapsed="0.025411"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:14.401867" level="INFO">Typing text 'بستری' into text field 'css=ng-select[formcontrolname='patientClass'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.401494" elapsed="0.089847"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.491644" elapsed="0.048718"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:14.540784" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'بستری')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.540524" elapsed="0.064952"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:14.606509" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='patientClass'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:14.911173" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:14.911407" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.605760" elapsed="0.339563"/>
+</kw>
+<arg>patientClass</arg>
+<arg>بستری</arg>
+<status status="PASS" start="2026-02-05T01:26:14.275429" elapsed="0.670073"/>
+</kw>
+<kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.947116" elapsed="0.028766"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:14.946707" elapsed="0.029359"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:14.976276" elapsed="0.025894"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:15.002782" level="INFO">Clicking element 'css=ng-select[formcontrolname='firstRecognition']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.002425" elapsed="0.083544"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.086182" elapsed="0.018431"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:15.105128" level="INFO">Typing text 'شکستگی' into text field 'css=ng-select[formcontrolname='firstRecognition'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.104807" elapsed="0.293168"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.398410" elapsed="0.025318"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:15.424127" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'شکستگی')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.423895" elapsed="0.079253"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:15.503734" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='firstRecognition'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:15.802954" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:15.803038" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.503325" elapsed="0.313591"/>
+</kw>
 <arg>firstRecognition</arg>
 <arg>شکستگی</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.688116" elapsed="0.000046"/>
+<status status="PASS" start="2026-02-05T01:26:14.946118" elapsed="0.870999"/>
 </kw>
 <kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.818509" elapsed="0.008828"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:15.818151" elapsed="0.009352"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.827709" elapsed="0.023890"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:15.852009" level="INFO">Clicking element 'css=ng-select[formcontrolname='howToRefer']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.851763" elapsed="0.083187"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.935128" elapsed="0.025525"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:15.961132" level="INFO">Typing text 'وسیله شخصی' into text field 'css=ng-select[formcontrolname='howToRefer'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:15.960815" elapsed="0.136625"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.097757" elapsed="0.018945"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:16.117128" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'وسیله شخصی')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.116878" elapsed="0.065523"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:16.182985" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='howToRefer'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:16.501271" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:16.501531" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.182577" elapsed="0.369543"/>
+</kw>
 <arg>howToRefer</arg>
 <arg>وسیله شخصی</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.688561" elapsed="0.000047"/>
+<status status="PASS" start="2026-02-05T01:26:15.817643" elapsed="0.734653"/>
 </kw>
 <kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.556012" elapsed="0.013949"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:16.555589" elapsed="0.014576"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.570390" elapsed="0.028142"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:16.598919" level="INFO">Clicking element 'css=ng-select[formcontrolname='causeOfHospitalization']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.598693" elapsed="0.081376"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.680336" elapsed="0.027617"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:16.708473" level="INFO">Typing text 'دل درد' into text field 'css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.708144" elapsed="0.090878"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.799268" elapsed="0.019405"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:16.819071" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'دل درد')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.818841" elapsed="0.061454"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:16.880830" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:17.208766" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:17.209005" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:16.880461" elapsed="0.353356"/>
+</kw>
 <arg>causeOfHospitalization</arg>
 <arg>دل درد</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.688869" elapsed="0.000032"/>
+<status status="PASS" start="2026-02-05T01:26:16.554114" elapsed="0.679892"/>
 </kw>
 <doc>پر کردن اطلاعات مورد نیاز بیمار</doc>
+<tag>inpatient</tag>
+<tag>step15</tag>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.664223" elapsed="0.025495">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:03.966211" elapsed="13.268239"/>
 </test>
-<test id="s1-s1-t4" name="15-UI - Assign Ward And Doctor And Prepayment" line="585">
-<kw name="Wait For Page Ready">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.696720" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.697802" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.692274" elapsed="0.008162">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<test id="s1-t4" name="16-UI - Assign Ward And Doctor" line="441">
+<kw name="Disable Screenshots">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:17.237894" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.237679" elapsed="0.000441"/>
 </kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-25T14:08:05.692006" elapsed="0.008574"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.704593" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.705623" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.700778" elapsed="0.007090">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<status status="FAIL" start="2025-12-25T14:08:05.691354" elapsed="0.016718">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:17.237260" elapsed="0.001048"/>
 </kw>
 <kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.244013" elapsed="0.014677"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:17.243592" elapsed="0.015280"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.259286" elapsed="0.026977"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:17.286817" level="INFO">Clicking element 'css=ng-select[formcontrolname='wardfileld']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.286494" elapsed="0.061881"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.348544" elapsed="0.014139"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:17.363111" level="INFO">Typing text 'اطفال 2 - تخت خالی (33)' into text field 'css=ng-select[formcontrolname='wardfileld'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.362849" elapsed="0.162517"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.525685" elapsed="0.016971"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:17.543061" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اطفال 2 - تخت خالی (33)')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.542826" elapsed="0.063285"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:17.606736" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='wardfileld'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:17.934666" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:17.934806" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.606295" elapsed="0.366156"/>
+</kw>
 <arg>wardfileld</arg>
 <arg>اطفال 2 - تخت خالی (33)</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.708806" elapsed="0.000108"/>
+<status status="PASS" start="2026-02-05T01:26:17.242265" elapsed="0.730368"/>
 </kw>
 <kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:17.974029" elapsed="3.060469"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:17.973762" elapsed="3.061206"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.035503" elapsed="0.031949"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:21.068230" level="INFO">Clicking element 'css=ng-select[formcontrolname='bedNum']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.067866" elapsed="0.072406"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.140443" elapsed="0.022017"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:21.163183" level="INFO">Typing text 'اتاق1 - تخت عمومي - تخت18' into text field 'css=ng-select[formcontrolname='bedNum'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.162729" elapsed="0.199683"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.362597" elapsed="0.017796"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:21.380840" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اتاق1 - تخت عمومي - تخت18')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.380572" elapsed="0.051704"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:21.432862" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='bedNum'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:21.753188" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:21.753397" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.432460" elapsed="0.347054"/>
+</kw>
+<arg>bedNum</arg>
+<arg>اتاق1 - تخت عمومي - تخت18</arg>
+<status status="PASS" start="2026-02-05T01:26:17.973309" elapsed="3.806360"/>
+</kw>
+<kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.782659" elapsed="0.029058"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:21.782253" elapsed="0.029572"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.811959" elapsed="0.023005"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:21.835380" level="INFO">Clicking element 'css=ng-select[formcontrolname='doctorField']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.835130" elapsed="0.103515"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.938820" elapsed="0.022283"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:21.961798" level="INFO">Typing text 'Siavash Siavash' into text field 'css=ng-select[formcontrolname='doctorField'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:21.961339" elapsed="0.127459"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.088966" elapsed="0.015328"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:22.104695" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'Siavash Siavash')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.104470" elapsed="0.050198"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:22.155237" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='doctorField'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:22.498213" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:22.498375" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.154841" elapsed="0.376917"/>
+</kw>
 <arg>doctorField</arg>
 <arg>Siavash Siavash</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.709625" elapsed="0.000090"/>
+<status status="PASS" start="2026-02-05T01:26:21.781576" elapsed="0.750379"/>
 </kw>
 <kw name="Select From Ng Select">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.534609" elapsed="0.009534"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:22.533884" elapsed="0.010641"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.546812" elapsed="0.021752"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:22.568953" level="INFO">Clicking element 'css=ng-select[formcontrolname='responsiblePatient']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.568727" elapsed="0.056105"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.625038" elapsed="0.013827"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:22.639300" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='responsiblePatient'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.639036" elapsed="0.084026"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.723278" elapsed="0.013212"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:22.737379" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.736892" elapsed="0.050618"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:22.788050" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='responsiblePatient'] input[type='text'] element.</msg>
+<msg time="2026-02-05T01:26:23.091465" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-05T01:26:23.091591" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-05T01:26:22.787678" elapsed="0.341669"/>
+</kw>
 <arg>responsiblePatient</arg>
 <arg>خود فرد</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.710352" elapsed="0.000092"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='prepayment']</arg>
-<arg>10000</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.711003" elapsed="0.000075"/>
+<status status="PASS" start="2026-02-05T01:26:22.533242" elapsed="0.596276"/>
 </kw>
 <doc>انتخاب بخش و پزشک بیمار preadmit</doc>
+<tag>inpatient</tag>
+<tag>step16</tag>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.690706" elapsed="0.020908">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:17.236170" elapsed="5.896995"/>
 </test>
-<test id="s1-s1-t5" name="18-UI - Save Admission Filing" line="704">
+<test id="s1-t5" name="17-UI - Save Admission Filing" line="454">
 <kw name="Click Element Safe">
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.716149" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.716682" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.713655" elapsed="0.004996">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:23.136567" elapsed="0.011477"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.713477" elapsed="0.005373">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:23.136171" elapsed="0.012017"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.719049" elapsed="0.000059"/>
+<status status="PASS" start="2026-02-05T01:26:23.148337" elapsed="0.033970"/>
 </kw>
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.719283" elapsed="0.000043"/>
+<status status="PASS" start="2026-02-05T01:26:23.183064" elapsed="0.020893"/>
 </kw>
 <kw name="Scroll Element Into View" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.719451" elapsed="0.000036"/>
+<status status="PASS" start="2026-02-05T01:26:23.204128" elapsed="0.305283"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:23.510371" level="INFO">Clicking element 'css=button.btn-saveFile'.</msg>
 <arg>${locator}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.719613" elapsed="0.000032"/>
+<status status="PASS" start="2026-02-05T01:26:23.509912" elapsed="0.107165"/>
 </kw>
 <arg>css=button.btn-saveFile</arg>
-<status status="FAIL" start="2025-12-25T14:08:05.713184" elapsed="0.006613">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:23.135657" elapsed="0.481541"/>
+</kw>
+<kw name="Click Element Safe">
+<kw name="Wait For Spinner Hidden">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:23.618444" elapsed="0.026654"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-05T01:26:23.618162" elapsed="0.027079"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:23.645414" elapsed="0.027885"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-05T01:26:23.673498" elapsed="0.035840"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-05T01:26:23.709501" elapsed="0.308442"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:24.019292" level="INFO">Clicking element 'css=button.swal2-confirm.swal2-styled'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-05T01:26:24.018585" elapsed="0.096721"/>
+</kw>
+<arg>css=button.swal2-confirm.swal2-styled</arg>
+<status status="PASS" start="2026-02-05T01:26:23.617723" elapsed="0.497708"/>
 </kw>
 <kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.720185" elapsed="0.000045"/>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:27.188533" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-05T01:26:24.116543" elapsed="3.075930">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-05T01:26:24.116212" elapsed="3.076575"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-05T01:26:27.193028" elapsed="0.008555"/>
+</kw>
+<status status="PASS" start="2026-02-05T01:26:24.115823" elapsed="3.085881"/>
 </kw>
 <doc>سیو کردن پذیرش preadmit</doc>
+<tag>inpatient</tag>
+<tag>step17</tag>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.712570" elapsed="0.007866">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:23.134698" elapsed="4.067335"/>
 </test>
-<test id="s1-s1-t6" name="21-UI - deny admit print page" line="808">
+<test id="s1-t6" name="18-UI - deny admit print page" line="462">
 <kw name="Click Element Safe">
 <kw name="Wait For Spinner Hidden">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.726393" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.728015" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
+<msg time="2026-02-05T01:26:45.677281" level="INFO">Suppressing StaleElementReferenceException from Selenium.</msg>
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.722520" elapsed="0.008819">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:27.203922" elapsed="18.680388"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.722318" elapsed="0.009278">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:27.203702" elapsed="18.680871"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.731733" elapsed="0.000031"/>
+<status status="PASS" start="2026-02-05T01:26:45.884840" elapsed="0.023915"/>
 </kw>
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.731839" elapsed="0.000020"/>
+<status status="PASS" start="2026-02-05T01:26:45.909022" elapsed="0.028667"/>
 </kw>
 <kw name="Scroll Element Into View" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.731923" elapsed="0.000019"/>
+<status status="PASS" start="2026-02-05T01:26:45.937941" elapsed="0.273525"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-05T01:26:46.212845" level="INFO">Clicking element 'css=button.swal2-deny.swal2-styled'.</msg>
 <arg>${locator}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.732036" elapsed="0.000019"/>
+<status status="PASS" start="2026-02-05T01:26:46.212062" elapsed="0.219548"/>
 </kw>
 <arg>css=button.swal2-deny.swal2-styled</arg>
-<status status="FAIL" start="2025-12-25T14:08:05.722025" elapsed="0.010161">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:27.203397" elapsed="19.228489"/>
 </kw>
 <doc>لغو پرینت برگه پذیرش</doc>
+<tag>inpatient</tag>
+<tag>step18</tag>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.721400" elapsed="0.011150">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
+<status status="PASS" start="2026-02-05T01:26:27.202824" elapsed="19.230607"/>
 </test>
-<test id="s1-s1-t7" name="21-UI - Open Cash Web And Pay" line="814">
-<kw name="Cash Pay Patient By National Code">
-<kw name="Wait For Page Ready">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.736842" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.737328" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.734428" elapsed="0.004982">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-25T14:08:05.734313" elapsed="0.005211"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.743753" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.744930" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.739668" elapsed="0.007119">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<status status="FAIL" start="2025-12-25T14:08:05.734117" elapsed="0.012898">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<kw name="Switch To Cash App">
-<status status="NOT RUN" start="2025-12-25T14:08:05.747197" elapsed="0.000036"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.747333" elapsed="0.000021"/>
-</kw>
-<kw name="Wait For Spinner Hidden">
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.747433" elapsed="0.000021"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>xpath=//input[@formcontrolname='nationalCode']</arg>
-<arg>${nationalCode}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.747542" elapsed="0.000020"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.747643" elapsed="0.000020"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//button[contains(@class,'btn-warning') and .//mat-icon[.='search']]</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.747738" elapsed="0.000032"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.747838" elapsed="0.000018"/>
-</kw>
-<kw name="Wait For Spinner Hidden">
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.747918" elapsed="0.000017"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<var>${row_xpath}</var>
-<arg>//tr[.//td[contains(normalize-space(), '${nationalCode}')]]</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.748005" elapsed="0.000019"/>
-</kw>
-<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
-<arg>3x</arg>
-<arg>5s</arg>
-<arg>Element Should Be Visible</arg>
-<arg>${row_xpath}</arg>
-<doc>Runs the specified keyword and retries if it fails.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.748125" elapsed="0.000019"/>
-</kw>
-<kw name="Double Click Element" owner="SeleniumLibrary">
-<arg>${row_xpath}</arg>
-<doc>Double clicks the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.748212" elapsed="0.000019"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//button[normalize-space(text())='پرداخت']</arg>
-<arg>30s</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.748316" elapsed="0.000020"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//button[normalize-space(text())='پرداخت']</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.748434" elapsed="0.000022"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.748540" elapsed="0.000020"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.748657" elapsed="0.000026"/>
-</kw>
-<arg>${nationalCode}</arg>
-<doc>Open Cash App, search patient by national code and complete payment flow</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.733823" elapsed="0.014971">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.733343" elapsed="0.015797">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</test>
-<test id="s1-s1-t8" name="22-UI - go to inpatient list" line="820">
-<kw name="Wait For Page Ready">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.753480" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.753964" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.750774" elapsed="0.005204">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-25T14:08:05.750637" elapsed="0.005447"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.759981" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.760831" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.756211" elapsed="0.007590">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<status status="FAIL" start="2025-12-25T14:08:05.750375" elapsed="0.013668">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<kw name="Switch To AdmitHis App">
-<status status="NOT RUN" start="2025-12-25T14:08:05.764376" elapsed="0.000041"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.764651" elapsed="0.000029"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.764840" elapsed="0.000025"/>
-</kw>
-<doc>رفتن به لیست بیماران بستری</doc>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.749849" elapsed="0.015196">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</test>
-<test id="s1-s1-t9" name="25-UI - Load Preadmit Patient List" line="916">
-<kw name="Wait For Page Ready">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.769562" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.770218" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.766667" elapsed="0.005133">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-25T14:08:05.766530" elapsed="0.005370"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.773858" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.774493" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.772011" elapsed="0.005303">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<status status="FAIL" start="2025-12-25T14:08:05.766240" elapsed="0.011487">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//span[contains(@class,'mat-checkbox-inner-container')]</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.778589" elapsed="0.000065"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.778909" elapsed="0.000032"/>
-</kw>
-<doc>لیست بیماران preadmit</doc>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.765653" elapsed="0.013572">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</test>
-<test id="s1-s1-t10" name="27-UI - Edit Preadmit Patient" line="1011">
-<kw name="Wait For Page Ready">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.782844" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.783397" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.780785" elapsed="0.004352">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-12-25T14:08:05.780654" elapsed="0.004585"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.787550" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.788095" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.785394" elapsed="0.004332">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<status status="FAIL" start="2025-12-25T14:08:05.780394" elapsed="0.009670">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='nationalCode']</arg>
-<arg>${nationalCode}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:05.790456" elapsed="0.000079"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.790918" elapsed="0.000070"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.791484" elapsed="0.000076"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>css=button.mat-tooltip-trigger.btn-action.ng-star-inserted</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.792349" elapsed="0.000075"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.792751" elapsed="0.000047"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>css=button.mat-tooltip-trigger.btn.btn-edit1</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.793110" elapsed="0.000065"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.793450" elapsed="0.000046"/>
-</kw>
-<kw name="Select From Ng Select">
-<arg>wardfileld</arg>
-<arg>اطفال 2 - تخت خالی (33)</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.793782" elapsed="0.000041"/>
-</kw>
-<kw name="Select From Ng Select">
-<arg>doctorField</arg>
-<arg>Siavash Siavash</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.794262" elapsed="0.000029"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.794465" elapsed="0.000027"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>css=button.btn-saveFile</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.794649" elapsed="0.000027"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.794817" elapsed="0.000026"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>css=button.swal2-deny.swal2-styled</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.794994" elapsed="0.000025"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.795214" elapsed="0.000027"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//span[contains(@class,'mat-checkbox-inner-container')]</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.795387" elapsed="0.000023"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.795538" elapsed="0.000022"/>
-</kw>
-<doc>ویرایش بیمار preadmit</doc>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.779976" elapsed="0.015844">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</test>
-<test id="s1-s1-t11" name="29-UI - Cancel Preadmit" line="1233">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.797339" level="INFO">Typing text '1520554001' into text field 'xpath=//input[@formcontrolname='nationalCode']'.</msg>
-<msg time="2025-12-25T14:08:05.799423" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.800207" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<arg>xpath=//input[@formcontrolname='nationalCode']</arg>
-<arg>${nationalCode}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.797044" elapsed="0.005027">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<kw name="Click Element Safe">
-<arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.802387" elapsed="0.000038"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.802636" elapsed="0.000030"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//button[not(@hidden) and .//mat-icon[normalize-space(.)='cancel']]</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.802824" elapsed="0.000028"/>
-</kw>
-<kw name="Wait For Page Ready">
-<status status="NOT RUN" start="2025-12-25T14:08:05.803011" elapsed="0.000024"/>
-</kw>
-<kw name="Click Element Safe">
-<arg>xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']</arg>
-<status status="NOT RUN" start="2025-12-25T14:08:05.803176" elapsed="0.000024"/>
-</kw>
-<doc>لغو پذیرش preadmit</doc>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.796563" elapsed="0.006818">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</test>
-<status status="FAIL" start="2025-12-25T14:07:57.236614" elapsed="8.567884"/>
-</suite>
-<suite id="s1-s2" name="AdmitRis" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitRis.robot">
-<kw name="Create AdmitRis Session" type="SETUP">
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-12-25T14:08:05.814943" level="INFO">Creating Session using : alias=RIS, url=http://192.168.5.19:8023, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>RIS</arg>
-<arg>${AdmitRis_Api_URL}</arg>
-<arg>verify=${False}</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-12-25T14:08:05.814630" elapsed="0.000534"/>
-</kw>
-<status status="PASS" start="2025-12-25T14:08:05.814377" elapsed="0.000898"/>
-</kw>
-<test id="s1-s2-t1" name="1-UI-Open Filing Page" line="182">
-<kw name="Start Browser AdmitRis With Token">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:05.816972" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8024/admit'.</msg>
-<arg>${AdmitRis_App_URL}</arg>
-<arg>chrome</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-12-25T14:08:05.816621" elapsed="3.017475"/>
-</kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<msg time="2025-12-25T14:08:08.838744" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:08.840002" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<doc>Maximizes current browser window.</doc>
-<status status="FAIL" start="2025-12-25T14:08:08.834495" elapsed="0.008358">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<kw name="Add Cookie" owner="SeleniumLibrary">
-<arg>token</arg>
-<arg>${COOKIE_TOKEN}</arg>
-<doc>Adds a cookie to your current session.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:08.843286" elapsed="0.000062"/>
-</kw>
-<kw name="Reload Page" owner="SeleniumLibrary">
-<doc>Simulates user reloading page.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:08.843544" elapsed="0.000051"/>
-</kw>
-<doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="FAIL" start="2025-12-25T14:08:05.816109" elapsed="3.027900">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</kw>
-<kw name="Go To AdmitRis Page">
-<doc>رفتن مستقیم به صفحه پذیرش طب تصویری</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:08.844911" elapsed="0.000102"/>
-</kw>
-<kw name="Wait For Spinner Hidden">
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:08.845497" elapsed="0.000048"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>---- DONE ----</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="NOT RUN" start="2025-12-25T14:08:08.846021" elapsed="0.000082"/>
-</kw>
-<doc>باز  کردن صفحه پذیرش طب تصویری</doc>
-<tag>STEP_01_Open_Browser</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2025-12-25T14:08:05.815363" elapsed="3.031225">NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</status>
-</test>
-<status status="FAIL" start="2025-12-25T14:08:05.805464" elapsed="3.043416"/>
-</suite>
-<status status="FAIL" start="2025-12-25T14:07:57.209212" elapsed="11.641281"/>
+<status status="PASS" start="2026-02-05T01:25:49.664608" elapsed="56.771933"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="11" skip="0">All Tests</stat>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="1" skip="0">STEP_01_Open_Browser</stat>
-<stat pass="1" fail="11" skip="0">UI_Test</stat>
+<stat pass="6" fail="0" skip="0">inpatient</stat>
+<stat pass="1" fail="0" skip="0">Open_Browser</stat>
+<stat pass="1" fail="0" skip="0">step13</stat>
+<stat pass="1" fail="0" skip="0">step14</stat>
+<stat pass="1" fail="0" skip="0">step15</stat>
+<stat pass="1" fail="0" skip="0">step16</stat>
+<stat pass="1" fail="0" skip="0">step17</stat>
+<stat pass="1" fail="0" skip="0">step18</stat>
+<stat pass="6" fail="0" skip="0">UI_Test</stat>
 </tag>
 <suite>
-<stat name="AdmitHis-Test" id="s1" pass="1" fail="11" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis" id="s1-s1" pass="1" fail="10" skip="0">AdmitHis-Test.AdmitHis</stat>
-<stat name="AdmitRis" id="s1-s2" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitRis</stat>
+<stat name="AdmitHis" id="s1" pass="6" fail="0" skip="0">AdmitHis</stat>
 </suite>
 </statistics>
 <errors>
-<msg time="2025-12-25T14:07:57.726111" level="ERROR">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis.robot' on line 6: Initializing library 'SeleniumLibrary' with arguments [ screenshot_on_failure=False ] failed: ValueError: Invalid time string 'screenshot_on_failure=False'.
-Traceback (most recent call last):
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\__init__.py", line 631, in __init__
-    self.timeout = _convert_timeout(timeout)
-                   ~~~~~~~~~~~~~~~~^^^^^^^^^
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\utils\types.py", line 42, in _convert_timeout
-    return timestr_to_secs(timeout)
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\robot\utils\robottime.py", line 58, in timestr_to_secs
-    raise ValueError(f"Invalid time string '{timestr}'.")
-ValueError: Invalid time string 'screenshot_on_failure=False'.</msg>
-<msg time="2025-12-25T14:08:05.638476" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.653840" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.670435" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.679560" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.696720" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.704593" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.716149" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.726393" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.736842" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.743753" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.753480" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.759981" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.769562" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.773858" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.782844" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.787550" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.799423" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
-<msg time="2025-12-25T14:08:05.812808" level="ERROR">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitRis.robot' on line 6: Initializing library 'SeleniumLibrary' with arguments [ screenshot_on_failure=False ] failed: ValueError: Invalid time string 'screenshot_on_failure=False'.
-Traceback (most recent call last):
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\__init__.py", line 631, in __init__
-    self.timeout = _convert_timeout(timeout)
-                   ~~~~~~~~~~~~~~~~^^^^^^^^^
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\utils\types.py", line 42, in _convert_timeout
-    return timestr_to_secs(timeout)
-  File "D:\Payvand\Projects\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\robot\utils\robottime.py", line 58, in timestr_to_secs
-    raise ValueError(f"Invalid time string '{timestr}'.")
-ValueError: Invalid time string 'screenshot_on_failure=False'.</msg>
-<msg time="2025-12-25T14:08:08.838744" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=143.0.7499.169)
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff7a21388e5
-	0x7ff7a2138940
-	0x7ff7a1f1165d
-	0x7ff7a1ee91b1
-	0x7ff7a1f997e6
-	0x7ff7a1fba5c2
-	0x7ff7a1f5ac29
-	0x7ff7a1f5ba93
-	0x7ff7a2450640
-	0x7ff7a244af80
-	0x7ff7a24696e6
-	0x7ff7a2155de4
-	0x7ff7a215ed8c
-	0x7ff7a2142004
-	0x7ff7a21421b5
-	0x7ff7a2127ee2
-	0x7ff91140e8d7
-	0x7ff912ecc53c
-</msg>
 </errors>
 </robot>
