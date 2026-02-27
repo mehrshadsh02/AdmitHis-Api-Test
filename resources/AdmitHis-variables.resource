@@ -26,6 +26,4 @@ ${fatherName}   مهرداد
 
 ${FileFormationID}  683676 
 
-${Admit_ID}   
-
-${BED_ID} 
+${STATE_FILE}    ${CURDIR}/state/runtime_state.json

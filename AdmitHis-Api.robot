@@ -5,6 +5,7 @@ Library           OperatingSystem
 Library           SeleniumLibrary
 Resource          ../resources/AdmitHis-variables.resource
 Resource          ../keywords/AdmitHis-keywords.resource
+Resource          ../state/runtime_state.json
 
 
 Suite Setup       Create AdmitHIS Session
@@ -204,7 +205,12 @@ Suite Setup       Create AdmitHIS Session
     Should Not Be Equal    ${EMPTY_BED_ID}    ${None}
 
     # ✅ ذخیره برای تست‌های بعدی
-    Set Suite Variable    ${BED_ID}    ${EMPTY_BED_ID}
+    # Set Suite Variable    ${BED_ID}    ${EMPTY_BED_ID}
+
+    ${bed_id}=    Get Empty Bed From API
+    Write State    BED_ID    ${bed_id}
+    Log To Console    ✅ BED_ID saved: ${bed_id}
+
 
 07-Admit Configuration
     [Documentation]    AdmitHis config
@@ -653,7 +659,7 @@ Suite Setup       Create AdmitHIS Session
     ...    dateTo=2026/02/27
     ...    status=0
 
-     ${resp}=    POST On Session
+    ${resp}=    POST On Session
     ...    HIS
     ...    url=/api/Patient/SearchPreAdmits
     ...    headers=&{headers}
@@ -686,8 +692,12 @@ Suite Setup       Create AdmitHIS Session
         END
     END  
     
-    Should Not Be Equal    ${FOUND_ADMIT_ID}    ${None}
-    Set Suite Variable    ${ADMIT_ID}    ${FOUND_ADMIT_ID}
+    # Should Not Be Equal    ${FOUND_ADMIT_ID}    ${None}
+    # Set Suite Variable    ${ADMIT_ID}    ${FOUND_ADMIT_ID}
+
+    ${admit_id}=    Get PreAdmit Id From API    ${national_code}
+    Write State    ADMIT_ID    ${admit_id}
+    Log To Console    ✅ ADMIT_ID saved: ${admit_id}
 
 18-Edit Filing PreAdmit
     [Documentation]  ویرایش Filing بیمار و اعتبارسنجی پاسخ
@@ -908,6 +918,11 @@ Suite Setup       Create AdmitHIS Session
 20-Change To Admit
     [Documentation]  تبدیل preadmit به بستری
     [Tags]    API_Filing    METHOD_POST  priadmit 
+
+    ${ADMIT_ID}=    Read State    ADMIT_ID
+    ${BED_ID}=      Read State    BED_ID
+
+    Log To Console    🚑 Using ADMIT_ID=${ADMIT_ID}, BED_ID=${BED_ID}
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
