@@ -3,180 +3,12 @@ Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
 Library           SeleniumLibrary
-Library           SeleniumLibrary    screenshot_on_failure=False
+Resource          ../resources/AdmitHis-variables.resource
+Resource          ../keywords/AdmitHis-keywords.resource
 
 
 Suite Setup       Create AdmitHIS Session
-
-*** Variables ***
-${AdmitHis_Api_URL}       http://192.168.5.19:1600
-
-${AdmitHis_App_URL}       http://192.168.5.19:8019/filing
-
-${Cash_App_URL}       http://192.168.5.19:8075/admit
-
-${BROWSER}        chrome
-
-${CHROME_DRIVER}    C:/chromedriver.exe
-
-${AUTH_BEARER}    bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjU4NmM4ZTIyLTNjMmEtNGZlYi05ZjUwLWMwNzk4ZGFlNDk5MyIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJCLzJxS1BFUUNYTXBaZjF3ay9GUGZZeGlWRWVNUEdqM3JMSVB4TTMyR3lJVXJJV3dZWUxkQnd0R29pZ25ENGpmNEQwa1RLa3U0WjZMcm9zWXh1dHZ3UnM0bDRER1pKNjJueS9MZkpGYjNqU2hFc2oxR3l0R081cDlHemkwZEF5SSIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc3MDI2MjY0NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.5yu1hH5l8qWWrG-sO3xPdv2aPsVmqbg9sDI2DIBH840
-
-${COOKIE_TOKEN}   eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsImtpZCI6IjU4NmM4ZTIyLTNjMmEtNGZlYi05ZjUwLWMwNzk4ZGFlNDk5MyIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiQ2l0eUlkIjowLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJCLzJxS1BFUUNYTXBaZjF3ay9GUGZZeGlWRWVNUEdqM3JMSVB4TTMyR3lJVXJJV3dZWUxkQnd0R29pZ25ENGpmNEQwa1RLa3U0WjZMcm9zWXh1dHZ3UnM0bDRER1pKNjJueS9MZkpGYjNqU2hFc2oxR3l0R081cDlHemkwZEF5SSIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMjQwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc3MDI2MjY0NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.5yu1hH5l8qWWrG-sO3xPdv2aPsVmqbg9sDI2DIBH840
-
-${GLOBAL_SPINNER}     css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop
-
-${nationalCode}    1520554001
-
-${firstName}    مهرشاد
-
-${lastName}     شیخ الاسلامی    
-
-${fatherName}   مهرداد
-
-${FileFormationID}  683676 
-
-${Admit_ID}    356115
-
-
-
-*** Keywords ***
-
-Create AdmitHIS Session
-    Create Session    HIS    ${AdmitHis_Api_URL}   verify=${False}
     
-# َAdmit_His  
-Start Browser AdmitHis With Token
-    [Documentation]    باز کردن کروم + تزریق کوکی token
-    Open Browser    ${AdmitHis_App_URL}    chrome
-    Maximize Browser Window
-    Add Cookie    token    ${COOKIE_TOKEN}
-    Reload Page
-
-Go To AdmitHis Page
-    [Documentation]    رفتن مستقیم به صفحه پذیرش بستری
-    Go To    ${AdmitHis_App_URL}
-    Reload Page
-
-Switch To AdmitHis App
-    Go To    ${AdmitHis_App_URL}
-    Wait Until Location Contains    8019  
-    Wait For Spinner Hidden
-    Wait For Page Ready  
-
-# Cash
-
-Switch To Cash App
-    Go To    ${Cash_App_URL}
-    Wait Until Location Contains    8075
-    Wait For Spinner Hidden
-    Wait For Page Ready
-    
-
-Start Browser Cash With Token
-    [Documentation]   باز کردن صندوق وب
-    Open Browser    ${Cash_App_URL}    chrome
-    Add Cookie    token    ${COOKIE_TOKEN}
-    Maximize Browser Window
-    Reload Page
-
-Go To Cash Page
-    [Documentation]    باز کردن صندوق وب
-    Go To    ${Cash_App_URL}
-    Reload Page
-
-Cash Pay Patient By National Code
-    [Arguments]    ${nationalCode}
-    [Documentation]    Open Cash App, search patient by national code and complete payment flow
-
-    Wait For Page Ready
-    Switch To Cash App
-    Wait For Page Ready
-    Wait For Spinner Hidden
-
-    Input Text
-    ...    xpath=//input[@formcontrolname='nationalCode']
-    ...    ${nationalCode}
-
-    Wait For Page Ready
-
-    Click Element Safe
-    ...    xpath=//button[contains(@class,'btn-warning') and .//mat-icon[.='search']]
-
-    Wait For Page Ready
-    Wait For Spinner Hidden
-
-    ${row_xpath}=    Set Variable
-    ...    //tr[.//td[contains(normalize-space(), '${nationalCode}')]]
-
-    Wait Until Keyword Succeeds
-    ...    3x
-    ...    5s
-    ...    Element Should Be Visible
-    ...    ${row_xpath}
-
-    Double Click Element    ${row_xpath}
-
-    Wait Until Element Is Visible
-    ...    xpath=//button[normalize-space(text())='پرداخت']
-    ...    30s
-
-    Click Element Safe
-    ...    xpath=//button[normalize-space(text())='پرداخت']
-
-    Wait For Page Ready
-
-    Click Element Safe
-    ...    xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']
-
-
-# General
-Wait For Spinner Hidden
-    [Documentation]    صبر کردن تا loading Angular ناپدید شود
-    Wait Until Element Is Not Visible    css=div.back-spenner.ng-star-inserted    1000
-
-Select From Ng Select
-    [Arguments]    ${formcontrol}    ${value}
-    Wait For Spinner Hidden
-
-    Wait Until Element Is Visible
-    ...    css=ng-select[formcontrolname='${formcontrol}']
-    Click Element
-    ...    css=ng-select[formcontrolname='${formcontrol}']
-
-    Wait Until Element Is Visible
-    ...    css=ng-select[formcontrolname='${formcontrol}'] input[type='text']
-    Input Text
-    ...    css=ng-select[formcontrolname='${formcontrol}'] input[type='text']
-    ...    ${value}
-
-    Wait Until Element Is Visible
-    ...    xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]
-    Click Element
-    ...    xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]
-
-    Press Keys
-    ...    css=ng-select[formcontrolname='${formcontrol}'] input[type='text']
-    ...    TAB
-
-Click Element Safe
-    [Arguments]    ${locator}
-    Wait For Spinner Hidden
-    Wait Until Element Is Visible    ${locator}
-    Wait Until Element Is Enabled    ${locator}
-    Scroll Element Into View         ${locator}
-    Click Element                    ${locator}     
-
-Wait For Page Ready
-    [Arguments]    ${timeout}=30
-
-    Run Keyword And Ignore Error
-    ...    Wait Until Page Contains Element
-    ...    ${GLOBAL_SPINNER}
-    ...    3
-
-    Wait Until Element Is Not Visible
-    ...    ${GLOBAL_SPINNER}
-    ...    ${timeout}      
 
 *** Test Cases ***
 
@@ -318,8 +150,8 @@ Wait For Page Ready
 
 
 06-Get All Names Inpatient Wards
-    [Documentation]    لیست تخت های خالی
-    [Tags]      API_GeneralVariables    METHOD_GET
+    [Documentation]    دریافت لیست بخش‌های بستری و انتخاب یک تخت خالی
+    [Tags]    API_GeneralVariables    METHOD_GET
 
     &{headers}=    Create Dictionary
     ...    Accept=application/json, text/plain, */*
@@ -330,23 +162,49 @@ Wait For Page Ready
     ...    HIS
     ...    /api/GeneralVariables/GetAllNamesInpatientWards
     ...    headers=&{headers}
-    Run Keyword If    '${resp}'=='None'    Return From Keyword
+
+    Run Keyword If    '${resp}' == 'None'    Fail    No response from GetAllNamesInpatientWards API
 
     Should Be Equal As Integers    ${resp.status_code}    200
 
-    ${json}=    To Json    ${resp.content}
+    # ✅ Parse JSON (modern & non-deprecated)
+    ${json}=    Set Variable    ${resp.json()}
 
-    # تعداد آیتم‌ها را به شکل صحیح بگیر
+    Should Be True    isinstance($json, list)
+
     ${count}=    Get Length    ${json}
-
-    Log To Console    Count: ${count}
-    Log To Console    First Item: ${json[0]}
-
-    # چند اعتبارسنجی کلیدی
+    Log To Console    🛏 Wards count: ${count}
     Should Be True    ${count} > 0
+
+    # ✅ Validation روی اولین آیتم
     Should Contain    ${json[0]}    name
     Should Contain    ${json[0]}    systemCodeId
+    Should Contain    ${json[0]}    standardVariableId
     Should Be Equal As Integers    ${json[0]["systemCodeId"]}    132
+
+    # ✅ پیدا کردن یک تخت خالی
+    ${EMPTY_BED_ID}=    Set Variable    ${None}
+
+    FOR    ${item}    IN    @{json}
+        Should Contain    ${item}    name
+        Should Contain    ${item}    standardVariableId
+
+        
+        ${bed_count}=    Evaluate
+        ...    int(re.search("\\((\\d+)\\)", $item["name"]).group(1))
+        ...    re
+
+        IF    ${bed_count} > 0
+            ${EMPTY_BED_ID}=    Set Variable    ${item["standardVariableId"]}
+            Log To Console    ✅ Empty bed selected | BED_ID=${EMPTY_BED_ID} | ${item["name"]}
+            Exit For Loop
+        END
+    END
+
+    Should Not Be Equal    ${EMPTY_BED_ID}    ${None}
+
+    # ✅ ذخیره برای تست‌های بعدی
+    Set Suite Variable    ${BED_ID}    ${EMPTY_BED_ID}
 
 07-Admit Configuration
     [Documentation]    AdmitHis config
@@ -539,7 +397,7 @@ Wait For Page Ready
 
 12-Get All Bed Number
     [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 204
-    [Tags]    API_Wards  METHOD_GET  BED_LIST
+    [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST
 
     ${wardId}=    Set Variable    204
 
@@ -592,7 +450,7 @@ Wait For Page Ready
 
 13-Get Doctors By Ward
     [Documentation]     تخت های خالی بر اساس id بخش مثلا بخش 204
-    [Tags]    API_Wards  METHOD_GET  DOCTORS_LIST
+    [Tags]    API_GeneralVariables  METHOD_GET  DOCTORS_LIST
 
     ${wardId}=    Set Variable    204
 
@@ -644,7 +502,7 @@ Wait For Page Ready
 
 14-Add Filing Validation Bug - Empty NationalCode
     [Documentation]    BUG-1247 - Empty nationalCode causes 500 instead of 400
-    [Tags]    API    NEGATIVE    VALIDATION    BUG_1247
+    [Tags]    API_Filing    NEGATIVE    VALIDATION    BUG_1247
 
     ${headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -769,9 +627,10 @@ Wait For Page Ready
         Should Be True    isinstance($item["name"], str)
     END
 
-17- Search Inpatient 
-    [Documentation]   جستجوی بیماران بستری
-    [Tags]    API_Patient    METHOD_POST  
+
+17-Search PreAdmit patiant 
+    [Documentation]   جستجوی بیماران preadmit
+    [Tags]    API_Patient    METHOD_POST  priadmit 
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -790,62 +649,8 @@ Wait For Page Ready
     ...    admitId=0
     ...    electronicNumber=0
     ...    hospitalNumber=0
-    ...    dateFrom=2025/12/12
-    ...    dateTo=2025/12/12
-    ...    status=0
-
-     ${resp}=    POST On Session
-    ...    HIS
-    ...    url=/api/Patient/SearchInpatients
-    ...    headers=&{headers}
-    ...    json=${body}
-
-    Should Be Equal As Integers    ${resp.status_code}    200
-
-    ${json}=    Set Variable    ${resp.json()}
-    Should Be True    isinstance($json, list)
-
-    ${count}=    Get Length    ${json}
-    Log    Returned inpatient count: ${count}
-
-    IF    ${count} > 0
-        FOR    ${item}    IN    @{json}
-            Dictionary Should Contain Key    ${item}    admitId
-            Dictionary Should Contain Key    ${item}    patientName
-            Dictionary Should Contain Key    ${item}    nationalCode
-            Dictionary Should Contain Key    ${item}    wardName
-            Dictionary Should Contain Key    ${item}    doctorName
-            Dictionary Should Contain Key    ${item}    status
-
-            Should Be True    $item["admitId"] > 0
-            Should Be True    isinstance($item["patientName"], str)
-        END
-    END  
-
-
-18- Search Inpatient 
-    [Documentation]   جستجوی بیماران بستری
-    [Tags]    API_Patient    METHOD_POST  
-
-    &{headers}=    Create Dictionary
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-    ...    Accept=application/json
-    
-    ${body}=     Create Dictionary
-    ...    firstName=
-    ...    lastName=
-    ...    grandPaName=
-    ...    fatherName=
-    ...    nationalCode=
-    ...    ward=0
-    ...    admissionReason=${None}
-    ...    doctorId=0
-    ...    admitId=0
-    ...    electronicNumber=0
-    ...    hospitalNumber=0
-    ...    dateFrom=2025/12/12
-    ...    dateTo=2025/12/12
+    ...    dateFrom=2026/02/27
+    ...    dateTo=2026/02/27
     ...    status=0
 
      ${resp}=    POST On Session
@@ -859,53 +664,32 @@ Wait For Page Ready
     ${json}=    Set Variable    ${resp.json()}
     Should Be True    isinstance($json, list)
 
+    ${TARGET_NATIONAL_CODE}=    Set Variable    1520554001
+    ${FOUND_ADMIT_ID}=    Set Variable    ${None}
+
     ${count}=    Get Length    ${json}
     Log    Returned inpatient count: ${count}
 
     IF    ${count} > 0
         FOR    ${item}    IN    @{json}
-            Dictionary Should Contain Key    ${item}    firstName
-            Dictionary Should Contain Key    ${item}    lastName
-            Dictionary Should Contain Key    ${item}    fatherName
-            Dictionary Should Contain Key    ${item}    motherName
-            Dictionary Should Contain Key    ${item}    grandPaName
-            Dictionary Should Contain Key    ${item}    momGrandPaName
-            Dictionary Should Contain Key    ${item}    nationalCode
-            Dictionary Should Contain Key    ${item}    doctorName
-            Dictionary Should Contain Key    ${item}    wardName
-            Dictionary Should Contain Key    ${item}    roomNo
-            Dictionary Should Contain Key    ${item}    bedNo
-            Dictionary Should Contain Key    ${item}    age
-            Dictionary Should Contain Key    ${item}    status
-            Dictionary Should Contain Key    ${item}    electronicNumber
-            Dictionary Should Contain Key    ${item}    sex
-            Dictionary Should Contain Key    ${item}    hospitalFileID
-            Dictionary Should Contain Key    ${item}    pishpardaght
-            Dictionary Should Contain Key    ${item}    hospitalizationTime
-            Dictionary Should Contain Key    ${item}    admitID
-            Dictionary Should Contain Key    ${item}    wardId
-            Dictionary Should Contain Key    ${item}    isPreAdmit
-            Dictionary Should Contain Key    ${item}    dischargeDate
-            Dictionary Should Contain Key    ${item}    passport
-            Dictionary Should Contain Key    ${item}    isUnder28Days
-            Dictionary Should Contain Key    ${item}    getNewHid
-            Dictionary Should Contain Key    ${item}    cancelHid
-            Dictionary Should Contain Key    ${item}    updateHid
-            Dictionary Should Contain Key    ${item}    hid
-            Dictionary Should Contain Key    ${item}    followedAdmitId 
-            Dictionary Should Contain Key    ${item}    nextPayable
-            Dictionary Should Contain Key    ${item}    doctorTotalCost
-            Dictionary Should Contain Key    ${item}    totalPayment
-            Dictionary Should Contain Key    ${item}    admissionReason   
-
-
+    
             Should Be True    $item["admitID"] > 0
-            Should Be True    isinstance($item["nationalCode"], str)and len($item["nationalCode"]) == 10
-            # ...    and $item["nationalCode"].isdigit())
+            Should Be True    isinstance($item["nationalCode"], str)
+            Should Be True    len($item["nationalCode"]) == 10
+    
+            IF    '${item["nationalCode"]}' == '${TARGET_NATIONAL_CODE}'
+                ${FOUND_ADMIT_ID}=    Set Variable    ${item["admitID"]}
+                Log    ✅ Found admitID=${FOUND_ADMIT_ID}
+                Exit For Loop
+            END
+    
         END
-    END     
+    END  
+    
+    Should Not Be Equal    ${FOUND_ADMIT_ID}    ${None}
+    Set Suite Variable    ${ADMIT_ID}    ${FOUND_ADMIT_ID}
 
-19- Edit Filing PreAdmit
+18-Edit Filing PreAdmit
     [Documentation]  ویرایش Filing بیمار و اعتبارسنجی پاسخ
     [Tags]    API_Filing    METHOD_POST  
 
@@ -1098,4 +882,50 @@ Wait For Page Ready
     Should Be Equal    ${json['data']}    ${TRUE}
     Should Be Equal    ${json['message']}    Success
 
-   
+19-Get Version
+    [Documentation]    دریافت ورژن api
+    [Tags]    API_Version    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /version    
+    ...    headers=${headers}
+
+    Should Be Equal As Integers    
+    ...    ${resp.status_code}    
+    ...    200    
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Set Test Message
+    ...    Build Info:\n${json}
+
+20-Change To Admit
+    [Documentation]  تبدیل preadmit به بستری
+    [Tags]    API_Filing    METHOD_POST  priadmit 
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    
+    ${body}=     Create Dictionary
+    ...    admitId=${ADMIT_ID}
+    ...    bedId=${BED_ID}
+    
+     ${resp}=    POST On Session
+    ...    HIS
+    ...    url=/api/Filing/ChangeToAdmit
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200
+
+    ${json}=    Set Variable    ${resp.json()}
+
+21-

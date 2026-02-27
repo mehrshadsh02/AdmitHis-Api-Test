@@ -1,1074 +1,2261 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2026-02-05T01:25:49.663171" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2026-02-27T00:03:30.917515" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitHis.robot">
-<kw name="Create AdmitHIS Session" type="SETUP">
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-02-05T01:25:49.952467" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-02-27T00:03:31.225626" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-02-05T01:25:49.952174" elapsed="0.000498"/>
+<status status="PASS" start="2026-02-27T00:03:31.225356" elapsed="0.000461"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:25:49.951149" elapsed="0.001636"/>
+<status status="PASS" start="2026-02-27T00:03:31.224501" elapsed="0.001431"/>
 </kw>
-<test id="s1-t1" name="13-UI - Open Filling Page" line="395">
-<kw name="Disable Screenshots">
+<test id="s1-t1" name="01-UI - Open Filing Page" line="14">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
 <kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:25:49.953944" level="INFO">No keyword will be run on failure.</msg>
+<msg time="2026-02-27T00:03:31.227003" level="INFO">No keyword will be run on failure.</msg>
 <arg>NONE</arg>
 <doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-02-05T01:25:49.953799" elapsed="0.000203"/>
+<status status="PASS" start="2026-02-27T00:03:31.226847" elapsed="0.000220"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:25:49.953555" elapsed="0.000520"/>
+<status status="PASS" start="2026-02-27T00:03:31.226595" elapsed="0.000546"/>
 </kw>
-<kw name="Start Browser AdmitHis With Token">
+<kw name="Start Browser AdmitHis With Token" owner="AdmitHis-keywords">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:25:49.954843" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
+<msg time="2026-02-27T00:03:31.227819" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
+<msg time="2026-02-27T00:04:50.430248" level="WARN">There was an error managing chromedriver (Unsuccessful response (403 Forbidden) for URL https://storage.googleapis.com/chrome-for-testing-public/145.0.7632.117/win64/chromedriver-win64.zip); using driver found in the cache</msg>
 <arg>${AdmitHis_App_URL}</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-02-05T01:25:49.954667" elapsed="1.707578"/>
+<status status="PASS" start="2026-02-27T00:03:31.227647" elapsed="80.974296"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-02-05T01:25:51.662439" elapsed="0.042243"/>
+<status status="PASS" start="2026-02-27T00:04:52.202426" elapsed="0.035706"/>
 </kw>
 <kw name="Add Cookie" owner="SeleniumLibrary">
 <arg>token</arg>
 <arg>${COOKIE_TOKEN}</arg>
 <doc>Adds a cookie to your current session.</doc>
-<status status="PASS" start="2026-02-05T01:25:51.705009" elapsed="0.010324"/>
+<status status="PASS" start="2026-02-27T00:04:52.238362" elapsed="0.008483"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-02-05T01:25:51.715590" elapsed="0.134849"/>
+<status status="PASS" start="2026-02-27T00:04:52.247019" elapsed="0.148780"/>
 </kw>
 <doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="PASS" start="2026-02-05T01:25:49.954446" elapsed="1.896176"/>
+<status status="PASS" start="2026-02-27T00:03:31.227415" elapsed="81.168565"/>
 </kw>
-<kw name="Go To AdmitHis Page">
+<kw name="Go To AdmitHis Page" owner="AdmitHis-keywords">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:25:51.853577" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
+<msg time="2026-02-27T00:04:52.399381" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
 <arg>${AdmitHis_App_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2026-02-05T01:25:51.853212" elapsed="0.081778"/>
+<status status="PASS" start="2026-02-27T00:04:52.399102" elapsed="0.098953"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-02-05T01:25:51.935163" elapsed="0.064429"/>
+<status status="PASS" start="2026-02-27T00:04:52.498314" elapsed="0.061295"/>
 </kw>
 <doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
-<status status="PASS" start="2026-02-05T01:25:51.852232" elapsed="0.147534"/>
+<status status="PASS" start="2026-02-27T00:04:52.398536" elapsed="0.161272"/>
 </kw>
-<kw name="Wait For Page Ready">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:25:55.025177" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-02-05T01:25:52.000968" elapsed="3.032583">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
-</kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-02-05T01:25:52.000567" elapsed="3.033420"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:25:55.034509" elapsed="0.027283"/>
-</kw>
-<status status="PASS" start="2026-02-05T01:25:52.000231" elapsed="3.061991"/>
-</kw>
-<kw name="Wait For Spinner Hidden">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:25:55.064581" elapsed="0.026859"/>
+<status status="PASS" start="2026-02-27T00:04:52.562493" elapsed="0.016602"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:25:55.063417" elapsed="0.028251"/>
+<status status="PASS" start="2026-02-27T00:04:52.562043" elapsed="0.017178"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>---- DONE ----</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-02-05T01:25:55.092250" elapsed="0.001034"/>
+<status status="PASS" start="2026-02-27T00:04:52.579648" elapsed="0.000458"/>
 </kw>
 <doc>باز  کردن صفحه پذیرش بستری</doc>
-<tag>inpatient</tag>
-<tag>Open_Browser</tag>
-<tag>step13</tag>
+<tag>preadmit</tag>
+<tag>step01</tag>
+<tag>STEP_01_Open_Browser</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2026-02-05T01:25:49.952875" elapsed="5.141024"/>
+<status status="PASS" start="2026-02-27T00:03:31.226028" elapsed="81.354297"/>
 </test>
-<test id="s1-t2" name="14- Enter national code of inpatient" line="406">
-<kw name="Disable Screenshots">
+<test id="s1-t2" name="02-UI - Enter national code of preadmit patient" line="26">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
 <kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:25:55.097569" level="INFO">No keyword will be run on failure.</msg>
+<msg time="2026-02-27T00:04:52.581681" level="INFO">No keyword will be run on failure.</msg>
 <arg>NONE</arg>
 <doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-02-05T01:25:55.097258" elapsed="0.000444"/>
+<status status="PASS" start="2026-02-27T00:04:52.581557" elapsed="0.000175"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:25:55.096698" elapsed="0.001264"/>
+<status status="PASS" start="2026-02-27T00:04:52.581328" elapsed="0.000470"/>
 </kw>
-<kw name="Wait For Page Ready">
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:25:58.113728" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2026-02-27T00:04:55.613450" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-02-05T01:25:55.100251" elapsed="3.014943">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2026-02-27T00:04:52.583149" elapsed="3.038013">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-02-05T01:25:55.099403" elapsed="3.015948"/>
+<status status="PASS" start="2026-02-27T00:04:52.582738" elapsed="3.038837"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:25:58.115527" elapsed="0.007691"/>
+<status status="PASS" start="2026-02-27T00:04:55.622154" elapsed="0.022699"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:25:55.098660" elapsed="3.024687"/>
+<status status="PASS" start="2026-02-27T00:04:52.582070" elapsed="3.063171"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>//input[@formcontrolname='nationalCode']</arg>
 <arg>10s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:25:58.123677" elapsed="0.031632"/>
+<status status="PASS" start="2026-02-27T00:04:55.645937" elapsed="2.840152"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>//input[@formcontrolname='nationalCode']</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:25:58.156402" elapsed="0.111881"/>
+<status status="PASS" start="2026-02-27T00:04:58.486542" elapsed="0.079552"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:25:58.268997" level="INFO">Typing text '1520554001' into text field '//input[@formcontrolname='nationalCode']'.</msg>
+<msg time="2026-02-27T00:04:58.566767" level="INFO">Typing text '1520554001' into text field '//input[@formcontrolname='nationalCode']'.</msg>
 <arg>//input[@formcontrolname='nationalCode']</arg>
 <arg>${nationalCode}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:25:58.268654" elapsed="0.250371"/>
+<status status="PASS" start="2026-02-27T00:04:58.566432" elapsed="0.213061"/>
 </kw>
-<kw name="Click Element Safe">
-<kw name="Wait For Spinner Hidden">
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:25:58.522702" elapsed="1.885777"/>
+<status status="PASS" start="2026-02-27T00:04:58.781422" elapsed="2.488475"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:25:58.522249" elapsed="1.886341"/>
+<status status="PASS" start="2026-02-27T00:04:58.780982" elapsed="2.489215"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:00.408733" elapsed="0.018572"/>
+<status status="PASS" start="2026-02-27T00:05:01.270579" elapsed="0.032667"/>
 </kw>
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2026-02-05T01:26:00.427475" elapsed="0.021187"/>
+<status status="PASS" start="2026-02-27T00:05:01.303535" elapsed="0.022709"/>
 </kw>
 <kw name="Scroll Element Into View" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="PASS" start="2026-02-05T01:26:00.448830" elapsed="0.269247"/>
+<status status="PASS" start="2026-02-27T00:05:01.326439" elapsed="0.276762"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:00.719515" level="INFO">Clicking element 'id=button-addon3'.</msg>
+<msg time="2026-02-27T00:05:01.604690" level="INFO">Clicking element 'id=button-addon3'.</msg>
 <arg>${locator}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:00.718655" elapsed="0.148617"/>
+<status status="PASS" start="2026-02-27T00:05:01.603784" elapsed="0.105963"/>
 </kw>
 <arg>id=button-addon3</arg>
-<status status="PASS" start="2026-02-05T01:25:58.521519" elapsed="2.345870"/>
+<status status="PASS" start="2026-02-27T00:04:58.780461" elapsed="2.929499"/>
 </kw>
-<kw name="Wait For Page Ready">
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:03.931161" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2026-02-27T00:05:04.730967" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-02-05T01:26:00.869001" elapsed="3.068456">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2026-02-27T00:05:01.713065" elapsed="3.019885">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-02-05T01:26:00.868136" elapsed="3.069814"/>
+<status status="PASS" start="2026-02-27T00:05:01.712264" elapsed="3.020891"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:03.938692" elapsed="0.024673"/>
+<status status="PASS" start="2026-02-27T00:05:04.733413" elapsed="0.008551"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:26:00.867720" elapsed="3.096070"/>
+<status status="PASS" start="2026-02-27T00:05:01.711578" elapsed="3.030606"/>
 </kw>
 <doc>وارد کردن کد ملی بیمار و استعلام کد ملی</doc>
-<tag>inpatient</tag>
-<tag>step14</tag>
+<tag>preadmit</tag>
+<tag>step02</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2026-02-05T01:25:55.095436" elapsed="8.868972"/>
+<status status="PASS" start="2026-02-27T00:04:52.580782" elapsed="12.162945"/>
 </test>
-<test id="s1-t3" name="15-UI - Fill inpatient Info" line="418">
-<kw name="Disable Screenshots">
+<test id="s1-t3" name="03-UI - Fill Patient PreAdmit Info" line="41">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
 <kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:03.968138" level="INFO">No keyword will be run on failure.</msg>
+<msg time="2026-02-27T00:05:04.750487" level="INFO">No keyword will be run on failure.</msg>
 <arg>NONE</arg>
 <doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-02-05T01:26:03.967859" elapsed="0.000400"/>
+<status status="PASS" start="2026-02-27T00:05:04.750214" elapsed="0.000380"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:26:03.967332" elapsed="0.001093"/>
+<status status="PASS" start="2026-02-27T00:05:04.749609" elapsed="0.001157"/>
 </kw>
-<kw name="Wait For Page Ready">
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:07.094344" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2026-02-27T00:05:07.773532" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-02-05T01:26:03.970741" elapsed="3.125649">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2026-02-27T00:05:04.754396" elapsed="3.023357">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-02-05T01:26:03.969566" elapsed="3.127031"/>
+<status status="PASS" start="2026-02-27T00:05:04.753756" elapsed="3.024188"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:07.096862" elapsed="0.019507"/>
+<status status="PASS" start="2026-02-27T00:05:07.778193" elapsed="0.013519"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:26:03.969041" elapsed="3.147529"/>
+<status status="PASS" start="2026-02-27T00:05:04.753184" elapsed="3.038704"/>
 </kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:07.118699" elapsed="4.727042"/>
+<status status="PASS" start="2026-02-27T00:05:07.793575" elapsed="3.939678"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:07.118242" elapsed="4.727683"/>
+<status status="PASS" start="2026-02-27T00:05:07.793194" elapsed="3.940176"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:11.846161" elapsed="0.024004"/>
+<status status="PASS" start="2026-02-27T00:05:11.733519" elapsed="0.024616"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:11.870601" level="INFO">Clicking element 'css=ng-select[formcontrolname='maritalStatus']'.</msg>
+<msg time="2026-02-27T00:05:11.758563" level="INFO">Clicking element 'css=ng-select[formcontrolname='maritalStatus']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:11.870342" elapsed="0.110282"/>
+<status status="PASS" start="2026-02-27T00:05:11.758317" elapsed="0.112719"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:11.980883" elapsed="0.033313"/>
+<status status="PASS" start="2026-02-27T00:05:11.871329" elapsed="0.033705"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:12.014976" level="INFO">Typing text 'مجرد' into text field 'css=ng-select[formcontrolname='maritalStatus'] input[type='text']'.</msg>
+<msg time="2026-02-27T00:05:11.905721" level="INFO">Typing text 'مجرد' into text field 'css=ng-select[formcontrolname='maritalStatus'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.014494" elapsed="0.123635"/>
+<status status="PASS" start="2026-02-27T00:05:11.905291" elapsed="0.111112"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.138421" elapsed="0.069627"/>
+<status status="PASS" start="2026-02-27T00:05:12.016703" elapsed="0.026347"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:12.208452" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'مجرد')]'.</msg>
+<msg time="2026-02-27T00:05:12.043730" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'مجرد')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.208220" elapsed="0.067443"/>
+<status status="PASS" start="2026-02-27T00:05:12.043371" elapsed="0.108711"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:12.277859" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='maritalStatus'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:12.602244" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:12.602339" level="INFO">Releasing special key TAB.</msg>
+<msg time="2026-02-27T00:05:12.152643" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='maritalStatus'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:12.488450" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:12.488614" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.275978" elapsed="0.346615"/>
+<status status="PASS" start="2026-02-27T00:05:12.152253" elapsed="0.380249"/>
 </kw>
 <arg>maritalStatus</arg>
 <arg>مجرد</arg>
-<status status="PASS" start="2026-02-05T01:26:07.117312" elapsed="5.505439"/>
+<status status="PASS" start="2026-02-27T00:05:07.792555" elapsed="4.740152"/>
 </kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.624236" elapsed="0.030873"/>
+<status status="PASS" start="2026-02-27T00:05:12.534208" elapsed="0.011597"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:12.623820" elapsed="0.031530"/>
+<status status="PASS" start="2026-02-27T00:05:12.533827" elapsed="0.012285"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.655569" elapsed="0.032867"/>
+<status status="PASS" start="2026-02-27T00:05:12.546396" elapsed="0.046807"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:12.691521" level="INFO">Clicking element 'css=ng-select[formcontrolname='insurRelation']'.</msg>
+<msg time="2026-02-27T00:05:12.593953" level="INFO">Clicking element 'css=ng-select[formcontrolname='insurRelation']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.690846" elapsed="0.092208"/>
+<status status="PASS" start="2026-02-27T00:05:12.593507" elapsed="0.091335"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.783226" elapsed="0.020862"/>
+<status status="PASS" start="2026-02-27T00:05:12.685013" elapsed="0.014898"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:12.804510" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='insurRelation'] input[type='text']'.</msg>
+<msg time="2026-02-27T00:05:12.700361" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='insurRelation'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.804256" elapsed="0.109789"/>
+<status status="PASS" start="2026-02-27T00:05:12.700085" elapsed="0.112138"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.914394" elapsed="0.017486"/>
+<status status="PASS" start="2026-02-27T00:05:12.812447" elapsed="0.028282"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:12.932285" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
+<msg time="2026-02-27T00:05:12.841446" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.932051" elapsed="0.067278"/>
+<status status="PASS" start="2026-02-27T00:05:12.840983" elapsed="0.067348"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:12.999913" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='insurRelation'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:13.335462" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:13.335647" level="INFO">Releasing special key TAB.</msg>
+<msg time="2026-02-27T00:05:12.908899" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='insurRelation'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:13.221604" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:13.221730" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:12.999502" elapsed="0.383212"/>
+<status status="PASS" start="2026-02-27T00:05:12.908509" elapsed="0.355986"/>
 </kw>
 <arg>insurRelation</arg>
 <arg>خود فرد</arg>
-<status status="PASS" start="2026-02-05T01:26:12.623260" elapsed="0.759575"/>
+<status status="PASS" start="2026-02-27T00:05:12.533169" elapsed="0.731470"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:13.383486" level="INFO">Typing text '09383509316' into text field '//input[@formcontrolname='mobileNumber']'.</msg>
+<msg time="2026-02-27T00:05:13.265274" level="INFO">Typing text '09383509316' into text field '//input[@formcontrolname='mobileNumber']'.</msg>
 <arg>//input[@formcontrolname='mobileNumber']</arg>
 <arg>09383509316</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:13.383175" elapsed="0.205684"/>
+<status status="PASS" start="2026-02-27T00:05:13.264973" elapsed="0.215615"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:13.590179" level="INFO">Typing text 'dfgdfgdfgd' into text field '//input[@formcontrolname='address']'.</msg>
+<msg time="2026-02-27T00:05:13.481932" level="INFO">Typing text 'dfgdfgdfgd' into text field '//input[@formcontrolname='address']'.</msg>
 <arg>//input[@formcontrolname='address']</arg>
 <arg>dfgdfgdfgd</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:13.589831" elapsed="0.183506"/>
+<status status="PASS" start="2026-02-27T00:05:13.481246" elapsed="0.170512"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:13.774413" level="INFO">Typing text 'مهرشاد شیخ الاسلامی' into text field '//input[@formcontrolname='accompanyfullName']'.</msg>
+<msg time="2026-02-27T00:05:13.652993" level="INFO">Typing text 'مهرشاد شیخ الاسلامی' into text field '//input[@formcontrolname='accompanyfullName']'.</msg>
 <arg>//input[@formcontrolname='accompanyfullName']</arg>
 <arg>مهرشاد شیخ الاسلامی</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:13.774038" elapsed="0.214446"/>
+<status status="PASS" start="2026-02-27T00:05:13.652666" elapsed="0.219243"/>
+</kw>
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:13.874446" elapsed="0.019319"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:05:13.873921" elapsed="0.019999"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:13.894110" elapsed="0.016244"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:13.910834" level="INFO">Clicking element 'css=ng-select[formcontrolname='relation']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:13.910544" elapsed="0.084463"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:13.995416" elapsed="0.031027"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:13.989820" level="INFO">Typing text '09383586316' into text field '//input[@formcontrolname='accompanyMobileNumber']'.</msg>
+<msg time="2026-02-27T00:05:14.027108" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='relation'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:14.026699" elapsed="0.104320"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:14.131324" elapsed="0.018234"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:14.149974" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:14.149742" elapsed="0.061539"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:14.212535" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='relation'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:14.516133" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:14.516267" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-27T00:05:14.211685" elapsed="0.334141"/>
+</kw>
+<arg>relation</arg>
+<arg>خود فرد</arg>
+<status status="PASS" start="2026-02-27T00:05:13.873301" elapsed="0.672772"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:14.546878" level="INFO">Typing text '09383586316' into text field '//input[@formcontrolname='accompanyMobileNumber']'.</msg>
 <arg>//input[@formcontrolname='accompanyMobileNumber']</arg>
 <arg>09383586316</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:13.989503" elapsed="0.167662"/>
+<status status="PASS" start="2026-02-27T00:05:14.546517" elapsed="0.169022"/>
 </kw>
-<kw name="Wait For Spinner Hidden">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.158122" elapsed="0.007772"/>
+<status status="PASS" start="2026-02-27T00:05:14.716544" elapsed="0.008011"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:14.157660" elapsed="0.008419"/>
+<status status="PASS" start="2026-02-27T00:05:14.716170" elapsed="0.008610"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=button-addon2</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.166904" elapsed="0.034101"/>
+<status status="PASS" start="2026-02-27T00:05:14.725157" elapsed="0.032397"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:14.201621" level="INFO">Clicking element 'id=button-addon2'.</msg>
+<msg time="2026-02-27T00:05:14.758261" level="INFO">Clicking element 'id=button-addon2'.</msg>
 <arg>id=button-addon2</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.201330" elapsed="0.073684"/>
+<status status="PASS" start="2026-02-27T00:05:14.757967" elapsed="0.074198"/>
 </kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.276000" elapsed="0.011405"/>
+<status status="PASS" start="2026-02-27T00:05:14.833839" elapsed="0.012260"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:14.275790" elapsed="0.012007"/>
+<status status="PASS" start="2026-02-27T00:05:14.833433" elapsed="0.012867"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.288101" elapsed="0.016752"/>
+<status status="PASS" start="2026-02-27T00:05:14.846542" elapsed="0.019982"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:14.305271" level="INFO">Clicking element 'css=ng-select[formcontrolname='patientClass']'.</msg>
+<msg time="2026-02-27T00:05:14.866937" level="INFO">Clicking element 'css=ng-select[formcontrolname='firstRecognition']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.305038" elapsed="0.070156"/>
+<status status="PASS" start="2026-02-27T00:05:14.866706" elapsed="0.079063"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.375844" elapsed="0.025411"/>
+<status status="PASS" start="2026-02-27T00:05:14.946040" elapsed="0.024297"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:14.401867" level="INFO">Typing text 'بستری' into text field 'css=ng-select[formcontrolname='patientClass'] input[type='text']'.</msg>
+<msg time="2026-02-27T00:05:14.971249" level="INFO">Typing text 'شکستگی' into text field 'css=ng-select[formcontrolname='firstRecognition'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.401494" elapsed="0.089847"/>
+<status status="PASS" start="2026-02-27T00:05:14.970642" elapsed="0.312748"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.491644" elapsed="0.048718"/>
+<status status="PASS" start="2026-02-27T00:05:15.283815" elapsed="0.053045"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:14.540784" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'بستری')]'.</msg>
+<msg time="2026-02-27T00:05:15.337297" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'شکستگی')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.540524" elapsed="0.064952"/>
+<status status="PASS" start="2026-02-27T00:05:15.337043" elapsed="0.076215"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:14.606509" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='patientClass'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:14.911173" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:14.911407" level="INFO">Releasing special key TAB.</msg>
+<msg time="2026-02-27T00:05:15.414503" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='firstRecognition'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:15.714293" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:15.714417" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.605760" elapsed="0.339563"/>
-</kw>
-<arg>patientClass</arg>
-<arg>بستری</arg>
-<status status="PASS" start="2026-02-05T01:26:14.275429" elapsed="0.670073"/>
-</kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.947116" elapsed="0.028766"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:14.946707" elapsed="0.029359"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:14.976276" elapsed="0.025894"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:15.002782" level="INFO">Clicking element 'css=ng-select[formcontrolname='firstRecognition']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.002425" elapsed="0.083544"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.086182" elapsed="0.018431"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:15.105128" level="INFO">Typing text 'شکستگی' into text field 'css=ng-select[formcontrolname='firstRecognition'] input[type='text']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>${value}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.104807" elapsed="0.293168"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.398410" elapsed="0.025318"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:15.424127" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'شکستگی')]'.</msg>
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.423895" elapsed="0.079253"/>
-</kw>
-<kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:15.503734" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='firstRecognition'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:15.802954" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:15.803038" level="INFO">Releasing special key TAB.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>TAB</arg>
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.503325" elapsed="0.313591"/>
+<status status="PASS" start="2026-02-27T00:05:15.413627" elapsed="0.312481"/>
 </kw>
 <arg>firstRecognition</arg>
 <arg>شکستگی</arg>
-<status status="PASS" start="2026-02-05T01:26:14.946118" elapsed="0.870999"/>
+<status status="PASS" start="2026-02-27T00:05:14.832796" elapsed="0.893462"/>
 </kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.818509" elapsed="0.008828"/>
+<status status="PASS" start="2026-02-27T00:05:15.727764" elapsed="0.017828"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:15.818151" elapsed="0.009352"/>
+<status status="PASS" start="2026-02-27T00:05:15.727446" elapsed="0.018331"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.827709" elapsed="0.023890"/>
+<status status="PASS" start="2026-02-27T00:05:15.745995" elapsed="0.026581"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:15.852009" level="INFO">Clicking element 'css=ng-select[formcontrolname='howToRefer']'.</msg>
+<msg time="2026-02-27T00:05:15.773009" level="INFO">Clicking element 'css=ng-select[formcontrolname='howToRefer']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.851763" elapsed="0.083187"/>
+<status status="PASS" start="2026-02-27T00:05:15.772757" elapsed="0.090184"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.935128" elapsed="0.025525"/>
+<status status="PASS" start="2026-02-27T00:05:15.863294" elapsed="0.019343"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:15.961132" level="INFO">Typing text 'وسیله شخصی' into text field 'css=ng-select[formcontrolname='howToRefer'] input[type='text']'.</msg>
+<msg time="2026-02-27T00:05:15.883094" level="INFO">Typing text 'وسیله شخصی' into text field 'css=ng-select[formcontrolname='howToRefer'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:15.960815" elapsed="0.136625"/>
+<status status="PASS" start="2026-02-27T00:05:15.882811" elapsed="0.116003"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.097757" elapsed="0.018945"/>
+<status status="PASS" start="2026-02-27T00:05:15.999052" elapsed="0.022635"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:16.117128" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'وسیله شخصی')]'.</msg>
+<msg time="2026-02-27T00:05:16.022106" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'وسیله شخصی')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.116878" elapsed="0.065523"/>
+<status status="PASS" start="2026-02-27T00:05:16.021875" elapsed="0.061062"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:16.182985" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='howToRefer'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:16.501271" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:16.501531" level="INFO">Releasing special key TAB.</msg>
+<msg time="2026-02-27T00:05:16.084218" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='howToRefer'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:16.384912" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:16.385117" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.182577" elapsed="0.369543"/>
+<status status="PASS" start="2026-02-27T00:05:16.083238" elapsed="0.338962"/>
 </kw>
 <arg>howToRefer</arg>
 <arg>وسیله شخصی</arg>
-<status status="PASS" start="2026-02-05T01:26:15.817643" elapsed="0.734653"/>
+<status status="PASS" start="2026-02-27T00:05:15.726765" elapsed="0.695645"/>
 </kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.556012" elapsed="0.013949"/>
+<status status="PASS" start="2026-02-27T00:05:16.424257" elapsed="0.020984"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:16.555589" elapsed="0.014576"/>
+<status status="PASS" start="2026-02-27T00:05:16.423844" elapsed="0.021624"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.570390" elapsed="0.028142"/>
+<status status="PASS" start="2026-02-27T00:05:16.445761" elapsed="0.035428"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:16.598919" level="INFO">Clicking element 'css=ng-select[formcontrolname='causeOfHospitalization']'.</msg>
+<msg time="2026-02-27T00:05:16.481606" level="INFO">Clicking element 'css=ng-select[formcontrolname='causeOfHospitalization']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.598693" elapsed="0.081376"/>
+<status status="PASS" start="2026-02-27T00:05:16.481361" elapsed="0.083068"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.680336" elapsed="0.027617"/>
+<status status="PASS" start="2026-02-27T00:05:16.564701" elapsed="0.032035"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:16.708473" level="INFO">Typing text 'دل درد' into text field 'css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text']'.</msg>
+<msg time="2026-02-27T00:05:16.597961" level="INFO">Typing text 'دل درد' into text field 'css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text']'.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>${value}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.708144" elapsed="0.090878"/>
+<status status="PASS" start="2026-02-27T00:05:16.597387" elapsed="0.104027"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.799268" elapsed="0.019405"/>
+<status status="PASS" start="2026-02-27T00:05:16.701827" elapsed="0.024112"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:16.819071" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'دل درد')]'.</msg>
+<msg time="2026-02-27T00:05:16.726348" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'دل درد')]'.</msg>
 <arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.818841" elapsed="0.061454"/>
+<status status="PASS" start="2026-02-27T00:05:16.726115" elapsed="0.063786"/>
 </kw>
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:16.880830" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:17.208766" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:17.209005" level="INFO">Releasing special key TAB.</msg>
+<msg time="2026-02-27T00:05:16.790635" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='causeOfHospitalization'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:17.094450" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:17.094603" level="INFO">Releasing special key TAB.</msg>
 <arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
 <arg>TAB</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:16.880461" elapsed="0.353356"/>
+<status status="PASS" start="2026-02-27T00:05:16.790085" elapsed="0.332490"/>
 </kw>
 <arg>causeOfHospitalization</arg>
 <arg>دل درد</arg>
-<status status="PASS" start="2026-02-05T01:26:16.554114" elapsed="0.679892"/>
+<status status="PASS" start="2026-02-27T00:05:16.422967" elapsed="0.699769"/>
 </kw>
 <doc>پر کردن اطلاعات مورد نیاز بیمار</doc>
-<tag>inpatient</tag>
-<tag>step15</tag>
+<tag>preadmit</tag>
+<tag>step03</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2026-02-05T01:26:03.966211" elapsed="13.268239"/>
+<status status="PASS" start="2026-02-27T00:05:04.748304" elapsed="12.376067"/>
 </test>
-<test id="s1-t4" name="16-UI - Assign Ward And Doctor" line="441">
-<kw name="Disable Screenshots">
+<test id="s1-t4" name="04-UI - Assign Ward And Doctor And Prepayment" line="66">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
 <kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:17.237894" level="INFO">No keyword will be run on failure.</msg>
+<msg time="2026-02-27T00:05:17.147506" level="INFO">No keyword will be run on failure.</msg>
 <arg>NONE</arg>
 <doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.237679" elapsed="0.000441"/>
+<status status="PASS" start="2026-02-27T00:05:17.147245" elapsed="0.000358"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:26:17.237260" elapsed="0.001048"/>
+<status status="PASS" start="2026-02-27T00:05:17.146745" elapsed="0.000988"/>
 </kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.244013" elapsed="0.014677"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:17.243592" elapsed="0.015280"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.259286" elapsed="0.026977"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:17.286817" level="INFO">Clicking element 'css=ng-select[formcontrolname='wardfileld']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.286494" elapsed="0.061881"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.348544" elapsed="0.014139"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:17.363111" level="INFO">Typing text 'اطفال 2 - تخت خالی (33)' into text field 'css=ng-select[formcontrolname='wardfileld'] input[type='text']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>${value}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.362849" elapsed="0.162517"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.525685" elapsed="0.016971"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:17.543061" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اطفال 2 - تخت خالی (33)')]'.</msg>
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.542826" elapsed="0.063285"/>
-</kw>
-<kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:17.606736" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='wardfileld'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:17.934666" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:17.934806" level="INFO">Releasing special key TAB.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>TAB</arg>
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.606295" elapsed="0.366156"/>
-</kw>
-<arg>wardfileld</arg>
-<arg>اطفال 2 - تخت خالی (33)</arg>
-<status status="PASS" start="2026-02-05T01:26:17.242265" elapsed="0.730368"/>
-</kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:17.974029" elapsed="3.060469"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:17.973762" elapsed="3.061206"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.035503" elapsed="0.031949"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:21.068230" level="INFO">Clicking element 'css=ng-select[formcontrolname='bedNum']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.067866" elapsed="0.072406"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.140443" elapsed="0.022017"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:21.163183" level="INFO">Typing text 'اتاق1 - تخت عمومي - تخت18' into text field 'css=ng-select[formcontrolname='bedNum'] input[type='text']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>${value}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.162729" elapsed="0.199683"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.362597" elapsed="0.017796"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:21.380840" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اتاق1 - تخت عمومي - تخت18')]'.</msg>
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.380572" elapsed="0.051704"/>
-</kw>
-<kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:21.432862" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='bedNum'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:21.753188" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:21.753397" level="INFO">Releasing special key TAB.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>TAB</arg>
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.432460" elapsed="0.347054"/>
-</kw>
-<arg>bedNum</arg>
-<arg>اتاق1 - تخت عمومي - تخت18</arg>
-<status status="PASS" start="2026-02-05T01:26:17.973309" elapsed="3.806360"/>
-</kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.782659" elapsed="0.029058"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:21.782253" elapsed="0.029572"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.811959" elapsed="0.023005"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:21.835380" level="INFO">Clicking element 'css=ng-select[formcontrolname='doctorField']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.835130" elapsed="0.103515"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.938820" elapsed="0.022283"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:21.961798" level="INFO">Typing text 'Siavash Siavash' into text field 'css=ng-select[formcontrolname='doctorField'] input[type='text']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>${value}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:21.961339" elapsed="0.127459"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.088966" elapsed="0.015328"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:22.104695" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'Siavash Siavash')]'.</msg>
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.104470" elapsed="0.050198"/>
-</kw>
-<kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:22.155237" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='doctorField'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:22.498213" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:22.498375" level="INFO">Releasing special key TAB.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>TAB</arg>
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.154841" elapsed="0.376917"/>
-</kw>
-<arg>doctorField</arg>
-<arg>Siavash Siavash</arg>
-<status status="PASS" start="2026-02-05T01:26:21.781576" elapsed="0.750379"/>
-</kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.534609" elapsed="0.009534"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:22.533884" elapsed="0.010641"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.546812" elapsed="0.021752"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:22.568953" level="INFO">Clicking element 'css=ng-select[formcontrolname='responsiblePatient']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.568727" elapsed="0.056105"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.625038" elapsed="0.013827"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:22.639300" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='responsiblePatient'] input[type='text']'.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>${value}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.639036" elapsed="0.084026"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.723278" elapsed="0.013212"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:22.737379" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.736892" elapsed="0.050618"/>
-</kw>
-<kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:22.788050" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='responsiblePatient'] input[type='text'] element.</msg>
-<msg time="2026-02-05T01:26:23.091465" level="INFO">Pressing special key TAB to element.</msg>
-<msg time="2026-02-05T01:26:23.091591" level="INFO">Releasing special key TAB.</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>TAB</arg>
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-02-05T01:26:22.787678" elapsed="0.341669"/>
-</kw>
-<arg>responsiblePatient</arg>
-<arg>خود فرد</arg>
-<status status="PASS" start="2026-02-05T01:26:22.533242" elapsed="0.596276"/>
-</kw>
-<doc>انتخاب بخش و پزشک بیمار preadmit</doc>
-<tag>inpatient</tag>
-<tag>step16</tag>
-<tag>UI_Test</tag>
-<status status="PASS" start="2026-02-05T01:26:17.236170" elapsed="5.896995"/>
-</test>
-<test id="s1-t5" name="17-UI - Save Admission Filing" line="454">
-<kw name="Click Element Safe">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.136567" elapsed="0.011477"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:23.136171" elapsed="0.012017"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.148337" elapsed="0.033970"/>
-</kw>
-<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.183064" elapsed="0.020893"/>
-</kw>
-<kw name="Scroll Element Into View" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.204128" elapsed="0.305283"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:23.510371" level="INFO">Clicking element 'css=button.btn-saveFile'.</msg>
-<arg>${locator}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.509912" elapsed="0.107165"/>
-</kw>
-<arg>css=button.btn-saveFile</arg>
-<status status="PASS" start="2026-02-05T01:26:23.135657" elapsed="0.481541"/>
-</kw>
-<kw name="Click Element Safe">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.618444" elapsed="0.026654"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:23.618162" elapsed="0.027079"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.645414" elapsed="0.027885"/>
-</kw>
-<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.673498" elapsed="0.035840"/>
-</kw>
-<kw name="Scroll Element Into View" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="PASS" start="2026-02-05T01:26:23.709501" elapsed="0.308442"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:24.019292" level="INFO">Clicking element 'css=button.swal2-confirm.swal2-styled'.</msg>
-<arg>${locator}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:24.018585" elapsed="0.096721"/>
-</kw>
-<arg>css=button.swal2-confirm.swal2-styled</arg>
-<status status="PASS" start="2026-02-05T01:26:23.617723" elapsed="0.497708"/>
-</kw>
-<kw name="Wait For Page Ready">
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:27.188533" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<msg time="2026-02-27T00:05:20.272844" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-02-05T01:26:24.116543" elapsed="3.075930">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<status status="FAIL" start="2026-02-27T00:05:17.149017" elapsed="3.128322">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
 </kw>
 <arg>Wait Until Page Contains Element</arg>
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>3</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-02-05T01:26:24.116212" elapsed="3.076575"/>
+<status status="PASS" start="2026-02-27T00:05:17.148551" elapsed="3.129229"/>
 </kw>
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
 <arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:27.193028" elapsed="0.008555"/>
+<status status="PASS" start="2026-02-27T00:05:20.278335" elapsed="0.023183"/>
 </kw>
-<status status="PASS" start="2026-02-05T01:26:24.115823" elapsed="3.085881"/>
+<status status="PASS" start="2026-02-27T00:05:17.148141" elapsed="3.153785"/>
 </kw>
-<doc>سیو کردن پذیرش preadmit</doc>
-<tag>inpatient</tag>
-<tag>step17</tag>
-<tag>UI_Test</tag>
-<status status="PASS" start="2026-02-05T01:26:23.134698" elapsed="4.067335"/>
-</test>
-<test id="s1-t6" name="18-UI - deny admit print page" line="462">
-<kw name="Click Element Safe">
-<kw name="Wait For Spinner Hidden">
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
 <kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:45.677281" level="INFO">Suppressing StaleElementReferenceException from Selenium.</msg>
 <arg>css=div.back-spenner.ng-star-inserted</arg>
 <arg>1000</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:27.203922" elapsed="18.680388"/>
+<status status="PASS" start="2026-02-27T00:05:20.305740" elapsed="0.029353"/>
 </kw>
 <doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T01:26:27.203702" elapsed="18.680871"/>
+<status status="PASS" start="2026-02-27T00:05:20.304706" elapsed="0.030828"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:20.336031" elapsed="0.032476"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:20.368996" level="INFO">Clicking element 'css=ng-select[formcontrolname='wardfileld']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:20.368710" elapsed="0.086262"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:20.455309" elapsed="0.051969"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:20.507860" level="INFO">Typing text 'اطفال 2 - تخت خالی (32)' into text field 'css=ng-select[formcontrolname='wardfileld'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:20.507499" elapsed="0.152703"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:20.660459" elapsed="0.016954"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:20.677822" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'اطفال 2 - تخت خالی (32)')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:20.677589" elapsed="0.055704"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:20.734644" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='wardfileld'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:21.042701" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:21.043099" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-27T00:05:20.733846" elapsed="0.352820"/>
+</kw>
+<arg>wardfileld</arg>
+<arg>اطفال 2 - تخت خالی (32)</arg>
+<status status="PASS" start="2026-02-27T00:05:20.303381" elapsed="0.783514"/>
+</kw>
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:21.088720" elapsed="3.046835"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:05:21.088189" elapsed="3.047676"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.136280" elapsed="0.040731"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:24.178025" level="INFO">Clicking element 'css=ng-select[formcontrolname='doctorField']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.177430" elapsed="0.156397"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.334091" elapsed="0.024858"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:24.359536" level="INFO">Typing text 'Siavash Siavash' into text field 'css=ng-select[formcontrolname='doctorField'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.359178" elapsed="0.179665"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.539120" elapsed="0.024098"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:24.563627" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'Siavash Siavash')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.563394" elapsed="0.052159"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:24.616092" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='doctorField'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:24.923445" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:24.923616" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.615724" elapsed="0.346605"/>
+</kw>
+<arg>doctorField</arg>
+<arg>Siavash Siavash</arg>
+<status status="PASS" start="2026-02-27T00:05:21.087505" elapsed="3.874997"/>
+</kw>
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.966648" elapsed="0.009316"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:05:24.966140" elapsed="0.009945"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:24.976222" elapsed="0.027665"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:25.004309" level="INFO">Clicking element 'css=ng-select[formcontrolname='responsiblePatient']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.004071" elapsed="0.055813"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.060067" elapsed="0.014027"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:25.074548" level="INFO">Typing text 'خود فرد' into text field 'css=ng-select[formcontrolname='responsiblePatient'] input[type='text']'.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.074264" elapsed="0.090820"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.165271" elapsed="0.014904"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:25.180630" level="INFO">Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'خود فرد')]'.</msg>
+<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.180350" elapsed="0.048968"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:25.229978" level="INFO">Sending key(s) ('TAB',) to css=ng-select[formcontrolname='responsiblePatient'] input[type='text'] element.</msg>
+<msg time="2026-02-27T00:05:25.556737" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2026-02-27T00:05:25.556871" level="INFO">Releasing special key TAB.</msg>
+<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.229603" elapsed="0.355301"/>
+</kw>
+<arg>responsiblePatient</arg>
+<arg>خود فرد</arg>
+<status status="PASS" start="2026-02-27T00:05:24.965457" elapsed="0.619574"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:25.587228" level="INFO">Typing text '10000' into text field '//input[@formcontrolname='prepayment']'.</msg>
+<arg>//input[@formcontrolname='prepayment']</arg>
+<arg>10000</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.586446" elapsed="0.116704"/>
+</kw>
+<doc>انتخاب بخش و پزشک بیمار preadmit</doc>
+<tag>preadmit</tag>
+<tag>step04</tag>
+<tag>UI_Test</tag>
+<status status="PASS" start="2026-02-27T00:05:17.127783" elapsed="8.575817"/>
+</test>
+<test id="s1-t5" name="05-UI - Save Admission Filing" line="78">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:25.705778" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.705646" elapsed="0.000187"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:25.705378" elapsed="0.000527"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:25.706638" elapsed="0.006431"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:05:25.706428" elapsed="0.006804"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T01:26:45.884840" elapsed="0.023915"/>
+<status status="PASS" start="2026-02-27T00:05:25.713635" elapsed="0.022450"/>
 </kw>
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2026-02-05T01:26:45.909022" elapsed="0.028667"/>
+<status status="PASS" start="2026-02-27T00:05:25.736256" elapsed="0.019555"/>
 </kw>
 <kw name="Scroll Element Into View" owner="SeleniumLibrary">
 <arg>${locator}</arg>
 <doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="PASS" start="2026-02-05T01:26:45.937941" elapsed="0.273525"/>
+<status status="PASS" start="2026-02-27T00:05:25.755998" elapsed="0.284110"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T01:26:46.212845" level="INFO">Clicking element 'css=button.swal2-deny.swal2-styled'.</msg>
+<msg time="2026-02-27T00:05:26.041650" level="INFO">Clicking element 'css=button.btn-saveFile'.</msg>
 <arg>${locator}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-02-05T01:26:46.212062" elapsed="0.219548"/>
+<status status="PASS" start="2026-02-27T00:05:26.040825" elapsed="0.171638"/>
+</kw>
+<arg>css=button.btn-saveFile</arg>
+<status status="PASS" start="2026-02-27T00:05:25.706161" elapsed="0.506578"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:29.354499" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:05:26.214194" elapsed="3.142948">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:05:26.213711" elapsed="3.143695"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:29.357751" elapsed="0.024201"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:26.213298" elapsed="3.168965"/>
+</kw>
+<doc>سیو کردن پذیرش preadmit</doc>
+<tag>preadmit</tag>
+<tag>step05</tag>
+<tag>UI_Test</tag>
+<status status="PASS" start="2026-02-27T00:05:25.704657" elapsed="3.678403"/>
+</test>
+<test id="s1-t6" name="06-UI - deny admit print page" line="89">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:29.387386" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:05:29.387054" elapsed="0.000483"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:29.386387" elapsed="0.001347"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:46.515772" level="INFO">Suppressing StaleElementReferenceException from Selenium.</msg>
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:29.390287" elapsed="17.333967"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:05:29.389585" elapsed="17.334784"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:46.724508" elapsed="0.017924"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-27T00:05:46.742599" elapsed="0.023577"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-27T00:05:46.766353" elapsed="0.294185"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:47.061180" level="INFO">Clicking element 'css=button.swal2-deny.swal2-styled'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:47.060819" elapsed="0.131665"/>
 </kw>
 <arg>css=button.swal2-deny.swal2-styled</arg>
-<status status="PASS" start="2026-02-05T01:26:27.203397" elapsed="19.228489"/>
+<status status="PASS" start="2026-02-27T00:05:29.388553" elapsed="17.804194"/>
 </kw>
 <doc>لغو پرینت برگه پذیرش</doc>
-<tag>inpatient</tag>
-<tag>step18</tag>
+<tag>preadmit</tag>
+<tag>step06</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2026-02-05T01:26:27.202824" elapsed="19.230607"/>
+<status status="PASS" start="2026-02-27T00:05:29.385069" elapsed="17.808111"/>
 </test>
-<status status="PASS" start="2026-02-05T01:25:49.664608" elapsed="56.771933"/>
+<test id="s1-t7" name="07-UI - Open Cash Web And Pay" line="96">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:47.195814" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:05:47.195644" elapsed="0.000246"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:47.195306" elapsed="0.000755"/>
+</kw>
+<kw name="Cash Pay Patient By National Code" owner="AdmitHis-keywords">
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:50.287494" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:05:47.197712" elapsed="3.094062">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:05:47.197142" elapsed="3.095044"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:50.292734" elapsed="0.023570"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:47.196827" elapsed="3.119924"/>
+</kw>
+<kw name="Switch To Cash App" owner="AdmitHis-keywords">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:50.318830" level="INFO">Opening url 'http://192.168.5.19:8075/admit'</msg>
+<arg>${Cash_App_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-02-27T00:05:50.318320" elapsed="0.262993"/>
+</kw>
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>8075</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-02-27T00:05:50.581491" elapsed="0.004208"/>
+</kw>
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:50.586236" elapsed="0.012576"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:05:50.585946" elapsed="0.012984"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:53.820659" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:05:50.599660" elapsed="3.225790">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:05:50.599359" elapsed="3.226535"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:53.826599" elapsed="0.023530"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:50.599103" elapsed="3.251452"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:50.317403" elapsed="3.533403"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:56.974967" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:05:53.854620" elapsed="3.124530">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:05:53.852625" elapsed="3.126919"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:56.980149" elapsed="0.026504"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:53.851411" elapsed="3.155637"/>
+</kw>
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:05:57.008702" elapsed="0.019745"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:05:57.007660" elapsed="0.021269"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:05:57.030505" level="INFO">Typing text '1520554001' into text field 'xpath=//input[@formcontrolname='nationalCode']'.</msg>
+<arg>xpath=//input[@formcontrolname='nationalCode']</arg>
+<arg>${nationalCode}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:05:57.029542" elapsed="0.249285"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:00.360051" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:05:57.280213" elapsed="3.085360">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:05:57.279659" elapsed="3.086330"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:00.366530" elapsed="0.023082"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:05:57.279143" elapsed="3.110870"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:00.392604" elapsed="0.022498"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:00.391769" elapsed="0.023898"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:00.416180" elapsed="0.123159"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-27T00:06:00.539546" elapsed="0.021130"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-27T00:06:00.560849" elapsed="0.273843"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:00.837068" level="INFO">Clicking element 'xpath=//button[contains(@class,'btn-warning') and .//mat-icon[.='search']]'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:00.835711" elapsed="0.139423"/>
+</kw>
+<arg>xpath=//button[contains(@class,'btn-warning') and .//mat-icon[.='search']]</arg>
+<status status="PASS" start="2026-02-27T00:06:00.390650" elapsed="0.584741"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:04.071289" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:00.977416" elapsed="3.096338">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:00.976919" elapsed="3.097075"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.074327" elapsed="0.015394"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:00.975909" elapsed="3.114069"/>
+</kw>
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.090926" elapsed="0.285255"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:04.090346" elapsed="0.285942"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-27T00:06:04.376772" level="INFO">${row_xpath} = //tr[.//td[contains(normalize-space(), '1520554001')]]</msg>
+<var>${row_xpath}</var>
+<arg>//tr[.//td[contains(normalize-space(), '${nationalCode}')]]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.376430" elapsed="0.000374"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:04.397805" level="INFO">Element '//tr[.//td[contains(normalize-space(), '1520554001')]]' is displayed.</msg>
+<arg>${row_xpath}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.377271" elapsed="0.020625"/>
+</kw>
+<arg>3x</arg>
+<arg>5s</arg>
+<arg>Element Should Be Visible</arg>
+<arg>${row_xpath}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.376924" elapsed="0.021065"/>
+</kw>
+<kw name="Double Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:04.398347" level="INFO">Double clicking element '//tr[.//td[contains(normalize-space(), '1520554001')]]'.</msg>
+<arg>${row_xpath}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.398151" elapsed="0.407979"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[normalize-space(text())='پرداخت']</arg>
+<arg>30s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.806420" elapsed="0.037373"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.845047" elapsed="0.009068"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:04.844648" elapsed="0.009739"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.854706" elapsed="0.020136"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.875172" elapsed="0.021431"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-27T00:06:04.896772" elapsed="0.301183"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:05.198465" level="INFO">Clicking element 'xpath=//button[normalize-space(text())='پرداخت']'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:05.198151" elapsed="0.083422"/>
+</kw>
+<arg>xpath=//button[normalize-space(text())='پرداخت']</arg>
+<status status="PASS" start="2026-02-27T00:06:04.844157" elapsed="0.437558"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:08.384515" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:05.284000" elapsed="3.104966">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:05.282224" elapsed="3.107145"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.389951" elapsed="0.023143"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:05.281907" elapsed="3.131732"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.416223" elapsed="0.021891"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:08.415391" elapsed="0.023151"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.439139" elapsed="0.046301"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.485814" elapsed="0.047087"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.533313" elapsed="0.290737"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:08.825395" level="INFO">Clicking element 'xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.824665" elapsed="0.162159"/>
+</kw>
+<arg>xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']</arg>
+<status status="PASS" start="2026-02-27T00:06:08.414280" elapsed="0.572847"/>
+</kw>
+<arg>${nationalCode}</arg>
+<doc>Open Cash App, search patient by national code and complete payment flow</doc>
+<status status="PASS" start="2026-02-27T00:05:47.196437" elapsed="21.790853"/>
+</kw>
+<doc>باز کردن صندوق و دریافت پیش پرداخت بیمار پری ادمیت</doc>
+<tag>preadmit</tag>
+<tag>step07</tag>
+<tag>UI_Test</tag>
+<status status="PASS" start="2026-02-27T00:05:47.194220" elapsed="21.793751"/>
+</test>
+<test id="s1-t8" name="08-UI - go to inpatient list" line="104">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:08.995748" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.995447" elapsed="0.000439"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:08.994357" elapsed="0.001903"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:12.139808" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:08.999652" elapsed="3.145622">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:08.999016" elapsed="3.146649"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:12.146169" elapsed="0.026193"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:08.998475" elapsed="3.174260"/>
+</kw>
+<kw name="Switch To AdmitHis App" owner="AdmitHis-keywords">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:12.174955" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
+<arg>${AdmitHis_App_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-02-27T00:06:12.174621" elapsed="0.159069"/>
+</kw>
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>8019</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-02-27T00:06:12.333989" elapsed="0.004645"/>
+</kw>
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:12.339089" elapsed="0.005441"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:12.338842" elapsed="0.005803"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:15.443700" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:12.345374" elapsed="3.102921">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:12.345069" elapsed="3.103635"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:15.449236" elapsed="0.023123"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:12.344810" elapsed="3.127953"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:12.173919" elapsed="3.299118"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:15.476453" elapsed="0.026800"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:15.475568" elapsed="0.028100"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:15.504379" elapsed="2.949155"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-27T00:06:18.453719" elapsed="0.025787"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-27T00:06:18.479699" elapsed="0.291629"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:18.771840" level="INFO">Clicking element 'xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:18.771554" elapsed="0.254330"/>
+</kw>
+<arg>xpath=//img[@src='assets/icons/inpatient.svg']/ancestor::a</arg>
+<status status="PASS" start="2026-02-27T00:06:15.474289" elapsed="3.551818"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:22.118504" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:19.027803" elapsed="3.092351">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:19.027205" elapsed="3.093103"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:22.120503" elapsed="0.013211"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:19.026642" elapsed="3.107290"/>
+</kw>
+<doc>رفتن به لیست بیماران بستری</doc>
+<tag>preadmit</tag>
+<tag>step08</tag>
+<tag>UI_Test</tag>
+<status status="PASS" start="2026-02-27T00:06:08.991452" elapsed="13.142952"/>
+</test>
+<test id="s1-t9" name="09-UI - Load Preadmit Patient List" line="117">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:22.136682" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:06:22.136502" elapsed="0.000256"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:22.136153" elapsed="0.000711"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:25.197459" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:22.138027" elapsed="3.062806">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:22.137593" elapsed="3.063549"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:25.201676" elapsed="0.020933"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:22.137198" elapsed="3.085614"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:25.224448" elapsed="2.158436"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:25.224079" elapsed="2.159138"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:27.383603" elapsed="0.029522"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-27T00:06:27.413313" elapsed="0.021151"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-27T00:06:27.434657" elapsed="0.271181"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:27.707373" level="INFO">Clicking element 'xpath=//span[contains(@class,'mat-checkbox-inner-container')]'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:27.706538" elapsed="0.187719"/>
+</kw>
+<arg>xpath=//span[contains(@class,'mat-checkbox-inner-container')]</arg>
+<status status="PASS" start="2026-02-27T00:06:25.223482" elapsed="2.671051"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:30.985756" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:27.896648" elapsed="3.094497">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:27.895862" elapsed="3.095727"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:30.992154" elapsed="0.024036"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:27.895158" elapsed="3.121349"/>
+</kw>
+<doc>لیست بیماران preadmit</doc>
+<tag>preadmit</tag>
+<tag>step09</tag>
+<tag>UI_Test</tag>
+<status status="PASS" start="2026-02-27T00:06:22.135471" elapsed="8.881687"/>
+</test>
+<test id="s1-t10" name="10-UI - Edit Preadmit Patient" line="130">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:31.020930" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:06:31.020672" elapsed="0.000371"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:31.020168" elapsed="0.001039"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:34.139290" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:31.022996" elapsed="3.120707">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:31.022276" elapsed="3.121828"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.144697" elapsed="0.016820"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:31.021769" elapsed="3.139999"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:34.162845" level="INFO">Typing text '1520554001' into text field '//input[@formcontrolname='nationalCode']'.</msg>
+<arg>//input[@formcontrolname='nationalCode']</arg>
+<arg>${nationalCode}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.162290" elapsed="0.156554"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.320373" elapsed="0.009043"/>
+</kw>
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="PASS" start="2026-02-27T00:06:34.319918" elapsed="0.009826"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.329987" elapsed="0.017014"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.347170" elapsed="0.015471"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.362824" elapsed="0.294647"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:34.659408" level="INFO">Clicking element 'css=button.mat-tooltip-trigger.btn.btn-warning'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.658594" elapsed="0.178638"/>
+</kw>
+<arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
+<status status="PASS" start="2026-02-27T00:06:34.319370" elapsed="0.518389"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:36.497212" level="FAIL">WebDriverException: Message: target frame detached
+  (failed to check if window was closed: disconnected: Unable to receive message from renderer)
+  (Session info: chrome=145.0.7632.116)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f2eda20
+	0x7ff64f2ec856
+	0x7ff64f3129cb
+	0x7ff64f38d500
+	0x7ff64f3a9652
+	0x7ff64f34cb0c
+	0x7ff64f34da53
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f568844
+	0x7ff64f5689f6
+	0x7ff64f54eb87
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:34.841858" elapsed="1.661370">WebDriverException: Message: target frame detached
+  (failed to check if window was closed: disconnected: Unable to receive message from renderer)
+  (Session info: chrome=145.0.7632.116)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f2eda20
+	0x7ff64f2ec856
+	0x7ff64f3129cb
+	0x7ff64f38d500
+	0x7ff64f3a9652
+	0x7ff64f34cb0c
+	0x7ff64f34da53
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f568844
+	0x7ff64f5689f6
+	0x7ff64f54eb87
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:34.840164" elapsed="1.663271"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:36.594878" level="FAIL">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=145.0.7632.116); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f3010bd
+	0x7ff64f2ec642
+	0x7ff64f3129cb
+	0x7ff64f38d500
+	0x7ff64f3a9652
+	0x7ff64f34cb0c
+	0x7ff64f34da53
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f568844
+	0x7ff64f5689f6
+	0x7ff64f54eb87
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="FAIL" start="2026-02-27T00:06:36.503701" elapsed="0.095694">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=145.0.7632.116); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f3010bd
+	0x7ff64f2ec642
+	0x7ff64f3129cb
+	0x7ff64f38d500
+	0x7ff64f3a9652
+	0x7ff64f34cb0c
+	0x7ff64f34da53
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f568844
+	0x7ff64f5689f6
+	0x7ff64f54eb87
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<status status="FAIL" start="2026-02-27T00:06:34.838873" elapsed="1.760866">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=145.0.7632.116); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f3010bd
+	0x7ff64f2ec642
+	0x7ff64f3129cb
+	0x7ff64f38d500
+	0x7ff64f3a9652
+	0x7ff64f34cb0c
+	0x7ff64f34da53
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f568844
+	0x7ff64f5689f6
+	0x7ff64f54eb87
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>css=button.mat-tooltip-trigger.btn-action.ng-star-inserted</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.600305" elapsed="0.000105"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.601160" elapsed="0.000106"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>css=button.mat-tooltip-trigger.btn.btn-edit1</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.601931" elapsed="0.000098"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.602830" elapsed="0.000116"/>
+</kw>
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<arg>wardfileld</arg>
+<arg>اطفال 2 - تخت خالی (33)</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.603936" elapsed="0.000101"/>
+</kw>
+<kw name="Select From Ng Select" owner="AdmitHis-keywords">
+<arg>doctorField</arg>
+<arg>Siavash Siavash</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.604645" elapsed="0.000101"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.605305" elapsed="0.000088"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>css=button.btn-saveFile</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.606408" elapsed="0.000108"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.607278" elapsed="0.000090"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>css=button.swal2-deny.swal2-styled</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.607882" elapsed="0.000099"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.616142" elapsed="0.000092"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>xpath=//span[contains(@class,'mat-checkbox-inner-container')]</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.617815" elapsed="0.000102"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.618735" elapsed="0.000107"/>
+</kw>
+<doc>ویرایش بیمار preadmit</doc>
+<tag>preadmit</tag>
+<tag>step10</tag>
+<tag>UI_Test</tag>
+<status status="FAIL" start="2026-02-27T00:06:31.019090" elapsed="5.600248">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=145.0.7632.116); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f3010bd
+	0x7ff64f2ec642
+	0x7ff64f3129cb
+	0x7ff64f38d500
+	0x7ff64f3a9652
+	0x7ff64f34cb0c
+	0x7ff64f34da53
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f568844
+	0x7ff64f5689f6
+	0x7ff64f54eb87
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</test>
+<test id="s1-t11" name="11-UI - Cancel Preadmit" line="159">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:36.636495" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:06:36.636011" elapsed="0.000615"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:36.635180" elapsed="0.001608"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:36.637883" level="INFO">Typing text '1520554001' into text field 'xpath=//input[@formcontrolname='nationalCode']'.</msg>
+<msg time="2026-02-27T00:06:36.773186" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</msg>
+<arg>xpath=//input[@formcontrolname='nationalCode']</arg>
+<arg>${nationalCode}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="FAIL" start="2026-02-27T00:06:36.637375" elapsed="0.138700">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>css=button.mat-tooltip-trigger.btn.btn-warning</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.776595" elapsed="0.000060"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.776912" elapsed="0.000035"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>xpath=//button[not(@hidden) and .//mat-icon[normalize-space(.)='cancel']]</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.777153" elapsed="0.000033"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.777380" elapsed="0.000031"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.777642" elapsed="0.000034"/>
+</kw>
+<doc>لغو پذیرش preadmit</doc>
+<tag>preadmit</tag>
+<tag>step11</tag>
+<tag>UI_Test</tag>
+<status status="FAIL" start="2026-02-27T00:06:36.633028" elapsed="0.144878">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</test>
+<test id="s1-t12" name="12-UI - Open Cash Web And Refund" line="179">
+<kw name="Disable Screenshots" owner="AdmitHis-keywords">
+<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:36.781279" level="INFO">No keyword will be run on failure.</msg>
+<arg>NONE</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2026-02-27T00:06:36.781150" elapsed="0.000193"/>
+</kw>
+<status status="PASS" start="2026-02-27T00:06:36.780903" elapsed="0.000511"/>
+</kw>
+<kw name="Cash Refund Patient By National Code" owner="AdmitHis-keywords">
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:36.784662" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-02-27T00:06:36.783098" elapsed="0.005511">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-02-27T00:06:36.782668" elapsed="0.006180"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<msg time="2026-02-27T00:06:36.791599" level="FAIL">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="FAIL" start="2026-02-27T00:06:36.789109" elapsed="0.006475">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<status status="FAIL" start="2026-02-27T00:06:36.782284" elapsed="0.013480">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<kw name="Switch To Cash App" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.795947" elapsed="0.000037"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.796102" elapsed="0.000029"/>
+</kw>
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.796235" elapsed="0.000029"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>xpath=//input[@formcontrolname='nationalCode']</arg>
+<arg>${nationalCode}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.796369" elapsed="0.000027"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.796511" elapsed="0.000032"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>xpath=//button[contains(@class,'btn-warning') and .//mat-icon[.='search']]</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.796655" elapsed="0.000027"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.796784" elapsed="0.000025"/>
+</kw>
+<kw name="Wait For Spinner Hidden" owner="AdmitHis-keywords">
+<doc>صبر کردن تا loading Angular ناپدید شود</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.796907" elapsed="0.000025"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${row_xpath}</var>
+<arg>//tr[.//td[contains(normalize-space(), '${nationalCode}')]]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.797048" elapsed="0.000045"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<arg>3x</arg>
+<arg>5s</arg>
+<arg>Element Should Be Visible</arg>
+<arg>${row_xpath}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.797285" elapsed="0.000037"/>
+</kw>
+<kw name="Double Click Element" owner="SeleniumLibrary">
+<arg>${row_xpath}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.797427" elapsed="0.000026"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>xpath=//input[@formcontrolname='comment']</arg>
+<arg>test</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.797540" elapsed="0.000024"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[normalize-space(text())='بازپرداخت']</arg>
+<arg>30s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2026-02-27T00:06:36.797655" elapsed="0.000025"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>xpath=//button[normalize-space(text())='بازپرداخت']</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.797810" elapsed="0.000029"/>
+</kw>
+<kw name="Wait For Page Ready" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-02-27T00:06:36.797946" elapsed="0.000026"/>
+</kw>
+<kw name="Click Element Safe" owner="AdmitHis-keywords">
+<arg>xpath=//button[contains(@class,'swal2-confirm') and normalize-space(.)='بله']</arg>
+<status status="NOT RUN" start="2026-02-27T00:06:36.798081" elapsed="0.000026"/>
+</kw>
+<arg>${nationalCode}</arg>
+<doc>Open Cash App, search patient by national code and complete payment flow</doc>
+<status status="FAIL" start="2026-02-27T00:06:36.781838" elapsed="0.016372">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</kw>
+<doc>بازپرداخت به بیمار در صندوق</doc>
+<tag>preadmit</tag>
+<tag>step12</tag>
+<tag>UI_Test</tag>
+<status status="FAIL" start="2026-02-27T00:06:36.780379" elapsed="0.018144">InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff64f55f3d5
+	0x7ff64f55f430
+	0x7ff64f300ea6
+	0x7ff64f34bb13
+	0x7ff64f3857a2
+	0x7ff64f37fbd6
+	0x7ff64f37eb41
+	0x7ff64f2c99e5
+	0x7ff64f83b470
+	0x7ff64f83586d
+	0x7ff64f85621a
+	0x7ff64f57b235
+	0x7ff64f583a5c
+	0x7ff64f2c87aa
+	0x7ff64f9972c8
+	0x7ffb37df7bd4
+	0x7ffb3910ced1
+</status>
+</test>
+<status status="FAIL" start="2026-02-27T00:03:30.919116" elapsed="185.882325"/>
 </suite>
 <statistics>
 <total>
-<stat pass="6" fail="0" skip="0">All Tests</stat>
+<stat pass="9" fail="3" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="6" fail="0" skip="0">inpatient</stat>
-<stat pass="1" fail="0" skip="0">Open_Browser</stat>
-<stat pass="1" fail="0" skip="0">step13</stat>
-<stat pass="1" fail="0" skip="0">step14</stat>
-<stat pass="1" fail="0" skip="0">step15</stat>
-<stat pass="1" fail="0" skip="0">step16</stat>
-<stat pass="1" fail="0" skip="0">step17</stat>
-<stat pass="1" fail="0" skip="0">step18</stat>
-<stat pass="6" fail="0" skip="0">UI_Test</stat>
+<stat pass="9" fail="3" skip="0">preadmit</stat>
+<stat pass="1" fail="0" skip="0">step01</stat>
+<stat pass="1" fail="0" skip="0">STEP_01_Open_Browser</stat>
+<stat pass="1" fail="0" skip="0">step02</stat>
+<stat pass="1" fail="0" skip="0">step03</stat>
+<stat pass="1" fail="0" skip="0">step04</stat>
+<stat pass="1" fail="0" skip="0">step05</stat>
+<stat pass="1" fail="0" skip="0">step06</stat>
+<stat pass="1" fail="0" skip="0">step07</stat>
+<stat pass="1" fail="0" skip="0">step08</stat>
+<stat pass="1" fail="0" skip="0">step09</stat>
+<stat pass="0" fail="1" skip="0">step10</stat>
+<stat pass="0" fail="1" skip="0">step11</stat>
+<stat pass="0" fail="1" skip="0">step12</stat>
+<stat pass="9" fail="3" skip="0">UI_Test</stat>
 </tag>
 <suite>
-<stat name="AdmitHis" id="s1" pass="6" fail="0" skip="0">AdmitHis</stat>
+<stat name="AdmitHis" id="s1" pass="9" fail="3" skip="0">AdmitHis</stat>
 </suite>
 </statistics>
 <errors>
+<msg time="2026-02-27T00:04:50.430248" level="WARN">There was an error managing chromedriver (Unsuccessful response (403 Forbidden) for URL https://storage.googleapis.com/chrome-for-testing-public/145.0.7632.117/win64/chromedriver-win64.zip); using driver found in the cache</msg>
 </errors>
 </robot>

@@ -1,294 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2026-02-05T00:42:08.907979" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2026-02-27T14:03:12.552855" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test">
-<suite id="s1-s1" name="AdmitHis" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitHis.robot">
-<kw name="Create AdmitHIS Session" type="SETUP">
+<suite id="s1-s1" name="AdmitHis-Api" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitHis-Api.robot">
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-02-05T00:42:09.344579" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-02-27T14:03:12.902734" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-02-05T00:42:09.344034" elapsed="0.001083"/>
+<status status="PASS" start="2026-02-27T14:03:12.901646" elapsed="0.001747"/>
 </kw>
-<status status="PASS" start="2026-02-05T00:42:09.342323" elapsed="0.003128"/>
+<status status="PASS" start="2026-02-27T14:03:12.899367" elapsed="0.004398"/>
 </kw>
-<test id="s1-s1-t1" name="16-UI - Assign Ward And Doctor" line="436">
-<kw name="Start Browser AdmitHis With Token">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-02-05T00:42:09.351758" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
-<msg time="2026-02-05T00:42:21.555924" level="WARN">There was an error managing chromedriver (error sending request for url (https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json)); using driver found in the cache</msg>
-<msg time="2026-02-05T00:42:21.579980" level="WARN">Error sending stats to Plausible: error sending request for url (https://plausible.io/api/event)</msg>
-<arg>${AdmitHis_App_URL}</arg>
-<arg>chrome</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-02-05T00:42:09.351023" elapsed="13.643308"/>
+<test id="s1-s1-t1" name="20-Change To Admit" line="908">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-27T14:03:12.914227" level="INFO">&amp;{headers} = { Authorization=bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3Vz...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<arg>Accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-27T14:03:12.912990" elapsed="0.001603"/>
 </kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-02-05T00:42:22.994980" elapsed="0.384857"/>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-27T14:03:12.916335" level="INFO">${body} = {'admitId': '', 'bedId': ''}</msg>
+<var>${body}</var>
+<arg>admitId=${ADMIT_ID}</arg>
+<arg>bedId=${BED_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-27T14:03:12.915073" elapsed="0.001654"/>
 </kw>
-<kw name="Add Cookie" owner="SeleniumLibrary">
-<arg>token</arg>
-<arg>${COOKIE_TOKEN}</arg>
-<doc>Adds a cookie to your current session.</doc>
-<status status="PASS" start="2026-02-05T00:42:23.380211" elapsed="0.011609"/>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-02-27T14:03:15.863391" level="INFO">POST Request : url=http://192.168.5.19:1600/api/Filing/ChangeToAdmit 
+ path_url=/api/Filing/ChangeToAdmit 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjAiLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ3MVZGTFFoc0tmRlM1eDRSMVUyYjF2YVloUjU2NEJNZHZVRzlxYUZHaUFBeVErZHBoYUpjWHAzWnVjL2dSUjZNWmk5RTc1MXNhS0RJckQ5NkovNXRKU3pXVWNNd1BqZHJmMkVpcHpvalhkZFYraHBrRytmNWc5bHR2UTM3NE5BWCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMzIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiY2hlY2siLCJyb2xlIl0sIlJvbGVJZCI6MTE5NSwiZXhwIjoxNzcyMjE0NTQwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojc3NDAvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNjU4LyJ9.gCdrocS10q5C_chKn9yAgtA7du147p78ftk6KESHZkE', 'Cookie': 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjAiLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ3MVZGTFFoc0tmRlM1eDRSMVUyYjF2YVloUjU2NEJNZHZVRzlxYUZHaUFBeVErZHBoYUpjWHAzWnVjL2dSUjZNWmk5RTc1MXNhS0RJckQ5NkovNXRKU3pXVWNNd1BqZHJmMkVpcHpvalhkZFYraHBrRytmNWc5bHR2UTM3NE5BWCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMzIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiY2hlY2siLCJyb2xlIl0sIlJvbGVJZCI6MTE5NSwiZXhwIjoxNzcyMjE0NTQwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojc3NDAvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNjU4LyJ9.gCdrocS10q5C_chKn9yAgtA7du147p78ftk6KESHZkE', 'Content-Length': '28', 'Content-Type': 'application/json'} 
+ body=b'{"admitId": "", "bedId": ""}' 
+ </msg>
+<msg time="2026-02-27T14:03:15.864376" level="INFO">POST Response : url=http://192.168.5.19:1600/api/Filing/ChangeToAdmit 
+ status=500, reason=Internal Server Error 
+ headers={'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json', 'Expires': '-1', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'Deny', 'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Download-Options': 'noopen', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Security-Policy': "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self';media-src 'self';font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content;report-uri /report", 'Content-Security-Policy-Report-Only': "default-src 'self';img-src 'self';media-src 'self'", 'X-Security': 'on', 'Date': 'Fri, 27 Feb 2026 10:33:17 GMT'} 
+ body={"isSuccess":false,"statusCode":500,"message":"Data provided in request is not valid.PreAdmitDto\r\n"} 
+ </msg>
+<msg time="2026-02-27T14:03:15.865257" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/ChangeToAdmit</msg>
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>url=/api/Filing/ChangeToAdmit</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2026-02-27T14:03:12.917210" elapsed="2.983822">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/ChangeToAdmit</status>
 </kw>
-<kw name="Reload Page" owner="SeleniumLibrary">
-<doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-02-05T00:42:23.392066" elapsed="0.126316"/>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-02-27T14:03:15.902233" elapsed="0.000710"/>
 </kw>
-<doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="PASS" start="2026-02-05T00:42:09.350233" elapsed="14.168327"/>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-02-27T14:03:15.903821" elapsed="0.000471"/>
 </kw>
-<kw name="Go To AdmitHis Page">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2026-02-05T00:42:23.520005" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
-<arg>${AdmitHis_App_URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2026-02-05T00:42:23.519612" elapsed="0.074732"/>
-</kw>
-<kw name="Reload Page" owner="SeleniumLibrary">
-<doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-02-05T00:42:23.594663" elapsed="0.066290"/>
-</kw>
-<doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
-<status status="PASS" start="2026-02-05T00:42:23.518971" elapsed="0.142230"/>
-</kw>
-<kw name="Wait For Page Ready">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T00:42:26.918599" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2026-02-05T00:42:26.919145" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-02-05T00:42:23.663532" elapsed="3.262008">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
-</kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-02-05T00:42:23.662530" elapsed="3.263241"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T00:42:26.925989" elapsed="0.009497"/>
-</kw>
-<status status="PASS" start="2026-02-05T00:42:23.661695" elapsed="3.274083"/>
-</kw>
-<kw name="Select From Ng Select">
-<kw name="Wait For Spinner Hidden">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-02-05T00:42:26.937906" elapsed="0.012050"/>
-</kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-02-05T00:42:26.937168" elapsed="0.012964"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-02-05T00:42:26.950286" elapsed="3.051532"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-02-05T00:42:30.002535" level="INFO">Clicking element 'css=ng-select[formcontrolname='wardfileld']'.</msg>
-<msg time="2026-02-05T00:42:31.343769" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2026-02-05T00:42:31.344173" level="FAIL">ElementClickInterceptedException: Message: element click intercepted: Element &lt;ng-select _ngcontent-lmb-c202="" bindlabel="name" formcontrolname="wardfileld" appendto="body" class="required ng-select-searchable ng-select-clearable ng-select ng-select-single ng-untouched ng-pristine ng-invalid"&gt;...&lt;/ng-select&gt; is not clickable at point (259, 564). Other element would receive the click: &lt;div _ngcontent-lmb-c64="" class="back-spenner ng-star-inserted"&gt;...&lt;/div&gt;
-  (Session info: chrome=144.0.7559.110); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff664bef3d5
-	0x7ff664bef430
-	0x7ff6649910bd
-	0x7ff6649f4885
-	0x7ff6649f1f9a
-	0x7ff6649eee25
-	0x7ff6649edcc7
-	0x7ff6649deee6
-	0x7ff664a1589a
-	0x7ff6649de766
-	0x7ff664a39d08
-	0x7ff6649dcb0c
-	0x7ff6649dda53
-	0x7ff664ecb470
-	0x7ff664ec586d
-	0x7ff664ee621a
-	0x7ff664c0b235
-	0x7ff664c13a5c
-	0x7ff664bf8844
-	0x7ff664bf89f6
-	0x7ff664bdeb87
-	0x7ff802787bd4
-	0x7ff802a6ced1
-</msg>
-<arg>css=ng-select[formcontrolname='${formcontrol}']</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="FAIL" start="2026-02-05T00:42:30.002053" elapsed="1.354385">ElementClickInterceptedException: Message: element click intercepted: Element &lt;ng-select _ngcontent-lmb-c202="" bindlabel="name" formcontrolname="wardfileld" appendto="body" class="required ng-select-searchable ng-select-clearable ng-select ng-select-single ng-untouched ng-pristine ng-invalid"&gt;...&lt;/ng-select&gt; is not clickable at point (259, 564). Other element would receive the click: &lt;div _ngcontent-lmb-c64="" class="back-spenner ng-star-inserted"&gt;...&lt;/div&gt;
-  (Session info: chrome=144.0.7559.110); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff664bef3d5
-	0x7ff664bef430
-	0x7ff6649910bd
-	0x7ff6649f4885
-	0x7ff6649f1f9a
-	0x7ff6649eee25
-	0x7ff6649edcc7
-	0x7ff6649deee6
-	0x7ff664a1589a
-	0x7ff6649de766
-	0x7ff664a39d08
-	0x7ff6649dcb0c
-	0x7ff6649dda53
-	0x7ff664ecb470
-	0x7ff664ec586d
-	0x7ff664ee621a
-	0x7ff664c0b235
-	0x7ff664c13a5c
-	0x7ff664bf8844
-	0x7ff664bf89f6
-	0x7ff664bdeb87
-	0x7ff802787bd4
-	0x7ff802a6ced1
-</status>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2026-02-05T00:42:31.357246" elapsed="0.000494"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>${value}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-02-05T00:42:31.358130" elapsed="0.000426"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2026-02-05T00:42:31.358979" elapsed="0.000399"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<arg>xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-02-05T00:42:31.359724" elapsed="0.000370"/>
-</kw>
-<kw name="Press Keys" owner="SeleniumLibrary">
-<arg>css=ng-select[formcontrolname='${formcontrol}'] input[type='text']</arg>
-<arg>TAB</arg>
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="NOT RUN" start="2026-02-05T00:42:31.360491" elapsed="0.000290"/>
-</kw>
-<arg>wardfileld</arg>
-<arg>اطفال 2 - تخت خالی (33)</arg>
-<status status="FAIL" start="2026-02-05T00:42:26.936312" elapsed="4.424701">ElementClickInterceptedException: Message: element click intercepted: Element &lt;ng-select _ngcontent-lmb-c202="" bindlabel="name" formcontrolname="wardfileld" appendto="body" class="required ng-select-searchable ng-select-clearable ng-select ng-select-single ng-untouched ng-pristine ng-invalid"&gt;...&lt;/ng-select&gt; is not clickable at point (259, 564). Other element would receive the click: &lt;div _ngcontent-lmb-c64="" class="back-spenner ng-star-inserted"&gt;...&lt;/div&gt;
-  (Session info: chrome=144.0.7559.110); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff664bef3d5
-	0x7ff664bef430
-	0x7ff6649910bd
-	0x7ff6649f4885
-	0x7ff6649f1f9a
-	0x7ff6649eee25
-	0x7ff6649edcc7
-	0x7ff6649deee6
-	0x7ff664a1589a
-	0x7ff6649de766
-	0x7ff664a39d08
-	0x7ff6649dcb0c
-	0x7ff6649dda53
-	0x7ff664ecb470
-	0x7ff664ec586d
-	0x7ff664ee621a
-	0x7ff664c0b235
-	0x7ff664c13a5c
-	0x7ff664bf8844
-	0x7ff664bf89f6
-	0x7ff664bdeb87
-	0x7ff802787bd4
-	0x7ff802a6ced1
-</status>
-</kw>
-<kw name="Select From Ng Select">
-<arg>bedNum</arg>
-<arg>اتاق1 - تخت عمومي - تخت18</arg>
-<status status="NOT RUN" start="2026-02-05T00:42:31.361561" elapsed="0.000246"/>
-</kw>
-<kw name="Select From Ng Select">
-<arg>doctorField</arg>
-<arg>Siavash Siavash</arg>
-<status status="NOT RUN" start="2026-02-05T00:42:31.362254" elapsed="0.000179"/>
-</kw>
-<kw name="Select From Ng Select">
-<arg>responsiblePatient</arg>
-<arg>خود فرد</arg>
-<status status="NOT RUN" start="2026-02-05T00:42:31.362839" elapsed="0.000162"/>
-</kw>
-<doc>انتخاب بخش و پزشک بیمار preadmit</doc>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-02-05T00:42:09.345727" elapsed="22.017702">ElementClickInterceptedException: Message: element click intercepted: Element &lt;ng-select _ngcontent-lmb-c202="" bindlabel="name" formcontrolname="wardfileld" appendto="body" class="required ng-select-searchable ng-select-clearable ng-select ng-select-single ng-untouched ng-pristine ng-invalid"&gt;...&lt;/ng-select&gt; is not clickable at point (259, 564). Other element would receive the click: &lt;div _ngcontent-lmb-c64="" class="back-spenner ng-star-inserted"&gt;...&lt;/div&gt;
-  (Session info: chrome=144.0.7559.110); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	0x7ff664bef3d5
-	0x7ff664bef430
-	0x7ff6649910bd
-	0x7ff6649f4885
-	0x7ff6649f1f9a
-	0x7ff6649eee25
-	0x7ff6649edcc7
-	0x7ff6649deee6
-	0x7ff664a1589a
-	0x7ff6649de766
-	0x7ff664a39d08
-	0x7ff6649dcb0c
-	0x7ff6649dda53
-	0x7ff664ecb470
-	0x7ff664ec586d
-	0x7ff664ee621a
-	0x7ff664c0b235
-	0x7ff664c13a5c
-	0x7ff664bf8844
-	0x7ff664bf89f6
-	0x7ff664bdeb87
-	0x7ff802787bd4
-	0x7ff802a6ced1
-</status>
+<doc>تبدیل preadmit به بستری</doc>
+<tag>API_Filing</tag>
+<tag>METHOD_POST</tag>
+<tag>priadmit</tag>
+<status status="FAIL" start="2026-02-27T14:03:12.904018" elapsed="3.001072">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/ChangeToAdmit</status>
 </test>
-<status status="FAIL" start="2026-02-05T00:42:08.991290" elapsed="22.386728"/>
+<status status="FAIL" start="2026-02-27T14:03:12.594595" elapsed="3.345128"/>
 </suite>
-<status status="FAIL" start="2026-02-05T00:42:08.915259" elapsed="22.473690"/>
+<status status="FAIL" start="2026-02-27T14:03:12.558023" elapsed="3.386674"/>
 </suite>
 <statistics>
 <total>
 <stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1" skip="0">UI_Test</stat>
+<stat pass="0" fail="1" skip="0">API_Filing</stat>
+<stat pass="0" fail="1" skip="0">METHOD_POST</stat>
+<stat pass="0" fail="1" skip="0">priadmit</stat>
 </tag>
 <suite>
 <stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis" id="s1-s1" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitHis</stat>
+<stat name="AdmitHis-Api" id="s1-s1" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitHis-Api</stat>
 </suite>
 </statistics>
 <errors>
-<msg time="2026-02-05T00:42:09.329644" level="ERROR">Error in file 'D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitHis.robot' on line 6: Initializing library 'SeleniumLibrary' with arguments [ screenshot_on_failure=False ] failed: ValueError: Invalid time string 'screenshot_on_failure=False'.
-Traceback (most recent call last):
-  File "D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\__init__.py", line 631, in __init__
-    self.timeout = _convert_timeout(timeout)
-                   ~~~~~~~~~~~~~~~~^^^^^^^^^
-  File "D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\SeleniumLibrary\utils\types.py", line 42, in _convert_timeout
-    return timestr_to_secs(timeout)
-  File "D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\.venv\Lib\site-packages\robot\utils\robottime.py", line 61, in timestr_to_secs
-    raise ValueError(f"Invalid time string '{timestr}'.")
-ValueError: Invalid time string 'screenshot_on_failure=False'.</msg>
-<msg time="2026-02-05T00:42:21.555924" level="WARN">There was an error managing chromedriver (error sending request for url (https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json)); using driver found in the cache</msg>
-<msg time="2026-02-05T00:42:21.579980" level="WARN">Error sending stats to Plausible: error sending request for url (https://plausible.io/api/event)</msg>
 </errors>
 </robot>
