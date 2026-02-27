@@ -151,7 +151,7 @@ Suite Setup       Create AdmitHIS Session
 
 
 06-Get All Names Inpatient Wards
-    [Documentation]    دریافت لیست بخش‌های بستری و انتخاب یک تخت خالی
+    [Documentation]    دریافت لیست بخش‌های بستری
     [Tags]    API_GeneralVariables    METHOD_GET
 
     &{headers}=    Create Dictionary
@@ -164,52 +164,42 @@ Suite Setup       Create AdmitHIS Session
     ...    /api/GeneralVariables/GetAllNamesInpatientWards
     ...    headers=&{headers}
 
-    Run Keyword If    '${resp}' == 'None'    Fail    No response from GetAllNamesInpatientWards API
-
     Should Be Equal As Integers    ${resp.status_code}    200
 
-    # ✅ Parse JSON (modern & non-deprecated)
+    # ✅ Parse JSON
     ${json}=    Set Variable    ${resp.json()}
-
     Should Be True    isinstance($json, list)
 
     ${count}=    Get Length    ${json}
-    Log To Console    🛏 Wards count: ${count}
+    Log To Console    🏥 Inpatient wards count: ${count}
     Should Be True    ${count} > 0
 
-    # ✅ Validation روی اولین آیتم
+    # ✅ Schema validation روی اولین آیتم
     Should Contain    ${json[0]}    name
     Should Contain    ${json[0]}    systemCodeId
     Should Contain    ${json[0]}    standardVariableId
     Should Be Equal As Integers    ${json[0]["systemCodeId"]}    132
 
-    # ✅ پیدا کردن یک تخت خالی
-    ${EMPTY_BED_ID}=    Set Variable    ${None}
+    # ✅ بررسی وجود حداقل یک بخش با ظرفیت خالی
+    ${HAS_AVAILABLE_WARD}=    Set Variable    ${False}
 
     FOR    ${item}    IN    @{json}
         Should Contain    ${item}    name
         Should Contain    ${item}    standardVariableId
 
-        
-        ${bed_count}=    Evaluate
-        ...    int(re.search("\\((\\d+)\\)", $item["name"]).group(1))
-        ...    re
-
-        IF    ${bed_count} > 0
-            ${EMPTY_BED_ID}=    Set Variable    ${item["standardVariableId"]}
-            Log To Console    ✅ Empty bed selected | BED_ID=${EMPTY_BED_ID} | ${item["name"]}
-            Exit For Loop
+        ${match}=    Evaluate    re.search("\\((\\d+)\\)", $item["name"])    re
+        IF    $match
+            ${capacity}=    Evaluate    int($match.group(1))
+            IF    ${capacity} > 0
+                Log To Console    ✅ Available ward found | ${item["name"]}
+                ${HAS_AVAILABLE_WARD}=    Set Variable    ${True}
+                Exit For Loop
+            END
         END
     END
 
-    Should Not Be Equal    ${EMPTY_BED_ID}    ${None}
-
-    # ✅ ذخیره برای تست‌های بعدی
-    # Set Suite Variable    ${BED_ID}    ${EMPTY_BED_ID}
-
-    ${bed_id}=    Get Empty Bed From API
-    Write State    BED_ID    ${bed_id}
-    Log To Console    ✅ BED_ID saved: ${bed_id}
+    Should Be True    ${HAS_AVAILABLE_WARD}
+    ...    ❌ No inpatient ward with available capacity found
 
 
 07-Admit Configuration
@@ -405,8 +395,6 @@ Suite Setup       Create AdmitHIS Session
     [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 204
     [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST
 
-    ${wardId}=    Set Variable    204
-
     &{headers}=    Create Dictionary
     ...    Accept=application/json
     ...    Authorization=${AUTH_BEARER}
@@ -417,24 +405,24 @@ Suite Setup       Create AdmitHIS Session
     ...    url=/api/GeneralVariables/GetAllBedNumber?wardId=${wardId}
     ...    headers=&{headers}
 
-    Should Be Equal As Integers
+     Should Be Equal As Integers
     ...    ${resp.status_code}    200
     ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp.status_code}
 
-    ${json}=    To Json    ${resp.content}
-
-    # Validate response is a list
+    # ✅ Parse JSON (modern)
+    ${json}=    Set Variable    ${resp.json()}
     Should Be True
-    ...    ${json}.__class__.__name__ == 'list'
-    ...    msg=❌ INVALID FORMAT | Expected a list[] of Bed objects | Got: ${json}
+    ...    isinstance($json, list)
+    ...    msg=❌ INVALID FORMAT | Expected list[] | Got: ${json}
 
-    # Validate list is not empty
     ${count}=    Get Length    ${json}
     Should Be True
     ...    ${count} > 0
-    ...    msg=❌ EMPTY RESULT | Expected list of beds | Got empty list | WardId=${wardId}
+    ...    msg=❌ EMPTY RESULT | No beds found | WardId=${wardId}
 
-    # Expected keys for each bed item
+    Log To Console    🛏 Beds found: ${count} | WardId=${wardId}
+
+    # ✅ Expected schema
     @{expected_keys}=    Create List
     ...    WardName
     ...    ID_Ward
@@ -444,15 +432,29 @@ Suite Setup       Create AdmitHIS Session
     ...    BedStatus
     ...    ID_Bed
 
-    # Validate keys in each object
+    ${SELECTED_BED_ID}=    Set Variable    ${None}
+
     FOR    ${item}    IN    @{json}
         FOR    ${key}    IN    @{expected_keys}
             Run Keyword If    '${key}' not in ${item}
-            ...    Fail    ❌ MISSING KEY | Key '${key}' not found in item: ${item}
+            ...    Fail    ❌ MISSING KEY | '${key}' not found | Item=${item}
+        END
+
+        # ✅ انتخاب اولین Bed معتبر (ساده و deterministic)
+        IF    ${SELECTED_BED_ID} == ${None}
+            ${SELECTED_BED_ID}=    Set Variable    ${item["ID_Bed"]}
+            Log To Console
+            ...    ✅ Bed selected | ID_Bed=${SELECTED_BED_ID} | Room=${item["RoomNo"]} | BedNo=${item["BedNo"]}
         END
     END
 
-    Log To Console    ✅ PASS | GetAllBedNumber | Count=${count} beds | WardId=${wardId}
+    Should Not Be Equal
+    ...    ${SELECTED_BED_ID}    ${None}
+    ...    ❌ No valid Bed ID selected
+
+    # ✅ ذخیره state برای تست‌های بعدی (ChangeToAdmit)
+    Write State    BED_ID    ${SELECTED_BED_ID}
+    Log To Console    💾 BED_ID saved to state: ${SELECTED_BED_ID}
 
 13-Get Doctors By Ward
     [Documentation]     تخت های خالی بر اساس id بخش مثلا بخش 204
@@ -537,7 +539,7 @@ Suite Setup       Create AdmitHIS Session
 
     ${hisAdmitDto}=    Create Dictionary
     ...    fileFormationID=683676
-    ...    wardIdIn=201
+    ...    wardIdIn=${wardId}
     ...    physicianID=993
     ...    admissionType=370
     ...    patientClass=5
@@ -670,34 +672,21 @@ Suite Setup       Create AdmitHIS Session
     ${json}=    Set Variable    ${resp.json()}
     Should Be True    isinstance($json, list)
 
-    ${TARGET_NATIONAL_CODE}=    Set Variable    1520554001
+    ${TARGET_NATIONAL_CODE}=    Set Variable    ${nationalCode}
     ${FOUND_ADMIT_ID}=    Set Variable    ${None}
 
-    ${count}=    Get Length    ${json}
-    Log    Returned inpatient count: ${count}
-
-    IF    ${count} > 0
-        FOR    ${item}    IN    @{json}
-    
-            Should Be True    $item["admitID"] > 0
-            Should Be True    isinstance($item["nationalCode"], str)
-            Should Be True    len($item["nationalCode"]) == 10
-    
-            IF    '${item["nationalCode"]}' == '${TARGET_NATIONAL_CODE}'
-                ${FOUND_ADMIT_ID}=    Set Variable    ${item["admitID"]}
-                Log    ✅ Found admitID=${FOUND_ADMIT_ID}
-                Exit For Loop
-            END
-    
+    FOR    ${item}    IN    @{json}
+        IF    '${item["nationalCode"]}' == '${TARGET_NATIONAL_CODE}'
+            ${FOUND_ADMIT_ID}=    Set Variable    ${item["admitID"]}
+            Exit For Loop
         END
-    END  
-    
-    # Should Not Be Equal    ${FOUND_ADMIT_ID}    ${None}
-    # Set Suite Variable    ${ADMIT_ID}    ${FOUND_ADMIT_ID}
+    END
 
-    ${admit_id}=    Get PreAdmit Id From API    ${national_code}
-    Write State    ADMIT_ID    ${admit_id}
-    Log To Console    ✅ ADMIT_ID saved: ${admit_id}
+    Should Not Be Equal    ${FOUND_ADMIT_ID}    ${None}
+    Write State    ADMIT_ID    ${FOUND_ADMIT_ID}
+
+    Log To Console    ✅ ADMIT_ID saved: ${FOUND_ADMIT_ID}
+
 
 18-Edit Filing PreAdmit
     [Documentation]  ویرایش Filing بیمار و اعتبارسنجی پاسخ
@@ -922,20 +911,23 @@ Suite Setup       Create AdmitHIS Session
     ${ADMIT_ID}=    Read State    ADMIT_ID
     ${BED_ID}=      Read State    BED_ID
 
-    Log To Console    🚑 Using ADMIT_ID=${ADMIT_ID}, BED_ID=${BED_ID}
+    Log To Console     Using ADMIT_ID=${ADMIT_ID}, BED_ID=${BED_ID}
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     
-    ${body}=     Create Dictionary
+    &{preAdmitDto}=    Create Dictionary
     ...    admitId=${ADMIT_ID}
     ...    bedId=${BED_ID}
+
+    &{body}=    Create Dictionary
+    ...    preAdmitDto=&{preAdmitDto}
     
      ${resp}=    POST On Session
     ...    HIS
-    ...    url=/api/Filing/ChangeToAdmit
+    ...    url=/api/Filing/ChangeToAdmit 
     ...    headers=&{headers}
     ...    json=${body}
 

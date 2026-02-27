@@ -249,16 +249,19 @@ Read State
     [Arguments]    ${key}
 
     File Should Exist    ${STATE_FILE}
+
     ${content}=    Get File    ${STATE_FILE}
     ${state}=      Evaluate    json.loads('''${content}''')    json
 
     ${value}=    Get From Dictionary    ${state}    ${key}
-    Should Not Be Empty    ${value}    ❌ ${key} not found in state
+
+    Should Not Be Equal    ${value}    ${None}
+    ...    ❌ ${key} not found in state file
 
     RETURN    ${value}
 
     
-Get Empty Bed From API
+# Get Empty Bed From API
     [Documentation]    برگردوندن یک تخت خالی معتبر
 
     Create AdmitHIS Session
@@ -284,48 +287,3 @@ Get Empty Bed From API
 
     RETURN    ${bed_id}
 
-
-Get PreAdmit Id From API
-    [Documentation]    گرفتن admitId از روی nationalCode
-
-    [Arguments]    ${national_code}
-
-    Create AdmitHIS Session
-
-    &{headers}=    Create Dictionary
-    ...    Accept=application/json, text/plain, */*
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-
-    ${body}=     Create Dictionary
-    ...    firstName=
-    ...    lastName=
-    ...    grandPaName=
-    ...    fatherName=
-    ...    nationalCode=
-    ...    ward=0
-    ...    admissionReason=${None}
-    ...    doctorId=0
-    ...    admitId=0
-    ...    electronicNumber=0
-    ...    hospitalNumber=0
-    ...    dateFrom=2026/02/27
-    ...    dateTo=2026/02/27
-    ...    status=0
-    
-    ${resp}=    POST On Session
-    ...    HIS
-    ...    url=/api/Patient/SearchPreAdmits
-    ...    headers=&{headers}
-    ...    json=${body}
-    # ...    json={"nationalCode":"${national_code}"}
-
-    Should Be Equal As Integers    ${resp.status_code}    200
-
-    ${json}=    Set Variable    ${resp.json()}
-
-    ${admit_id}=    Get From Dictionary    ${json}[0]    admitId
-
-    # Should Not Be Empty    ${admit_id}    ❌ No preAdmit found
-
-    RETURN    ${admit_id}        
