@@ -1,86 +1,812 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4 (Python 3.13.5 on win32)" generated="2026-02-27T14:03:12.552855" rpa="false" schemaversion="5">
-<suite id="s1" name="AdmitHis-Test" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test">
-<suite id="s1-s1" name="AdmitHis-Api" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitHis-Api.robot">
-<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords" type="SETUP">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-04-20T23:37:33.648606" rpa="false" schemaversion="5">
+<suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
+<suite id="s1-s1" name="AdmitHis-Api" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis-Api.robot">
+<kw name="Create All Sessions" owner="AdmitHis-keywords" type="SETUP">
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-02-27T14:03:12.902734" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-04-20T23:37:33.989879" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-02-27T14:03:12.901646" elapsed="0.001747"/>
+<status status="PASS" start="2026-04-20T23:37:33.989596" elapsed="0.000581"/>
 </kw>
-<status status="PASS" start="2026-02-27T14:03:12.899367" elapsed="0.004398"/>
+<status status="PASS" start="2026-04-20T23:37:33.988944" elapsed="0.001366"/>
 </kw>
-<test id="s1-s1-t1" name="20-Change To Admit" line="908">
+<kw name="Create Cartable Session" owner="AdmitHis-keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-20T23:37:33.990883" level="INFO">Creating Session using : alias=Cartable, url=http://192.168.5.19:8020, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>Cartable</arg>
+<arg>${Cartable_Api_URL}</arg>
+<arg>verify=${False}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-20T23:37:33.990654" elapsed="0.000423"/>
+</kw>
+<status status="PASS" start="2026-04-20T23:37:33.990433" elapsed="0.000739"/>
+</kw>
+<kw name="Create Cash Session" owner="AdmitHis-keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-20T23:37:33.991725" level="INFO">Creating Session using : alias=Cash, url=http://192.168.5.19:8074, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>Cash</arg>
+<arg>${Cash_Api_URL}</arg>
+<arg>verify=${False}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-20T23:37:33.991502" elapsed="0.000397"/>
+</kw>
+<status status="PASS" start="2026-04-20T23:37:33.991310" elapsed="0.000678"/>
+</kw>
+<status status="PASS" start="2026-04-20T23:37:33.988511" elapsed="0.003559"/>
+</kw>
+<test id="s1-s1-t1" name="047-Validate DataBase After Cancel Preadmit Admit" line="2881">
+<kw name="Read State" owner="AdmitHis-keywords">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:33.999084" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-04-20T23:37:33.998769" elapsed="0.000498"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:33.999619" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-04-20T23:37:34.000259" level="INFO">${content} = {
+  "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
+  "SEX": "مرد       ",
+  "SEXID": 365,
+  "MOBILE": "09383509316",
+  "LASTHOMECITY": "363",
+  "LASTINSURANCENO": "0019208291",
+  "RELIGION": "مسلمان",
+  "NAT...</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-04-20T23:37:33.999417" elapsed="0.000953"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.001319" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.000550" elapsed="0.000985"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-04-20T23:37:34.002308" level="INFO">${value} = 683676</msg>
+<var>${value}</var>
+<arg>${state}</arg>
+<arg>${key}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.001735" elapsed="0.000723"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.003138" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<arg>${value}</arg>
+<arg>${None}</arg>
+<arg>❌ ${key} not found in state file</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.002726" elapsed="0.000641"/>
+</kw>
+<return>
+<value>${value}</value>
+<status status="PASS" start="2026-04-20T23:37:34.003513" elapsed="0.000130"/>
+</return>
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-04-20T23:37:34.003805" elapsed="0.000220"/>
+</kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-02-27T14:03:12.914227" level="INFO">&amp;{headers} = { Authorization=bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3Vz...</msg>
 <var>&amp;{headers}</var>
+<arg>Accept=application/json, text/plain, */*</arg>
 <arg>Authorization=${AUTH_BEARER}</arg>
 <arg>Cookie=${COOKIE_TOKEN}</arg>
-<arg>Accept=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-02-27T14:03:12.912990" elapsed="0.001603"/>
+<status status="NOT RUN" start="2026-04-20T23:37:34.004199" elapsed="0.000137"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-02-27T14:03:12.916335" level="INFO">${body} = {'admitId': '', 'bedId': ''}</msg>
-<var>${body}</var>
-<arg>admitId=${ADMIT_ID}</arg>
-<arg>bedId=${BED_ID}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-02-27T14:03:12.915073" elapsed="0.001654"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-02-27T14:03:15.863391" level="INFO">POST Request : url=http://192.168.5.19:1600/api/Filing/ChangeToAdmit 
- path_url=/api/Filing/ChangeToAdmit 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjAiLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ3MVZGTFFoc0tmRlM1eDRSMVUyYjF2YVloUjU2NEJNZHZVRzlxYUZHaUFBeVErZHBoYUpjWHAzWnVjL2dSUjZNWmk5RTc1MXNhS0RJckQ5NkovNXRKU3pXVWNNd1BqZHJmMkVpcHpvalhkZFYraHBrRytmNWc5bHR2UTM3NE5BWCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMzIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiY2hlY2siLCJyb2xlIl0sIlJvbGVJZCI6MTE5NSwiZXhwIjoxNzcyMjE0NTQwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojc3NDAvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNjU4LyJ9.gCdrocS10q5C_chKn9yAgtA7du147p78ftk6KESHZkE', 'Cookie': 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjAiLCJQZXJzb25JZCI6OTIzLCJMb2dpblBhZ2VVcmwiOiIxOTIuMTY4LjUuNjYiLCJOUElEIjoiIiwidXNpbmYiOiJ3MVZGTFFoc0tmRlM1eDRSMVUyYjF2YVloUjU2NEJNZHZVRzlxYUZHaUFBeVErZHBoYUpjWHAzWnVjL2dSUjZNWmk5RTc1MXNhS0RJckQ5NkovNXRKU3pXVWNNd1BqZHJmMkVpcHpvalhkZFYraHBrRytmNWc5bHR2UTM3NE5BWCIsIkNJRCI6IiIsIkFJRCI6IjEwMCIsIkNlbnRlck5hbWUiOiLZhdix2qnYsiDYqtmH2LHYp9mGIiwiVXNlckVtYWlsQWRkcmVzcyI6IiIsIkR5bmFtaWNQZXJtaXNzaW9uS2V5IjoiMzIzOTYwMzhmY2EwMWNiNjlkMmM0NGIwOTY0NjI0ZDFmZTQ2MWM5NzgwY2ZmYzdmOTU1ODJhOGFhOTc3YzJhMSIsIklkbGV0aW1lIjoiMzIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOlsiY2hlY2siLCJyb2xlIl0sIlJvbGVJZCI6MTE5NSwiZXhwIjoxNzcyMjE0NTQwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojc3NDAvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDoyNjU4LyJ9.gCdrocS10q5C_chKn9yAgtA7du147p78ftk6KESHZkE', 'Content-Length': '28', 'Content-Type': 'application/json'} 
- body=b'{"admitId": "", "bedId": ""}' 
- </msg>
-<msg time="2026-02-27T14:03:15.864376" level="INFO">POST Response : url=http://192.168.5.19:1600/api/Filing/ChangeToAdmit 
- status=500, reason=Internal Server Error 
- headers={'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json', 'Expires': '-1', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'Deny', 'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Download-Options': 'noopen', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Security-Policy': "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self';media-src 'self';font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content;report-uri /report", 'Content-Security-Policy-Report-Only': "default-src 'self';img-src 'self';media-src 'self'", 'X-Security': 'on', 'Date': 'Fri, 27 Feb 2026 10:33:17 GMT'} 
- body={"isSuccess":false,"statusCode":500,"message":"Data provided in request is not valid.PreAdmitDto\r\n"} 
- </msg>
-<msg time="2026-02-27T14:03:15.865257" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/ChangeToAdmit</msg>
+<kw name="GET On Session" owner="RequestsLibrary">
 <var>${resp}</var>
 <arg>HIS</arg>
-<arg>url=/api/Filing/ChangeToAdmit</arg>
+<arg>/api/GeneralVariables/GetAllNamesInpatientWards</arg>
 <arg>headers=&amp;{headers}</arg>
-<arg>json=${body}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="FAIL" start="2026-02-27T14:03:12.917210" elapsed="2.983822">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/ChangeToAdmit</status>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.004483" elapsed="0.000098"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${resp.status_code}</arg>
 <arg>200</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="NOT RUN" start="2026-02-27T14:03:15.902233" elapsed="0.000710"/>
+<status status="NOT RUN" start="2026-04-20T23:37:34.004714" elapsed="0.000202"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
 <var>${json}</var>
 <arg>${resp.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="NOT RUN" start="2026-02-27T14:03:15.903821" elapsed="0.000471"/>
+<status status="NOT RUN" start="2026-04-20T23:37:34.005049" elapsed="0.000092"/>
 </kw>
-<doc>تبدیل preadmit به بستری</doc>
-<tag>API_Filing</tag>
-<tag>METHOD_POST</tag>
-<tag>priadmit</tag>
-<status status="FAIL" start="2026-02-27T14:03:12.904018" elapsed="3.001072">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/ChangeToAdmit</status>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${bed_id}</var>
+<arg>${json}[0]</arg>
+<arg>standardVariableId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.005243" elapsed="0.000087"/>
+</kw>
+<return>
+<value>${bed_id}</value>
+<status status="NOT RUN" start="2026-04-20T23:37:34.005405" elapsed="0.000056"/>
+</return>
+<msg time="2026-04-20T23:37:34.005639" level="INFO">${FOUND_PREADMIT_FILEFORMATION_ID} = 683676</msg>
+<var>${FOUND_PREADMIT_FILEFORMATION_ID}</var>
+<arg>PREADMIT_FILEFORMATION_ID</arg>
+<doc>برگردوندن یک تخت خالی معتبر</doc>
+<status status="PASS" start="2026-04-20T23:37:33.998083" elapsed="0.007671"/>
+</kw>
+<kw name="Validate DB After Cancel Preadmit Admit" owner="AdmitHis-DB-keywords">
+<kw name="Connect To HIS Database" owner="AdmitHis-DB-keywords">
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-04-20T23:37:34.007156" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2026-04-20T23:37:34.007315" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-04-20T23:37:34.007538" level="INFO">Connect to DB using : pymssql.connect(database='His1_Payvand', user='sa', password=***, host='192.168.5.17', port=1433, charset='UTF-8')</msg>
+<arg>db_module=pymssql</arg>
+<arg>db_name=${DB_NAME}</arg>
+<arg>db_user=${DB_USER}</arg>
+<arg>db_password=${DB_PASS}</arg>
+<arg>db_host=${DB_HOST}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.006774" elapsed="0.423625"/>
+</kw>
+<status status="PASS" start="2026-04-20T23:37:34.006434" elapsed="0.424200"/>
+</kw>
+<kw name="Read State" owner="AdmitHis-keywords">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.431388" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.431195" elapsed="0.000336"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.431841" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-04-20T23:37:34.432578" level="INFO">${content} = {
+  "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
+  "SEX": "مرد       ",
+  "SEXID": 365,
+  "MOBILE": "09383509316",
+  "LASTHOMECITY": "363",
+  "LASTINSURANCENO": "0019208291",
+  "RELIGION": "مسلمان",
+  "NAT...</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.431667" elapsed="0.001029"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.433222" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.432843" elapsed="0.000598"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-04-20T23:37:34.433909" level="INFO">${value} = 356346</msg>
+<var>${value}</var>
+<arg>${state}</arg>
+<arg>${key}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.433618" elapsed="0.000404"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.434430" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<arg>${value}</arg>
+<arg>${None}</arg>
+<arg>❌ ${key} not found in state file</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.434171" elapsed="0.000358"/>
+</kw>
+<return>
+<value>${value}</value>
+<status status="PASS" start="2026-04-20T23:37:34.434615" elapsed="0.000083"/>
+</return>
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-04-20T23:37:34.434814" elapsed="0.000086"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Accept=application/json, text/plain, */*</arg>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.435011" elapsed="0.000079"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>/api/GeneralVariables/GetAllNamesInpatientWards</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.435211" elapsed="0.000077"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.435397" elapsed="0.000072"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.435570" elapsed="0.000067"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${bed_id}</var>
+<arg>${json}[0]</arg>
+<arg>standardVariableId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.435733" elapsed="0.000067"/>
+</kw>
+<return>
+<value>${bed_id}</value>
+<status status="NOT RUN" start="2026-04-20T23:37:34.435867" elapsed="0.000049"/>
+</return>
+<msg time="2026-04-20T23:37:34.436029" level="INFO">${PREADMIT_ADMIT_ID} = 356346</msg>
+<var>${PREADMIT_ADMIT_ID}</var>
+<arg>PREADMIT_ADMIT_ID</arg>
+<doc>برگردوندن یک تخت خالی معتبر</doc>
+<status status="PASS" start="2026-04-20T23:37:34.430857" elapsed="0.005246"/>
+</kw>
+<kw name="Read State" owner="AdmitHis-keywords">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.436713" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.436536" elapsed="0.000276"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.437080" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-04-20T23:37:34.437682" level="INFO">${content} = {
+  "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
+  "SEX": "مرد       ",
+  "SEXID": 365,
+  "MOBILE": "09383509316",
+  "LASTHOMECITY": "363",
+  "LASTINSURANCENO": "0019208291",
+  "RELIGION": "مسلمان",
+  "NAT...</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.436928" elapsed="0.000869"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.438523" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.437948" elapsed="0.000811"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-04-20T23:37:34.439589" level="INFO">${value} = 683676</msg>
+<var>${value}</var>
+<arg>${state}</arg>
+<arg>${key}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.439012" elapsed="0.000708"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.440617" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<arg>${value}</arg>
+<arg>${None}</arg>
+<arg>❌ ${key} not found in state file</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.440113" elapsed="0.000650"/>
+</kw>
+<return>
+<value>${value}</value>
+<status status="PASS" start="2026-04-20T23:37:34.441139" elapsed="0.000137"/>
+</return>
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-04-20T23:37:34.441463" elapsed="0.000113"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Accept=application/json, text/plain, */*</arg>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.441790" elapsed="0.000110"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>/api/GeneralVariables/GetAllNamesInpatientWards</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.442055" elapsed="0.000083"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.442246" elapsed="0.000070"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.442417" elapsed="0.000067"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${bed_id}</var>
+<arg>${json}[0]</arg>
+<arg>standardVariableId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.442581" elapsed="0.000066"/>
+</kw>
+<return>
+<value>${bed_id}</value>
+<status status="NOT RUN" start="2026-04-20T23:37:34.442713" elapsed="0.000049"/>
+</return>
+<msg time="2026-04-20T23:37:34.442898" level="INFO">${PREADMIT_iD_FileFormation} = 683676</msg>
+<var>${PREADMIT_iD_FileFormation}</var>
+<arg>PREADMIT_FILEFORMATION_ID</arg>
+<doc>برگردوندن یک تخت خالی معتبر</doc>
+<status status="PASS" start="2026-04-20T23:37:34.436286" elapsed="0.006711"/>
+</kw>
+<kw name="Read State" owner="AdmitHis-keywords">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.443617" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.443433" elapsed="0.000293"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.443992" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-04-20T23:37:34.444585" level="INFO">${content} = {
+  "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
+  "SEX": "مرد       ",
+  "SEXID": 365,
+  "MOBILE": "09383509316",
+  "LASTHOMECITY": "363",
+  "LASTINSURANCENO": "0019208291",
+  "RELIGION": "مسلمان",
+  "NAT...</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.443840" elapsed="0.000862"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.445391" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.444878" elapsed="0.000746"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-04-20T23:37:34.446213" level="INFO">${value} = 1520554001</msg>
+<var>${value}</var>
+<arg>${state}</arg>
+<arg>${key}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.445777" elapsed="0.000555"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.446766" level="INFO">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<arg>${value}</arg>
+<arg>${None}</arg>
+<arg>❌ ${key} not found in state file</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.446496" elapsed="0.000569"/>
+</kw>
+<return>
+<value>${value}</value>
+<status status="PASS" start="2026-04-20T23:37:34.447165" elapsed="0.000088"/>
+</return>
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-04-20T23:37:34.447385" elapsed="0.000104"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Accept=application/json, text/plain, */*</arg>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.447620" elapsed="0.000081"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>/api/GeneralVariables/GetAllNamesInpatientWards</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.447818" elapsed="0.000069"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.447991" elapsed="0.000066"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.448156" elapsed="0.000068"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${bed_id}</var>
+<arg>${json}[0]</arg>
+<arg>standardVariableId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.448323" elapsed="0.000065"/>
+</kw>
+<return>
+<value>${bed_id}</value>
+<status status="NOT RUN" start="2026-04-20T23:37:34.448454" elapsed="0.000053"/>
+</return>
+<msg time="2026-04-20T23:37:34.448628" level="INFO">${NATIONALCODE} = 1520554001</msg>
+<var>${NATIONALCODE}</var>
+<arg>NATIONALCODE</arg>
+<doc>برگردوندن یک تخت خالی معتبر</doc>
+<status status="PASS" start="2026-04-20T23:37:34.443181" elapsed="0.005531"/>
+</kw>
+<kw name="Read State" owner="AdmitHis-keywords">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.449513" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.449300" elapsed="0.000349"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.450031" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-04-20T23:37:34.450662" level="INFO">${content} = {
+  "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
+  "SEX": "مرد       ",
+  "SEXID": 365,
+  "MOBILE": "09383509316",
+  "LASTHOMECITY": "363",
+  "LASTINSURANCENO": "0019208291",
+  "RELIGION": "مسلمان",
+  "NAT...</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.449823" elapsed="0.000992"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.451463" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.451056" elapsed="0.000508"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-04-20T23:37:34.451926" level="INFO">${value} = 147979</msg>
+<var>${value}</var>
+<arg>${state}</arg>
+<arg>${key}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.451700" elapsed="0.000306"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.452376" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<arg>${value}</arg>
+<arg>${None}</arg>
+<arg>❌ ${key} not found in state file</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.452139" elapsed="0.000521"/>
+</kw>
+<return>
+<value>${value}</value>
+<status status="PASS" start="2026-04-20T23:37:34.452781" elapsed="0.000120"/>
+</return>
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-04-20T23:37:34.453033" elapsed="0.000384"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Accept=application/json, text/plain, */*</arg>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.453621" elapsed="0.000141"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>/api/GeneralVariables/GetAllNamesInpatientWards</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.453900" elapsed="0.000253"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.454409" elapsed="0.000343"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.454959" elapsed="0.000115"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${bed_id}</var>
+<arg>${json}[0]</arg>
+<arg>standardVariableId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.455215" elapsed="0.000085"/>
+</kw>
+<return>
+<value>${bed_id}</value>
+<status status="NOT RUN" start="2026-04-20T23:37:34.455408" elapsed="0.000098"/>
+</return>
+<msg time="2026-04-20T23:37:34.455829" level="INFO">${HOSPITALFILEID} = 147979</msg>
+<var>${HOSPITALFILEID}</var>
+<arg>HOSPITALFILEID</arg>
+<doc>برگردوندن یک تخت خالی معتبر</doc>
+<status status="PASS" start="2026-04-20T23:37:34.448908" elapsed="0.007262"/>
+</kw>
+<kw name="Read State" owner="AdmitHis-keywords">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.457401" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.457190" elapsed="0.000348"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-04-20T23:37:34.457829" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-04-20T23:37:34.458417" level="INFO">${content} = {
+  "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
+  "SEX": "مرد       ",
+  "SEXID": 365,
+  "MOBILE": "09383509316",
+  "LASTHOMECITY": "363",
+  "LASTINSURANCENO": "0019208291",
+  "RELIGION": "مسلمان",
+  "NAT...</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.457663" elapsed="0.000898"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.459424" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.458761" elapsed="0.000989"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-04-20T23:37:34.460226" level="INFO">${value} = 1405/01/21</msg>
+<var>${value}</var>
+<arg>${state}</arg>
+<arg>${key}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.459914" elapsed="0.000411"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.460733" level="INFO">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<arg>${value}</arg>
+<arg>${None}</arg>
+<arg>❌ ${key} not found in state file</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.460481" elapsed="0.000345"/>
+</kw>
+<return>
+<value>${value}</value>
+<status status="PASS" start="2026-04-20T23:37:34.460904" elapsed="0.000078"/>
+</return>
+<kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
+<status status="NOT RUN" start="2026-04-20T23:37:34.461094" elapsed="0.000080"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>&amp;{headers}</var>
+<arg>Accept=application/json, text/plain, */*</arg>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.461281" elapsed="0.000074"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>/api/GeneralVariables/GetAllNamesInpatientWards</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.461461" elapsed="0.000068"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.461640" elapsed="0.000074"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.461824" elapsed="0.000063"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${bed_id}</var>
+<arg>${json}[0]</arg>
+<arg>standardVariableId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.462307" elapsed="0.000131"/>
+</kw>
+<return>
+<value>${bed_id}</value>
+<status status="NOT RUN" start="2026-04-20T23:37:34.462534" elapsed="0.000074"/>
+</return>
+<msg time="2026-04-20T23:37:34.462764" level="INFO">${PREADMIT_ADMIT_DATE} = 1405/01/21</msg>
+<var>${PREADMIT_ADMIT_DATE}</var>
+<arg>PREADMIT_ADMIT_DATE</arg>
+<doc>برگردوندن یک تخت خالی معتبر</doc>
+<status status="PASS" start="2026-04-20T23:37:34.456488" elapsed="0.006402"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.463320" level="INFO">${query} = SELECT TotalCash.ID_TotalCash, TotalCash.FileFormationID, TotalCash.AdmitID, TotalCash.ClinicTitleType, TotalCash.Credit, TotalCash.OperatorID, TotalCash.OperatorName, TotalCash.Note, TotalCash.CashTy...</msg>
+<var>${query}</var>
+<arg>SELECT TotalCash.ID_TotalCash, TotalCash.FileFormationID, TotalCash.AdmitID, TotalCash.ClinicTitleType, TotalCash.Credit,</arg>
+<arg>TotalCash.OperatorID, TotalCash.OperatorName, TotalCash.Note, TotalCash.CashType, Admit_HIS.DischargeStep,</arg>
+<arg>Admit_HIS.CancelReasonID,Admit_HIS.PishPardaght, Admit_HIS.DischargeDebt, Admit_HIS.Status_AdmitHIS</arg>
+<arg>FROM</arg>
+<arg>TotalCash INNER JOIN Admit_HIS ON TotalCash.AdmitID = Admit_HIS.ID_Admit</arg>
+<arg>WHERE</arg>
+<arg>TotalCash.AdmitID = ${PREADMIT_ADMIT_ID}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.463048" elapsed="0.000351"/>
+</kw>
+<kw name="Query" owner="DatabaseLibrary">
+<msg time="2026-04-20T23:37:34.463713" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT TotalCash.ID_TotalCash, TotalCash.FileFormationID, TotalCash.AdmitID, TotalCash.ClinicTitleType, TotalCash.Credit, TotalCash.OperatorID, TotalCash.OperatorName, TotalCash.Note, TotalCash.CashType, Admit_HIS.DischargeStep, Admit_HIS.CancelReasonID,Admit_HIS.PishPardaght, Admit_HIS.DischargeDebt, Admit_HIS.Status_AdmitHIS FROM TotalCash INNER JOIN Admit_HIS ON TotalCash.AdmitID = Admit_HIS.ID_Admit WHERE TotalCash.AdmitID = 356346&lt;/code&gt;</msg>
+<msg time="2026-04-20T23:37:34.500865" level="INFO">Commit the transaction</msg>
+<msg time="2026-04-20T23:37:34.579055" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;ID_TotalCash&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;FileFormationID&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;AdmitID&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;ClinicTitleType&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Credit&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;OperatorID&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;OperatorName&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Note&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;CashType&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;DischargeStep&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;CancelReasonID&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;PishPardaght&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;DischargeDebt&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Status_AdmitHIS&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;196&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;683676&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;356346&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;249&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;10000.00&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;923&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;ÂÒíÊÇ ÝÔÇÑí äíÇ (30627)&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;None&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;55&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;55&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;12&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0.0&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0.0&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;2&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2026-04-20T23:37:34.580177" level="INFO">${rows} = [(196, 683676, 356346, 249, Decimal('10000.00'), 923, 'ÂÒíÊÇ ÝÔÇÑ\x98í äíÇ (30627)', None, 55, 55, 12, 0.0, 0.0, 2)]</msg>
+<var>${rows}</var>
+<arg>${query}</arg>
+<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
+The type of row values depends on the database module -
+usually they are tuples or tuple-like objects.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.463533" elapsed="0.117382"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.583283" level="INFO">Length is 1.</msg>
+<arg>${rows}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.581931" elapsed="0.001937"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.585429" level="INFO">${row} = (196, 683676, 356346, 249, Decimal('10000.00'), 923, 'ÂÒíÊÇ ÝÔÇÑ\x98í äíÇ (30627)', None, 55, 55, 12, 0.0, 0.0, 2)</msg>
+<var>${row}</var>
+<arg>${rows[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.584313" elapsed="0.001334"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${row[0]}</arg>
+<arg>msg= Admit ID Not Mach</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-04-20T23:37:34.585896" elapsed="0.000619"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-20T23:37:34.587182" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-04-20T23:37:34.587368" level="FAIL"> DischargeStep != 54: 683676 != 55</msg>
+<arg>${row[1]}</arg>
+<arg>55</arg>
+<arg>msg= DischargeStep != 54</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-04-20T23:37:34.586675" elapsed="0.005462"> DischargeStep != 54: 683676 != 55</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[2]}</arg>
+<arg>12</arg>
+<arg>msg= CancelReasonID != 12</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.592371" elapsed="0.000328"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[3]}</arg>
+<arg>0</arg>
+<arg>msg= Pishpardaght != 0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.592936" elapsed="0.000209"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[4]}</arg>
+<arg>-${pishPardaght}</arg>
+<arg>msg= DischargeDebt != -${pishPardaght}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.593340" elapsed="0.000105"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[5]}</arg>
+<arg>2</arg>
+<arg>msg= Status_AdmitHIS != 2</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.593556" elapsed="0.000075"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[6]}</arg>
+<arg>${PREADMIT_ADMIT_ID}</arg>
+<arg>msg= Admit ID Not Mach</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.593734" elapsed="0.000069"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[7]}</arg>
+<arg>55</arg>
+<arg>msg= DischargeStep != 54</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.593887" elapsed="0.000057"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[8]}</arg>
+<arg>12</arg>
+<arg>msg= CancelReasonID != 12</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.594079" elapsed="0.000149"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[9]}</arg>
+<arg>0</arg>
+<arg>msg= Pishpardaght != 0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.594329" elapsed="0.000064"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[10]}</arg>
+<arg>-${pishPardaght}</arg>
+<arg>msg= DischargeDebt != -${pishPardaght}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.594477" elapsed="0.000058"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${row[11]}</arg>
+<arg>2</arg>
+<arg>msg= Status_AdmitHIS != 2</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-04-20T23:37:34.594621" elapsed="0.000058"/>
+</kw>
+<arg>${FOUND_PREADMIT_FILEFORMATION_ID}</arg>
+<status status="FAIL" start="2026-04-20T23:37:34.006084" elapsed="0.588717"> DischargeStep != 54: 683676 != 55</status>
+</kw>
+<doc>تست دیتابیس بعد از پذیرش پری ادمیت</doc>
+<tag>DB-Test</tag>
+<tag>preadmit</tag>
+<status status="FAIL" start="2026-04-20T23:37:33.992161" elapsed="0.603164"> DischargeStep != 54: 683676 != 55</status>
 </test>
-<status status="FAIL" start="2026-02-27T14:03:12.594595" elapsed="3.345128"/>
+<status status="FAIL" start="2026-04-20T23:37:33.677814" elapsed="0.931374"/>
 </suite>
-<status status="FAIL" start="2026-02-27T14:03:12.558023" elapsed="3.386674"/>
+<status status="FAIL" start="2026-04-20T23:37:33.653951" elapsed="0.959307"/>
 </suite>
 <statistics>
 <total>
 <stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1" skip="0">API_Filing</stat>
-<stat pass="0" fail="1" skip="0">METHOD_POST</stat>
-<stat pass="0" fail="1" skip="0">priadmit</stat>
+<stat pass="0" fail="1" skip="0">DB-Test</stat>
+<stat pass="0" fail="1" skip="0">preadmit</stat>
 </tag>
 <suite>
 <stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>

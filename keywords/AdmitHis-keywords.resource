@@ -3,6 +3,10 @@ Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
 Library           SeleniumLibrary
+Library           JSONLibrary
+Library           DatabaseLibrary
+Library           pymssql
+
 Resource          ../resources/AdmitHis-variables.resource
 
 
@@ -10,6 +14,17 @@ Resource          ../resources/AdmitHis-variables.resource
 
 Create AdmitHIS Session
     Create Session    HIS    ${AdmitHis_Api_URL}   verify=${False}
+
+Create Cartable Session
+    Create Session    Cartable    ${Cartable_Api_URL}   verify=${False}
+
+Create Cash Session
+    Create Session    Cash    ${Cash_Api_URL}   verify=${False}    
+
+Create All Sessions
+    Create AdmitHIS Session
+    Create Cartable Session
+    Create Cash Session
 
 Disable Screenshots
     Register Keyword To Run On Failure    NONE    
@@ -221,3 +236,70 @@ Wait For Page Ready
     Wait Until Element Is Not Visible
     ...    ${GLOBAL_SPINNER}
     ...    ${timeout}      
+
+##############################################################
+# runtime state
+# 
+
+Write State
+    [Arguments]    ${key}    ${value}
+
+    ${exists}=    Run Keyword And Return Status
+    ...    File Should Exist    ${STATE_FILE}
+
+    IF    not ${exists}
+        Create File    ${STATE_FILE}    {}
+    END
+
+    ${content}=    Get File    ${STATE_FILE}    encoding=utf-8
+    ${state}=      Evaluate    json.loads('''${content}''')    json    
+
+    Set To Dictionary    ${state}    ${key}    ${value}
+
+    ${out}=    Evaluate    json.dumps(${state}, indent=2, ensure_ascii=False)
+    Create File    ${STATE_FILE}    ${out}    encoding=utf-8
+
+
+Read State
+    [Arguments]    ${key}
+
+    File Should Exist    ${STATE_FILE}
+
+    ${content}=    Get File    ${STATE_FILE}
+    ${state}=      Evaluate    json.loads('''${content}''')    json
+
+    ${value}=    Get From Dictionary    ${state}    ${key}
+
+    Should Not Be Equal    ${value}    ${None}
+    ...    ❌ ${key} not found in state file
+
+    RETURN    ${value}
+
+    
+# Get Empty Bed From API
+    [Documentation]    برگردوندن یک تخت خالی معتبر
+
+    Create AdmitHIS Session
+
+    &{headers}=    Create Dictionary
+    ...    Accept=application/json, text/plain, */*
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    /api/GeneralVariables/GetAllNamesInpatientWards
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers    ${resp.status_code}    200
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    # فرض: اولین تخت خالی
+    ${bed_id}=    Get From Dictionary    ${json}[0]    standardVariableId
+
+    # Should Not Be Empty    ${bed_id}    ❌ No empty bed found
+
+    RETURN    ${bed_id}
+
+

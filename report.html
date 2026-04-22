@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 7.4 (Python 3.13.5 on win32)" name="Generator">
+<meta content="Robot Framework 7.3.2 (Python 3.13.2 on win32)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAqAAAAAAAAAAAAAAAAAAAALIAAAD/AAAA4AAAANwAAADcAAAA3AAAANwAAADcAAAA3AAAANwAAADcAAAA4AAAAP8AAACxAAAAAAAAAKYAAAD/AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAA/wAAAKkAAAD6AAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN8AAAD/AAAA+gAAAMMAAAAAAAAAAgAAAGsAAABrAAAAawAAAGsAAABrAAAAawAAAGsAAABrAAAADAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAIsAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAANEAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAAAAAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAFAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAADwAAAB8AAAAAAAAAGAAAABcAAAAAAAAAH8AAABKAAAAAAAAAAAAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAADCAAAA/wAAACkAAADqAAAA4QAAAAAAAAD7AAAA/wAAALAAAAAGAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAIwAAAP4AAAD/AAAA/wAAAGAAAAAAAAAAAAAAAMkAAAD/AAAAigAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAAAAAAAIAAAAcAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA2gAAAP8AAAD7AAAAywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AAAD/AAAAqwAAAP8AAACvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIAAAD/AAAAsgAAAAAAAAC5AAAA/wAAAMoAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMkAAAD/AAAAvAAAAAAAAAAAAAAAAAAAAKwAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAArQAAAAAAAAAAwAMAAIABAAAf+AAAP/wAAD/8AAAgBAAAP/wAAD/8AAA//AAAJIwAADHEAAA//AAAP/wAAB/4AACAAQAAwAMAAA==">
 <style media="all">
 :root {
@@ -116,16 +116,15 @@ select {
 #header {
     width: 65em;
     height: 3em;
-    margin: 1em 0 0 0;
+    margin: 20px 0 6px 0;
 }
 h1 {
     float: left;
-    margin: 0 0 1em 0;
+    margin: 0 0 0.5em 0;
     width: 75%;
 }
 h2 {
     clear: left;
-    margin: 1.5em 0 0.5em 0;
 }
 #generated {
     float: right;
@@ -169,13 +168,7 @@ h2 {
     background-color: var(--primary-color);
     border-radius: 3px;
 }
-/* https://stackoverflow.com/questions/75238633 */
-@supports (-moz-appearance: none) {
-    .label {
-        padding-top: 4px;
-    }
-}
-.label.debug, .label.trace, .label.error {
+.label.debug, .label.trace, .label.error, .label.keyword {
     letter-spacing: 0;
 }
 .label.pass, .label.fail, .label.error, .label.skip, .label.warn {
@@ -361,6 +354,19 @@ th.stats-col-graph:hover {
 [data-theme="dark"] .light-mode-icon,
 [data-theme="light"] .dark-mode-icon {
     display: block;
+}
+@keyframes highlight {
+    0% {
+        background: var(--primary-color)
+    }
+    100% {
+        background: var(--target-color);
+    }
+}
+:target {
+    background: var(--target-color);
+    transition: background 0.3s;
+    animation: highlight 4s;
 }
 </style>
 <style media="all">
@@ -951,7 +957,7 @@ window.model = (function () {
         kw.type = data.type;
         kw.template = 'keywordTemplate';
         kw.arguments = data.args;
-        kw.assign = data.assign;
+        kw.assign = data.assign + (data.assign ? ' =  ' : '');
         kw.tags = data.tags;
         kw.timeout = data.timeout;
         kw.populateKeywords = createIterablePopulator('Keyword');
@@ -1690,7 +1696,7 @@ function addStatistics() {
         '<th class="stats-col-elapsed">Elapsed</th>' +
         '<th class="stats-col-graph">Pass / Fail / Skip</th>';
     var statTable =
-        '<h2>Statistics</h2>' +
+        '<h2>{Test} Statistics</h2>' +
         '<table class="statistics" id="total-stats"><thead><tr>' +
         '<th class="stats-col-name">Total Statistics</th>' + statHeaders +
         '</tr></thead></table>' +
@@ -1700,7 +1706,7 @@ function addStatistics() {
         '<table class="statistics" id="suite-stats"><thead><tr>' +
         '<th class="stats-col-name">Statistics by Suite</th>' + statHeaders +
         '</tr></thead></table>';
-    $(statTable).appendTo('#statistics-container');
+    $(testOrTask(statTable)).appendTo('#statistics-container');
     util.map(['total', 'tag', 'suite'], addStatTable);
     addTooltipsToElapsedTimes();
     enableStatisticsSorter();
@@ -1881,22 +1887,22 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[0,0,185882],[],[[4,0,5,[6,7,8,9],[1,307,81354],[]],[10,0,11,[6,12,9],[1,81662,12163],[]],[13,0,14,[6,15,9],[1,93829,12376],[]],[16,0,17,[6,18,9],[1,106209,8576],[]],[19,0,20,[6,21,9],[1,114786,3678],[]],[22,0,23,[6,24,9],[1,118466,17808],[]],[25,0,26,[6,27,9],[1,136275,21794],[]],[28,0,29,[6,30,9],[1,158072,13143],[]],[31,0,32,[6,33,9],[1,171216,8882],[]],[34,0,35,[6,36,9],[0,180100,5600,37],[]],[38,0,39,[6,40,9],[0,185714,145,41],[]],[42,0,43,[6,44,9],[0,185861,18,41],[]]],[],[12,9,3,0]];
+window.output["suite"] = [1,2,3,0,[],[0,0,37275],[],[[4,0,5,[6,7,8,9],[1,225,3367],[]],[10,0,11,[6,7,12,9],[1,3592,4800],[]],[13,0,14,[15,7,16],[1,8393,12820],[]],[17,0,18,[19,7,16],[1,21214,3428],[]],[20,0,21,[19,7,9],[1,24643,3345],[]],[22,0,23,[15,7,16],[1,27989,5767],[]],[24,0,25,[19,26,7,16],[0,33756,402,27],[]],[28,0,29,[19,7,9],[1,34159,3114],[]]],[],[8,7,1,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis","*D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test\\AdmitHis.robot","*AdmitHis.robot","*01-UI - Open Filing Page","*<p>باز  کردن صفحه پذیرش بستری\x3c/p>","*preadmit","*step01","*STEP_01_Open_Browser","*UI_Test","*02-UI - Enter national code of preadmit patient","*<p>وارد کردن کد ملی بیمار و استعلام کد ملی\x3c/p>","*step02","*03-UI - Fill Patient PreAdmit Info","*<p>پر کردن اطلاعات مورد نیاز بیمار\x3c/p>","*step03","*04-UI - Assign Ward And Doctor And Prepayment","*<p>انتخاب بخش و پزشک بیمار preadmit\x3c/p>","*step04","*05-UI - Save Admission Filing","*<p>سیو کردن پذیرش preadmit\x3c/p>","*step05","*06-UI - deny admit print page","*<p>لغو پرینت برگه پذیرش\x3c/p>","*step06","*07-UI - Open Cash Web And Pay","*<p>باز کردن صندوق و دریافت پیش پرداخت بیمار پری ادمیت\x3c/p>","*step07","*08-UI - go to inpatient list","*<p>رفتن به لیست بیماران بستری\x3c/p>","*step08","*09-UI - Load Preadmit Patient List","*<p>لیست بیماران preadmit\x3c/p>","*step09","*10-UI - Edit Preadmit Patient","*<p>ویرایش بیمار preadmit\x3c/p>","*step10","eNq1kEtu2zAQhtfVKQbpJgUKPUlKVpOskgJZdOVegI9RRFQiDZKSktuHThybPkABLuabxz/D/9msfNJqj95ra57V06vEQ4hhD39ijr9gD/qzB/xnE2jVn2OFEwZUwD2EEUE4u3l0MEaWk/WxckxLawzKo2w2ODuD0v6UwqhlbIAzQrDwiOtfayefAdzuv5aawfYgxziO9xWheZm3rKnzqmI/fsFv60BZucxoAj/ugfjCqD2gc9b9hMOE3COs2uvQwx2H0eFwfzOGcPB9UWzblvv4FaOXOVe4FldixYZCOb2iK4Kzi5jQj9YGbV6KD3n//WTRyRWt8MvGm4f/vuKu4A/ZPnD5Lzgusc/2b7OI7n34yleuJx7lcnhc5kPUg8U49HZao9fiMvStfG2HgZGB0qFR9IpJU164KatSqAvXKBmpk3pV76RIuFO0TOf5jtG0n0hRypQVp82Fu0aQtkyZdizZ31FWVzy5txV1k97fNZwm+pR1HSFXvBtYwgRF155YNK0aWqHImXdVKVFV2Ts8RA72","*11-UI - Cancel Preadmit","*<p>لغو پذیرش preadmit\x3c/p>","*step11","eNq1jk1ugzAQRtfNKUbptgo/Bgw0zaqtlEVXOcEYD8EqYGQbSG9f2qSNc4BIXswbfX7z7fsJWyUPZK3S/V6+nSoa3DKW8LHs8EglqHMG7DkESj7DuzYgdTV21Dv8ycPyXKMskDHaPMHQElqCSVnlStgiNIbql3Xj3GDLIJjneWOppV6N3UbSFNzIgpmENGoiEzijR9GSbbR2qj8Gv3r7eOl0qaQk/fVe7+5+YhvgbnVwWH06gxWVq8NXJ3RrodcOcELV4qLbwOvYDYsPxt6Q1e1EEsT100N44nWdJXWa1kymN5yw8MosDAkzjxMhIuZxnnKMPea1kH6ek0iiK8dVUZB3L2ci4aHPaZ5Jj9MsjtDrx0XM/L45w7Ty/TlHL18UfFldWDAuay5k8s9FFFYko9U3juTWLg==","*12-UI - Open Cash Web And Refund","*<p>بازپرداخت به بیمار در صندوق\x3c/p>","*step12"]);
+window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis-Api","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitHis-Api.robot","*AdmitHis-Api.robot","*23-Get Emergency Wards","*<p>نام بخش های اورژانس تحت نظر\x3c/p>","*API_GeneralVariables","*Emergency","*Emergency_Ward_LIST","*METHOD_GET","*24-Get All Bed Number Of Emengemcy Ward","*<p>دریافت لیست تخت های خالی اورژانس تحت نظر\x3c/p>","*EMERGENCY_BED_ID_LIST","*25-Add Filing Emergency Patient","*<p>پذیرش بیمار اورژانس تحت نظر\x3c/p>","*API_Filing","*METHOD_POST","*26-Search Patient Emergency","*<p>جستجوی بیماران اورژانس تحت نظر\x3c/p>","*API_Patient","*27-Get Patient By AdmitID","*<p>دریافت اطلاعات بیمار بستری اورژانش با شماره پذیرش\x3c/p>","*28-Edit Filing Emergency Patient","*<p>ویرایش بیمار بستری اورژانس تحت نظر\x3c/p>","*29-Patient Admission Order From Cartable","*<p>بستری بیمار تحت نظر از کارتابل\x3c/p>","*Catable","*Operation completed != Success","*30-Send Patient From Emergency To Ward","*<p>دریافت اطلاعات بیمار  اورژانس جهت انتقال به بخش\x3c/p>"]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:03:06","fail":3,"label":"All Tests","pass":9,"skip":0}],[{"elapsed":"00:03:06","fail":3,"label":"preadmit","pass":9,"skip":0},{"elapsed":"00:01:21","fail":0,"label":"step01","pass":1,"skip":0},{"elapsed":"00:01:21","fail":0,"label":"STEP_01_Open_Browser","pass":1,"skip":0},{"elapsed":"00:00:12","fail":0,"label":"step02","pass":1,"skip":0},{"elapsed":"00:00:12","fail":0,"label":"step03","pass":1,"skip":0},{"elapsed":"00:00:09","fail":0,"label":"step04","pass":1,"skip":0},{"elapsed":"00:00:04","fail":0,"label":"step05","pass":1,"skip":0},{"elapsed":"00:00:18","fail":0,"label":"step06","pass":1,"skip":0},{"elapsed":"00:00:22","fail":0,"label":"step07","pass":1,"skip":0},{"elapsed":"00:00:13","fail":0,"label":"step08","pass":1,"skip":0},{"elapsed":"00:00:09","fail":0,"label":"step09","pass":1,"skip":0},{"elapsed":"00:00:06","fail":1,"label":"step10","pass":0,"skip":0},{"elapsed":"00:00:00","fail":1,"label":"step11","pass":0,"skip":0},{"elapsed":"00:00:00","fail":1,"label":"step12","pass":0,"skip":0},{"elapsed":"00:03:06","fail":3,"label":"UI_Test","pass":9,"skip":0}],[{"elapsed":"00:03:06","fail":3,"id":"s1","label":"AdmitHis","name":"AdmitHis","pass":9,"skip":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:37","fail":1,"label":"All Tests","pass":7,"skip":0}],[{"elapsed":"00:00:19","fail":0,"label":"API_Filing","pass":2,"skip":0},{"elapsed":"00:00:08","fail":0,"label":"API_GeneralVariables","pass":2,"skip":0},{"elapsed":"00:00:10","fail":1,"label":"API_Patient","pass":3,"skip":0},{"elapsed":"00:00:00","fail":1,"label":"Catable","pass":0,"skip":0},{"elapsed":"00:00:37","fail":1,"label":"Emergency","pass":7,"skip":0},{"elapsed":"00:00:05","fail":0,"label":"EMERGENCY_BED_ID_LIST","pass":1,"skip":0},{"elapsed":"00:00:03","fail":0,"label":"Emergency_Ward_LIST","pass":1,"skip":0},{"elapsed":"00:00:15","fail":0,"label":"METHOD_GET","pass":4,"skip":0},{"elapsed":"00:00:22","fail":1,"label":"METHOD_POST","pass":3,"skip":0}],[{"elapsed":"00:00:37","fail":1,"id":"s1","label":"AdmitHis-Api","name":"AdmitHis-Api","pass":7,"skip":0}]];
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1772138010919;
+window.output["baseMillis"] = 1773265588691;
 </script>
 <script type="text/javascript">
-window.output["generated"] = 185908;
+window.output["generated"] = 37561;
 </script>
 <script type="text/javascript">
 window.output["expand_keywords"] = null;
@@ -2279,7 +2285,7 @@ function hideHiddenDetailsColumns(elem) {
 </script>
 
 <script type="text/x-jquery-tmpl" id="summaryTableTemplate">
-  <h2>Summary</h2>
+  <h2>Summary Information</h2>
   <table class="details">
     <tr>
       <th>Status:</th>
@@ -2376,7 +2382,7 @@ function hideHiddenDetailsColumns(elem) {
 </script>
 
 <script type="text/x-jquery-tmpl" id="detailsHeaderTemplate">
-  <h2 id="${linkTarget}">Details</h2>
+  <h2 id="${linkTarget}">{{= testOrTask('{Test} Details')}}</h2>
   <ul id="detail-tabs">
     <li class="${totalTabStatus} detail-tab">
       <a href="#totals" onclick="renderTotalSelector()"

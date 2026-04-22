@@ -3,16 +3,126 @@ Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
 Library           SeleniumLibrary
+Library           JSONLibrary
+Library           DatabaseLibrary
+Library           pymssql
+
 Resource          ../resources/AdmitHis-variables.resource
 Resource          ../keywords/AdmitHis-keywords.resource
+Resource          ../keywords/AdmitHis-DB-keywords.resource
 
-
-Suite Setup       Create AdmitHIS Session
+Suite Setup       Create All Sessions   
     
 
 *** Test Cases ***
 
-01-Get All Jobs
+001-Get Version
+    [Documentation]    دریافت ورژن api
+    [Tags]    API_Version    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /version    
+    ...    headers=${headers}
+
+    Should Be Equal As Integers    
+    ...    ${resp.status_code}    
+    ...    200    
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Set Test Message
+    ...    Build Info:\n${json}
+
+002-Get Patient By FileFormationID
+    [Documentation]    بررسی بدهی بیمار
+    [Tags]    API_Patient    METHOD_POST    
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    &{body}=    Create Dictionary
+    ...    name=
+    ...    lastName=
+    ...    triageId=0
+    ...    fatherName=
+    ...    nationalityId=912
+    ...    nationalCode=
+    ...    PassportNo=
+    ...    grandPaName=
+    ...    motherName=
+    ...    momGrandPaName=
+    ...    fileFormationId=${FileFormationID}
+    ...    hospitalCodeId=0
+
+    ${resp}=    POST On Session
+    ...    HIS
+    ...    /api/Patient/GetPatientByNationalCode
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Not Be Empty    ${json}
+
+    FOR    ${item}    IN    @{json}
+        IF    ${item["iD_FileFormation"]} == ${FileFormationID}
+            ${FOUND_Hospital_FileID}=    Set Variable    ${item["hospitalFileID"]}
+            ${FOUND_National_Code}=    Set Variable    ${item["nCode"]}
+            ${FOUND_First_Name}=    Set Variable    ${item["firstName"]}
+            ${FOUND_Last_Name}=    Set Variable    ${item["lastName"]}
+            ${FOUND_Father_Name}=    Set Variable    ${item["fatherName"]}
+            ${FOUND_display_Name}=    Set Variable    ${item["displayName"]}
+            ${FOUND_sex}=    Set Variable    ${item["sex"]}
+            ${FOUND_mobile}=    Set Variable    ${item["mobile"]}
+            ${FOUND_lastHomeCity}=    Set Variable    ${item["lastHomeCity"]}
+            ${FOUND_lastInsuranceNO}=    Set Variable    ${item["lastInsuranceNO"]}
+            ${FOUND_religion}=    Set Variable    ${item["religion"]}
+            ${FOUND_nationalityID}=    Set Variable    ${item["nationalityID"]}
+            ${FOUND_lastMaritalStatus}=    Set Variable    ${item["lastMaritalStatus"]}
+            ${FOUND_birthCityID}=    Set Variable    ${item["birthCityID"]}
+            # ${FOUND_uniqueEmergencyNo}=    Set Variable    ${item["uniqueEmergencyNo"]}
+            ${FOUND_lastCityID}=    Set Variable    ${item["lastCityID"]}
+            ${FOUND_lastInsurBox_SepasID}=    Set Variable    ${item["lastInsurBox_SepasID"]}
+            ${FOUND_sexId}=    Set Variable    ${item["sexId"]}
+            ${FOUND_inquiryUId}=    Set Variable    ${item["inquiryUId"]}
+            ${FOUND_Fileformation_Id}=    Set Variable    ${item["iD_FileFormation"]}
+            Exit For Loop
+        END
+    END
+
+    Write State    DISPLAYNAME    ${FOUND_display_Name}
+    Write State    SEX    ${FOUND_sex}
+    Write State    SEXID    ${FOUND_sexId}
+    Write State    MOBILE    ${FOUND_mobile}
+    Write State    LASTHOMECITY    ${FOUND_lastHomeCity}
+    Write State    LASTINSURANCENO    ${FOUND_lastInsuranceNO}
+    Write State    RELIGION    ${FOUND_religion}
+    Write State    NATIONALITYID    ${FOUND_nationalityID}
+    Write State    LASTMARITALSTATUS    ${FOUND_lastMaritalStatus}
+    Write State    BIRTHCITYID    ${FOUND_birthCityID}
+    # Write State    UNIQUEMERGENCYNO    ${FOUND_uniqueEmergencyNo}
+    Write State    LASTCITYID    ${FOUND_lastCityID}
+    Write State    LASTINSURBOX_SEPASID    ${FOUND_lastInsurBox_SepasID}
+    Write State    INQUIRYUID    ${FOUND_inquiryUId}
+    Write State    HOSPITALFILEID    ${FOUND_Hospital_FileID}  
+    Write State    NATIONALCODE      ${FOUND_National_Code}
+    Write State    iD_FileFormation    ${FOUND_Fileformation_Id}
+    Write State    FIRSTNAME         ${FOUND_First_Name}
+    Write State    LASTNAME          ${FOUND_Last_Name}
+    Write State    FATHERNAME        ${FOUND_Father_Name}    
+
+
+003-Get All Jobs
     [Documentation]    دریافت لیست کامل شغل‌ها
     [Tags]    API_GeneralVariables    METHOD_GET  
 
@@ -21,7 +131,10 @@ Suite Setup       Create AdmitHIS Session
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
 
-    ${resp}=    GET On Session    HIS    /api/GeneralVariables/GetAllJobs    headers=${headers}
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllJobs    
+    ...    headers=${headers}
 
     Run Keyword If    '${resp}'=='None'
     ...    Fail    ❌ NO RESPONSE | API: GetAllJobs | Server did not respond (Timeout / Network)
@@ -31,6 +144,8 @@ Suite Setup       Create AdmitHIS Session
     ...    msg=❌ WRONG STATUS | API: GetAllJobs | Expected: 200 | Actual: ${resp.status_code}
 
     ${json}=    To JSON    ${resp.content}
+
+    ${target}=    Evaluate    [x for x in $json if x["jobName"]=="پزشک"]
 
     Dictionary Should Contain Key
     ...    ${json[0]}    iD_Job
@@ -47,25 +162,6 @@ Suite Setup       Create AdmitHIS Session
     ${count}=    Get Length    ${json}
     Log To Console    ✅ PASS | GetAllJobs Loaded Successfully | Total Jobs: ${count}
 
-
-
-02-Validate Specific Job - پزشک Exists
-    [Documentation]    بررسی وجود شغل «پزشک» با کد سپاس صحیح
-    [Tags]    API_GeneralVariables  METHOD_GET 
-
-    ${headers}=    Create Dictionary
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-
-    ${resp}=    GET On Session    HIS    /api/GeneralVariables/GetAllJobs    headers=${headers}
-
-    Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API: GetAllJobs | While validating Doctor job
-
-    ${j}=    To JSON    ${resp.content}
-
-    ${target}=    Evaluate    [x for x in $j if x["jobName"]=="پزشک"]
-
     Should Not Be Empty
     ...    ${target}
     ...    msg=❌ DATA ERROR | Job 'پزشک' not found in response | API: GetAllJobs
@@ -77,7 +173,7 @@ Suite Setup       Create AdmitHIS Session
     Log To Console    ✅ PASS | Doctor job validated | ID=${target[0]["iD_Job"]}
 
 
-03-Get All Cause Of Hospitalization
+004-Get All Cause Of Hospitalization
     [Documentation]    دریافت لیست علل بستری
     [Tags]    API_GeneralVariables    METHOD_GET
 
@@ -111,8 +207,8 @@ Suite Setup       Create AdmitHIS Session
     ...    msg=❌ DATA MISSING | Cause 'سوختگی' Not Found | ID=82
 
 
-04-Get Standard Variables
-    [Documentation]    Get Standard Variables
+005-Get Standard Variables
+    [Documentation]    لیست شهرها و وضعیت تاهل و ملیت و نام بیمه ها و نسبیت ها  و نوع بستری و نام بیمه های تکمیلی و تحصیلات و نام پزشک ها وجنسیت و استان ها و نحوه مراجعه
     [Tags]       API_GeneralVariables    METHOD_GET
 
     &{headers}=    Create Dictionary
@@ -130,7 +226,7 @@ Suite Setup       Create AdmitHIS Session
     Should Be Equal As Integers    ${resp.status_code}    200
 
 
-05-Get All First Recognition
+006-Get All First Recognition
     [Documentation]    دریافت لیست تشخیص های اولیه
     [Tags]      API_GeneralVariables    METHOD_GET
 
@@ -139,8 +235,11 @@ Suite Setup       Create AdmitHIS Session
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
 
-    ${resp}=    GET On Session    HIS    /api/GeneralVariables/GetAllFirstRecognition
+    ${resp}=    GET On Session   
+    ...     HIS    
+    ...    /api/GeneralVariables/GetAllFirstRecognition
     ...    headers=&{headers}
+
     Run Keyword If    '${resp}'=='None'    Return From Keyword
 
     Log To Console    Status: ${resp.status_code}
@@ -148,9 +247,28 @@ Suite Setup       Create AdmitHIS Session
 
     Should Be Equal As Integers    ${resp.status_code}    200
 
+    ${json}=    Set Variable    ${resp.json()}
 
-06-Get All Names Inpatient Wards
-    [Documentation]    دریافت لیست بخش‌های بستری و انتخاب یک تخت خالی
+    Should Not Be Empty    ${json}
+    
+    ${target}=    Evaluate    [x for x in $json if x["iD_GVariable"]==13309]
+    ${target_2}=    Evaluate    [x for x in $json if x["iD_GVariable"]==35543]  
+
+    ${FOUND_Diagnosis_Name}=    Set Variable    ${target[0]["name"]}
+    ${FOUND_Diagnosis_ID}=    Set Variable    ${target[0]["iD_GVariable"]}
+    ${FOUND_Diagnosis_Name-Edit}=    Set Variable    ${target_2[0]["name"]}
+    ${FOUND_Diagnosis_ID-Edit}=    Set Variable    ${target_2[0]["iD_GVariable"]}
+
+
+    Write State    Diagnosis-ID    ${FOUND_Diagnosis_ID}
+    Write State    Diagnosis-Name    ${FOUND_Diagnosis_Name}
+    Write State    Diagnosis-ID-Edit    ${FOUND_Diagnosis_ID-Edit}
+    Write State    Diagnosis-Name-Edit   ${FOUND_Diagnosis_Name-Edit}
+    
+
+
+007-Get All Names Inpatient Wards
+    [Documentation]    دریافت لیست بخش‌های بستری
     [Tags]    API_GeneralVariables    METHOD_GET
 
     &{headers}=    Create Dictionary
@@ -163,51 +281,61 @@ Suite Setup       Create AdmitHIS Session
     ...    /api/GeneralVariables/GetAllNamesInpatientWards
     ...    headers=&{headers}
 
-    Run Keyword If    '${resp}' == 'None'    Fail    No response from GetAllNamesInpatientWards API
-
     Should Be Equal As Integers    ${resp.status_code}    200
 
-    # ✅ Parse JSON (modern & non-deprecated)
+    # ✅ Parse JSON
     ${json}=    Set Variable    ${resp.json()}
-
     Should Be True    isinstance($json, list)
 
     ${count}=    Get Length    ${json}
-    Log To Console    🛏 Wards count: ${count}
+    Log To Console    🏥 Inpatient wards count: ${count}
     Should Be True    ${count} > 0
 
-    # ✅ Validation روی اولین آیتم
+    # ✅ Schema validation روی اولین آیتم
     Should Contain    ${json[0]}    name
     Should Contain    ${json[0]}    systemCodeId
     Should Contain    ${json[0]}    standardVariableId
     Should Be Equal As Integers    ${json[0]["systemCodeId"]}    132
 
-    # ✅ پیدا کردن یک تخت خالی
-    ${EMPTY_BED_ID}=    Set Variable    ${None}
+    # ✅ بررسی وجود حداقل یک بخش با ظرفیت خالی
+    ${HAS_AVAILABLE_WARD}=    Set Variable    ${False}
 
     FOR    ${item}    IN    @{json}
         Should Contain    ${item}    name
         Should Contain    ${item}    standardVariableId
 
-        
-        ${bed_count}=    Evaluate
-        ...    int(re.search("\\((\\d+)\\)", $item["name"]).group(1))
-        ...    re
-
-        IF    ${bed_count} > 0
-            ${EMPTY_BED_ID}=    Set Variable    ${item["standardVariableId"]}
-            Log To Console    ✅ Empty bed selected | BED_ID=${EMPTY_BED_ID} | ${item["name"]}
-            Exit For Loop
+        ${match}=    Evaluate    re.search("\\((\\d+)\\)", $item["name"])    re
+        IF    $match
+            ${capacity}=    Evaluate    int($match.group(1))
+            IF    ${capacity} > 0
+                Log To Console    ✅ Available ward found | ${item["name"]}
+                ${HAS_AVAILABLE_WARD}=    Set Variable    ${True}
+                Exit For Loop
+            END
         END
     END
 
-    Should Not Be Equal    ${EMPTY_BED_ID}    ${None}
+    Should Be True    ${HAS_AVAILABLE_WARD}
+    ...    ❌ No inpatient ward with available capacity found
 
-    # ✅ ذخیره برای تست‌های بعدی
-    Set Suite Variable    ${BED_ID}    ${EMPTY_BED_ID}
+    ${target}=    Evaluate    [x for x in $json if x["standardVariableId"]==${wardId}]
+    ${target_2}=    Evaluate    [x for x in $json if x["standardVariableId"]==${wardId_edit}]
+    
+    ${FOUND_INPATIONT_WARD_ID}=    Set Variable    ${target[0]["standardVariableId"]}
+    ${FOUND_INPATIONT_WARD_NAME}=    Set Variable    ${target[0]["name"]}
+    ${FOUND_INPATIONT_WARD_ID_EDIT}=    Set Variable    ${target_2[0]["standardVariableId"]}
+    ${FOUND_INPATIONT_WARD_NAME_EDIT}=    Set Variable    ${target_2[0]["name"]}
 
-07-Admit Configuration
-    [Documentation]    AdmitHis config
+    Write State    INPATIONT_WARD_ID    ${FOUND_INPATIONT_WARD_ID} 
+    Write State    INPATIONT_WARD_NAME    ${FOUND_INPATIONT_WARD_NAME}
+    Write State    INPATIONT_WARD_ID_EDIT    ${FOUND_INPATIONT_WARD_ID_EDIT}
+    Write State    INPATIONT_WARD_NAME_EDIT    ${FOUND_INPATIONT_WARD_NAME_EDIT}   
+
+    Log To Console    ✅ INPATIONT_WARD_NAME saved: ${FOUND_INPATIONT_WARD_NAME}
+
+
+008-Admit Configuration
+    [Documentation]    گرفتن فایل confing در admithis
     [Tags]    API_GeneralVariables    METHOD_GET    
 
     &{headers}=    Create Dictionary
@@ -215,14 +343,17 @@ Suite Setup       Create AdmitHIS Session
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
 
-    ${resp}=    GET On Session    HIS    /api/GeneralVariables/AdmitConfiguration    headers=&{headers}
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/AdmitConfiguration    
+    ...    headers=&{headers}
 
     Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API:GetAllCauseOfHospitalization
+    ...    Fail    ❌ NO RESPONSE | API:AdmitConfiguration
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API:GetAllCauseOfHospitalization | Expected:200 | Actual:${resp.status_code}
+    ...    msg=❌ WRONG STATUS | API:AdmitConfiguration | Expected:200 | Actual:${resp.status_code}
 
     ${json}=    To JSON    ${resp.content}
     ${count}=    Get Length    ${json}
@@ -230,9 +361,13 @@ Suite Setup       Create AdmitHIS Session
     Log To Console    ✅ PASS | Hospitalization Causes Loaded | Count=${count}
 
 
-08-Get Person From Ditas
+009-Get Person From Ditas
     [Documentation]    دریافت اطلاعات شخص از ديتاس با کدملی
     [Tags]    API_Inquiry  METHOD_POST  DITAS
+        
+    Run Keyword If    
+    ...    '${nationalCode}'=='null'
+    ...    Fail    ❌ NO RESPONSE | API: GetPersonFromDitas | nationalCode=${nationalCode}
 
     &{headers}=    Create Dictionary
     ...    Accept=application/json
@@ -258,19 +393,63 @@ Suite Setup       Create AdmitHIS Session
     ...    ${resp.status_code}    200
     ...    msg=❌ WRONG STATUS | API: GetPersonFromDitas | Expected: 200 | Actual: ${resp.status_code}
 
-    ${json}=    To Json    ${resp.content}
+    ${json}=    Set Variable    ${resp.json()}
 
     ${nationalCode_Ditas}=    Evaluate    $json['data']['fileFormation']['nationalCode']
 
     Should Be Equal
     ...    ${nationalCode_Ditas}    ${nationalCode}
-    ...    msg=❌ DATA MISMATCH | NationalCode mismatch | Expected: ${nationalCode} | Actual: ${nationalCode}
+    ...    msg=❌ DATA MISMATCH | NationalCode mismatch | Message: Ditas service failed.
 
-    Log To Console    ✅ PASS | DITAS data fetched successfully | NationalCode=${nationalCode}
+    Log To Console    ✅ PASS | DITAS data fetched successfully | NationalCode=${nationalCode_Ditas}
+
+    FOR    ${item}    IN    @{json}
+        IF    ${nationalCode} == ${nationalCode_Ditas}
+            ${FOUND_Hospital_FileID}=   Evaluate    $json['data']['fileFormation']['hospitalFileID']
+            ${FOUND_National_Code}=    Evaluate     $json['data']['fileFormation']["nationalCode"]
+            ${FOUND_First_Name}=       Evaluate     $json['data']['fileFormation']["name"]
+            ${FOUND_Last_Name}=        Evaluate     $json['data']['fileFormation']["familyName"]
+            ${FOUND_Father_Name}=      Evaluate     $json['data']['fileFormation']["fatherName"]
+            ${FOUND_display_Name}=     Evaluate     $json['data']['fileFormation']["middleName"]
+            ${FOUND_sex}=              Evaluate     $json['data']['fileFormation']["sexString"]
+            ${FOUND_mobile}=           Evaluate     $json['data']['fileFormation']["mobileNo"]
+            ${FOUND_lastHomeCity}=     Evaluate     $json['data']['fileFormation']["addressLine"]
+            ${FOUND_lastInsuranceNO}=  Evaluate     $json['data']['hisAdmitDto']["insuranceNO"]
+            # ${FOUND_religion}=         Evaluate     $json['data']['fileFormation']["religion"]
+            ${FOUND_nationalityID}=    Evaluate     $json['data']['fileFormation']["nationality"]
+            ${FOUND_lastMaritalStatus}=     Evaluate     $json['data']['fileFormation']["maritalStatus"]
+            ${FOUND_birthCityID}=           Evaluate     $json['data']['fileFormation']["cityId"]
+            ${FOUND_lastCityID}=       Evaluate          $json['data']['hisAdmitDto']["homeCity"]
+            ${FOUND_lastInsurBox_SepasID}=   Evaluate    $json['data']["lastInsuranceKind"]
+            ${FOUND_sexId}=                  Evaluate    $json['data']['fileFormation']["sex"]
+            ${FOUND_inquiryUId}=             Evaluate    $json['data']['hisAdmitDto']["inquiryUId"]
+            Exit For Loop
+        END
+    END
+    
+    Write State    FIRSTNAME         ${FOUND_First_Name}
+    Write State    LASTNAME          ${FOUND_Last_Name}
+    Write State    DISPLAYNAME    ${FOUND_display_Name}
+    Write State    SEX    ${FOUND_sex}
+    Write State    SEXID    ${FOUND_sexId}
+    Write State    MOBILE    ${FOUND_mobile}
+    Write State    LASTHOMECITY    ${FOUND_lastHomeCity}
+    Write State    LASTINSURANCENO    ${FOUND_lastInsuranceNO}
+    # Write State    RELIGION    ${FOUND_religion}
+    Write State    NATIONALITYID    ${FOUND_nationalityID}
+    Write State    LASTMARITALSTATUS    ${FOUND_lastMaritalStatus}
+    Write State    BIRTHCITYID    ${FOUND_birthCityID}
+    # Write State    UNIQUEMERGENCYNO    ${FOUND_uniqueEmergencyNo}
+    Write State    LASTCITYID    ${FOUND_lastCityID}
+    Write State    LASTINSURBOX_SEPASID    ${FOUND_lastInsurBox_SepasID}
+    Write State    INQUIRYUID    ${FOUND_inquiryUId}
+    Write State    HOSPITALFILEID    ${FOUND_Hospital_FileID}  
+    Write State    NATIONALCODE      ${FOUND_National_Code}
+       
 
 
 
-09-Get All Insurance Kind
+010-Get All Insurance Kind
     [Documentation]    دریافت لیست صندوق های بیمه بر اساس sepasid بیمه پایه
     [Tags]    API_GeneralVariables  METHOD_Get  Insure
 
@@ -290,38 +469,1040 @@ Suite Setup       Create AdmitHIS Session
     ${json}=    To Json    ${resp.content}
     Log To Console    ${json}
 
-10-Check Patient Debt
-    [Documentation]    بررسی بدهی بیمار
-    [Tags]    API_Patient    METHOD_POST    Debt
+011-Get All Bed Number
+    [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 201 و 224
+    [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST
 
     &{headers}=    Create Dictionary
+    ...    Accept=application/json
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    url=/api/GeneralVariables/GetAllBedNumber?wardId=${wardId}
+    ...    headers=&{headers}
+
+    ${resp_edit}=    GET On Session
+    ...    HIS
+    ...    url=/api/GeneralVariables/GetAllBedNumber?wardId=${wardId_edit}
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp.status_code}
+
+    Should Be Equal As Integers
+    ...    ${resp_edit.status_code}    200
+    ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp_edit.status_code}
+
+    # ✅ Parse JSON (modern)
+    ${json}=    Set Variable    ${resp.json()}
+    
+    ${json_edit}=    Set Variable    ${resp_edit.json()}
+
+    Should Be True
+    ...    isinstance($json, list)
+    ...    msg=❌ INVALID FORMAT | Expected list[] | Got: ${json}
+
+    Should Be True
+    ...    isinstance($json_edit, list)
+    ...    msg=❌ INVALID FORMAT | Expected list[] | Got: ${json_edit}
+
+    ${count}=    Get Length    ${json}
+
+    ${count_edit}=    Get Length    ${json_edit}
+
+    Should Be True
+    ...    ${count} > 0
+    ...    msg=❌ EMPTY RESULT | No beds found | WardId=${wardId}
+
+    Should Be True
+    ...    ${count_edit} > 0
+    ...    msg=❌ EMPTY RESULT | No beds found | WardId=${wardId_edit}
+
+    Log To Console    🛏 Beds found: ${count} | WardId=${wardId}
+
+    Log To Console    🛏 Beds found: ${count_edit} | WardId=${wardId_edit}
+
+    # ✅ Expected schema
+    @{expected_keys}=    Create List
+    ...    WardName
+    ...    ID_Ward
+    ...    RoomNo
+    ...    BedNo
+    ...    RoomTypeName
+    ...    BedStatus
+    ...    ID_Bed
+
+    ${SELECTED_INPATIONT_BED_ID}=    Set Variable    ${None}
+
+    FOR    ${item}    IN    @{json}
+        FOR    ${key}    IN    @{expected_keys}
+            Run Keyword If    '${key}' not in ${item}
+            ...    Fail    ❌ MISSING KEY | '${key}' not found | Item=${item}
+        END
+
+        # ✅ انتخاب اولین Bed معتبر (ساده و deterministic)
+        IF    ${SELECTED_INPATIONT_BED_ID} == ${None}
+            ${SELECTED_INPATIONT_BED_ID}=    Set Variable    ${item["ID_Bed"]}
+            ${SELECTED_INPATIONT_BED_NO}=    Set Variable    ${item["RoomTypeName"]}
+            Log To Console
+            ...    ✅ Bed selected | ID_Bed=${SELECTED_INPATIONT_BED_ID} | Room=${item["RoomNo"]} | BedNo=${item["BedNo"]}
+        END
+    END
+
+    Should Not Be Equal
+    ...    ${SELECTED_INPATIONT_BED_ID}    ${None}
+    ...    ❌ No valid Bed ID selected
+
+    ${INPATIONT_BED_ID_EDIT}=           Set Variable    ${json_edit[0]["ID_Bed"]}
+    ${INPATIONT_BED_NO_EDIT}=           Set Variable    ${json_edit[0]["RoomTypeName"]}
+
+    # ✅ ذخیره state برای تست‌های بعدی (ChangeToAdmit)
+    Write State    INPATIONT_BED_ID    ${SELECTED_INPATIONT_BED_ID}
+    Write State    INPATIONT_BED_NO    ${SELECTED_INPATIONT_BED_NO}
+    Write State    INPATIONT_BED_ID_Edit    ${INPATIONT_BED_ID_EDIT}
+    Write State    INPATIONT_BED_NO_Edit    ${INPATIONT_BED_NO_EDIT}
+    Log To Console    💾 BED_ID saved to state: ${SELECTED_INPATIONT_BED_ID}
+
+012-Get Doctors By Ward Id
+    [Documentation]     تخت های خالی بر اساس id بخش مثلا بخش 201
+    [Tags]    API_GeneralVariables  METHOD_GET  DOCTORS_LIST
+
+    # ${wardId}=    Set Variable    204
+
+    &{headers}=    Create Dictionary
+    ...    Accept=application/json
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    url=/api/GeneralVariables/GetDoctorsByWard?wardId=${wardId}
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp.status_code}
+
+    ${json}=    To Json    ${resp.content}
+
+    # Validate response is a list
+    Should Be True
+    ...    ${json}.__class__.__name__ == 'list'
+    ...    msg=❌ INVALID FORMAT | Expected a list[] of doctors | Got: ${json}
+
+    # Validate list is not empty
+    ${count}=    Get Length    ${json}
+    Should Be True
+    ...    ${count} > 0
+    ...    msg=❌ EMPTY RESULT | Expected list of doctors | WardId=${wardId}
+
+    # Expected keys for each doctor item
+    @{expected_keys}=    Create List
+    ...    standardVariableId
+    ...    name
+    ...    systemCodeId
+    ...    parent
+    ...    default
+
+    # Validate keys
+    FOR    ${item}    IN    @{json}
+        FOR    ${key}    IN    @{expected_keys}
+            Run Keyword If    '${key}' not in ${item}
+            ...    Fail    ❌ MISSING KEY | Key '${key}' not found in item: ${item}
+        END
+    END
+
+    ${target}=    Evaluate    [x for x in $json if x["standardVariableId"]==${Doctor_ID}]
+    ${target_2}=    Evaluate    [x for x in $json if x["standardVariableId"]==${Doctor_ID_Edit}]
+    
+    ${FOUND_Doctor_ID}=    Set Variable    ${target[0]["standardVariableId"]}
+    ${FOUND_Doctor_NAME}=    Set Variable    ${target[0]["name"]}
+    ${FOUND_Doctor_ID_EDIT}=    Set Variable    ${target_2[0]["standardVariableId"]}
+    ${FOUND_Doctor_NAME_EDIT}=    Set Variable    ${target_2[0]["name"]}
+
+    Write State    Doctor_ID    ${FOUND_Doctor_ID} 
+    Write State    Doctor_NAME    ${FOUND_Doctor_NAME}
+    Write State    Doctor_ID_EDIT    ${FOUND_Doctor_ID_EDIT}
+    Write State    Doctor_NAME_EDIT    ${FOUND_Doctor_NAME_EDIT}  
+
+    Log To Console    ✅ PASS | GetDoctorsByWard | Count=${count} doctors | WardId=${wardId}
+
+
+013-Get Emergency Wards
+    [Documentation]    نام بخش های اورژانس تحت نظر 
+    [Tags]    API_GeneralVariables  METHOD_GET  Emergency_Ward_LIST  Emergency
+
+    &{headers}=    Create Dictionary
+    ...    Accept=application/json
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    url=/api/GeneralVariables/GetEmergencyWards
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers    ${resp.status_code}    200
+
+    ${json}=     Set Variable    ${resp.json()}
+    
+    FOR    ${item}    IN    @{json}
+        IF    ${item["standardVariableId"]} == 200
+            ${EMERGENCY_WARD_ID}=      Set Variable    ${item["standardVariableId"]}
+            ${EMERGENCY_WARD_NAME}=    Set Variable    ${item["name"]}
+            Exit For Loop
+        END
+    END
+    
+    &{WARD}=    Create Dictionary
+    ...    id=${EMERGENCY_WARD_ID}
+    ...    name=${EMERGENCY_WARD_NAME}
+
+    Write State    EMERGENCY_WARD_ID      ${EMERGENCY_WARD_ID}
+    Write State    EMERGENCY_WARD_NAME    ${EMERGENCY_WARD_NAME}     
+
+014-Get All Bed Number Of Emengemcy Ward
+    [Documentation]   دریافت لیست تخت های خالی اورژانس تحت نظر 
+    [Tags]    API_GeneralVariables  METHOD_GET  EMERGENCY_BED_ID_LIST  Emergency
+
+    &{headers}=    Create Dictionary
+    ...    Accept=application/json
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    url=/api/GeneralVariables/GetAllBedNumber?wardId=200
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp.status_code}
+
+    # ✅ Parse JSON (modern)
+    ${json}=    Set Variable    ${resp.json()}
+    Should Be True
+    ...    isinstance($json, list)
+    ...    msg=❌ INVALID FORMAT | Expected list[] | Got: ${json}
+
+    ${count}=    Get Length    ${json}
+
+    Should Be True
+    ...    ${count} > 0
+    ...    msg=❌ EMPTY RESULT | No beds found | WardId=200
+
+    Log To Console    🛏 Beds found: ${count} | WardId=200
+
+    # ✅ Expected schema
+    @{expected_keys}=    Create List
+    ...    WardName
+    ...    ID_Ward
+    ...    RoomNo
+    ...    BedNo
+    ...    RoomTypeName
+    ...    BedStatus
+    ...    ID_Bed
+
+    ${SELECTED_EMERGEMCY_BED_ID}=    Set Variable    ${None}
+
+    FOR    ${item}    IN    @{json}
+        FOR    ${key}    IN    @{expected_keys}
+            Run Keyword If    '${key}' not in ${item}
+            ...    Fail    ❌ MISSING KEY | '${key}' not found | Item=${item}
+        END
+
+        # ✅ انتخاب اولین Bed معتبر (ساده و deterministic)
+        IF    ${SELECTED_EMERGEMCY_BED_ID} == ${None}
+            ${SELECTED_EMERGEMCY_BED_ID}=    Set Variable    ${item["ID_Bed"]}
+            ${SELECTED_EMERGEMCY_BED_NO}=    Set Variable    ${item["RoomTypeName"]}
+            Log To Console
+            ...    ✅ Bed selected | ID_Bed=${SELECTED_EMERGEMCY_BED_ID} | Room=${item["RoomNo"]} | BedNo=${item["BedNo"]}
+        END
+    END
+
+    Should Not Be Equal
+    ...    ${SELECTED_EMERGEMCY_BED_ID}    ${None}
+    ...    ❌ No valid Bed ID selected
+
+    # ✅ ذخیره state برای تست‌های بعدی (ChangeToAdmit)
+    Write State    EMERGEMCY_BED_ID    ${SELECTED_EMERGEMCY_BED_ID}
+    Write State    EMERGEMCY_BED_NO    ${SELECTED_EMERGEMCY_BED_NO}
+    Log To Console    💾 EMERGEMCY_BED_ID saved to state: ${SELECTED_EMERGEMCY_BED_ID}
+
+015-Get All City
+    [Documentation]    دریافت لیست کامل شهر ها
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
 
-    &{body}=    Create Dictionary
-    ...    nationalCode=${nationalCode}
-    ...    fileformationId=0
-
-    ${resp}=    POST On Session
-    ...    HIS
-    ...    /api/Patient/CheckPatientDebt
-    ...    headers=&{headers}
-    ...    json=${body}
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllCity   
+    ...    headers=${headers}
 
     Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API:CheckPatientDebt
+    ...    Fail    ❌ NO RESPONSE | API: GetAllCity | Server did not respond (Timeout / Network)
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API:CheckPatientDebt | Expected:200 | Actual:${resp.status_code}
+    ...    msg=❌ WRONG STATUS | API: GetAllCity | Expected: 200 | Actual: ${resp.status_code}
 
-    ${json}=    To Json    ${resp.content}
-    Log To Console    ✅ PASS | Patient Debt Checked | Response=${json}
+    ${json}=    Set Variable    ${resp.json()}
 
-11-Check Filing Doubling
+    ${target}=    Evaluate    [x for x in $json if x["city_Default"]=="1"]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_CityBase
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_CityBase | API: GetAllJobs
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    city_Name
+    ...    msg=❌ SCHEMA ERROR | Missing key: city_Name | API: GetAllJobs
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_State
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_State | API: GetAllCity
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllCity Loaded Successfully | Total City: ${count}
+
+    Should Not Be Empty
+    ...    ${target}
+    ...    msg=❌ DATA ERROR | City 'تهران' not found in response | API: GetAllCity
+
+    ${city_Base_Name}=    Set Variable    ${target[0]["city_Name"]}
+    ${city_Base_ID}=           Set Variable    ${target[0]["iD_CityBase"]}
+
+    Write State    city_Base_ID    ${city_Base_ID}
+    Write State    city_Base_Name    ${city_Base_Name}
+
+    Log To Console    ✅ PASS | city validated | ID=${target[0]["iD_CityBase"]}
+
+016-Get All Marital Status
+    [Documentation]    دریافت لیست وضعیت تاهل
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllMaritalStatus
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllMaritalStatus | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllMaritalStatus | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${target}=    Evaluate    [x for x in $json if x["iD_Sepas"]==363]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_Sepas
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_Sepas | API: GetAllMaritalStatus
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    name
+    ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllMaritalStatus
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    sepas_Code
+    ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetAllMaritalStatus
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllMaritalStatus Loaded Successfully | Total MaritalStatus : ${count}
+
+    Should Not Be Empty
+    ...    ${target}
+    ...    msg=❌ DATA ERROR | MaritalStatus '363' not found in response | API: GetAllMaritalStatus
+
+    ${Marital_Status_ID}=    Set Variable    ${target[0]["iD_Sepas"]}
+    ${Marital_Status_Name}=           Set Variable    ${target[0]["name"]}
+
+    Write State    Marital_Status_ID    ${Marital_Status_ID}
+    Write State    Marital_Status_Name    ${Marital_Status_Name}
+
+    Log To Console    ✅ PASS | Marital Status validated | ID=${target[0]["iD_Sepas"]}
+
+017-Get All Nationality
+    [Documentation]    دریافت لیست ملیت ها
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllNationality
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllNationality | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllNationality | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${target}=    Evaluate    [x for x in $json if x["iD_GVariable"]==912]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_GVariable
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_GVariable | API: GetAllNationality
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    name
+    ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllNationality
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    sepas_Code
+    ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetAllNationality
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllNationality Loaded Successfully | Total Nationality : ${count}
+
+    Should Not Be Empty
+    ...    ${target}
+    ...    msg=❌ DATA ERROR | Nationality '912' not found in response | API: GetAllNationality
+
+    ${Nationality_ID}=    Set Variable    ${target[0]["iD_GVariable"]}
+    ${Nationality_Name}=           Set Variable    ${target[0]["name"]}
+
+    Write State    Nationality_ID      ${Nationality_ID}
+    Write State    Nationality_Name    ${Nationality_Name}
+
+    Log To Console    ✅ PASS | Marital Status validated | ID=${target[0]["iD_GVariable"]}
+
+018-Get All Insurance
+    [Documentation]    دریافت لیست بیمه ها 
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllInsurance
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllInsurance | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllInsurance | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${target_Azad}=    Evaluate    [x for x in $json if x["standardVariableId"]==1]
+    ${target_Tamin}=    Evaluate    [x for x in $json if x["standardVariableId"]==6]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    standardVariableId
+    ...    msg=❌ SCHEMA ERROR | Missing key: standardVariableId | API: GetAllInsurance
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    sepasId
+    ...    msg=❌ SCHEMA ERROR | Missing key: sepasId | API: GetAllInsurance
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllInsurance Loaded Successfully | Total Insurance : ${count}
+
+    Should Not Be Empty
+    ...    ${target_Azad}
+    ...    msg=❌ DATA ERROR | sepasId '127' not found in response | API: GetAllInsurance
+
+    ${Azad_Insurance_Sepas_ID}=    Set Variable    ${target_Azad[0]["sepasId"]}
+    ${Azad_Insurance_name}=    Set Variable    ${target_Azad[0]["name"]}
+    ${Tamin_Insurance_Sepas_ID}=    Set Variable    ${target_Tamin[0]["sepasId"]}
+    ${Tamin_Insurance_name}=    Set Variable    ${target_Tamin[0]["name"]}
+
+    Write State    Azad_Insurance_Sepas_ID      ${Azad_Insurance_Sepas_ID}
+    Write State    Azad_Insurance_name          ${Azad_Insurance_name}
+    Write State    Tamin_Insurance_Sepas_ID     ${Tamin_Insurance_Sepas_ID}
+    Write State    Tamin_Insurance_name         ${Tamin_Insurance_name}
+
+019-Get All Relationship
+    [Documentation]    دریافت لیست نسبیت ها
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllRelationship
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllRelationship | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllRelationship | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${target}=    Evaluate    [x for x in $json if x["relationshipName"]=="پدر"]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_Relationship
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_Relationship | API: GetAllRelationship
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    relationshipName
+    ...    msg=❌ SCHEMA ERROR | Missing key: relationshipName | API: GetAllRelationship
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD2
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD2 | API: GetAllRelationship
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllRelationship Loaded Successfully | Total Relationship : ${count}
+
+    Should Not Be Empty
+    ...    ${target}
+    ...    msg=❌ DATA ERROR | relationshipName 'پدر' not found in response | API: GetAllRelationship
+
+    ${Relationship_Name}=           Set Variable    ${target[0]["relationshipName"]}
+
+    Write State    Relationship_Name    ${Relationship_Name}
+
+    Log To Console    ✅ PASS | Relationship validated | ID=${target[0]["relationshipName"]}
+
+
+020-Get All Type Admission
+    [Documentation]    دریافت لیست نوع پذیرش
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllTypeAdmission
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllTypeAdmission | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllTypeAdmission | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${target_inpationt}=    Evaluate    [x for x in $json if x["iD_Sepas"]==370]
+    ${target_emergency}=    Evaluate    [x for x in $json if x["iD_Sepas"]==372]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_Sepas
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_Sepas | API: GetAllTypeAdmission
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    name
+    ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllTypeAdmission
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    sepas_Code
+    ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetAllTypeAdmission
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllTypeAdmission Loaded Successfully | Total Type Admission : ${count}
+
+    ${Inpationt_Admission_Type_Sepas}=           Set Variable    ${target_inpationt[0]["iD_Sepas"]}
+    ${Inpationt_Admission_Type_Name}=           Set Variable    ${target_inpationt[0]["name"]}
+    ${Emergency_Admission_Type_Sepas}=           Set Variable    ${target_emergency[0]["iD_Sepas"]}
+    ${Emergency_Admission_Type_Name}=           Set Variable    ${target_emergency[0]["name"]}
+
+    Write State    Inpationt_Admission_Type_Sepas    ${Inpationt_Admission_Type_Sepas}
+    Write State    Inpationt_Admission_Type_Name    ${Inpationt_Admission_Type_Name}
+    Write State    Emergency_Admission_Type_Sepas    ${Emergency_Admission_Type_Sepas}
+    Write State    Emergency_Admission_Type_Name    ${Emergency_Admission_Type_Name}
+
+
+021-Get All Doctors
+    [Documentation]    دریافت لیست پزشکان
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllDoctors
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllDoctors | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllDoctors | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    # ${target}=    Evaluate    [x for x in $json if x["iD_Sepas"]==370]
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    iD_Sepas
+    # ...    msg=❌ SCHEMA ERROR | Missing key: iD_Sepas | API: GetAllDoctors
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    name
+    # ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllDoctors
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    sepas_Code
+    # ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetAllDoctors
+
+    # ${count}=    Get Length    ${json}
+    # Log To Console    ✅ PASS | GetAllDoctors Loaded Successfully | Total Type Admission : ${count}
+
+    # ${Inpationt_Admission_Type_Sepas}=           Set Variable    ${target_inpationt[0]["iD_Sepas"]}
+    # ${Inpationt_Admission_Type_Name}=           Set Variable    ${target_inpationt[0]["name"]}
+    # ${Emergency_Admission_Type_Sepas}=           Set Variable    ${target_emergency[0]["iD_Sepas"]}
+    # ${Emergency_Admission_Type_Name}=           Set Variable    ${target_emergency[0]["name"]}
+
+    # Write State    Inpationt_Admission_Type_Sepas    ${Inpationt_Admission_Type_Sepas}
+    # Write State    Inpationt_Admission_Type_Name    ${Inpationt_Admission_Type_Name}
+    # Write State    Emergency_Admission_Type_Sepas    ${Emergency_Admission_Type_Sepas}
+    # Write State    Emergency_Admission_Type_Name    ${Emergency_Admission_Type_Name}
+
+022-Get All Doctor 
+    [Documentation]    دریافت لیست پزشکان
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    url=/api/GeneralVariables/GetAllDoctor?wardId=${wardId}
+    ...    headers=${headers}
+
+    Log To Console    STATUS : ${resp.status_code}
+    Log To Console    BODY   : ${resp.text}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllDoctors | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllDoctors | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Not Be Empty   
+    ...    ${json}    
+    ...    msg=❌ API: GetAllTranslators | Body Is Empty | Body : ${json} 
+
+    # ${target}=    Evaluate    [x for x in $json if x["iD_Sepas"]==370]
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    iD_Sepas
+    # ...    msg=❌ SCHEMA ERROR | Missing key: iD_Sepas | API: GetAllDoctors
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    name
+    # ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllDoctors
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    sepas_Code
+    # ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetAllDoctors
+
+    # ${count}=    Get Length    ${json}
+    # Log To Console    ✅ PASS | GetAllDoctors Loaded Successfully | Total Type Admission : ${count}
+
+    # ${Inpationt_Admission_Type_Sepas}=           Set Variable    ${target_inpationt[0]["iD_Sepas"]}
+    # ${Inpationt_Admission_Type_Name}=           Set Variable    ${target_inpationt[0]["name"]}
+    # ${Emergency_Admission_Type_Sepas}=           Set Variable    ${target_emergency[0]["iD_Sepas"]}
+    # ${Emergency_Admission_Type_Name}=           Set Variable    ${target_emergency[0]["name"]}
+
+    # Write State    Inpationt_Admission_Type_Sepas    ${Inpationt_Admission_Type_Sepas}
+    # Write State    Inpationt_Admission_Type_Name    ${Inpationt_Admission_Type_Name}
+    # Write State    Emergency_Admission_Type_Sepas    ${Emergency_Admission_Type_Sepas}
+    # Write State    Emergency_Admission_Type_Name    ${Emergency_Admission_Type_Name}
+
+023-Get All Supplementary Insurance
+    [Documentation]    دریافت لیست بیمه های تکمیلی
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllSupplementaryInsurance
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllSupplementaryInsurance | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllSupplementaryInsurance | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${target}=    Evaluate    [x for x in $json if x["iD_Insurance2"]==19]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_Insurance2
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_Insurance2 | API: GetAllSupplementaryInsurance
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    name
+    ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllSupplementaryInsurance
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    sepasID
+    ...    msg=❌ SCHEMA ERROR | Missing key: sepasID | API: GetAllSupplementaryInsurance
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllSupplementaryInsurance Loaded Successfully | Total Insurance2 : ${count}
+
+    Should Not Be Empty
+    ...    ${target}
+    ...    msg=❌ DATA ERROR | iD_Insurance2 '19' not found in response | API: GetAllSupplementaryInsurance
+
+    ${iD_Insurance2}=           Set Variable    ${target[0]["iD_Insurance2"]}
+    ${Name_Insurance2}=           Set Variable    ${target[0]["name"]}
+
+    Write State    iD_Insurance2    ${iD_Insurance2}
+    Write State    Name_Insurance2    ${Name_Insurance2}
+
+    Log To Console    ✅ PASS | Name_Insurance2 validated | ID=${target[0]["name"]}
+
+024-Get All Referral Centers
+    [Documentation]    دریافت لیست بیمه های تکمیلی
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllReferralCenters
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllSupplementaryInsurance | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllSupplementaryInsurance | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Not Be Empty   
+    ...    ${json}    
+    ...    msg=❌ API: GetAllTranslators | Body Is Empty | Body : ${json} 
+
+    # ${target}=    Evaluate    [x for x in $json if x["iD_Insurance2"]==19]
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    iD_Insurance2
+    # ...    msg=❌ SCHEMA ERROR | Missing key: iD_Insurance2 | API: GetAllSupplementaryInsurance
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    name
+    # ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllSupplementaryInsurance
+
+    # Dictionary Should Contain Key
+    # ...    ${json[0]}    sepasID
+    # ...    msg=❌ SCHEMA ERROR | Missing key: sepasID | API: GetAllSupplementaryInsurance
+
+    # ${count}=    Get Length    ${json}
+    # Log To Console    ✅ PASS | GetAllSupplementaryInsurance Loaded Successfully | Total Insurance2 : ${count}
+
+    # Should Not Be Empty
+    # ...    ${target}
+    # ...    msg=❌ DATA ERROR | iD_Insurance2 '19' not found in response | API: GetAllSupplementaryInsurance
+
+    # ${iD_Insurance2}=           Set Variable    ${target[0]["iD_Insurance2"]}
+    # ${Name_Insurance2}=           Set Variable    ${target[0]["name"]}
+
+    # Write State    iD_Insurance2    ${iD_Insurance2}
+    # Write State    Name_Insurance2    ${Name_Insurance2}
+
+    # Log To Console    ✅ PASS | Name_Insurance2 validated | ID=${target[0]["name"]}
+
+025-Get All Type Treatment For Certain Centers
+    [Documentation]   دریافت همه انواع خدمات درمانی برای مراکز مشخص
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllTypeTreatmentForCertainCenters
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllTypeTreatmentForCertainCenters | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllTypeTreatmentForCertainCenters | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+026-Get All Physician Special Centers
+    [Documentation]  دریافت تمام مراکز تخصصی پزشکان
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllPhysicianSpecialCenters
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllPhysicianSpecialCenters | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllPhysicianSpecialCenters | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+027-Get All Translators
+    [Documentation]   دریافت همه مترجمان
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllTranslators
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllTranslators | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllTranslators | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Not Be Empty   
+    ...    ${json}    
+    ...    msg=❌ API: GetAllTranslators | Body Is Empty | Body : ${json} 
+
+
+028-Get All Education
+    [Documentation]   دریافت لیست تحصیلات 
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllEducation
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllEducation | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllEducation | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Not Be Empty   
+    ...    ${json}    
+    ...    msg=❌ API: GetAllTranslators | Body Is Empty | Body : ${json} 
+
+029-Get All RoomType
+    [Documentation]    دریافت لیست نوع اتاق های بیمارستان
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllRoomType
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllRoomType | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllRoomType | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${target}=    Evaluate    [x for x in $json if x["Status_RoomType"]==0]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    ID_RoomType
+    ...    msg=❌ SCHEMA ERROR | Missing key: ID_RoomType | API: GetAllRoomType
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    RoomTypeName
+    ...    msg=❌ SCHEMA ERROR | Missing key: RoomTypeName | API: GetAllRoomType
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    Status_RoomType
+    ...    msg=❌ SCHEMA ERROR | Missing key: Status_RoomType | API: GetAllRoomType
+
+    ${count}=    Get Length    ${json}
+    Log To Console    ✅ PASS | GetAllRoomType Loaded Successfully | Total Insurance2 : ${count}
+
+    Should Not Be Empty
+    ...    ${target}
+    ...    msg=❌ DATA ERROR | RoomType not found in response | API: GetAllRoomType
+
+
+030-Get All State
+    [Documentation]    دریافت لیست نام تمام استان ها 
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllState
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetAllState | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetAllState | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    # ${target}=    Evaluate    [x for x in $json if x["Status_RoomType"]==0]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    iD_State
+    ...    msg=❌ SCHEMA ERROR | Missing key: iD_State | API: GetAllState
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    code
+    ...    msg=❌ SCHEMA ERROR | Missing key: code | API: GetAllState
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    name
+    ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllState
+
+    ${count}=    
+    ...    Get Length    ${json}
+    Log To Console    ✅ PASS | All State Loaded Successfully | Total State : ${count}
+
+    Should Not Be Empty
+    ...    ${json}
+    ...    msg=❌ DATA ERROR | State not found in response | API: GetAllState
+
+
+031-Get Genders
+    [Documentation]    دریافت لیست نام تمام استان ها 
+    [Tags]    API_GeneralVariables    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetGenders
+    ...    headers=${headers}
+
+    Run Keyword If    '${resp}'=='None'
+    ...    Fail    ❌ NO RESPONSE | API: GetGenders | Server did not respond (Timeout / Network)
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | API: GetGenders | Expected: 200 | Actual: ${resp.status_code}
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    # ${target}=    Evaluate    [x for x in $json if x["Status_RoomType"]==0]
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    id
+    ...    msg=❌ SCHEMA ERROR | Missing key: id | API: GetGenders
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    name
+    ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetGenders
+
+    Dictionary Should Contain Key
+    ...    ${json[0]}    sepas_Code
+    ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetGenders
+
+    ${count}=    
+    ...    Get Length    ${json}
+    Log To Console    ✅ PASS | Genders Loaded Successfully | Total Genders : ${count}
+
+    Should Not Be Empty
+    ...    ${json}
+    ...    msg=❌ DATA ERROR | Genders not found in response | API: GetGenders
+
+
+032-Check Filing Doubling
     [Documentation]    بررسی تکراری بودن پذیرش بیمار بر اساس اطلاعات هویتی
     [Tags]    API_Filing  METHOD_POST 
+
+    ${nationalCode}=   Read State    NATIONALCODE
+    ${firstname}=      Read State    FIRSTNAME
+    ${lastname}=       Read State    LASTNAME
+    ${fatherName}=     Read State    FATHERNAME
 
     &{headers}=    Create Dictionary
     ...    Accept=application/json, text/plain, */*
@@ -329,10 +1510,6 @@ Suite Setup       Create AdmitHIS Session
     ...    Cookie=${COOKIE_TOKEN}
 
     &{checkDto}=    Create Dictionary
-    # ...    nationalCode=3031855256
-    # ...    fatherName=علی
-    # ...    firstName=مهری
-    # ...    lastName=مونس زاده شيرواني
     ...    nationalCode=${nationalCode}
     ...    fatherName=${fatherName}
     ...    firstName=${firstname}
@@ -395,180 +1572,12 @@ Suite Setup       Create AdmitHIS Session
     END
 
 
-12-Get All Bed Number
-    [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 204
-    [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST
 
-    ${wardId}=    Set Variable    204
-
-    &{headers}=    Create Dictionary
-    ...    Accept=application/json
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-
-    ${resp}=    GET On Session
-    ...    HIS
-    ...    url=/api/GeneralVariables/GetAllBedNumber?wardId=${wardId}
-    ...    headers=&{headers}
-
-    Should Be Equal As Integers
-    ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp.status_code}
-
-    ${json}=    To Json    ${resp.content}
-
-    # Validate response is a list
-    Should Be True
-    ...    ${json}.__class__.__name__ == 'list'
-    ...    msg=❌ INVALID FORMAT | Expected a list[] of Bed objects | Got: ${json}
-
-    # Validate list is not empty
-    ${count}=    Get Length    ${json}
-    Should Be True
-    ...    ${count} > 0
-    ...    msg=❌ EMPTY RESULT | Expected list of beds | Got empty list | WardId=${wardId}
-
-    # Expected keys for each bed item
-    @{expected_keys}=    Create List
-    ...    WardName
-    ...    ID_Ward
-    ...    RoomNo
-    ...    BedNo
-    ...    RoomTypeName
-    ...    BedStatus
-    ...    ID_Bed
-
-    # Validate keys in each object
-    FOR    ${item}    IN    @{json}
-        FOR    ${key}    IN    @{expected_keys}
-            Run Keyword If    '${key}' not in ${item}
-            ...    Fail    ❌ MISSING KEY | Key '${key}' not found in item: ${item}
-        END
-    END
-
-    Log To Console    ✅ PASS | GetAllBedNumber | Count=${count} beds | WardId=${wardId}
-
-13-Get Doctors By Ward
-    [Documentation]     تخت های خالی بر اساس id بخش مثلا بخش 204
-    [Tags]    API_GeneralVariables  METHOD_GET  DOCTORS_LIST
-
-    ${wardId}=    Set Variable    204
-
-    &{headers}=    Create Dictionary
-    ...    Accept=application/json
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-
-    ${resp}=    GET On Session
-    ...    HIS
-    ...    url=/api/GeneralVariables/GetDoctorsByWard?wardId=${wardId}
-    ...    headers=&{headers}
-
-    Should Be Equal As Integers
-    ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp.status_code}
-
-    ${json}=    To Json    ${resp.content}
-
-    # Validate response is a list
-    Should Be True
-    ...    ${json}.__class__.__name__ == 'list'
-    ...    msg=❌ INVALID FORMAT | Expected a list[] of doctors | Got: ${json}
-
-    # Validate list is not empty
-    ${count}=    Get Length    ${json}
-    Should Be True
-    ...    ${count} > 0
-    ...    msg=❌ EMPTY RESULT | Expected list of doctors | WardId=${wardId}
-
-    # Expected keys for each doctor item
-    @{expected_keys}=    Create List
-    ...    standardVariableId
-    ...    name
-    ...    systemCodeId
-    ...    parent
-    ...    default
-
-    # Validate keys
-    FOR    ${item}    IN    @{json}
-        FOR    ${key}    IN    @{expected_keys}
-            Run Keyword If    '${key}' not in ${item}
-            ...    Fail    ❌ MISSING KEY | Key '${key}' not found in item: ${item}
-        END
-    END
-
-    Log To Console    ✅ PASS | GetDoctorsByWard | Count=${count} doctors | WardId=${wardId}
-
-
-14-Add Filing Validation Bug - Empty NationalCode
-    [Documentation]    BUG-1247 - Empty nationalCode causes 500 instead of 400
-    [Tags]    API_Filing    NEGATIVE    VALIDATION    BUG_1247
-
-    ${headers}=    Create Dictionary
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-    ...    Accept=application/json
-    ...    Content-Type=application/json
-    ...    AID=777
-    ...    Origin=http://192.168.5.19:8019
-    ...    Referer=http://192.168.5.19:8019/
-
-    ${fileFormation}=    Create Dictionary
-    ...    name=مهرشاد
-    ...    familyName=شیخ الاسلامی
-    ...    fatherName=مهرداد
-    ...    nationalCode=${EMPTY}
-    ...    birthDate=2002/07/07
-    ...    sex=365
-    ...    nationality=912
-    ...    maritalStatus=363
-    ...    mobileNo=09383509316
-    ...    birthPlace=363
-    ...    addressLine=dfgdfgdfgd
-    ...    hospitalFileID=147979
-    ...    fileFormationId=683676
-    ...    isNationalCodeRequired=${True}
-
-    ${hisAdmitDto}=    Create Dictionary
-    ...    fileFormationID=683676
-    ...    wardIdIn=201
-    ...    physicianID=993
-    ...    admissionType=370
-    ...    patientClass=5
-    ...    priority=3
-    ...    entranceType=393
-    ...    admissionReason=دل درد
-    ...    insuranceID=6
-    ...    insuranceNO=0019208291
-    ...    insuranceExpDate=2026/01/05
-    ...    sponsor=خود فرد
-    ...    maritalStatus=363
-    ...    admitDate=2025/12/19
-    ...    admitTime=17:40
-
-    ${filingDto}=    Create Dictionary
-    ...    fileFormation=${fileFormation}
-    ...    hisAdmitDto=${hisAdmitDto}
-    ...    insur_Relation=18
-    ...    lastInsuranceKind=422
-    ...    wasInEmergency=${False}
-
-    ${body}=    Create Dictionary
-    ...    filingDto=${filingDto}
-
-    ${resp}=    POST On Session
-    ...    HIS
-    ...    url=/api/Filing/EditFiling
-    ...    headers=${headers}
-    ...    json=${body}
-    ...    expected_status=anything
-
-    Should Be Equal As Integers    ${resp.status_code}    500
-
-
-15-Check Patient Debt
+033-Check Patient Debt
     [Documentation]    بررسی بدهی بیمار
     [Tags]    API_Patient    METHOD_POST    Debt
+
+    ${nationalCode}=      Read State    NATIONALCODE
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -595,42 +1604,258 @@ Suite Setup       Create AdmitHIS Session
     ${json}=    To Json    ${resp.content}
     Log To Console    ✅ PASS | Patient Debt Checked | Response=${json}
 
-16-Get All Name Inpatient Ward
-    [Documentation]    دریافت لیست بخش ها به هماره تخت های خالی
-    [Tags]    API_GeneralVariables    METHOD_GET  
+034-Add Filing Preadmit
+    [Documentation]   پذیرش بیمار preadmit
+    [Tags]    API_Filing    METHOD_POST    preadmit
+
+    ${ward_value}=      Read State    INPATIONT_WARD_NAME
+    ${nationalCode}=      Read State    NATIONALCODE
+    ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
+    ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    ${EMERGEMCY_BED_NO}=      Read State    EMERGEMCY_BED_NO
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Inpationt_Admission_Type_Sepas}=    Read State    Inpationt_Admission_Type_Sepas
+    ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    charset=utf-8
 
-     ${resp}=    GET On Session
-    ...    HIS
-    ...    url=/api/GeneralVariables/GetAllNamesInpatientWards
-    ...    headers=&{headers}
+    ${fileFormation}=    Create Dictionary
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName=${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
+    ...    residencePermit=${False}
+    ...    nationalCode=${nationalCode}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${city_Base_ID}
+    ...    birthPlaceOut=
+    ...    birthDate=2002/07/07
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
+    ...    image=
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo=
+    ...    postalCode=
+    ...    unknown=${False}
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=0
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
+    ...    isNationalCodeRequired=${True}
+  
 
-    Should Be Equal As Integers    ${resp.status_code}    200
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=${FileFormationID}
+	...    inquiryUId=${INQUIRYUID}
+    ...    admitDate=
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${wardId}
+	...    wardName=${ward_value}
+    ...    physicianID=599
+    ...    recommender=
+    ...    admissionType=${Inpationt_Admission_Type_Sepas}
+    ...    patientClass=5    #
+    ...    priority=3        #
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    admissionReason=دل درد
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=(1تروماP14.9
+    ...    diagnosisId=13309
+    ...    insuranceID=6
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=${pishPardaght}
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=2028/04/04
+    ...    sponsor=خود فرد
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=${Marital_Status_ID}
+	...    job=
+    ...    jobId=0
+    ...    homeCity=${city_Base_Name}
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=${MOBILE}
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=${FATHERNAME}
+    ...    familyRelationship=${Relationship_Name}
+    ...    familyCity=${city_Base_Name}
+    ...    familyAddress=dfgdfgdfgd
+    ...    familyPhone1=09373969517
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=0
+    ...    husbandJobID=0
+    ...    husbandNationalityID=0
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=false
+    ...    iD_Admit=0
+    ...    bedId=0
+    ...    bedNo=
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
+
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+	...    insuranceNote=
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${False}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
+
+    ${resp}=    POST On Session
+    ...    HIS 
+    ...    url=/api/Filing/AddFiling
+    ...    headers=&{headers} 
+    ...    data=${json_string}
+
+    Log To Console    Response Status: ${resp.status_code}
+    Log To Console    Response Body: ${resp.text}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
 
     ${json}=    Set Variable    ${resp.json()}
 
-    Should Be True    ${json} != None
-    Should Be True    isinstance($json, list)
-
-    FOR    ${item}    IN    @{json}
-        Dictionary Should Contain Key    ${item}    standardVariableId
-        Dictionary Should Contain Key    ${item}    name
-        Dictionary Should Contain Key    ${item}    systemCodeId
-        Dictionary Should Contain Key    ${item}    parent
-        Dictionary Should Contain Key    ${item}    default
-
-        Should Be True    isinstance($item["standardVariableId"], int)
-        Should Be True    isinstance($item["name"], str)
-    END
+    ${FOUND_PREADMIT_ADMIT_ID}=    Set Variable    ${json["admitId"]}
+    ${FOUND_PREADMIT_ADMIT_DATE}=    Set Variable    ${json["admitDate"]}
+    ${FOUND_PREADMIT_TITLE_TYPE}=    Set Variable    ${json["titleType"]}
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=    Set Variable    ${json["fileFormationId"]}
 
 
-17-Search PreAdmit patiant 
+    Write State    PREADMIT_ADMIT_ID    ${FOUND_PREADMIT_ADMIT_ID}  
+    Write State    PREADMIT_ADMIT_DATE    ${FOUND_PREADMIT_ADMIT_DATE}
+    Write State    PREADMIT_TITLE_TYPE    ${FOUND_PREADMIT_TITLE_TYPE}
+    Write State    PREADMIT_FILEFORMATION_ID    ${FOUND_PREADMIT_FILEFORMATION_ID}  
+
+    Log To Console    ✅ ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
+
+035-Validate Database After Preadmit  
+    [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    Validate AdmitHIS After Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+    Validate Pationt-Movement After Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+    Validate Tbl-Bed After Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+
+036-Search PreAdmit patiant 
     [Documentation]   جستجوی بیماران preadmit
     [Tags]    API_Patient    METHOD_POST  priadmit 
+
+    ${nationalCode}=      Read State    NATIONALCODE
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -649,11 +1874,11 @@ Suite Setup       Create AdmitHIS Session
     ...    admitId=0
     ...    electronicNumber=0
     ...    hospitalNumber=0
-    ...    dateFrom=2026/02/27
-    ...    dateTo=2026/02/27
+    ...    dateFrom=2026/01/01
+    ...    dateTo=2026/12/12
     ...    status=0
 
-     ${resp}=    POST On Session
+    ${resp}=    POST On Session
     ...    HIS
     ...    url=/api/Patient/SearchPreAdmits
     ...    headers=&{headers}
@@ -664,263 +1889,274 @@ Suite Setup       Create AdmitHIS Session
     ${json}=    Set Variable    ${resp.json()}
     Should Be True    isinstance($json, list)
 
-    ${TARGET_NATIONAL_CODE}=    Set Variable    1520554001
-    ${FOUND_ADMIT_ID}=    Set Variable    ${None}
 
-    ${count}=    Get Length    ${json}
-    Log    Returned inpatient count: ${count}
+037-Edit Filing Preadmit
+    [Documentation]   ویرایش بیمار preadmit
+    [Tags]    API_Filing    METHOD_POST    preadmit
 
-    IF    ${count} > 0
-        FOR    ${item}    IN    @{json}
+    ${ward_value}=      Read State    INPATIONT_WARD_NAME
+    ${ADMIT_ID}=      Read State    PREADMIT_ADMIT_ID
+    ${ADMIT_DATE}=      Read State    PREADMIT_ADMIT_DATE
+    ${TITLE_TYPE}=      Read State    PREADMIT_TITLE_TYPE
+    ${PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
     
-            Should Be True    $item["admitID"] > 0
-            Should Be True    isinstance($item["nationalCode"], str)
-            Should Be True    len($item["nationalCode"]) == 10
+    ${ward_value_edit}=      Read State    INPATIONT_WARD_ID_EDIT
+    ${nationalCode}=      Read State    NATIONALCODE
+    ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
+    ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    ${EMERGEMCY_BED_NO}=      Read State    EMERGEMCY_BED_NO
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Inpationt_Admission_Type_Sepas}=    Read State    Inpationt_Admission_Type_Sepas
+    ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${Doctor_ID_EDIT}=    Read State    Doctor_ID_EDIT
+    ${Diagnosis-Name-Edit}=    Read State    Diagnosis-Name-Edit
+    ${Diagnosis-ID-Edit}=    Read State    Diagnosis-ID-Edit
     
-            IF    '${item["nationalCode"]}' == '${TARGET_NATIONAL_CODE}'
-                ${FOUND_ADMIT_ID}=    Set Variable    ${item["admitID"]}
-                Log    ✅ Found admitID=${FOUND_ADMIT_ID}
-                Exit For Loop
-            END
-    
-        END
-    END  
-    
-    Should Not Be Equal    ${FOUND_ADMIT_ID}    ${None}
-    Set Suite Variable    ${ADMIT_ID}    ${FOUND_ADMIT_ID}
-
-18-Edit Filing PreAdmit
-    [Documentation]  ویرایش Filing بیمار و اعتبارسنجی پاسخ
-    [Tags]    API_Filing    METHOD_POST  
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
-
+    ...    charset=utf-8
 
     ${fileFormation}=    Create Dictionary
-    ...    name=مهرشاد
-    ...    nameEn= 
-    ...    middleName=شيخ الاسلامي - مهرشاد
-    ...    familyName=شيخ الاسلامي
-    ...    familyEnName= 
-    ...    fatherName=مهرداد
-    ...    grandPaName= 
-    ...    motherName= 
-    ...    momGrandPaName= 
-    ...    unknownType=${0}
-    ...    passportType=${0}
-    ...    maritalStatus=${363}
-    ...    cityId=${363}
-    ...    relegiousStatus=مسلمان
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName=${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
     ...    residencePermit=${False}
-    ...    nationalCode=1520554001
-    ...    parentNationalCode= 
-    ...    identityCode= 
-    ...    nationality=${912}
-    ...    passportNumber= 
-    ...    sex=${365}
-    ...    sexString=مرد
-    ...    email= 
-    ...    mobileNo=09383509316
-    ...    birthPlace=${363}
-    ...    birthPlaceOut= 
+    ...    nationalCode=${nationalCode}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${city_Base_ID}
+    ...    birthPlaceOut=
     ...    birthDate=2002/07/07
-    ...    maritalStatusString=مجرد
-    ...    nationalityTitle=ایرانی
-    ...    birthPlaceString=تهران
-    ...    image= 
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
+    ...    image=
     ...    addressLine=dfgdfgdfgd
-    ...    phoneNo= 
-    ...    postalCode= 
+    ...    phoneNo=
+    ...    postalCode=
     ...    unknown=${False}
-    ...    hospitalFileID=${147979}
-    ...    sensitivity= 
-    ...    contagion= 
-    ...    note1= 
-    ...    note2= 
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
     ...    bPolice=${True}
     ...    bCutting=${True}
     ...    bDischarge=${True}
     ...    bSurgery=${True}
     ...    bUsingFile=${True}
     ...    isDangerous=${False}
-    ...    uniqueEmergencyNo=${0}
-    ...    fileFormationId=${683676}
-    ...    husbandName= 
-    ...    husbandLastName= 
-    ...    triageId=${0}
+    ...    uniqueEmergencyNo=0
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
     ...    isNationalCodeRequired=${True}
-    ...    AgeUnit=سال
-
+  
     ${hisAdmitDto}=    Create Dictionary
-    ...     fileFormationID=${683676}
-    ...     inquiryUId=52c30e55-d8be-4b0c-baff-8ec115514ac6
-    ...     admitDate=1404/09/26
-    ...     admitTime= 
-    ...     isDischarged=${False}
-    ...     dischargeDate= 
-    ...     dischargeTime= 
-    ...     dischargeStep=${0}
-    ...     dischargeDebt=${0}
-    ...     wardIdIn=${201}
-    ...     wardName= 
-    ...     physicianID=${993}
-    ...     recommender= 
-    ...     admissionType=${370}
-    ...     patientClass=${5}
-    ...     priority=${3}
-    ...     ability=${0}
-    ...     limitation1=${False}
-    ...     limitation2=${False}
-    ...     limitation3=${False}
-    ...     limitation4=${False}
-    ...     limitation5=${False}
-    ...     bPolice=${True}
-    ...     bCutting=${True}
-    ...     bDischarge=${True}
-    ...     bSurgery=${True}
-    ...     bUsingFile=${True}
-    ...     admissionReason=دل درد
-    ...     entranceType=${393}
-    ...     emsId=${0}
-    ...     krokiCode=${0}
-    ...     diagnosis=(4شکستگیT14.8
-    ...     diagnosisId=${13308}
-    ...     insuranceID=${6}
-    ...     insurPageNo=${0}
-    ...     insurSerialNO= 
-    ...     recomendationNo= 
-    ...     insurMax=${0}
-    ...     pishPardaght=${10000}
-    ...     pishPardaghtDoctor=${0}
-    ...     doctorTotalCost=${0}
-    ...     referenceDoctorID=${0}
-    ...     insuranceNO=0019208291
-    ...     insuranceExpDate=2026/01/05
-    ...     sponsor=خود فرد
-    ...     degree=${0}
-    ...     shebaNo= 
-    ...     maritalStatus=${363}
-    ...     job= 
-    ...     jobId=${0}
-    ...     homeCity=تهران
-    ...     homeZone= 
-    ...     homeAddress=dfgdfgdfgd
-    ...     homePhone1=09383509316
-    ...     homePhone2= 
-    ...     homePostCode= 
-    ...     workPlaceName= 
-    ...     workCity= 
-    ...     workAddress= 
-    ...     workPhone1= 
-    ...     workPhone2= 
-    ...     workFax= 
-    ...     workPostCode= 
-    ...     familyFullName=مهرشاد شيخ الاسلامي
-    ...     familyRelationship= 
-    ...     familyCity=تهران
-    ...     familyAddress=dfgdfgdfgd
-    ...     familyPhone1=09383586316
-    ...     familyPhone2= 
-    ...     familyPostCode= 
-    ...     husbandNCode= 
-    ...     husbandFirstName= 
-    ...     husbandLastName= 
-    ...     husbandBirthDate=${None} 
-    ...     husbandIdentityNo= 
-    ...     husbandIssuePlaceID=${363}
-    ...     husbandJobID=${0}
-    ...     husbandNationalityID=${912}
-    ...     husbandPassportID= 
-    ...     tourismId=${0}
-    ...     isPregnant=${False}
-    ...     iD_Admit=${356115}
-    ...     bedId=${0}
-    ...     bedNo= 
-    ...     referal=${None} 
-    ...     referalCenter=${0}
-    ...     operationDate=${None} 
-    ...     operationTime= 
-    ...     sendToWardDate= 
-    ...     sendToWardTime= 
-    ...     isInfantUnder28Days=${False}
-    ...     supRecomendationNo= 
+    ...    fileFormationID=${PREADMIT_FILEFORMATION_ID}
+	...    inquiryUId=250bf58f-4c2d-4cd5-9d78-c0d45bcdee99
+    ...    admitDate=${ADMIT_DATE}
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${ward_value_edit}         # new ward
+	...    wardName=
+    ...    physicianID=${Doctor_ID_EDIT}        # new doctor
+    ...    recommender=
+    ...    admissionType=370
+    ...    patientClass=5
+    ...    priority=3
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    admissionReason=گلودرد        # new admissionreason
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=${Diagnosis-Name-Edit}       # new diadnosis
+    ...    diagnosisId=${Diagnosis-ID-Edit}                # new diagnosisid
+    ...    insuranceID=6
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=${pishPardaght}           # ziro paishpardaght
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=0019208291
+    ...    insuranceExpDate=2028/04/04
+    ...    sponsor=شوهر        # new sponsor
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=363
+	...    job=
+    ...    jobId=0
+    ...    homeCity=تهران
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=09196964067        # new homePhone1    
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=مهرشاد شیخ الاسلامی     #
+    ...    familyRelationship=پدر
+    ...    familyCity=تهران
+    ...    familyAddress=ویرایش1        # new familyAddress
+    ...    familyPhone1=09217460838        # new familyphone1
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=363
+    ...    husbandJobID=0
+    ...    husbandNationalityID=912
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=false
+    ...    iD_Admit=${ADMIT_ID}
+    ...    bedId=0
+    ...    bedNo=
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
 
-    
-    ${filing_dto}=    Create Dictionary
+    ${filingDto}=    Create Dictionary
     ...    fileFormation=${fileFormation}
     ...    hisAdmitDto=${hisAdmitDto}
-    ...    insuranceNote= 
-    ...    insur_Relation=${18}
-    ...    lastInsuranceKind=${422}
-    ...    lastInsuranceDate=${None} 
-    ...    insur2ID=${0}
-    ...    insur2No=${0}
-    ...    insur2Max=${0}
-    ...    wasInEmergency=${FALSE}
- 
-    ${body}=     Create Dictionary
-    ...    filingDto=${filing_dto}
+	...    insuranceNote=
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${False}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
 
     ${resp}=    POST On Session
-    ...    HIS
+    ...    HIS 
     ...    url=/api/Filing/EditFiling
-    ...    headers=&{headers}
-    ...    json=${body}
-    ...    expected_status=any
-    
-    Should Be Equal As Integers    ${resp.status_code}    200    msg=ارور AgeUnit میده اما توی body هیچ فیلدی برای این ارسال نمیشود | Actual:${resp.status_code}
+    ...    headers=&{headers} 
+    ...    data=${json_string}
 
-    # Preview
-    ${json}=    Set Variable    ${resp.json()}
-    
-    Should Be True    ${json['isSuccess']}
-    Should Be Equal As Integers    ${json['statusCode']}    200
-    Should Be Equal    ${json['data']}    ${TRUE}
-    Should Be Equal    ${json['message']}    Success
-
-19-Get Version
-    [Documentation]    دریافت ورژن api
-    [Tags]    API_Version    METHOD_GET  
-
-    ${headers}=    Create Dictionary
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-    ...    Accept=application/json
-
-    ${resp}=    GET On Session    
-    ...    HIS    
-    ...    /version    
-    ...    headers=${headers}
-
-    Should Be Equal As Integers    
-    ...    ${resp.status_code}    
-    ...    200    
+    Should Be Equal As Integers    ${resp.status_code}    200 
 
     ${json}=    Set Variable    ${resp.json()}
 
-    Set Test Message
-    ...    Build Info:\n${json}
+    Should Be True    ${json["isSuccess"]}
+    Should Be Equal As Integers    ${json["statusCode"]}    200
+    Should Be Equal    ${json["message"]}    Success
 
-20-Change To Admit
+038-Validate DataBase After Edit Preadmit
+    [Documentation]   تست دیتابیس بعد از ویرایش  پذیرش Preafmit
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    
+    Validate DB After Edit Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+
+039-Change To Admit From Preadmit
     [Documentation]  تبدیل preadmit به بستری
     [Tags]    API_Filing    METHOD_POST  priadmit 
+
+    ${PREADMIT_ADMIT_ID}=    Read State    PREADMIT_ADMIT_ID 
+    ${BED_ID}=      Read State    INPATIONT_BED_ID_Edit
+
+    Log To Console     Using ADMIT_ID=${PREADMIT_ADMIT_ID}, BED_ID=${BED_ID}
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     
-    ${body}=     Create Dictionary
-    ...    admitId=${ADMIT_ID}
+    &{preAdmitDto}=    Create Dictionary
+    ...    admitId=${PREADMIT_ADMIT_ID}
     ...    bedId=${BED_ID}
+
+    &{body}=    Create Dictionary
+    ...    preAdmitDto=&{preAdmitDto}
     
      ${resp}=    POST On Session
     ...    HIS
-    ...    url=/api/Filing/ChangeToAdmit
+    ...    url=/api/Filing/ChangeToAdmit 
     ...    headers=&{headers}
     ...    json=${body}
 
@@ -928,4 +2164,1682 @@ Suite Setup       Create AdmitHIS Session
 
     ${json}=    Set Variable    ${resp.json()}
 
-21-
+040-Validate DataBase After Change Preadmit To Admit
+    [Documentation]   تست دیتابیس بعد از رزرو preadmit
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    
+    Validate DateBase After Change Preadmit To Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+
+041-Add Filing Preadmit Part2 For Cancel Reserve
+    [Documentation]   پذیرش بیمار preadmit برای کنسل کردن 
+    [Tags]    API_Filing    METHOD_POST    preadmit
+
+    ${ward_value}=      Read State    INPATIONT_WARD_NAME
+    ${nationalCode}=      Read State    NATIONALCODE
+    ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
+    ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    ${EMERGEMCY_BED_NO}=      Read State    EMERGEMCY_BED_NO
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Inpationt_Admission_Type_Sepas}=    Read State    Inpationt_Admission_Type_Sepas
+    ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    charset=utf-8
+
+    ${fileFormation}=    Create Dictionary
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName=${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
+    ...    residencePermit=${False}
+    ...    nationalCode=${nationalCode}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${city_Base_ID}
+    ...    birthPlaceOut=
+    ...    birthDate=2002/07/07
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
+    ...    image=
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo=
+    ...    postalCode=
+    ...    unknown=${False}
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=0
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
+    ...    isNationalCodeRequired=${True}
+  
+
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=${FileFormationID}
+	...    inquiryUId=${INQUIRYUID}
+    ...    admitDate=
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${wardId}
+	...    wardName=${ward_value}
+    ...    physicianID=599
+    ...    recommender=
+    ...    admissionType=${Inpationt_Admission_Type_Sepas}
+    ...    patientClass=5    #
+    ...    priority=3        #
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    admissionReason=دل درد
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=(1تروماP14.9
+    ...    diagnosisId=13309
+    ...    insuranceID=6
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=${pishPardaght}
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=2028/04/04
+    ...    sponsor=خود فرد
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=${Marital_Status_ID}
+	...    job=
+    ...    jobId=0
+    ...    homeCity=${city_Base_Name}
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=${MOBILE}
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=${FATHERNAME}
+    ...    familyRelationship=${Relationship_Name}
+    ...    familyCity=${city_Base_Name}
+    ...    familyAddress=dfgdfgdfgd
+    ...    familyPhone1=09373969517
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=0
+    ...    husbandJobID=0
+    ...    husbandNationalityID=0
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=false
+    ...    iD_Admit=0
+    ...    bedId=0
+    ...    bedNo=
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
+
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+	...    insuranceNote=
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${False}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
+
+    ${resp}=    POST On Session
+    ...    HIS 
+    ...    url=/api/Filing/AddFiling
+    ...    headers=&{headers} 
+    ...    data=${json_string}
+
+    Log To Console    Response Status: ${resp.status_code}
+    Log To Console    Response Body: ${resp.text}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${FOUND_PREADMIT_ADMIT_ID}=    Set Variable    ${json["admitId"]}
+    ${FOUND_PREADMIT_ADMIT_DATE}=    Set Variable    ${json["admitDate"]}
+    ${FOUND_PREADMIT_TITLE_TYPE}=    Set Variable    ${json["titleType"]}
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=    Set Variable    ${json["fileFormationId"]}
+
+
+    Write State    PREADMIT_ADMIT_ID    ${FOUND_PREADMIT_ADMIT_ID}  
+    Write State    PREADMIT_ADMIT_DATE    ${FOUND_PREADMIT_ADMIT_DATE}
+    Write State    PREADMIT_TITLE_TYPE    ${FOUND_PREADMIT_TITLE_TYPE}
+    Write State    PREADMIT_FILEFORMATION_ID    ${FOUND_PREADMIT_FILEFORMATION_ID}  
+
+    Log To Console    ✅ ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
+
+042-Cancel Reserve PreAdmit
+    [Documentation]    کنسل کردن پذیرش بیمار preadmit
+    [Tags]    API_FILING    METHOD_POST   Catable    preadmit 
+
+    ${PREADMIT_ADMIT_ID}=      Read State    PREADMIT_ADMIT_ID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    &{body}=    Create Dictionary     
+    ...    admitId=${PREADMIT_ADMIT_ID}
+
+
+    ${resp}=    POST On Session    
+    ...    HIS
+    ...    /api/Filing/CancelPreAdmit
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+
+043-Validate DataBase After Cancel Preadmit Reserve
+    [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    
+    Validate DB After Cancel Preadmit Reserve    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+044-Add Filing Preadmit Part3 For Cancel Admit
+    [Documentation]   پذیرش قطعی بیمار preadmit برای کنسل کردن 
+    [Tags]    API_Filing    METHOD_POST    preadmit
+
+    ${ward_value}=      Read State    INPATIONT_WARD_NAME
+    ${nationalCode}=      Read State    NATIONALCODE
+    ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
+    ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    ${EMERGEMCY_BED_NO}=      Read State    EMERGEMCY_BED_NO
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Inpationt_Admission_Type_Sepas}=    Read State    Inpationt_Admission_Type_Sepas
+    ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    charset=utf-8
+
+    ${fileFormation}=    Create Dictionary
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName=${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
+    ...    residencePermit=${False}
+    ...    nationalCode=${nationalCode}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${city_Base_ID}
+    ...    birthPlaceOut=
+    ...    birthDate=2002/07/07
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
+    ...    image=
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo=
+    ...    postalCode=
+    ...    unknown=${False}
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=0
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
+    ...    isNationalCodeRequired=${True}
+  
+
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=${FileFormationID}
+	...    inquiryUId=${INQUIRYUID}
+    ...    admitDate=
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${wardId}
+	...    wardName=${ward_value}
+    ...    physicianID=599
+    ...    recommender=
+    ...    admissionType=${Inpationt_Admission_Type_Sepas}
+    ...    patientClass=5    #
+    ...    priority=3        #
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    admissionReason=دل درد
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=(1تروماP14.9
+    ...    diagnosisId=13309
+    ...    insuranceID=6
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=${pishPardaght}
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=2028/04/04
+    ...    sponsor=خود فرد
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=${Marital_Status_ID}
+	...    job=
+    ...    jobId=0
+    ...    homeCity=${city_Base_Name}
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=${MOBILE}
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=${FATHERNAME}
+    ...    familyRelationship=${Relationship_Name}
+    ...    familyCity=${city_Base_Name}
+    ...    familyAddress=dfgdfgdfgd
+    ...    familyPhone1=09373969517
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=0
+    ...    husbandJobID=0
+    ...    husbandNationalityID=0
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=false
+    ...    iD_Admit=0
+    ...    bedId=0
+    ...    bedNo=
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
+
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+	...    insuranceNote=
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${False}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
+
+    ${resp}=    POST On Session
+    ...    HIS 
+    ...    url=/api/Filing/AddFiling
+    ...    headers=&{headers} 
+    ...    data=${json_string}
+
+    Log To Console    Response Status: ${resp.status_code}
+    Log To Console    Response Body: ${resp.text}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${FOUND_PREADMIT_ADMIT_ID}=    Set Variable    ${json["admitId"]}
+    ${FOUND_PREADMIT_ADMIT_DATE}=    Set Variable    ${json["admitDate"]}
+    ${FOUND_PREADMIT_TITLE_TYPE}=    Set Variable    ${json["titleType"]}
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=    Set Variable    ${json["fileFormationId"]}
+
+
+    Write State    PREADMIT_ADMIT_ID    ${FOUND_PREADMIT_ADMIT_ID}  
+    Write State    PREADMIT_ADMIT_DATE    ${FOUND_PREADMIT_ADMIT_DATE}
+    Write State    PREADMIT_TITLE_TYPE    ${FOUND_PREADMIT_TITLE_TYPE}
+    Write State    PREADMIT_FILEFORMATION_ID    ${FOUND_PREADMIT_FILEFORMATION_ID}  
+
+    Log To Console    ✅ ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
+
+045-Save Pay Naghdi From Cash
+    [Documentation]   پرداخت پیش پرداخت بیمار preadmit
+    [Tags]    API_Cash    METHOD_POST    Cash      preadmit 
+    
+    ${ward_value}=      Read State    INPATIONT_WARD_NAME
+    ${nationalCode}=      Read State    NATIONALCODE
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Inpationt_Admission_Type_Sepas}=    Read State    Inpationt_Admission_Type_Sepas
+    ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${PREADMIT_ADMIT_ID}=    Read State    PREADMIT_ADMIT_ID
+    ${PREADMIT_FILEFORMATION_ID}=    Read State    PREADMIT_FILEFORMATION_ID
+    ${PREADMIT_ADMIT_DATE}=    Read State    PREADMIT_ADMIT_DATE
+    ${Doctor_ID}=    Read State    Doctor_ID  
+    ${Doctor_NAME}=    Read State    Doctor_NAME  
+
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${listAdded}=    Create Dictionary     
+    ...		iD_TotalCash=0
+    ...		admitID=${PREADMIT_ADMIT_ID}
+    ...		clinicTitleType=249
+    ...		fileFormationID=${PREADMIT_FILEFORMATION_ID}
+    ...		patientPayment=${pishPardaght}
+    ...		cashPayment=0
+    ...		reduction=0
+    ...		realPrice=${pishPardaght} 
+    ...		cashType=5
+    ...		note=
+    ...		fromPos=false
+    ...		fromBank=false
+    ...		fromInternet=false
+    ...		discountTypeID=0
+    ...		iD_ClinicCash=0
+    ...		ticketNo=
+    ...		operatorName=
+    ...		operatorDate=
+    ...		operatorTime=
+    ...		opName=
+    ...		opDate=
+    ...		opTime=
+    ...		opNameE=
+    ...		opDateE=
+    ...		opTimeE=
+    ...		bankSn=0
+    ...		posSerialNo=
+    ...		contractEntityId=0
+    ...		currencyID=0
+    ...		currencyPrice=0
+    ...		date=
+    ...		chequeID=0
+    ...		paymentReasonID=0
+    ...		indexString=
+    ...		personPaymentID=0
+    ...		clinicTitleTypeString=
+    ...		freeBedID=0
+
+    ${listBastari}=    Create Dictionary
+    ...		id=1
+    ...		admitID=${PREADMIT_ADMIT_ID}
+    ...		fileFormationID=${PREADMIT_FILEFORMATION_ID}
+    ...		hospitalID=${HOSPITALFILEID}
+    ...		patientName=${FIRSTNAME} ${LASTNAME}
+    ...		date=${PREADMIT_ADMIT_DATE}
+    ...		type=249
+    ...		cashType=5
+    ...		discount=0
+    ...		payableForHospital=0
+    ...		accountNoForHospital=IR HOS Darman
+    ...		payableForDoctor=0
+    ...		doctorID=${Doctor_ID}
+    ...		accountNoForDoctor=
+    ...		payableForDarman=${pishPardaght}
+    ...		payableForDaroo=0
+    ...		payable=${pishPardaght}
+    ...		typeString=بستري
+    ...		phonenumber=${MOBILE}
+    ...		services=null
+    ...		fatherName=${FATHERNAME}
+    ...		doctorName=${Doctor_NAME}
+    ...		insuranceName=تامين اجتماعي
+    ...		nCode=1520554001
+    ...		emergencyNo=140300250
+    ...		admitOperator=آزيتا فشارکي نيا
+    ...		patientServicePrice=0
+    ...		patientPaid=0
+    ...		accountNoForDarman=IR HOS Darman
+    ...		darmanID=null
+    ...		accountNoForDaroo=
+    ...		darooID=
+    ...		patientStatus=5
+    ...		searchField=شيخالاسلاميمهرشاد3563466836761520554001
+    ...		debt=0
+    ...		insurID=6
+    ...		radifNo=1
+    ...		clinicTitleName=بستري
+    ...		grandPaName=0
+    ...		iD_TotalCash=0
+    ...		checkbox=true
+    ...		refund=0
+    ...		payment=10000
+    ...		selected=true
+    ...		TodayDate=true
+    ...		clearing=false
+    ...		disabled=true
+
+    ${nonCash}=    Create Dictionary
+    ...		cardNo=
+    ...		shebaNo=
+    ...		name=
+    ...		relationID=0
+    ...		note=
+    ...		iD_NonCashRePayment=0
+    ...		clinicCashID=0
+    ...		type=0
+    ...		status=0
+    ...		opName=
+    ...		opDate=
+    ...		opTime=
+    ...		opNameE=
+    ...		opDateE=
+    ...		opTimeE=
+    ...		admitID=0
+    ...		price=0
+    ...		fullName=
+
+    ${body}=    Create Dictionary
+    ...    listAdded=${listAdded}
+    ...    listBastari=${listBastari}
+    ...    nonCashRePayment=${nonCash}
+    ...    ravashPardakht=0
+    ...    offline=${False}
+    ...    offlineRRN=
+    ...    offlineNote=
+    ...    posConfigID=0
+    ...    macAddress=70-32-17-60-A8-9B
+
+
+    ${resp}=    POST On Session    
+    ...    Cash
+    ...    /api/Cash/SavePayNaghdi
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+
+046-Cancel Admit PreAdmit
+    [Documentation]    کنسل کردن پذیرش بیمار preadmit
+    [Tags]    API_FILING    METHOD_POST    preadmit 
+
+    ${PREADMIT_ADMIT_ID}=      Read State    PREADMIT_ADMIT_ID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    &{body}=    Create Dictionary     
+    ...    admitId=${PREADMIT_ADMIT_ID}
+
+
+    ${resp}=    POST On Session    
+    ...    HIS
+    ...    /api/Filing/CancelPreAdmit
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+047-Validate DataBase After Cancel Preadmit Admit
+    [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    
+    Validate DB After Cancel Preadmit Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+25-Add Filing Emergency Patient
+    [Documentation]   پذیرش بیمار اورژانس تحت نظر
+    [Tags]    API_Filing    METHOD_POST    Emergency
+
+    ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
+    ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    ${EMERGEMCY_BED_NO}=      Read State    EMERGEMCY_BED_NO
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+  
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    charset=utf-8
+
+      ${fileFormation}=    Create Dictionary
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName= ${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${LASTMARITALSTATUS}
+    ...    cityId=${LASTCITYID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
+    ...    residencePermit=${False}
+    ...    nationalCode=${NATIONALCODE}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${BIRTHCITYID}
+    ...    birthPlaceOut=
+    ...    birthDate=2002/07/07
+	...    maritalStatusString=مجرد
+    ...    nationalityTitle=ایرانی
+    ...    birthPlaceString=تهران
+    ...    image=
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo=
+    ...    postalCode=
+    ...    unknown=${False}
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
+    ...    bPolice=${False}
+    ...    bCutting=${False}
+    ...    bDischarge=${False}
+    ...    bSurgery=${False}
+    ...    bUsingFile=${False}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=0
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
+    ...    isNationalCodeRequired=${True}
+  
+
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=${FileFormationID}
+	...    inquiryUId=250bf58f-4c2d-4cd5-9d78-c0d45bcdee99
+    ...    admitDate=
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${EMERGENCY_WARD_ID}
+	...    wardName=${EMERGENCY_ward_NAME}
+    ...    physicianID=592
+    ...    recommender=
+    ...    admissionType=372
+    ...    patientClass=0
+    ...    priority=2
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${False}
+    ...    bCutting=${False}
+    ...    bDischarge=${False}
+    ...    bSurgery=${False}
+    ...    bUsingFile=${False}
+    ...    admissionReason=سوختگي
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=(1تروماP14.9
+    ...    diagnosisId=13309
+    ...    insuranceID=6
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=0
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=2028/04/04
+    ...    sponsor=اورژانس
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=${LASTMARITALSTATUS}
+	...    job=
+    ...    jobId=0
+    ...    homeCity=تهران
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=${MOBILE}
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=مهرداد شیخ الاسلامی
+    ...    familyRelationship=پدر
+    ...    familyCity=تهران
+    ...    familyAddress=dfgdfgdfgd
+    ...    familyPhone1=09126944812
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=363
+    ...    husbandJobID=0
+    ...    husbandNationalityID=912
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=false
+    ...    iD_Admit=0
+    ...    bedId=${EMERGEMCY_BED_ID}
+    ...    bedNo=${EMERGEMCY_BED_NO}
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
+
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+	...    insuranceNote=
+    ...    insur_Relation=2
+    ...    lastInsuranceKind=422
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${False}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
+
+    ${resp}=    POST On Session
+    ...    HIS 
+    ...    url=/api/Filing/AddFiling
+    ...    headers=&{headers} 
+    ...    data=${json_string}
+
+    # Log To Console    Response Status: ${resp.status_code}
+    # Log To Console    Response Body: ${resp.text}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${FOUND_EMERGENCY_ADMIT_ID}=    Set Variable    ${json["admitId"]}
+    ${FOUND_EMERGENCY_ADMIT_DATE}=    Set Variable    ${json["admitDate"]}
+    ${FOUND_EMERGENCY_TITLE_TYPE}=    Set Variable    ${json["titleType"]}
+    ${FOUND_EMERGENCY_FILEFORMATION_ID}=    Set Variable    ${json["fileFormationId"]}
+
+
+    Write State    EMERGENCY_ADMIT_ID    ${FOUND_EMERGENCY_ADMIT_ID}  
+    Write State    EMERGENCY_ADMIT_DATE    ${FOUND_EMERGENCY_ADMIT_DATE}
+    Write State    EMERGENCY_TITLE_TYPE    ${FOUND_EMERGENCY_TITLE_TYPE}
+    Write State   EMERGENCY_FILEFORMATION_ID    ${FOUND_EMERGENCY_FILEFORMATION_ID}  
+
+    Log To Console    ✅ EMERGENCY_ADMIT_ID saved: ${FOUND_EMERGENCY_ADMIT_ID}
+
+26-Search Patient Emergency
+    [Documentation]   جستجوی بیماران اورژانس تحت نظر
+    [Tags]    API_Patient    METHOD_POST  Emergency 
+
+    ${nationalCode}=      Read State    NATIONALCODE
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    
+    ${body}=     Create Dictionary
+    ...    firstName=
+    ...    grandPaName=
+    ...    fatherName=
+    ...    lastName=
+    ...    nationalCode=${nationalCode}
+    ...    electronicNumber=${0}
+    ...    dateFrom=${None}
+    ...    fromHours=${None}
+    ...    toHours=${None}
+    ...    ward=${0}
+    ...    hospitalNumber=${0}
+
+    ${resp}=    POST On Session
+    ...    HIS
+    ...    url=/api/Patient/SearchPatientEmergency
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200
+
+    ${json}=    Set Variable    ${resp.json()}
+    Should Be True    isinstance($json, list)
+
+
+27-Get Patient By AdmitID
+    [Documentation]   دریافت اطلاعات بیمار بستری اورژانش با شماره پذیرش
+    [Tags]    API_Patient    METHOD_GET    Emergency    
+
+    ${EMERGENCY_ADMIT_ID} =    Read State    EMERGENCY_ADMIT_ID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    url=/api/Patient/GetPatientByAdmitID?admitId=${EMERGENCY_ADMIT_ID}
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Not Be Empty    ${json}
+
+28-Edit Filing Emergency Patient
+    [Documentation]   ویرایش بیمار بستری اورژانس تحت نظر
+    [Tags]    API_Filing    METHOD_POST    Emergency
+
+    ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
+    ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    ${EMERGEMCY_BED_NO}=      Read State    EMERGEMCY_BED_NO
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${EMERGENCY_ADMIT_ID}=      Read State    EMERGENCY_ADMIT_ID
+    ${EMERGENCY_ADMIT_DATE}=      Read State    EMERGENCY_ADMIT_DATE
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    charset=utf-8
+
+      ${fileFormation}=    Create Dictionary
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName= ${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${LASTMARITALSTATUS}
+    ...    cityId=${LASTCITYID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
+    ...    residencePermit=${False}
+    ...    nationalCode=${NATIONALCODE}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${BIRTHCITYID}
+    ...    birthPlaceOut=
+    ...    birthDate=2002/07/07
+	...    maritalStatusString=مجرد
+    ...    nationalityTitle=ایرانی
+    ...    birthPlaceString=تهران
+    ...    image=
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo=
+    ...    postalCode=
+    ...    unknown=${False}
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
+    ...    bPolice=${False}
+    ...    bCutting=${False}
+    ...    bDischarge=${False}
+    ...    bSurgery=${False}
+    ...    bUsingFile=${False}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=0
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
+    ...    isNationalCodeRequired=${True}
+  
+
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=${FileFormationID}
+	...    inquiryUId=250bf58f-4c2d-4cd5-9d78-c0d45bcdee99
+    ...    admitDate=${EMERGENCY_ADMIT_DATE}
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${EMERGENCY_WARD_ID}
+	...    wardName=${EMERGENCY_ward_NAME}
+    ...    physicianID=592
+    ...    recommender=
+    ...    admissionType=372
+    ...    patientClass=0
+    ...    priority=2
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${False}
+    ...    bCutting=${False}
+    ...    bDischarge=${False}
+    ...    bSurgery=${False}
+    ...    bUsingFile=${False}
+    ...    admissionReason=سوختگي
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=(1تروماP14.9
+    ...    diagnosisId=13309
+    ...    insuranceID=6
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=0
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=2028/04/04
+    ...    sponsor=خود فرد
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=${LASTMARITALSTATUS}
+	...    job=
+    ...    jobId=0
+    ...    homeCity=تهران
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=${MOBILE}
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=مهرداد شیخ الاسلامی
+    ...    familyRelationship=پدر
+    ...    familyCity=تهران
+    ...    familyAddress=تهران خ قزوین
+    ...    familyPhone1=09126944812
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=363
+    ...    husbandJobID=0
+    ...    husbandNationalityID=912
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=false
+    ...    iD_Admit=${EMERGENCY_ADMIT_ID}
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
+
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+	...    insuranceNote=
+    ...    insur_Relation=2
+    ...    lastInsuranceKind=422
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${False}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
+
+    ${resp}=    POST On Session
+    ...    HIS 
+    ...    url=/api/Filing/EditFiling
+    ...    headers=&{headers} 
+    ...    data=${json_string}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Be True    ${json["isSuccess"]}
+    Should Be Equal As Integers    ${json["statusCode"]}    200
+    Should Be Equal    ${json["message"]}    Success
+
+29-Patient Admission Order From Cartable
+    [Documentation]    بستری بیمار تحت نظر از کارتابل
+    [Tags]    API_Patient    METHOD_POST   Catable    Emergency 
+
+    ${EMERGENCY_ADMIT_ID}=      Read State    EMERGENCY_ADMIT_ID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    &{body}=    Create Dictionary     
+    ...    admitId=${EMERGENCY_ADMIT_ID}
+
+
+    ${resp}=    POST On Session    
+    ...    Cartable
+    ...    /api/Patient/PatientAdmissionOrder
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Be True    ${json["isSuccess"]}
+    Should Be Equal As Integers    ${json["statusCode"]}    200
+    Should Be Equal    ${json["message"]}    Operation completed
+
+30-Get Information Of Patient Before Sent To Ward
+    [Documentation]      دریافت اطلاعات بیمار  اورژانس جهت انتقال به بخش
+    [Tags]    API_Patient    METHOD_GET    Emergency    
+
+    ${EMERGENCY_ADMIT_ID} =    Read State    EMERGENCY_ADMIT_ID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    url=/api/Patient/SendPatientFromEmergencyToWard?admitId=${EMERGENCY_ADMIT_ID}
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    Should Not Be Empty    ${json}
+
+    ${EMERGENCY_UNIQUE_NO}=    Set Variable    ${json["fileFormation"]["uniqueEmergencyNo"]}
+
+    Write State    UNIQUEMERGENCYNO    ${EMERGENCY_UNIQUE_NO}
+
+31-1-Get All Bed Number For Send To Ward
+    [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 201
+    [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST    Emergency
+
+    &{headers}=    Create Dictionary
+    ...    Accept=application/json
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    url=/api/GeneralVariables/GetAllBedNumber?wardId=${wardId}
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers
+    ...    ${resp.status_code}    200
+    ...    msg=❌ WRONG STATUS | Expected 200 | Actual ${resp.status_code}
+
+    # ✅ Parse JSON (modern)
+    ${json}=    Set Variable    ${resp.json()}
+    Should Be True
+    ...    isinstance($json, list)
+    ...    msg=❌ INVALID FORMAT | Expected list[] | Got: ${json}
+
+    ${count}=    Get Length    ${json}
+
+    Should Be True
+    ...    ${count} > 0
+    ...    msg=❌ EMPTY RESULT | No beds found | WardId=${wardId}
+
+    Log To Console    🛏 Beds found: ${count} | WardId=${wardId}
+
+    # ✅ Expected schema
+    @{expected_keys}=    Create List
+    ...    WardName
+    ...    ID_Ward
+    ...    RoomNo
+    ...    BedNo
+    ...    RoomTypeName
+    ...    BedStatus
+    ...    ID_Bed
+
+    ${SELECTED_INPATIONT_BED_ID}=    Set Variable    ${None}
+
+    FOR    ${item}    IN    @{json}
+        FOR    ${key}    IN    @{expected_keys}
+            Run Keyword If    '${key}' not in ${item}
+            ...    Fail    ❌ MISSING KEY | '${key}' not found | Item=${item}
+        END
+
+        # ✅ انتخاب اولین Bed معتبر (ساده و deterministic)
+        IF    ${SELECTED_INPATIONT_BED_ID} == ${None}
+            ${SELECTED_INPATIONT_BED_ID}=    Set Variable    ${item["ID_Bed"]}
+            ${SELECTED_INPATIONT_BED_NO}=    Set Variable    ${item["RoomTypeName"]}
+            Log To Console
+            ...    ✅ Bed selected | ID_Bed=${SELECTED_INPATIONT_BED_ID} | Room=${item["RoomNo"]} | BedNo=${item["BedNo"]}
+        END
+    END
+
+    Should Not Be Equal
+    ...    ${SELECTED_INPATIONT_BED_ID}    ${None}
+    ...    ❌ No valid Bed ID selected
+
+    # ✅ ذخیره state برای تست‌های بعدی (ChangeToAdmit)
+    Write State    INPATIONT_BED_ID    ${SELECTED_INPATIONT_BED_ID}
+    Write State    INPATIONT_BED_NO    ${SELECTED_INPATIONT_BED_NO}
+    Log To Console    💾 BED_ID saved to state: ${SELECTED_INPATIONT_BED_ID}
+
+31-2-Get All Names Inpatient Wards For Send To Ward
+    [Documentation]    دریافت لیست بخش‌های بستری
+    [Tags]    API_GeneralVariables    METHOD_GET    Emergency
+
+    &{headers}=    Create Dictionary
+    ...    Accept=application/json, text/plain, */*
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+
+    ${resp}=    GET On Session
+    ...    HIS
+    ...    /api/GeneralVariables/GetAllNamesInpatientWards
+    ...    headers=&{headers}
+
+    Should Be Equal As Integers    ${resp.status_code}    200
+
+    # ✅ Parse JSON
+    ${json}=    Set Variable    ${resp.json()}
+    Should Be True    isinstance($json, list)
+
+    ${count}=    Get Length    ${json}
+    Log To Console    🏥 Inpatient wards count: ${count}
+    Should Be True    ${count} > 0
+
+    # ✅ Schema validation روی اولین آیتم
+    Should Contain    ${json[0]}    name
+    Should Contain    ${json[0]}    systemCodeId
+    Should Contain    ${json[0]}    standardVariableId
+    Should Be Equal As Integers    ${json[0]["systemCodeId"]}    132
+
+    # ✅ بررسی وجود حداقل یک بخش با ظرفیت خالی
+    ${HAS_AVAILABLE_WARD}=    Set Variable    ${False}
+
+    FOR    ${item}    IN    @{json}
+        Should Contain    ${item}    name
+        Should Contain    ${item}    standardVariableId
+
+        ${match}=    Evaluate    re.search("\\((\\d+)\\)", $item["name"])    re
+        IF    $match
+            ${capacity}=    Evaluate    int($match.group(1))
+            IF    ${capacity} > 0
+                Log To Console    ✅ Available ward found | ${item["name"]}
+                ${HAS_AVAILABLE_WARD}=    Set Variable    ${True}
+                Exit For Loop
+            END
+        END
+    END
+
+    Should Be True    ${HAS_AVAILABLE_WARD}
+    ...    ❌ No inpatient ward with available capacity found
+
+    ${TARGET_WARD_NAME}=    Set Variable    ${wardId}
+    ${FOUND_INPATIONT_WARD_NAME}=    Set Variable    ${None}
+
+    FOR    ${item}    IN    @{json}
+        IF    '${item["standardVariableId"]}' == '${TARGET_WARD_NAME}'
+            ${FOUND_INPATIONT_WARD_NAME}=    Set Variable    ${item["name"]}
+            Exit For Loop
+        END
+    END
+
+    Write State    INPATIONT_WARD_NAME    ${FOUND_INPATIONT_WARD_NAME}    
+
+    Log To Console    ✅ INPATIONT_WARD_NAME saved: ${FOUND_INPATIONT_WARD_NAME}
+
+
+31-3-Send To Ward Emergency Patient
+    [Documentation]     انتقال بیمار اورژانس به بخش 
+    [Tags]    API_FILING    METHOD_POST    Emergency
+
+    ${INPATIONT_WARD_NAME}=      Read State  INPATIONT_WARD_NAME
+    ${INPATIONT_BED_ID}=      Read State     INPATIONT_BED_ID
+    ${INPATIONT_BED_NO}=      Read State     INPATIONT_BED_NO
+    ${EMERGENCY_ADMIT_ID}=    Read State    EMERGENCY_ADMIT_ID
+    ${EMERGENCY_ADMIT_DATE}=    Read State    EMERGENCY_ADMIT_DATE
+    ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
+    ${NATIONALCODE}=      Read State    NATIONALCODE
+    ${FIRSTNAME}=      Read State    FIRSTNAME
+    ${LASTNAME}=      Read State    LASTNAME
+    ${FATHERNAME}=      Read State    FATHERNAME
+    ${DISPLAYNAME}=      Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=      Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=      Read State    LASTCITYID
+    ${RELIGION}=      Read State    RELIGION
+    ${NATIONALITYID}=      Read State    NATIONALITYID
+    ${SEXID}=      Read State    SEXID
+    ${SEX}=      Read State    SEX
+    ${MOBILE}=      Read State    MOBILE
+    ${BIRTHCITYID}=      Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${UNIQUEMERGENCYNO}=    Read State    UNIQUEMERGENCYNO
+  
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    charset=utf-8
+
+    ${fileFormation}=    Create Dictionary
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName= ${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${LASTMARITALSTATUS}
+    ...    cityId=${LASTCITYID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
+    ...    residencePermit=${False}
+    ...    nationalCode=${NATIONALCODE}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${BIRTHCITYID}
+    ...    birthPlaceOut=
+    ...    birthDate=2002/07/07
+	...    maritalStatusString=مجرد
+    ...    nationalityTitle=ایرانی
+    ...    birthPlaceString=تهران
+    ...    image=
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo=
+    ...    postalCode=
+    ...    unknown=${False}
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
+    ...    bPolice=${False}
+    ...    bCutting=${False}
+    ...    bDischarge=${False}
+    ...    bSurgery=${False}
+    ...    bUsingFile=${False}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=${UNIQUEMERGENCYNO}
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
+    ...    isNationalCodeRequired=${True}
+  
+
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=${FileFormationID}
+	...    inquiryUId=${INQUIRYUID}
+    ...    admitDate=${EMERGENCY_ADMIT_DATE}    #
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${wardId}
+	...    wardName=${INPATIONT_WARD_NAME}
+    ...    physicianID=592
+    ...    recommender=
+    ...    admissionType=4131
+    ...    patientClass=2    #
+    ...    priority=2
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${False}
+    ...    bCutting=${False}
+    ...    bDischarge=${False}
+    ...    bSurgery=${False}
+    ...    bUsingFile=${False}
+    ...    admissionReason=سوختگي
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=(1تروماP14.9
+    ...    diagnosisId=13309
+    ...    insuranceID=6
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=0
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=2028/04/04
+    ...    sponsor=خود فرد
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=${LASTMARITALSTATUS}
+	...    job=
+    ...    jobId=0
+    ...    homeCity=تهران
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=${MOBILE}
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=مهرداد شیخ الاسلامی
+    ...    familyRelationship=پدر
+    ...    familyCity=تهران
+    ...    familyAddress=dfgdfgdfgd
+    ...    familyPhone1=09126944812
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=363
+    ...    husbandJobID=0
+    ...    husbandNationalityID=912
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=${False}
+    ...    iD_Admit=${EMERGENCY_ADMIT_ID}
+    ...    bedId=${INPATIONT_BED_ID}
+    ...    bedNo=${INPATIONT_BED_NO}
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
+
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+	...    insuranceNote=
+    ...    insur_Relation=2
+    ...    lastInsuranceKind=422
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${True}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
+
+    ${resp}=    POST On Session
+    ...    HIS 
+    ...    url=/api/Filing/SendToWard
+    ...    headers=&{headers} 
+    ...    data=${json_string}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${FOUND_INPATIENT_ADMIT_ID}=    Set Variable    ${json["data"]["admitId"]}
+    ${FOUND_INPATIENT_ADMIT_DATE}=    Set Variable    ${json["data"]["admitDate"]}
+    ${FOUND_INPATIENT_TITLE_TYPE}=    Set Variable    ${json["data"]["titleType"]}
+    ${FOUND_INPATIENT_FILEFORMATION_ID}=    Set Variable    ${json["data"]["fileFormationId"]}
+
+
+    Write State    INPATIENT_ADMIT_ID            ${FOUND_INPATIENT_ADMIT_ID}  
+    Write State    INPATIENT_ADMIT_DATE          ${FOUND_INPATIENT_ADMIT_DATE}
+    Write State    INPATIENT_TITLE_TYPE          ${FOUND_INPATIENT_TITLE_TYPE}
+    Write State    INPATIENT_FILEFORMATION_ID    ${FOUND_INPATIENT_FILEFORMATION_ID}  
+
+    
+32-Changing Sheba No
+    [Documentation]    عوض کردن شماره شبای وارد شده برای بیمار 
+    [Tags]    API_FILING    METHOD_POST    PUBLIC    
+
+    ${INPATIENT_ADMIT_ID}=    Read State    INPATIENT_ADMIT_ID
+
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${changingShebaNoDto}=    Create Dictionary
+    ...    shebaNo=1425100000015236251
+    ...    admitId=${INPATIENT_ADMIT_ID}
+
+
+    ${body}=    Create Dictionary
+    ...    changingShebaNoDto=${changingShebaNoDto}
+
+    ${resp}=    POST On Session    
+    ...    HIS
+    ...    /api/Filing/ChangingShebaNo
+    ...    headers=&{headers}
+    ...    json=${body}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+33-Send To His Live
+    [Documentation]    ارسال پذیرش برای His Live
+    [Tags]    API_FILING    METHOD_POST    PUBLIC    
+
+    ${INPATIENT_ADMIT_ID}=    Read State    INPATIENT_ADMIT_ID
+
+   &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${body}=    Create Dictionary
+    ...    changingShebaNoDto=${changingShebaNoDto}
+
+    ${resp}=    POST On Session    
+    ...    HIS
+    ...    /api/Filing/ChangingShebaNo
+    ...    headers=&{headers}
+    ...    json=${body}
+34-
+35-
