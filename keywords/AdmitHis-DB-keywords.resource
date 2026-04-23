@@ -18,7 +18,8 @@ Connect To HIS Database
     ...    db_name=${DB_NAME}
     ...    db_user=${DB_USER}
     ...    db_password=${DB_PASS}
-    ...    db_host=${DB_HOST}
+    ...    db_host=${DB_HOST} 
+    ...    charset=cp1256
 
 
 
@@ -263,6 +264,10 @@ Validate DB After Cancel Preadmit Admit
     ${NATIONALCODE}=    Read State    NATIONALCODE
     ${HOSPITALFILEID}=    Read State    HOSPITALFILEID
     ${PREADMIT_ADMIT_DATE}=    Read State    PREADMIT_ADMIT_DATE
+    ${Login_Person_Id}=    Read State    Login_Person_Id
+    ${Login_Display_Name}=    Read State    Login_Display_Name
+    ${Login_User_Name}=     Read State    Login_User_Name
+    
 
     ${query}=    Catenate 
     ...    SELECT TotalCash.ID_TotalCash, TotalCash.FileFormationID, TotalCash.AdmitID, TotalCash.ClinicTitleType, TotalCash.Credit, 
@@ -278,14 +283,18 @@ Validate DB After Cancel Preadmit Admit
    
     Should Be True                 ${row[0]}                                    msg= ID_TotalCash is Null
     Should Be Equal As Integers    ${row[1]}    ${PREADMIT_iD_FileFormation}    msg= FileFormationID != ${PREADMIT_iD_FileFormation}
-    Should Be Equal As Integers    ${row[2]}    ${PREADMIT_ADMIT_DATE}          msg= PREADMIT ADMIT DATE != ${PREADMIT_ADMIT_DATE}
-    Should Be Equal As Integers    ${row[3]}    0                               msg= Pishpardaght != 0 
-    Should Be Equal As Integers    ${row[4]}    -${pishPardaght}                msg= DischargeDebt != -${pishPardaght}
-    Should Be Equal As Integers    ${row[5]}    2                               msg= Status_AdmitHIS != 2
-    Should Be Equal As Integers    ${row[6]}    ${PREADMIT_ADMIT_ID}            msg= Admit ID Not Mach
-    Should Be Equal As Integers    ${row[7]}    55                              msg= DischargeStep != 54
-    Should Be Equal As Integers    ${row[8]}    12                              msg= CancelReasonID != 12
-    Should Be Equal As Integers    ${row[9]}    0                               msg= Pishpardaght != 0 
-    Should Be Equal As Integers    ${row[10]}    -${pishPardaght}               msg= DischargeDebt != -${pishPardaght}
-    Should Be Equal As Integers    ${row[11]}    2                              msg= Status_AdmitHIS != 2
+    Should Be Equal As Integers    ${row[2]}    ${PREADMIT_ADMIT_ID}            msg= PREADMIT ADMIT ID != ${PREADMIT_ADMIT_ID}
+    Should Be Equal As Integers    ${row[3]}    249                             msg= ClinicTitleType != 249 
+    Should Be Equal As Integers    ${row[4]}    ${pishPardaght}                 msg= Credit != -${pishPardaght}
+    Should Be Equal As Integers    ${row[5]}    ${Login_Person_Id}              msg= Login Person Id != ${Login_Person_Id}
+    Should Contain                 ${row[6]}    (${Login_User_Name})            msg= Login User Name doesnt contain
+    Should Be True                 ${row[7]} is None or '${row[7]}' != ''       msg= Note 
+    Should Be Equal As Integers    ${row[8]}    55                              msg= CashType != 55
+    Should Be Equal As Integers    ${row[9]}    55                              msg= DischargeStep != 55 
+    Should Be Equal As Integers    ${row[10]}   12                              msg= CancelReasonID != 12
+    Should Be Equal As Integers    ${row[11]}   0                               msg= PishPardaght != 0
+    Should Be Equal As Integers    ${row[12]}   0                               msg= DischargeDebt != 0
+    Should Be Equal As Integers    ${row[13]}   2                               msg= Status_AdmitHIS != 2
+
+
         

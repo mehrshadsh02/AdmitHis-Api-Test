@@ -39,6 +39,38 @@ Suite Setup       Create All Sessions
     Set Test Message
     ...    Build Info:\n${json}
 
+001-Get Token Data
+    [Documentation]    دریافت اطلاعات کاربر لاگین کننده
+    [Tags]    API_DynamicRoleClaimsManager    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/DynamicRoleClaimsManager/GetTokenData    
+    ...    headers=${headers}
+
+    Should Be Equal As Integers    
+    ...    ${resp.status_code}    
+    ...    200    
+
+    ${json}=    Set Variable    ${resp.json()}  
+
+    ${LOGIN_user_name}=           Set Variable    ${json["username"]}
+    ${LOGIN_person_Id}=           Set Variable    ${json["personId"]}
+    ${LOGIN_display_Name}=           Set Variable    ${json["displayName"]}
+
+    Write State    Login_User_Name    ${LOGIN_user_name} 
+    Write State    Login_Person_Id    ${LOGIN_person_Id} 
+    Write State    Login_Display_Name    ${LOGIN_display_Name} 
+
+    
+    Set Test Message
+    ...    User Info:\n${LOGIN_user_name} / ${LOGIN_person_Id} / ${LOGIN_display_Name}
+
 002-Get Patient By FileFormationID
     [Documentation]    بررسی بدهی بیمار
     [Tags]    API_Patient    METHOD_POST    
