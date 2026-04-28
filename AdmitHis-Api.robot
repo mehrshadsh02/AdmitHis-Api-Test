@@ -6,6 +6,7 @@ Library           SeleniumLibrary
 Library           JSONLibrary
 Library           DatabaseLibrary
 Library           pymssql
+Library           jdatetime
 
 Resource          ../resources/AdmitHis-variables.resource
 Resource          ../keywords/AdmitHis-keywords.resource
@@ -37,8 +38,8 @@ Suite Setup       Create All Sessions
     ${json}=    Set Variable    ${resp.json()}
 
     Set Test Message
-    ...    Build Info:\n${json}
-
+    ...    Response: ${resp.status_code}\nBuild Info:\n${json}
+  
 001-Get Token Data
     [Documentation]    دریافت اطلاعات کاربر لاگین کننده
     [Tags]    API_DynamicRoleClaimsManager    METHOD_GET  
@@ -69,10 +70,10 @@ Suite Setup       Create All Sessions
 
     
     Set Test Message
-    ...    User Info:\n${LOGIN_user_name} / ${LOGIN_person_Id} / ${LOGIN_display_Name}
+    ...    Response: ${resp.status_code}\nUser Info:\n${LOGIN_user_name} / ${LOGIN_person_Id} / ${LOGIN_display_Name}
 
 002-Get Patient By FileFormationID
-    [Documentation]    بررسی بدهی بیمار
+    [Documentation]    دریافت اطلاعات بیمار با استفاده از شماره الکترونیکی
     [Tags]    API_Patient    METHOD_POST    
 
     &{headers}=    Create Dictionary
@@ -128,6 +129,9 @@ Suite Setup       Create All Sessions
             ${FOUND_sexId}=    Set Variable    ${item["sexId"]}
             ${FOUND_inquiryUId}=    Set Variable    ${item["inquiryUId"]}
             ${FOUND_Fileformation_Id}=    Set Variable    ${item["iD_FileFormation"]}
+            ${FOUND_lastInsurance_ID}=    Set Variable    ${item["lastInsuranceID"]}
+            ${FOUND_lastInsurance_ExpDate}=    Set Variable    ${item["lastInsuranceExpDate"]}
+            
             Exit For Loop
         END
     END
@@ -151,7 +155,12 @@ Suite Setup       Create All Sessions
     Write State    iD_FileFormation    ${FOUND_Fileformation_Id}
     Write State    FIRSTNAME         ${FOUND_First_Name}
     Write State    LASTNAME          ${FOUND_Last_Name}
-    Write State    FATHERNAME        ${FOUND_Father_Name}    
+    Write State    FATHERNAME        ${FOUND_Father_Name}  
+    Write State    lastInsurance_ID        ${FOUND_lastInsurance_ID}
+    Write State    lastInsurance_ExpDate        ${FOUND_lastInsurance_ExpDate}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n  
 
 
 003-Get All Jobs
@@ -204,6 +213,9 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ PASS | Doctor job validated | ID=${target[0]["iD_Job"]}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n 
+
 
 004-Get All Cause Of Hospitalization
     [Documentation]    دریافت لیست علل بستری
@@ -214,7 +226,10 @@ Suite Setup       Create All Sessions
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
 
-    ${resp}=    GET On Session    HIS    /api/GeneralVariables/GetAllCauseOfHospitalization    headers=&{headers}
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetAllCauseOfHospitalization    
+    ...    headers=&{headers}
 
     Run Keyword If    '${resp}'=='None'
     ...    Fail    ❌ NO RESPONSE | API:GetAllCauseOfHospitalization
@@ -238,6 +253,20 @@ Suite Setup       Create All Sessions
     ...    ${burn}
     ...    msg=❌ DATA MISSING | Cause 'سوختگی' Not Found | ID=82
 
+    ${FOUND_Cause_Of_Hospitalization_ID}=    Set Variable    ${burn[0]["iD_GVariable"]}
+    ${FOUND_Cause_Of_Hospitalization_Name}=    Set Variable    ${burn[0]["name"]}
+    ${FOUND_Cause_Of_Hospitalization_ID_Edit}=    Set Variable    ${accident[0]["iD_GVariable"]}
+    ${FOUND_Cause_Of_Hospitalization_Name_Edit}=    Set Variable    ${accident[0]["name"]}
+
+
+    Write State    Cause_Of_Hospitalization_ID    ${FOUND_Cause_Of_Hospitalization_ID}
+    Write State    Cause_Of_Hospitalization_Name    ${FOUND_Cause_Of_Hospitalization_Name}
+    Write State    Cause_Of_Hospitalization_ID_Edit    ${FOUND_Cause_Of_Hospitalization_ID_Edit}
+    Write State    Cause_Of_Hospitalization_Name_Edit   ${FOUND_Cause_Of_Hospitalization_Name_Edit}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n 
+
 
 005-Get Standard Variables
     [Documentation]    لیست شهرها و وضعیت تاهل و ملیت و نام بیمه ها و نسبیت ها  و نوع بستری و نام بیمه های تکمیلی و تحصیلات و نام پزشک ها وجنسیت و استان ها و نحوه مراجعه
@@ -256,6 +285,9 @@ Suite Setup       Create All Sessions
     #Log To Console    Body length: ${resp.content.__len__()}
 
     Should Be Equal As Integers    ${resp.status_code}    200
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n 
 
 
 006-Get All First Recognition
@@ -399,7 +431,7 @@ Suite Setup       Create All Sessions
         
     Run Keyword If    
     ...    '${nationalCode}'=='null'
-    ...    Fail    ❌ NO RESPONSE | API: GetPersonFromDitas | nationalCode=${nationalCode}
+    ...    Fail    ❌ nationalCode is null | API: GetPersonFromDitas | nationalCode=${nationalCode}
 
     &{headers}=    Create Dictionary
     ...    Accept=application/json
@@ -1671,6 +1703,8 @@ Suite Setup       Create All Sessions
     ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
     ${Relationship_Name}=    Read State    Relationship_Name
     ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -1966,6 +2000,8 @@ Suite Setup       Create All Sessions
     ${Doctor_ID_EDIT}=    Read State    Doctor_ID_EDIT
     ${Diagnosis-Name-Edit}=    Read State    Diagnosis-Name-Edit
     ${Diagnosis-ID-Edit}=    Read State    Diagnosis-ID-Edit
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
     
 
     &{headers}=    Create Dictionary
@@ -2919,7 +2955,7 @@ Suite Setup       Create All Sessions
     
     Validate DB After Cancel Preadmit Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
 
-25-Add Filing Emergency Patient
+048-Add Filing Emergency Patient
     [Documentation]   پذیرش بیمار اورژانس تحت نظر
     [Tags]    API_Filing    METHOD_POST    Emergency
 
@@ -2942,6 +2978,22 @@ Suite Setup       Create All Sessions
     ${MOBILE}=      Read State    MOBILE
     ${BIRTHCITYID}=      Read State    BIRTHCITYID
     ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Emergency_Admission_Type_Sepas}=    Read State    Emergency_Admission_Type_Sepas
+    ${Emergency_Admission_Type_Name}=    Read State    Emergency_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${Diagnosis_Name}=    Read State    Diagnosis-Name
+    ${Diagnosis_ID}=    Read State    Diagnosis-ID
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
+
   
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -2950,23 +3002,23 @@ Suite Setup       Create All Sessions
     ...    Content-Type=application/json
     ...    charset=utf-8
 
-      ${fileFormation}=    Create Dictionary
+    ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
     ...    nameEn=
     ...    middleName=${DISPLAYNAME}
     ...    familyName=${LASTNAME}
     ...    familyEnName=
-    ...    fatherName= ${FATHERNAME}
+    ...    fatherName=${FATHERNAME}
     ...    grandPaName=
 	...    motherName=
     ...    momGrandPaName=
-    ...    maritalStatus=${LASTMARITALSTATUS}
-    ...    cityId=${LASTCITYID}
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
     ...    relegiousStatus=${RELIGION}
     ...    unknownType=0
     ...    passportType=0
     ...    residencePermit=${False}
-    ...    nationalCode=${NATIONALCODE}
+    ...    nationalCode=${nationalCode}
 	...    parentNationalCode=
     ...    identityCode=
     ...    nationality=${NATIONALITYID}
@@ -2975,12 +3027,12 @@ Suite Setup       Create All Sessions
     ...    sexString=${SEX}
     ...    email=
     ...    mobileNo=${MOBILE}
-    ...    birthPlace=${BIRTHCITYID}
+    ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
     ...    birthDate=2002/07/07
-	...    maritalStatusString=مجرد
-    ...    nationalityTitle=ایرانی
-    ...    birthPlaceString=تهران
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
     ...    image=
     ...    addressLine=dfgdfgdfgd
     ...    phoneNo=
@@ -2991,11 +3043,11 @@ Suite Setup       Create All Sessions
     ...    contagion=
     ...    note1=
     ...    note2=
-    ...    bPolice=${False}
-    ...    bCutting=${False}
-    ...    bDischarge=${False}
-    ...    bSurgery=${False}
-    ...    bUsingFile=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
     ...    isDangerous=${False}
     ...    uniqueEmergencyNo=0
     ...    fileFormationId=${FileFormationID}
@@ -3007,7 +3059,7 @@ Suite Setup       Create All Sessions
 
     ${hisAdmitDto}=    Create Dictionary
     ...    fileFormationID=${FileFormationID}
-	...    inquiryUId=250bf58f-4c2d-4cd5-9d78-c0d45bcdee99
+	...    inquiryUId=${INQUIRYUID}
     ...    admitDate=
     ...    admitTime=
     ...    isDischarged=${False}
@@ -3019,7 +3071,7 @@ Suite Setup       Create All Sessions
 	...    wardName=${EMERGENCY_ward_NAME}
     ...    physicianID=592
     ...    recommender=
-    ...    admissionType=372
+    ...    admissionType=${Emergency_Admission_Type_Sepas}
     ...    patientClass=0
     ...    priority=2
 	...    ability=0
@@ -3037,9 +3089,9 @@ Suite Setup       Create All Sessions
     ...    entranceType=393
 	...    emsId=0
     ...    krokiCode=0
-    ...    diagnosis=(1تروماP14.9
-    ...    diagnosisId=13309
-    ...    insuranceID=6
+    ...    diagnosis=${Diagnosis_Name}
+    ...    diagnosisId=${Diagnosis_ID}
+    ...    insuranceID=${lastInsurance_ID}
 	...    insurPageNo=0
     ...    insurSerialNO=
     ...    recomendationNo=
@@ -3049,14 +3101,14 @@ Suite Setup       Create All Sessions
     ...    doctorTotalCost=0
     ...    referenceDoctorID=0
     ...    insuranceNO=${LASTINSURANCENO}
-    ...    insuranceExpDate=2028/04/04
+    ...    insuranceExpDate=${insuranceExpDate}
     ...    sponsor=اورژانس
     ...    degree=0         
     ...    shebaNo=
     ...    maritalStatus=${LASTMARITALSTATUS}
 	...    job=
     ...    jobId=0
-    ...    homeCity=تهران
+    ...    homeCity=${city_Base_Name}
     ...    homeZone=
     ...    homeAddress=dfgdfgdfgd
     ...    homePhone1=${MOBILE}
@@ -3069,9 +3121,9 @@ Suite Setup       Create All Sessions
     ...    workPhone2=
     ...    workFax=
     ...    workPostCode=
-    ...    familyFullName=مهرداد شیخ الاسلامی
-    ...    familyRelationship=پدر
-    ...    familyCity=تهران
+    ...    familyFullName=${FATHERNAME}
+    ...    familyRelationship=${Relationship_Name}
+    ...    familyCity=${city_Base_Name}
     ...    familyAddress=dfgdfgdfgd
     ...    familyPhone1=09126944812
     ...    familyPhone2=
@@ -3081,9 +3133,9 @@ Suite Setup       Create All Sessions
     ...    husbandLastName=
     ...    husbandBirthDate=
     ...    husbandIdentityNo=
-    ...    husbandIssuePlaceID=363
+    ...    husbandIssuePlaceID=0
     ...    husbandJobID=0
-    ...    husbandNationalityID=912
+    ...    husbandNationalityID=0
     ...    husbandPassportID=
     ...    tourismId=0
     ...    isPregnant=false
@@ -3104,8 +3156,8 @@ Suite Setup       Create All Sessions
     ...    fileFormation=${fileFormation}
     ...    hisAdmitDto=${hisAdmitDto}
 	...    insuranceNote=
-    ...    insur_Relation=2
-    ...    lastInsuranceKind=422
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
 	...    lastInsuranceDate=
     ...    insur2ID=0
     ...    insur2No=0
@@ -3123,9 +3175,6 @@ Suite Setup       Create All Sessions
     ...    headers=&{headers} 
     ...    data=${json_string}
 
-    # Log To Console    Response Status: ${resp.status_code}
-    # Log To Console    Response Body: ${resp.text}
-
     Should Be Equal As Integers    ${resp.status_code}    200 
 
     ${json}=    Set Variable    ${resp.json()}
@@ -3139,11 +3188,20 @@ Suite Setup       Create All Sessions
     Write State    EMERGENCY_ADMIT_ID    ${FOUND_EMERGENCY_ADMIT_ID}  
     Write State    EMERGENCY_ADMIT_DATE    ${FOUND_EMERGENCY_ADMIT_DATE}
     Write State    EMERGENCY_TITLE_TYPE    ${FOUND_EMERGENCY_TITLE_TYPE}
-    Write State   EMERGENCY_FILEFORMATION_ID    ${FOUND_EMERGENCY_FILEFORMATION_ID}  
+    Write State    EMERGENCY_FILEFORMATION_ID    ${FOUND_EMERGENCY_FILEFORMATION_ID}  
 
     Log To Console    ✅ EMERGENCY_ADMIT_ID saved: ${FOUND_EMERGENCY_ADMIT_ID}
 
-26-Search Patient Emergency
+049-Validate DataBase After Admit Emergency Patient
+    [Documentation]   تست دیتابیس بعد از پذیرش بیمار تحت نظر
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    
+    Validate DB After Admit Emergency Patient    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+050-Search Patient Emergency
     [Documentation]   جستجوی بیماران اورژانس تحت نظر
     [Tags]    API_Patient    METHOD_POST  Emergency 
 
@@ -3179,7 +3237,7 @@ Suite Setup       Create All Sessions
     Should Be True    isinstance($json, list)
 
 
-27-Get Patient By AdmitID
+051-Get Patient By AdmitID
     [Documentation]   دریافت اطلاعات بیمار بستری اورژانش با شماره پذیرش
     [Tags]    API_Patient    METHOD_GET    Emergency    
 
@@ -3201,10 +3259,12 @@ Suite Setup       Create All Sessions
 
     Should Not Be Empty    ${json}
 
-28-Edit Filing Emergency Patient
+052-Edit Filing Emergency Patient
     [Documentation]   ویرایش بیمار بستری اورژانس تحت نظر
     [Tags]    API_Filing    METHOD_POST    Emergency
 
+    ${EMERGENCY_ADMIT_ID}=      Read State    EMERGENCY_ADMIT_ID
+    ${EMERGENCY_ADMIT_DATE}=      Read State    EMERGENCY_ADMIT_DATE
     ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
     ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
     ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
@@ -3224,8 +3284,22 @@ Suite Setup       Create All Sessions
     ${MOBILE}=      Read State    MOBILE
     ${BIRTHCITYID}=      Read State    BIRTHCITYID
     ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
-    ${EMERGENCY_ADMIT_ID}=      Read State    EMERGENCY_ADMIT_ID
-    ${EMERGENCY_ADMIT_DATE}=      Read State    EMERGENCY_ADMIT_DATE
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Emergency_Admission_Type_Sepas}=    Read State    Emergency_Admission_Type_Sepas
+    ${Emergency_Admission_Type_Name}=    Read State    Emergency_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${Diagnosis_Name}=    Read State    Diagnosis-Name
+    ${Diagnosis_ID}=    Read State    Diagnosis-ID
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
+    
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -3234,23 +3308,23 @@ Suite Setup       Create All Sessions
     ...    Content-Type=application/json
     ...    charset=utf-8
 
-      ${fileFormation}=    Create Dictionary
+    ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
     ...    nameEn=
     ...    middleName=${DISPLAYNAME}
     ...    familyName=${LASTNAME}
     ...    familyEnName=
-    ...    fatherName= ${FATHERNAME}
+    ...    fatherName=${FATHERNAME}
     ...    grandPaName=
 	...    motherName=
     ...    momGrandPaName=
-    ...    maritalStatus=${LASTMARITALSTATUS}
-    ...    cityId=${LASTCITYID}
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
     ...    relegiousStatus=${RELIGION}
     ...    unknownType=0
     ...    passportType=0
     ...    residencePermit=${False}
-    ...    nationalCode=${NATIONALCODE}
+    ...    nationalCode=${nationalCode}
 	...    parentNationalCode=
     ...    identityCode=
     ...    nationality=${NATIONALITYID}
@@ -3259,12 +3333,12 @@ Suite Setup       Create All Sessions
     ...    sexString=${SEX}
     ...    email=
     ...    mobileNo=${MOBILE}
-    ...    birthPlace=${BIRTHCITYID}
+    ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
     ...    birthDate=2002/07/07
-	...    maritalStatusString=مجرد
-    ...    nationalityTitle=ایرانی
-    ...    birthPlaceString=تهران
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
     ...    image=
     ...    addressLine=dfgdfgdfgd
     ...    phoneNo=
@@ -3275,11 +3349,11 @@ Suite Setup       Create All Sessions
     ...    contagion=
     ...    note1=
     ...    note2=
-    ...    bPolice=${False}
-    ...    bCutting=${False}
-    ...    bDischarge=${False}
-    ...    bSurgery=${False}
-    ...    bUsingFile=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
     ...    isDangerous=${False}
     ...    uniqueEmergencyNo=0
     ...    fileFormationId=${FileFormationID}
@@ -3291,7 +3365,7 @@ Suite Setup       Create All Sessions
 
     ${hisAdmitDto}=    Create Dictionary
     ...    fileFormationID=${FileFormationID}
-	...    inquiryUId=250bf58f-4c2d-4cd5-9d78-c0d45bcdee99
+	...    inquiryUId=${INQUIRYUID}
     ...    admitDate=${EMERGENCY_ADMIT_DATE}
     ...    admitTime=
     ...    isDischarged=${False}
@@ -3303,7 +3377,7 @@ Suite Setup       Create All Sessions
 	...    wardName=${EMERGENCY_ward_NAME}
     ...    physicianID=592
     ...    recommender=
-    ...    admissionType=372
+    ...    admissionType=${Emergency_Admission_Type_Sepas}
     ...    patientClass=0
     ...    priority=2
 	...    ability=0
@@ -3321,9 +3395,9 @@ Suite Setup       Create All Sessions
     ...    entranceType=393
 	...    emsId=0
     ...    krokiCode=0
-    ...    diagnosis=(1تروماP14.9
-    ...    diagnosisId=13309
-    ...    insuranceID=6
+    ...    diagnosis=${Diagnosis_Name}
+    ...    diagnosisId=${Diagnosis_ID}
+    ...    insuranceID=${lastInsurance_ID}
 	...    insurPageNo=0
     ...    insurSerialNO=
     ...    recomendationNo=
@@ -3333,14 +3407,14 @@ Suite Setup       Create All Sessions
     ...    doctorTotalCost=0
     ...    referenceDoctorID=0
     ...    insuranceNO=${LASTINSURANCENO}
-    ...    insuranceExpDate=2028/04/04
-    ...    sponsor=خود فرد
+    ...    insuranceExpDate=${insuranceExpDate}
+    ...    sponsor=خود فرد        #edit
     ...    degree=0         
     ...    shebaNo=
     ...    maritalStatus=${LASTMARITALSTATUS}
 	...    job=
     ...    jobId=0
-    ...    homeCity=تهران
+    ...    homeCity=${city_Base_Name}
     ...    homeZone=
     ...    homeAddress=dfgdfgdfgd
     ...    homePhone1=${MOBILE}
@@ -3353,11 +3427,11 @@ Suite Setup       Create All Sessions
     ...    workPhone2=
     ...    workFax=
     ...    workPostCode=
-    ...    familyFullName=مهرداد شیخ الاسلامی
-    ...    familyRelationship=پدر
-    ...    familyCity=تهران
-    ...    familyAddress=تهران خ قزوین
-    ...    familyPhone1=09126944812
+    ...    familyFullName=${FATHERNAME}
+    ...    familyRelationship=${Relationship_Name}
+    ...    familyCity=${city_Base_Name}
+    ...    familyAddress=تهران خ قزوین    #edit
+    ...    familyPhone1=0912656565        #edit
     ...    familyPhone2=
     ...    familyPostCode=
     ...    husbandNCode=
@@ -3365,9 +3439,9 @@ Suite Setup       Create All Sessions
     ...    husbandLastName=
     ...    husbandBirthDate=
     ...    husbandIdentityNo=
-    ...    husbandIssuePlaceID=363
+    ...    husbandIssuePlaceID=0
     ...    husbandJobID=0
-    ...    husbandNationalityID=912
+    ...    husbandNationalityID=0
     ...    husbandPassportID=
     ...    tourismId=0
     ...    isPregnant=false
@@ -3386,8 +3460,8 @@ Suite Setup       Create All Sessions
     ...    fileFormation=${fileFormation}
     ...    hisAdmitDto=${hisAdmitDto}
 	...    insuranceNote=
-    ...    insur_Relation=2
-    ...    lastInsuranceKind=422
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
 	...    lastInsuranceDate=
     ...    insur2ID=0
     ...    insur2No=0
@@ -3413,7 +3487,7 @@ Suite Setup       Create All Sessions
     Should Be Equal As Integers    ${json["statusCode"]}    200
     Should Be Equal    ${json["message"]}    Success
 
-29-Patient Admission Order From Cartable
+053-Patient Admission Order From Cartable
     [Documentation]    بستری بیمار تحت نظر از کارتابل
     [Tags]    API_Patient    METHOD_POST   Catable    Emergency 
 
@@ -3442,7 +3516,29 @@ Suite Setup       Create All Sessions
     Should Be Equal As Integers    ${json["statusCode"]}    200
     Should Be Equal    ${json["message"]}    Operation completed
 
-30-Get Information Of Patient Before Sent To Ward
+
+    ${server_date}=    Get From Dictionary    ${resp.headers}    Date
+
+    ${expected}=    Evaluate    (lambda d:(lambda dt:(lambda iran:(lambda j:(j.strftime("%Y/%m/%d"), j.strftime("%H:%M")))(__import__('jdatetime').datetime.fromgregorian(datetime=iran)))(dt+__import__('datetime').timedelta(hours=3,minutes=30)))(__import__('datetime').datetime.strptime(d,"%a, %d %b %Y %H:%M:%S GMT")))($server_date)
+
+
+    ${expected_date}=    Set Variable    ${expected}[0]
+    ${expected_time}=    Set Variable    ${expected}[1]
+
+    Write State    Send_To_Ward_Date    ${expected_date}
+    Write State    Send_To_Ward_Time    ${expected_time}
+
+
+054-Validate DataBase After Patient Admission Order From Cartable
+    [Documentation]   تست دیتابیس بعد از پذیرش بیمار تحت نظر
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    
+    Validate DB After Patient Admission Order From Cartable    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+055-Get Information Of Patient Before Sent To Ward
     [Documentation]      دریافت اطلاعات بیمار  اورژانس جهت انتقال به بخش
     [Tags]    API_Patient    METHOD_GET    Emergency    
 
@@ -3468,7 +3564,7 @@ Suite Setup       Create All Sessions
 
     Write State    UNIQUEMERGENCYNO    ${EMERGENCY_UNIQUE_NO}
 
-31-1-Get All Bed Number For Send To Ward
+056-1-Get All Bed Number For Send To Ward
     [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 201
     [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST    Emergency
 
@@ -3536,7 +3632,7 @@ Suite Setup       Create All Sessions
     Write State    INPATIONT_BED_NO    ${SELECTED_INPATIONT_BED_NO}
     Log To Console    💾 BED_ID saved to state: ${SELECTED_INPATIONT_BED_ID}
 
-31-2-Get All Names Inpatient Wards For Send To Ward
+056-2-Get All Names Inpatient Wards For Send To Ward
     [Documentation]    دریافت لیست بخش‌های بستری
     [Tags]    API_GeneralVariables    METHOD_GET    Emergency
 
@@ -3602,7 +3698,7 @@ Suite Setup       Create All Sessions
     Log To Console    ✅ INPATIONT_WARD_NAME saved: ${FOUND_INPATIONT_WARD_NAME}
 
 
-31-3-Send To Ward Emergency Patient
+056-3-Send To Ward Emergency Patient
     [Documentation]     انتقال بیمار اورژانس به بخش 
     [Tags]    API_FILING    METHOD_POST    Emergency
 
@@ -3628,6 +3724,21 @@ Suite Setup       Create All Sessions
     ${LASTINSURANCENO}=      Read State    LASTINSURANCENO
     ${INQUIRYUID}=    Read State    INQUIRYUID
     ${UNIQUEMERGENCYNO}=    Read State    UNIQUEMERGENCYNO
+    ${Marital_Status_ID}=    Read State    Marital_Status_ID
+    ${city_Base_ID}=    Read State    city_Base_ID
+    ${city_Base_Name}=    Read State    city_Base_Name
+    ${Marital_Status_Name}=    Read State    Marital_Status_Name
+    ${Nationality_Name}=    Read State    Nationality_Name
+    ${INQUIRYUID}=    Read State    INQUIRYUID
+    ${Emergency_Admission_Type_Sepas}=    Read State    Emergency_Admission_Type_Sepas
+    ${Emergency_Admission_Type_Name}=    Read State    Emergency_Admission_Type_Name
+    ${Relationship_Name}=    Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${Diagnosis_Name}=    Read State    Diagnosis-Name
+    ${Diagnosis_ID}=    Read State    Diagnosis-ID
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
   
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -3642,17 +3753,17 @@ Suite Setup       Create All Sessions
     ...    middleName=${DISPLAYNAME}
     ...    familyName=${LASTNAME}
     ...    familyEnName=
-    ...    fatherName= ${FATHERNAME}
+    ...    fatherName=${FATHERNAME}
     ...    grandPaName=
 	...    motherName=
     ...    momGrandPaName=
-    ...    maritalStatus=${LASTMARITALSTATUS}
-    ...    cityId=${LASTCITYID}
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
     ...    relegiousStatus=${RELIGION}
     ...    unknownType=0
     ...    passportType=0
     ...    residencePermit=${False}
-    ...    nationalCode=${NATIONALCODE}
+    ...    nationalCode=${nationalCode}
 	...    parentNationalCode=
     ...    identityCode=
     ...    nationality=${NATIONALITYID}
@@ -3661,12 +3772,12 @@ Suite Setup       Create All Sessions
     ...    sexString=${SEX}
     ...    email=
     ...    mobileNo=${MOBILE}
-    ...    birthPlace=${BIRTHCITYID}
+    ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
     ...    birthDate=2002/07/07
-	...    maritalStatusString=مجرد
-    ...    nationalityTitle=ایرانی
-    ...    birthPlaceString=تهران
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
     ...    image=
     ...    addressLine=dfgdfgdfgd
     ...    phoneNo=
@@ -3677,13 +3788,13 @@ Suite Setup       Create All Sessions
     ...    contagion=
     ...    note1=
     ...    note2=
-    ...    bPolice=${False}
-    ...    bCutting=${False}
-    ...    bDischarge=${False}
-    ...    bSurgery=${False}
-    ...    bUsingFile=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
     ...    isDangerous=${False}
-    ...    uniqueEmergencyNo=${UNIQUEMERGENCYNO}
+    ...    uniqueEmergencyNo=0
     ...    fileFormationId=${FileFormationID}
     ...    husbandName=
     ...    husbandLastName=
@@ -3705,7 +3816,7 @@ Suite Setup       Create All Sessions
 	...    wardName=${INPATIONT_WARD_NAME}
     ...    physicianID=592
     ...    recommender=
-    ...    admissionType=4131
+    ...    admissionType=${Emergency_Admission_Type_Sepas}
     ...    patientClass=2    #
     ...    priority=2
 	...    ability=0
@@ -3723,9 +3834,9 @@ Suite Setup       Create All Sessions
     ...    entranceType=393
 	...    emsId=0
     ...    krokiCode=0
-    ...    diagnosis=(1تروماP14.9
-    ...    diagnosisId=13309
-    ...    insuranceID=6
+    ...    diagnosis=${Diagnosis_Name}
+    ...    diagnosisId=${Diagnosis_ID}
+    ...    insuranceID=${lastInsurance_ID}
 	...    insurPageNo=0
     ...    insurSerialNO=
     ...    recomendationNo=
@@ -3735,14 +3846,14 @@ Suite Setup       Create All Sessions
     ...    doctorTotalCost=0
     ...    referenceDoctorID=0
     ...    insuranceNO=${LASTINSURANCENO}
-    ...    insuranceExpDate=2028/04/04
+    ...    insuranceExpDate=${insuranceExpDate}
     ...    sponsor=خود فرد
     ...    degree=0         
     ...    shebaNo=
     ...    maritalStatus=${LASTMARITALSTATUS}
 	...    job=
     ...    jobId=0
-    ...    homeCity=تهران
+    ...    homeCity=${city_Base_Name}
     ...    homeZone=
     ...    homeAddress=dfgdfgdfgd
     ...    homePhone1=${MOBILE}
@@ -3755,11 +3866,11 @@ Suite Setup       Create All Sessions
     ...    workPhone2=
     ...    workFax=
     ...    workPostCode=
-    ...    familyFullName=مهرداد شیخ الاسلامی
-    ...    familyRelationship=پدر
-    ...    familyCity=تهران
-    ...    familyAddress=dfgdfgdfgd
-    ...    familyPhone1=09126944812
+    ...    familyFullName=${FATHERNAME}
+    ...    familyRelationship=${Relationship_Name}
+    ...    familyCity=${city_Base_Name}
+    ...    familyAddress=تهران خ قزوین 
+    ...    familyPhone1=0912656565
     ...    familyPhone2=
     ...    familyPostCode=
     ...    husbandNCode=
@@ -3767,9 +3878,9 @@ Suite Setup       Create All Sessions
     ...    husbandLastName=
     ...    husbandBirthDate=
     ...    husbandIdentityNo=
-    ...    husbandIssuePlaceID=363
+    ...    husbandIssuePlaceID=0
     ...    husbandJobID=0
-    ...    husbandNationalityID=912
+    ...    husbandNationalityID=0
     ...    husbandPassportID=
     ...    tourismId=0
     ...    isPregnant=${False}
@@ -3790,8 +3901,8 @@ Suite Setup       Create All Sessions
     ...    fileFormation=${fileFormation}
     ...    hisAdmitDto=${hisAdmitDto}
 	...    insuranceNote=
-    ...    insur_Relation=2
-    ...    lastInsuranceKind=422
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
 	...    lastInsuranceDate=
     ...    insur2ID=0
     ...    insur2No=0
@@ -3825,7 +3936,7 @@ Suite Setup       Create All Sessions
     Write State    INPATIENT_FILEFORMATION_ID    ${FOUND_INPATIENT_FILEFORMATION_ID}  
 
     
-32-Changing Sheba No
+057-Changing Sheba No
     [Documentation]    عوض کردن شماره شبای وارد شده برای بیمار 
     [Tags]    API_FILING    METHOD_POST    PUBLIC    
 
@@ -3854,7 +3965,7 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
-33-Send To His Live
+058-Send To His Live
     [Documentation]    ارسال پذیرش برای His Live
     [Tags]    API_FILING    METHOD_POST    PUBLIC    
 

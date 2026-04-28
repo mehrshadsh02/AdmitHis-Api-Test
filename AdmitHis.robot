@@ -5,6 +5,7 @@ Library           OperatingSystem
 Library           SeleniumLibrary
 Resource          ../AdmitHis-Test/resources/AdmitHis-variables.resource
 Resource          ../AdmitHis-Test/keywords/AdmitHis-keywords.resource
+Resource          ../keywords/AdmitHis-DB-keywords.resource
 
 Suite Setup       Create AdmitHIS Session
 
@@ -29,7 +30,7 @@ Suite Setup       Create AdmitHIS Session
 
     Disable Screenshots        
     Wait For Page Ready
-    Wait Until Element Is Visible    //input[@formcontrolname='nationalCode']    10s
+    Wait Until Element Is Visible    //input[@formcontrolname='nationalCode']    50s
     Clear Element Text    //input[@formcontrolname='nationalCode']
     Input Text         //input[@formcontrolname='nationalCode']     ${nationalCode}
     Click Element Safe       id=button-addon3
@@ -69,7 +70,7 @@ Suite Setup       Create AdmitHIS Session
 
     Disable Screenshots
     Wait For Page Ready
-    Select From Ng Select    wardfileld             اطفال 2 - تخت خالی (32)
+    Select From Ng Select    wardfileld             اطفال 2 - تخت خالی 
     Select From Ng Select    doctorField             Siavash Siavash
     Select From Ng Select    responsiblePatient     خود فرد
 

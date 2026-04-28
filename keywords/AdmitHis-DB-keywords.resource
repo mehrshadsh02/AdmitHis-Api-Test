@@ -285,7 +285,7 @@ Validate DB After Cancel Preadmit Admit
     Should Be Equal As Integers    ${row[1]}    ${PREADMIT_iD_FileFormation}    msg= FileFormationID != ${PREADMIT_iD_FileFormation}
     Should Be Equal As Integers    ${row[2]}    ${PREADMIT_ADMIT_ID}            msg= PREADMIT ADMIT ID != ${PREADMIT_ADMIT_ID}
     Should Be Equal As Integers    ${row[3]}    249                             msg= ClinicTitleType != 249 
-    Should Be Equal As Integers    ${row[4]}    ${pishPardaght}                 msg= Credit != -${pishPardaght}
+    Should Be Equal As Integers    ${row[4]}    ${pishPardaght}                 msg= Credit != ${pishPardaght}
     Should Be Equal As Integers    ${row[5]}    ${Login_Person_Id}              msg= Login Person Id != ${Login_Person_Id}
     Should Contain                 ${row[6]}    (${Login_User_Name})            msg= Login User Name doesnt contain
     Should Be True                 ${row[7]} is None or '${row[7]}' != ''       msg= Note 
@@ -297,4 +297,97 @@ Validate DB After Cancel Preadmit Admit
     Should Be Equal As Integers    ${row[13]}   2                               msg= Status_AdmitHIS != 2
 
 
-        
+Validate DB After Admit Emergency Patient
+    [Arguments]    ${fileFormationId}
+
+    Connect To HIS Database
+
+    ${EMERGENCY_ADMIT_ID}=    Read State    EMERGENCY_ADMIT_ID
+    ${EMERGENCY_ADMIT_DATE}=    Read State    EMERGENCY_ADMIT_DATE
+    ${EMERGENCY_FILEFORMATION_ID}=    Read State    EMERGENCY_FILEFORMATION_ID
+    ${EMERGENCY_TITLE_TYPE}=    Read State    EMERGENCY_TITLE_TYPE
+    ${NATIONALCODE}=    Read State    NATIONALCODE
+    ${HOSPITALFILEID}=    Read State    HOSPITALFILEID
+    ${Login_Person_Id}=    Read State    Login_Person_Id
+    ${Login_Display_Name}=    Read State    Login_Display_Name
+    ${Login_User_Name}=     Read State    Login_User_Name
+    ${EMERGENCY_WARD_ID}=    Read State    EMERGENCY_WARD_ID
+    ${Diagnosis_Name}=    Read State    Diagnosis-Name
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    
+
+    ${query}=    Catenate 
+    ...    SELECT     dbo.Admit_HIS.ID_Admit, dbo.Admit_HIS.FileFormationID, dbo.Admit_HIS.AdmitDate, dbo.Admit_HIS.DischargeStep, dbo.Admit_HIS.WardIdIn, dbo.Admit_HIS.PatientClass, dbo.Admit_HIS.Priority, dbo.Admit_HIS.Diagnosis, dbo.Admit_HIS.InsuranceID, dbo.Admit_HIS.InsuranceExpDate, 
+    ...    dbo.Admit_HIS.Status_AdmitHIS, dbo.Admit_HIS.EmergencyNo, dbo.Patient_Movement.PreBedID, dbo.Patient_Movement.BedID, dbo.Tbl_Bed.ID_Bed, dbo.Tbl_Bed.BedStatus, dbo.Tbl_Bed.WardID, dbo.ICD_Madarek.ICDCode, 
+    ...    dbo.TotalCash.ClinicTitleType, dbo.TotalCash.CashType
+    ...    FROM        dbo.Admit_HIS INNER JOIN
+    ...    dbo.Patient_Movement ON dbo.Admit_HIS.ID_Admit = dbo.Patient_Movement.AdmitID INNER JOIN
+    ...    dbo.Tbl_Bed ON dbo.Patient_Movement.AdmitID = dbo.Tbl_Bed.AdmitID INNER JOIN
+    ...    dbo.ICD_Madarek ON dbo.Tbl_Bed.AdmitID = dbo.ICD_Madarek.AdmitID INNER JOIN
+    ...    dbo.TotalCash ON dbo.ICD_Madarek.AdmitID = dbo.TotalCash.AdmitID
+    ...    WHERE     dbo.Admit_HIS.ID_Admit = ${EMERGENCY_ADMIT_ID}
+
+    ${rows}=    Query    ${query}
+    Should Not Be Empty    ${rows}
+    ${row}=    Set Variable    ${rows[0]}
+    
+   
+    Should Be Equal As Integers    ${row[0]}    ${EMERGENCY_ADMIT_ID}           msg= EMERGENCY_ADMIT_ID is Null
+    Should Be Equal As Integers    ${row[1]}    ${EMERGENCY_FILEFORMATION_ID}   msg= FileFormationID != ${EMERGENCY_FILEFORMATION_ID}
+    Should Contain                 ${row[2]}    ${EMERGENCY_ADMIT_DATE}         msg= EMERGENCY ADMIT ID != ${EMERGENCY_ADMIT_DATE}
+    Should Be Equal As Integers    ${row[3]}    4                               msg= DischargeStep != 4 
+    Should Be Equal As Integers    ${row[4]}    ${EMERGENCY_WARD_ID}            msg= WARD In != ${EMERGENCY_WARD_ID}
+    Should Be Equal As Integers    ${row[5]}    0                               msg= PatientClass != 0
+    Should Be Equal As Integers    ${row[6]}    2                               msg= Priority !=2
+    Should Contain                 ${row[7]}    ${Diagnosis_Name}               msg= Diagnosis Name != ${Diagnosis_Name}
+    Should Be Equal As Integers    ${row[8]}    ${lastInsurance_ID}             msg= lastInsurance_ID Not Mach
+    Should Contain                 ${row[9]}    ${lastInsurance_ExpDate}        msg= DischargeStep != 55 
+    Should Be Equal As Integers    ${row[10]}   0                               msg= Status_AdmitHIS != 0
+    Should Be True                 ${row[11]}                                   msg= EmergencyNo Is Null
+    Should Be Equal As Integers    ${row[12]}   0                               msg= PreBedID != 0
+    Should Be Equal As Integers    ${row[13]}   ${EMERGEMCY_BED_ID}             msg= dbo.Patient_Movement.BedID Not Mach 
+    Should Be Equal As Integers    ${row[14]}   ${EMERGEMCY_BED_ID}             msg= Tbl_Bed.ID_Bed Not Mach 
+    Should Be Equal As Integers    ${row[15]}   1                               msg= BedStatus != 1 
+    Should Be Equal As Integers    ${row[16]}   ${EMERGENCY_WARD_ID}            msg= Tbl_Bed.WardID != ${EMERGENCY_WARD_ID}
+    Should Not Be Empty            ${row[17]}                                   msg= ICDCode Is Null 
+    Should Be Equal As Integers    ${row[18]}   249                             msg= ClinicTitleType != 249
+ 
+
+ Validate DB After Patient Admission Order From Cartable
+    [Arguments]    ${fileFormationId}
+
+    Connect To HIS Database
+
+    ${EMERGENCY_ADMIT_ID}=    Read State    EMERGENCY_ADMIT_ID
+    ${Send_To_Ward_Date}=    Read State    Send_To_Ward_Date
+    ${EMERGENCY_FILEFORMATION_ID}=    Read State    EMERGENCY_FILEFORMATION_ID
+    ${Send_To_Ward_Time}=    Read State    Send_To_Ward_Time
+    ${NATIONALCODE}=    Read State    NATIONALCODE
+    ${HOSPITALFILEID}=    Read State    HOSPITALFILEID
+    ${Login_Person_Id}=    Read State    Login_Person_Id
+    ${Login_Display_Name}=    Read State    Login_Display_Name
+    ${Login_User_Name}=     Read State    Login_User_Name
+    ${EMERGENCY_WARD_ID}=    Read State    EMERGENCY_WARD_ID
+    ${Diagnosis_Name}=    Read State    Diagnosis-Name
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
+    
+
+    ${query}=    Catenate 
+    ...    SELECT ID_Admit, DischargeStep, SendToWardDate, SendToWardTime
+    ...    FROM dbo.Admit_HIS
+    ...    WHERE ID_Admit = ${EMERGENCY_ADMIT_ID}
+
+    ${rows}=    Query    ${query}
+    Should Not Be Empty    ${rows}
+    ${row}=    Set Variable    ${rows[0]}
+    
+   
+    Should Be Equal As Integers    ${row[0]}    ${EMERGENCY_ADMIT_ID}           msg= EMERGENCY_ADMIT_ID is Null
+    Should Be Equal As Integers    ${row[1]}    5                               msg= DischargeStep != 5
+    Should Contain                 ${row[2]}    ${Send_To_Ward_Date}            msg= Send_To_Ward_Date Not Mach
+    Should Contain                 ${row[3]}    ${Send_To_Ward_Time}            msg= Send_To_Ward_Time Not Mach
+    

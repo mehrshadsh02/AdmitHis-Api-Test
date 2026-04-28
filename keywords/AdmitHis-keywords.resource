@@ -6,6 +6,7 @@ Library           SeleniumLibrary
 Library           JSONLibrary
 Library           DatabaseLibrary
 Library           pymssql
+Library           jdatetime
 
 Resource          ../resources/AdmitHis-variables.resource
 
@@ -32,7 +33,7 @@ Disable Screenshots
 # َAdmit_His  
 Start Browser AdmitHis With Token
     [Documentation]    باز کردن کروم + تزریق کوکی token
-    Open Browser    ${AdmitHis_App_URL}    chrome
+    Open Browser    ${AdmitHis_App_URL}    chrome     executable_path=C:/chromedriver.exe
     Maximize Browser Window
     Add Cookie    token    ${COOKIE_TOKEN}
     Reload Page
@@ -276,7 +277,7 @@ Read State
     RETURN    ${value}
 
     
-# Get Empty Bed From API
+Get Empty Bed From API
     [Documentation]    برگردوندن یک تخت خالی معتبر
 
     Create AdmitHIS Session
@@ -302,4 +303,8 @@ Read State
 
     RETURN    ${bed_id}
 
+Convert Jalali To Gregorian
+    [Arguments]    ${jalali_date}
+    ${gdate}=    Evaluate    __import__('jdatetime').datetime.strptime("${jalali_date}", "%Y/%m/%d").togregorian().strftime("%Y/%m/%d")
+    RETURN    ${gdate}
 
