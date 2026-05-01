@@ -76,6 +76,10 @@ Suite Setup       Create All Sessions
     [Documentation]    دریافت اطلاعات بیمار با استفاده از شماره الکترونیکی
     [Tags]    API_Patient    METHOD_POST    
 
+    Run Keyword If    '${FileFormationID}'=='null' 
+    ...    fail   
+    ...    FileFormationID Is NULL !!!!!    
+
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
@@ -277,12 +281,15 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
 
-    ${resp}=    GET On Session    HIS    /api/GeneralVariables/GetStandardVariables
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/GeneralVariables/GetStandardVariables
     ...    headers=&{headers}
-    Run Keyword If    '${resp}'=='None'    Return From Keyword
+
+    Run Keyword If    '${resp}'=='None'    
+    ...    Return From Keyword
 
     Log To Console    Status: ${resp.status_code}
-    #Log To Console    Body length: ${resp.content.__len__()}
 
     Should Be Equal As Integers    ${resp.status_code}    200
 
@@ -307,7 +314,6 @@ Suite Setup       Create All Sessions
     Run Keyword If    '${resp}'=='None'    Return From Keyword
 
     Log To Console    Status: ${resp.status_code}
-    #Log To Console    Body length: ${resp.content.__len__()}
 
     Should Be Equal As Integers    ${resp.status_code}    200
 
@@ -329,9 +335,11 @@ Suite Setup       Create All Sessions
     Write State    Diagnosis-ID-Edit    ${FOUND_Diagnosis_ID-Edit}
     Write State    Diagnosis-Name-Edit   ${FOUND_Diagnosis_Name-Edit}
     
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 
-007-Get All Names Inpatient Wards
+007-Get All Inpatient Wards Names
     [Documentation]    دریافت لیست بخش‌های بستری
     [Tags]    API_GeneralVariables    METHOD_GET
 
@@ -355,13 +363,12 @@ Suite Setup       Create All Sessions
     Log To Console    🏥 Inpatient wards count: ${count}
     Should Be True    ${count} > 0
 
-    # ✅ Schema validation روی اولین آیتم
     Should Contain    ${json[0]}    name
     Should Contain    ${json[0]}    systemCodeId
     Should Contain    ${json[0]}    standardVariableId
     Should Be Equal As Integers    ${json[0]["systemCodeId"]}    132
 
-    # ✅ بررسی وجود حداقل یک بخش با ظرفیت خالی
+    #  بررسی وجود حداقل یک بخش با ظرفیت خالی
     ${HAS_AVAILABLE_WARD}=    Set Variable    ${False}
 
     FOR    ${item}    IN    @{json}
@@ -397,6 +404,9 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ INPATIONT_WARD_NAME saved: ${FOUND_INPATIONT_WARD_NAME}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 
 008-Admit Configuration
     [Documentation]    گرفتن فایل confing در admithis
@@ -424,6 +434,9 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ PASS | Hospitalization Causes Loaded | Count=${count}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 
 009-Get Person From Ditas
     [Documentation]    دریافت اطلاعات شخص از ديتاس با کدملی
@@ -431,7 +444,7 @@ Suite Setup       Create All Sessions
         
     Run Keyword If    
     ...    '${nationalCode}'=='null'
-    ...    Fail    ❌ nationalCode is null | API: GetPersonFromDitas | nationalCode=${nationalCode}
+    ...    Fail    National Code Is Null !!!
 
     &{headers}=    Create Dictionary
     ...    Accept=application/json
@@ -487,6 +500,8 @@ Suite Setup       Create All Sessions
             ${FOUND_lastInsurBox_SepasID}=   Evaluate    $json['data']["lastInsuranceKind"]
             ${FOUND_sexId}=                  Evaluate    $json['data']['fileFormation']["sex"]
             ${FOUND_inquiryUId}=             Evaluate    $json['data']['hisAdmitDto']["inquiryUId"]
+            ${FOUND_lastInsurance_ExpDate}=    Evaluate     $json['data']['hisAdmitDto']["insuranceExpDate"]
+            ${FOUND_lastInsurance_ID}=    Evaluate     $json['data']['hisAdmitDto']["insuranceID"]
             Exit For Loop
         END
     END
@@ -509,13 +524,23 @@ Suite Setup       Create All Sessions
     Write State    INQUIRYUID    ${FOUND_inquiryUId}
     Write State    HOSPITALFILEID    ${FOUND_Hospital_FileID}  
     Write State    NATIONALCODE      ${FOUND_National_Code}
+    Write State    lastInsurance_ID        ${FOUND_lastInsurance_ID}
+    Write State    lastInsurance_ExpDate        ${FOUND_lastInsurance_ExpDate}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
        
 
-
-
-010-Get All Insurance Kind
+010-Get List of Insurance Funds
     [Documentation]    دریافت لیست صندوق های بیمه بر اساس sepasid بیمه پایه
     [Tags]    API_GeneralVariables  METHOD_Get  Insure
+
+    ${lastInsurance_ID}=   Read State    lastInsurance_ID
+
+    Run Keyword If    
+    ...    ${lastInsurance_ID} ==1
+    ...    Fail    
+    ...    Bimeh Azad !!!
 
     &{headers}=    Create Dictionary
     ...    Accept=application/json, text/plain, */*
@@ -524,7 +549,7 @@ Suite Setup       Create All Sessions
 
     ${resp}=    GET On Session
     ...    HIS
-    ...    url=/api/GeneralVariables/GetAllInsuranceKind?sepasId=6
+    ...    url=/api/GeneralVariables/GetAllInsuranceKind?sepasId=${lastInsurance_ID}
     ...    headers=&{headers}
     Run Keyword If    '${resp}'=='None'    Return From Keyword
 
@@ -532,6 +557,9 @@ Suite Setup       Create All Sessions
 
     ${json}=    To Json    ${resp.content}
     Log To Console    ${json}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 011-Get All Bed Number
     [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 201 و 224
@@ -630,6 +658,9 @@ Suite Setup       Create All Sessions
     Write State    INPATIONT_BED_NO_Edit    ${INPATIONT_BED_NO_EDIT}
     Log To Console    💾 BED_ID saved to state: ${SELECTED_INPATIONT_BED_ID}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 012-Get Doctors By Ward Id
     [Documentation]     تخت های خالی بر اساس id بخش مثلا بخش 201
     [Tags]    API_GeneralVariables  METHOD_GET  DOCTORS_LIST
@@ -694,6 +725,9 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ PASS | GetDoctorsByWard | Count=${count} doctors | WardId=${wardId}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 
 013-Get Emergency Wards
     [Documentation]    نام بخش های اورژانس تحت نظر 
@@ -726,7 +760,10 @@ Suite Setup       Create All Sessions
     ...    name=${EMERGENCY_WARD_NAME}
 
     Write State    EMERGENCY_WARD_ID      ${EMERGENCY_WARD_ID}
-    Write State    EMERGENCY_WARD_NAME    ${EMERGENCY_WARD_NAME}     
+    Write State    EMERGENCY_WARD_NAME    ${EMERGENCY_WARD_NAME}  
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n   
 
 014-Get All Bed Number Of Emengemcy Ward
     [Documentation]   دریافت لیست تخت های خالی اورژانس تحت نظر 
@@ -794,7 +831,11 @@ Suite Setup       Create All Sessions
     # ✅ ذخیره state برای تست‌های بعدی (ChangeToAdmit)
     Write State    EMERGEMCY_BED_ID    ${SELECTED_EMERGEMCY_BED_ID}
     Write State    EMERGEMCY_BED_NO    ${SELECTED_EMERGEMCY_BED_NO}
+
     Log To Console    💾 EMERGEMCY_BED_ID saved to state: ${SELECTED_EMERGEMCY_BED_ID}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 015-Get All City
     [Documentation]    دریافت لیست کامل شهر ها
@@ -848,6 +889,10 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ PASS | city validated | ID=${target[0]["iD_CityBase"]}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
+
 016-Get All Marital Status
     [Documentation]    دریافت لیست وضعیت تاهل
     [Tags]    API_GeneralVariables    METHOD_GET  
@@ -900,6 +945,10 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ PASS | Marital Status validated | ID=${target[0]["iD_Sepas"]}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
+
 017-Get All Nationality
     [Documentation]    دریافت لیست ملیت ها
     [Tags]    API_GeneralVariables    METHOD_GET  
@@ -951,6 +1000,9 @@ Suite Setup       Create All Sessions
     Write State    Nationality_Name    ${Nationality_Name}
 
     Log To Console    ✅ PASS | Marital Status validated | ID=${target[0]["iD_GVariable"]}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 018-Get All Insurance
     [Documentation]    دریافت لیست بیمه ها 
@@ -1053,6 +1105,9 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ PASS | Relationship validated | ID=${target[0]["relationshipName"]}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 
 020-Get All Type Admission
     [Documentation]    دریافت لیست نوع پذیرش
@@ -1105,6 +1160,9 @@ Suite Setup       Create All Sessions
     Write State    Emergency_Admission_Type_Sepas    ${Emergency_Admission_Type_Sepas}
     Write State    Emergency_Admission_Type_Name    ${Emergency_Admission_Type_Name}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 
 021-Get All Doctors
     [Documentation]    دریافت لیست پزشکان
@@ -1125,36 +1183,13 @@ Suite Setup       Create All Sessions
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API: GetAllDoctors | Expected: 200 | Actual: ${resp.status_code}
+    ...    msg=❌ \n WRONG STATUS \n API: GetAllDoctors \n Expected: 200 \n Actual: ${resp.status_code}
 
     ${json}=    Set Variable    ${resp.json()}
 
-    # ${target}=    Evaluate    [x for x in $json if x["iD_Sepas"]==370]
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    iD_Sepas
-    # ...    msg=❌ SCHEMA ERROR | Missing key: iD_Sepas | API: GetAllDoctors
-
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    name
-    # ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllDoctors
-
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    sepas_Code
-    # ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetAllDoctors
-
-    # ${count}=    Get Length    ${json}
-    # Log To Console    ✅ PASS | GetAllDoctors Loaded Successfully | Total Type Admission : ${count}
-
-    # ${Inpationt_Admission_Type_Sepas}=           Set Variable    ${target_inpationt[0]["iD_Sepas"]}
-    # ${Inpationt_Admission_Type_Name}=           Set Variable    ${target_inpationt[0]["name"]}
-    # ${Emergency_Admission_Type_Sepas}=           Set Variable    ${target_emergency[0]["iD_Sepas"]}
-    # ${Emergency_Admission_Type_Name}=           Set Variable    ${target_emergency[0]["name"]}
-
-    # Write State    Inpationt_Admission_Type_Sepas    ${Inpationt_Admission_Type_Sepas}
-    # Write State    Inpationt_Admission_Type_Name    ${Inpationt_Admission_Type_Name}
-    # Write State    Emergency_Admission_Type_Sepas    ${Emergency_Admission_Type_Sepas}
-    # Write State    Emergency_Admission_Type_Name    ${Emergency_Admission_Type_Name}
 
 022-Get All Doctor 
     [Documentation]    دریافت لیست پزشکان
@@ -1174,44 +1209,21 @@ Suite Setup       Create All Sessions
     Log To Console    BODY   : ${resp.text}
 
     Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API: GetAllDoctors | Server did not respond (Timeout / Network)
+    ...    Fail    ❌ NO RESPONSE | API: GetAllDoctor | Server did not respond (Timeout / Network)
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API: GetAllDoctors | Expected: 200 | Actual: ${resp.status_code}
+    ...    msg=❌ WRONG STATUS | API: GetAllDoctor | Expected: 200 | Actual: ${resp.status_code}
 
     ${json}=    Set Variable    ${resp.json()}
 
     Should Not Be Empty   
     ...    ${json}    
-    ...    msg=❌ API: GetAllTranslators | Body Is Empty | Body : ${json} 
+    ...    msg=❌ \n API: GetAllDoctor \n Body Is Empty \n Body : ${json} \n Response: ${resp.status_code}
 
-    # ${target}=    Evaluate    [x for x in $json if x["iD_Sepas"]==370]
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    iD_Sepas
-    # ...    msg=❌ SCHEMA ERROR | Missing key: iD_Sepas | API: GetAllDoctors
-
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    name
-    # ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllDoctors
-
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    sepas_Code
-    # ...    msg=❌ SCHEMA ERROR | Missing key: sepas_Code | API: GetAllDoctors
-
-    # ${count}=    Get Length    ${json}
-    # Log To Console    ✅ PASS | GetAllDoctors Loaded Successfully | Total Type Admission : ${count}
-
-    # ${Inpationt_Admission_Type_Sepas}=           Set Variable    ${target_inpationt[0]["iD_Sepas"]}
-    # ${Inpationt_Admission_Type_Name}=           Set Variable    ${target_inpationt[0]["name"]}
-    # ${Emergency_Admission_Type_Sepas}=           Set Variable    ${target_emergency[0]["iD_Sepas"]}
-    # ${Emergency_Admission_Type_Name}=           Set Variable    ${target_emergency[0]["name"]}
-
-    # Write State    Inpationt_Admission_Type_Sepas    ${Inpationt_Admission_Type_Sepas}
-    # Write State    Inpationt_Admission_Type_Name    ${Inpationt_Admission_Type_Name}
-    # Write State    Emergency_Admission_Type_Sepas    ${Emergency_Admission_Type_Sepas}
-    # Write State    Emergency_Admission_Type_Name    ${Emergency_Admission_Type_Name}
 
 023-Get All Supplementary Insurance
     [Documentation]    دریافت لیست بیمه های تکمیلی
@@ -1236,7 +1248,7 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
-    ${target}=    Evaluate    [x for x in $json if x["iD_Insurance2"]==19]
+    ${target}=    Evaluate    [x for x in $json if x["sepasID"]==98]
 
     Dictionary Should Contain Key
     ...    ${json[0]}    iD_Insurance2
@@ -1257,16 +1269,19 @@ Suite Setup       Create All Sessions
     ...    ${target}
     ...    msg=❌ DATA ERROR | iD_Insurance2 '19' not found in response | API: GetAllSupplementaryInsurance
 
-    ${iD_Insurance2}=           Set Variable    ${target[0]["iD_Insurance2"]}
+    ${iD_Insurance2}=           Set Variable    ${target[0]["sepasID"]}
     ${Name_Insurance2}=           Set Variable    ${target[0]["name"]}
 
-    Write State    iD_Insurance2    ${iD_Insurance2}
-    Write State    Name_Insurance2    ${Name_Insurance2}
+    Write State    Insurance2_ID    ${iD_Insurance2}
+    Write State    Insurance2_Name    ${Name_Insurance2}
 
     Log To Console    ✅ PASS | Name_Insurance2 validated | ID=${target[0]["name"]}
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 024-Get All Referral Centers
-    [Documentation]    دریافت لیست بیمه های تکمیلی
+    [Documentation]    دریافت مراکز ارجاع 
     [Tags]    API_GeneralVariables    METHOD_GET  
 
     ${headers}=    Create Dictionary
@@ -1280,46 +1295,20 @@ Suite Setup       Create All Sessions
     ...    headers=${headers}
 
     Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API: GetAllSupplementaryInsurance | Server did not respond (Timeout / Network)
+    ...    Fail    ❌ NO RESPONSE | API: GetAllReferralCenters | Server did not respond (Timeout / Network)
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API: GetAllSupplementaryInsurance | Expected: 200 | Actual: ${resp.status_code}
+    ...    msg=❌ WRONG STATUS | API: GetAllReferralCenters | Expected: 200 | Actual: ${resp.status_code}
 
     ${json}=    Set Variable    ${resp.json()}
 
     Should Not Be Empty   
     ...    ${json}    
-    ...    msg=❌ API: GetAllTranslators | Body Is Empty | Body : ${json} 
+    ...    msg=❌ \n API: GetAllReferralCenters \n Body Is Empty \n Body : ${json} 
 
-    # ${target}=    Evaluate    [x for x in $json if x["iD_Insurance2"]==19]
-
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    iD_Insurance2
-    # ...    msg=❌ SCHEMA ERROR | Missing key: iD_Insurance2 | API: GetAllSupplementaryInsurance
-
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    name
-    # ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllSupplementaryInsurance
-
-    # Dictionary Should Contain Key
-    # ...    ${json[0]}    sepasID
-    # ...    msg=❌ SCHEMA ERROR | Missing key: sepasID | API: GetAllSupplementaryInsurance
-
-    # ${count}=    Get Length    ${json}
-    # Log To Console    ✅ PASS | GetAllSupplementaryInsurance Loaded Successfully | Total Insurance2 : ${count}
-
-    # Should Not Be Empty
-    # ...    ${target}
-    # ...    msg=❌ DATA ERROR | iD_Insurance2 '19' not found in response | API: GetAllSupplementaryInsurance
-
-    # ${iD_Insurance2}=           Set Variable    ${target[0]["iD_Insurance2"]}
-    # ${Name_Insurance2}=           Set Variable    ${target[0]["name"]}
-
-    # Write State    iD_Insurance2    ${iD_Insurance2}
-    # Write State    Name_Insurance2    ${Name_Insurance2}
-
-    # Log To Console    ✅ PASS | Name_Insurance2 validated | ID=${target[0]["name"]}
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 025-Get All Type Treatment For Certain Centers
     [Documentation]   دریافت همه انواع خدمات درمانی برای مراکز مشخص
@@ -1340,9 +1329,12 @@ Suite Setup       Create All Sessions
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API: GetAllTypeTreatmentForCertainCenters | Expected: 200 | Actual: ${resp.status_code}
+    ...    msg=❌ \n WRONG STATUS \n API: GetAllTypeTreatmentForCertainCenters \n Expected: 200 \n Actual: ${resp.status_code}
 
     ${json}=    Set Variable    ${resp.json()}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 026-Get All Physician Special Centers
     [Documentation]  دریافت تمام مراکز تخصصی پزشکان
@@ -1363,9 +1355,12 @@ Suite Setup       Create All Sessions
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API: GetAllPhysicianSpecialCenters | Expected: 200 | Actual: ${resp.status_code}
+    ...    msg=❌ \n WRONG STATUS \n API: GetAllPhysicianSpecialCenters \n Expected: 200 \n Actual: ${resp.status_code}
 
     ${json}=    Set Variable    ${resp.json()}
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 027-Get All Translators
     [Documentation]   دریافت همه مترجمان
@@ -1392,7 +1387,10 @@ Suite Setup       Create All Sessions
 
     Should Not Be Empty   
     ...    ${json}    
-    ...    msg=❌ API: GetAllTranslators | Body Is Empty | Body : ${json} 
+    ...    msg=❌ \n API: GetAllTranslators \n Body Is Empty \n Body : ${json} 
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 
 028-Get All Education
@@ -1437,11 +1435,11 @@ Suite Setup       Create All Sessions
     ...    headers=${headers}
 
     Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API: GetAllRoomType | Server did not respond (Timeout / Network)
+    ...    Fail    ❌ \n NO RESPONSE \n API: GetAllRoomType \n Server did not respond (Timeout / Network)
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API: GetAllRoomType | Expected: 200 | Actual: ${resp.status_code}
+    ...    msg=❌ \n WRONG STATUS \n API: GetAllRoomType \n Expected: 200 \n Actual: ${resp.status_code}
 
     ${json}=    Set Variable    ${resp.json()}
 
@@ -1449,22 +1447,25 @@ Suite Setup       Create All Sessions
 
     Dictionary Should Contain Key
     ...    ${json[0]}    ID_RoomType
-    ...    msg=❌ SCHEMA ERROR | Missing key: ID_RoomType | API: GetAllRoomType
+    ...    msg=❌ SCHEMA ERROR \n Missing key: ID_RoomType \n API: GetAllRoomType
 
     Dictionary Should Contain Key
     ...    ${json[0]}    RoomTypeName
-    ...    msg=❌ SCHEMA ERROR | Missing key: RoomTypeName | API: GetAllRoomType
+    ...    msg=❌ SCHEMA ERROR \n Missing key: RoomTypeName \n API: GetAllRoomType
 
     Dictionary Should Contain Key
     ...    ${json[0]}    Status_RoomType
-    ...    msg=❌ SCHEMA ERROR | Missing key: Status_RoomType | API: GetAllRoomType
+    ...    msg=❌ \n SCHEMA ERROR \n Missing key: Status_RoomType \n API: GetAllRoomType
 
     ${count}=    Get Length    ${json}
-    Log To Console    ✅ PASS | GetAllRoomType Loaded Successfully | Total Insurance2 : ${count}
+    Log To Console    ✅ PASS \n GetAllRoomType Loaded Successfully \n Total Insurance2 : ${count}
 
     Should Not Be Empty
     ...    ${target}
-    ...    msg=❌ DATA ERROR | RoomType not found in response | API: GetAllRoomType
+    ...    msg=❌ \n DATA ERROR \n RoomType not found in response \n API: GetAllRoomType
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 
 030-Get All State
@@ -1482,11 +1483,11 @@ Suite Setup       Create All Sessions
     ...    headers=${headers}
 
     Run Keyword If    '${resp}'=='None'
-    ...    Fail    ❌ NO RESPONSE | API: GetAllState | Server did not respond (Timeout / Network)
+    ...    Fail    ❌ \n NO RESPONSE \n API: GetAllState \n Server did not respond (Timeout / Network)
 
     Should Be Equal As Integers
     ...    ${resp.status_code}    200
-    ...    msg=❌ WRONG STATUS | API: GetAllState | Expected: 200 | Actual: ${resp.status_code}
+    ...    msg=❌ \n WRONG STATUS \n API: GetAllState \n Expected: 200 \n Actual: ${resp.status_code}
 
     ${json}=    Set Variable    ${resp.json()}
 
@@ -1494,27 +1495,30 @@ Suite Setup       Create All Sessions
 
     Dictionary Should Contain Key
     ...    ${json[0]}    iD_State
-    ...    msg=❌ SCHEMA ERROR | Missing key: iD_State | API: GetAllState
+    ...    msg=❌ \n SCHEMA ERROR \n Missing key: iD_State \n API: GetAllState
 
     Dictionary Should Contain Key
     ...    ${json[0]}    code
-    ...    msg=❌ SCHEMA ERROR | Missing key: code | API: GetAllState
+    ...    msg=❌ \n SCHEMA ERROR \n Missing key: code \n API: GetAllState
 
     Dictionary Should Contain Key
     ...    ${json[0]}    name
-    ...    msg=❌ SCHEMA ERROR | Missing key: name | API: GetAllState
+    ...    msg=❌ \n SCHEMA ERROR \n Missing key: name \n API: GetAllState
 
     ${count}=    
     ...    Get Length    ${json}
-    Log To Console    ✅ PASS | All State Loaded Successfully | Total State : ${count}
+    Log To Console    ✅ \n PASS \n All State Loaded Successfully \n Total State : ${count}
 
     Should Not Be Empty
     ...    ${json}
-    ...    msg=❌ DATA ERROR | State not found in response | API: GetAllState
+    ...    msg=❌ \n DATA ERROR \n State not found in response \n API: GetAllState
+
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
 
 
 031-Get Genders
-    [Documentation]    دریافت لیست نام تمام استان ها 
+    [Documentation]    دریافت لیست جنسیت ها
     [Tags]    API_GeneralVariables    METHOD_GET  
 
     ${headers}=    Create Dictionary
@@ -1558,6 +1562,9 @@ Suite Setup       Create All Sessions
     ...    ${json}
     ...    msg=❌ DATA ERROR | Genders not found in response | API: GetGenders
 
+    Set Test Message
+    ...    Response: ${resp.status_code}\n
+
 
 032-Check Filing Doubling
     [Documentation]    بررسی تکراری بودن پذیرش بیمار بر اساس اطلاعات هویتی
@@ -1569,15 +1576,17 @@ Suite Setup       Create All Sessions
     ${fatherName}=     Read State    FATHERNAME
 
     &{headers}=    Create Dictionary
-    ...    Accept=application/json, text/plain, */*
+    ...    Accept=application/json, text/plain, */* 
+    ...    Content-Type=application/json
     ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
+    ...    Cookie=${COOKIE_TOKEN} 
+    ...    charset=utf-8
 
     &{checkDto}=    Create Dictionary
     ...    nationalCode=${nationalCode}
-    ...    fatherName=${fatherName}
     ...    firstName=${firstname}
     ...    lastName=${lastname}
+    ...    fatherName=${fatherName}
 
     &{body}=    Create Dictionary
     ...    checkDoublingDto=&{checkDto}
@@ -1610,6 +1619,9 @@ Suite Setup       Create All Sessions
         Log To Console
         ...    ✅ PASS | CheckFilingDoubling | HTTP 200 | Business OK | Message='${msg}'
 
+        Set Test Message
+        ...    Response: ${resp.status_code}\n 
+
     ELSE IF    ${http_status} == 500
         ${json}=    Set Variable    ${resp.json()}
         ${raw_msg}=    Set Variable    ${json["message"]}
@@ -1626,14 +1638,16 @@ Suite Setup       Create All Sessions
         ...    | Architecture Violation
         ...    | Message="${raw_msg}"
 
-        Log To Console    ⚠️ PASS (BUSINESS) | ${log_msg}
-        Log    ${log_msg}    WARN
-        Set Test Message    ${log_msg}
+        Fail
+        ...    ❌ FAIL \n CheckFilingDoubling \n Unexpected HTTP Status=${http_status} \n  Patient already admitted !!!
+
     ELSE
         Fail
         ...    ❌ FAIL | CheckFilingDoubling
         ...    | Unexpected HTTP Status=${http_status}
     END
+
+    
 
 
 
