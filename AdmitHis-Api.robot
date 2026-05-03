@@ -1580,7 +1580,7 @@ Suite Setup       Create All Sessions
     ...    Content-Type=application/json
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN} 
-    ...    charset=utf-8
+    ...    Accept-Language=en
 
     &{checkDto}=    Create Dictionary
     ...    nationalCode=${nationalCode}
@@ -1660,11 +1660,13 @@ Suite Setup       Create All Sessions
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
-    ...    Accept=application/json
+    ...    Accept=application/json 
+    ...    Content-Type=application/json
+    ...    Accept-Language=en
 
     &{body}=    Create Dictionary
+    ...    fileFormationId=0
     ...    nationalCode=${nationalCode}
-    ...    fileformationId=0
 
     ${resp}=    POST On Session
     ...    HIS
@@ -1679,19 +1681,37 @@ Suite Setup       Create All Sessions
     ...    ${resp.status_code}    200
     ...    msg=❌ WRONG STATUS | API:CheckPatientDebt | Expected:200 | Actual:${resp.status_code}
 
-    ${json}=    To Json    ${resp.content}
-    Log To Console    ✅ PASS | Patient Debt Checked | Response=${json}
+    ${json}=    Evaluate    $resp.json()
+    Log    ${resp.json()}
 
-034-Add Filing Preadmit
+    ${extra_msg}=    Set Variable    ${json['amount']}
+
+    IF    ${extra_msg} == 0.0
+    
+        ${json}=    Evaluate    $resp.json()
+
+        ${STATUS}=    Set Variable    OK
+
+        Set Test Message
+        ...    Response: ${resp.status_code}\n Message: ${json['message']} \n ${STATUS}
+
+    ELSE IF    ${extra_msg} != 0.0
+         ${json}=    Evaluate    $resp.json()
+
+        ${STATUS}=    Set Variable    ⚠️ Patient has debt: ${json['amount']}
+
+        Set Test Message
+        ...    Response: ${resp.status_code}\n Message: ${json['message']} \n ${STATUS}
+
+    END
+
+
+034-Add Filing Preadmit Resarve
     [Documentation]   پذیرش بیمار preadmit
     [Tags]    API_Filing    METHOD_POST    preadmit
 
     ${ward_value}=      Read State    INPATIONT_WARD_NAME
     ${nationalCode}=      Read State    NATIONALCODE
-    ${EMERGENCY_ward_NAME}=      Read State    EMERGENCY_WARD_NAME
-    ${EMERGENCY_WARD_ID}=      Read State    EMERGENCY_WARD_ID
-    ${EMERGEMCY_BED_ID}=      Read State    EMERGEMCY_BED_ID
-    ${EMERGEMCY_BED_NO}=      Read State    EMERGEMCY_BED_NO
     ${HOSPITALFILEID}=      Read State    HOSPITALFILEID
     ${NATIONALCODE}=      Read State    NATIONALCODE
     ${FIRSTNAME}=      Read State    FIRSTNAME
@@ -1920,7 +1940,10 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
 
-035-Validate Database After Preadmit  
+    Set Test Message
+    ...    Response: ${resp.status_code}\n Patient Admit.
+
+035-Validate Database After Preadmit Rezerve 
     [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
     [Tags]    DB-Test    preadmit
 
@@ -1929,6 +1952,9 @@ Suite Setup       Create All Sessions
     Validate AdmitHIS After Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
     Validate Pationt-Movement After Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
     Validate Tbl-Bed After Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n Message: Validate Database After Preadmit Rezerve Pass
 
 
 036-Search PreAdmit patiant 
