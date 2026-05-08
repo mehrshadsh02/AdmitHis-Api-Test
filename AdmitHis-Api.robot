@@ -84,6 +84,7 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
 
     &{body}=    Create Dictionary
     ...    name=
@@ -1008,6 +1009,8 @@ Suite Setup       Create All Sessions
     [Documentation]    دریافت لیست بیمه ها 
     [Tags]    API_GeneralVariables    METHOD_GET  
 
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
+
     ${headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
@@ -1028,7 +1031,7 @@ Suite Setup       Create All Sessions
     ${json}=    Set Variable    ${resp.json()}
 
     ${target_Azad}=    Evaluate    [x for x in $json if x["standardVariableId"]==1]
-    ${target_Tamin}=    Evaluate    [x for x in $json if x["standardVariableId"]==6]
+    ${target_Patient}=    Evaluate    [x for x in $json if x["standardVariableId"]==${lastInsurance_ID}]
 
     Dictionary Should Contain Key
     ...    ${json[0]}    standardVariableId
@@ -1047,13 +1050,13 @@ Suite Setup       Create All Sessions
 
     ${Azad_Insurance_Sepas_ID}=    Set Variable    ${target_Azad[0]["sepasId"]}
     ${Azad_Insurance_name}=    Set Variable    ${target_Azad[0]["name"]}
-    ${Tamin_Insurance_Sepas_ID}=    Set Variable    ${target_Tamin[0]["sepasId"]}
-    ${Tamin_Insurance_name}=    Set Variable    ${target_Tamin[0]["name"]}
+    ${Patient_Insurance_Sepas_ID}=    Set Variable    ${target_Patient[0]["sepasId"]}
+    ${Patient_Insurance_name}=    Set Variable    ${target_Patient[0]["name"]}
 
     Write State    Azad_Insurance_Sepas_ID      ${Azad_Insurance_Sepas_ID}
     Write State    Azad_Insurance_name          ${Azad_Insurance_name}
-    Write State    Tamin_Insurance_Sepas_ID     ${Tamin_Insurance_Sepas_ID}
-    Write State    Tamin_Insurance_name         ${Tamin_Insurance_name}
+    Write State    Patient_Insurance_Sepas_ID   ${Patient_Insurance_Sepas_ID}
+    Write State    Patient_Insurance_name       ${Patient_Insurance_name}
 
 019-Get All Relationship
     [Documentation]    دریافت لیست نسبیت ها
@@ -1696,7 +1699,7 @@ Suite Setup       Create All Sessions
         ...    Response: ${resp.status_code}\n Message: ${json['message']} \n ${STATUS}
 
     ELSE IF    ${extra_msg} != 0.0
-         ${json}=    Evaluate    $resp.json()
+        ${json}=    Evaluate    $resp.json()
 
         ${STATUS}=    Set Variable    ⚠️ Patient has debt: ${json['amount']}
 
@@ -1957,16 +1960,21 @@ Suite Setup       Create All Sessions
     ...    Response: 200 \n Message: Validate Database After Preadmit Rezerve Pass
 
 
-036-Search PreAdmit patiant 
+036-Search PreAdmit Patient 
     [Documentation]   جستجوی بیماران preadmit
     [Tags]    API_Patient    METHOD_POST  priadmit 
 
     ${nationalCode}=      Read State    NATIONALCODE
+    ${PREADMIT_ADMIT_ID}=      Read State    PREADMIT_ADMIT_ID
+    ${Date_From_Search}=    Convert Jalali To Gregorian    ${Date_From_Search}
+    ${Date_To_Search}=    Convert Jalali To Gregorian    ${Date_To_Search}
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
-    ...    Accept=application/json
+    ...    Accept=application/json 
+    ...    Content-Type=application/json
+    ...    Accept-Language=en
     
     ${body}=     Create Dictionary
     ...    firstName=
@@ -1980,8 +1988,8 @@ Suite Setup       Create All Sessions
     ...    admitId=0
     ...    electronicNumber=0
     ...    hospitalNumber=0
-    ...    dateFrom=2026/01/01
-    ...    dateTo=2026/12/12
+    ...    dateFrom=${Date_From_Search}
+    ...    dateTo=${Date_To_Search}
     ...    status=0
 
     ${resp}=    POST On Session
@@ -1995,8 +2003,20 @@ Suite Setup       Create All Sessions
     ${json}=    Set Variable    ${resp.json()}
     Should Be True    isinstance($json, list)
 
+    ${PREADMIT_ADMIT_ID}=    Convert To Integer    ${PREADMIT_ADMIT_ID}
+    # ${json}=    Set Variable    ${resp.json()}
 
-037-Edit Filing Preadmit
+    ${matched}=    Evaluate    [item for item in $json if int(item['admitID']) == $PREADMIT_ADMIT_ID]
+
+    Should Not Be Empty    ${matched}    msg=❌ AdmitID not found
+
+    Should Be True    ${matched[0]['isPreAdmit']}    msg=❌ isPreAdmit is not Trued
+
+    Set Test Message
+    ...    Response: 200 \n   
+
+
+037-Edit Filing Preadmit Rezerve
     [Documentation]   ویرایش بیمار preadmit
     [Tags]    API_Filing    METHOD_POST    preadmit
 
@@ -2049,7 +2069,7 @@ Suite Setup       Create All Sessions
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
-    ...    charset=utf-8
+    ...    Accept-Language=en
 
     ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
@@ -2181,9 +2201,9 @@ Suite Setup       Create All Sessions
     ...    husbandLastName=
     ...    husbandBirthDate=
     ...    husbandIdentityNo=
-    ...    husbandIssuePlaceID=363
+    ...    husbandIssuePlaceID=0
     ...    husbandJobID=0
-    ...    husbandNationalityID=912
+    ...    husbandNationalityID=0
     ...    husbandPassportID=
     ...    tourismId=0
     ...    isPregnant=false
@@ -2231,7 +2251,10 @@ Suite Setup       Create All Sessions
     Should Be Equal As Integers    ${json["statusCode"]}    200
     Should Be Equal    ${json["message"]}    Success
 
-038-Validate DataBase After Edit Preadmit
+    Set Test Message
+    ...    Response: 200 \n
+
+038-Validate DataBase After Edit Preadmit Rezerve
     [Documentation]   تست دیتابیس بعد از ویرایش  پذیرش Preafmit
     [Tags]    DB-Test    preadmit
 
@@ -2240,8 +2263,11 @@ Suite Setup       Create All Sessions
     
     Validate DB After Edit Preadmit    ${FOUND_PREADMIT_FILEFORMATION_ID}
 
+    Set Test Message
+    ...    Response: 200 \n
 
-039-Change To Admit From Preadmit
+
+039-Change Preadmit Rezerve To Admit  
     [Documentation]  تبدیل preadmit به بستری
     [Tags]    API_Filing    METHOD_POST  priadmit 
 
@@ -2254,6 +2280,7 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=en
     
     &{preAdmitDto}=    Create Dictionary
     ...    admitId=${PREADMIT_ADMIT_ID}
@@ -2272,14 +2299,22 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
-040-Validate DataBase After Change Preadmit To Admit
+    Set Test Message
+    ...    Response: 200 \n
+
+040-Validate DataBase After Change Preadmit Rezerve To Admit And Cancel
     [Documentation]   تست دیتابیس بعد از رزرو preadmit
     [Tags]    DB-Test    preadmit
 
     ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
 
     
-    Validate DateBase After Change Preadmit To Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+    Validate DateBase After Change Preadmit Rezerve To Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+    
+    Cancel Preadmit Reserve After Admited    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n Admit Cancel
 
 
 041-Add Filing Preadmit Part2 For Cancel Reserve
@@ -2323,7 +2358,7 @@ Suite Setup       Create All Sessions
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
-    ...    charset=utf-8
+    ...    Accept-Language=en
 
     ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
@@ -2518,6 +2553,9 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
 
+    Set Test Message
+    ...    Response: 200 \n
+
 042-Cancel Reserve PreAdmit
     [Documentation]    کنسل کردن پذیرش بیمار preadmit
     [Tags]    API_FILING    METHOD_POST   Catable    preadmit 
@@ -2543,8 +2581,11 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
+    Set Test Message
+    ...    Response: 200 \n
 
-043-Validate DataBase After Cancel Preadmit Reserve
+
+043-Validate DataBase After Cancel Preadmit Reserve  
     [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
     [Tags]    DB-Test    preadmit
 
@@ -2552,6 +2593,9 @@ Suite Setup       Create All Sessions
 
     
     Validate DB After Cancel Preadmit Reserve    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n
 
 044-Add Filing Preadmit Part3 For Cancel Admit
     [Documentation]   پذیرش قطعی بیمار preadmit برای کنسل کردن 
@@ -2593,7 +2637,8 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
-    ...    Content-Type=application/json
+    ...    Content-Type=application/json; charset=utf-8
+    ...    Accept-Language=fa
     ...    charset=utf-8
 
     ${fileFormation}=    Create Dictionary
@@ -2789,6 +2834,9 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
+
 045-Save Pay Naghdi From Cash
     [Documentation]   پرداخت پیش پرداخت بیمار preadmit
     [Tags]    API_Cash    METHOD_POST    Cash      preadmit 
@@ -2825,12 +2873,17 @@ Suite Setup       Create All Sessions
     ${PREADMIT_ADMIT_DATE}=    Read State    PREADMIT_ADMIT_DATE
     ${Doctor_ID}=    Read State    Doctor_ID  
     ${Doctor_NAME}=    Read State    Doctor_NAME  
+    ${Patient_Insurance_name}=    Read State     Patient_Insurance_name
+    ${Login_Display_Name}=    Read State     Login_Display_Name
+    ${lastInsurance_ID}=    Read State    lastInsurance_ID
 
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Content-Type=application/json; charset=utf-8
+    ...    Accept-Language=fa
 
     ${listAdded}=    Create Dictionary     
     ...		iD_TotalCash=0
@@ -2894,10 +2947,10 @@ Suite Setup       Create All Sessions
     ...		services=null
     ...		fatherName=${FATHERNAME}
     ...		doctorName=${Doctor_NAME}
-    ...		insuranceName=تامين اجتماعي
-    ...		nCode=1520554001
-    ...		emergencyNo=140300250
-    ...		admitOperator=آزيتا فشارکي نيا
+    ...		insuranceName=${Patient_Insurance_name}
+    ...		nCode=${NATIONALCODE}
+    ...		emergencyNo=
+    ...		admitOperator=${Login_Display_Name}
     ...		patientServicePrice=0
     ...		patientPaid=0
     ...		accountNoForDarman=IR HOS Darman
@@ -2907,14 +2960,14 @@ Suite Setup       Create All Sessions
     ...		patientStatus=5
     ...		searchField=شيخالاسلاميمهرشاد3563466836761520554001
     ...		debt=0
-    ...		insurID=6
+    ...		insurID=${lastInsurance_ID}
     ...		radifNo=1
     ...		clinicTitleName=بستري
     ...		grandPaName=0
     ...		iD_TotalCash=0
     ...		checkbox=true
     ...		refund=0
-    ...		payment=10000
+    ...		payment=${pishPardaght}
     ...		selected=true
     ...		TodayDate=true
     ...		clearing=false
@@ -2951,14 +3004,20 @@ Suite Setup       Create All Sessions
     ...    posConfigID=0
     ...    macAddress=70-32-17-60-A8-9B
 
+    ${body_json}=    Evaluate
+    ...    json.dumps($body, ensure_ascii=False)
+    ...   modules=json
 
-    ${resp}=    POST On Session    
+    ${resp}=    POST On Session
     ...    Cash
     ...    /api/Cash/SavePayNaghdi
     ...    headers=&{headers}
-    ...    json=${body}
+    ...    data=${body_json}
 
     Should Be Equal As Integers    ${resp.status_code}    200 
+
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
 
 
 046-Cancel Admit PreAdmit

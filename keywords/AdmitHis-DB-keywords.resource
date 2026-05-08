@@ -19,7 +19,8 @@ Connect To HIS Database
     ...    db_user=${DB_USER}
     ...    db_password=${DB_PASS}
     ...    db_host=${DB_HOST} 
-    ...    charset=cp1256
+    ...    charset=utf8
+    
 
 
 
@@ -151,7 +152,7 @@ Validate DB After Edit Preadmit
 
     Set Test Message    Validate DB After Edit Preadmit Pass         
 
-Validate DateBase After Change Preadmit To Admit
+Validate DateBase After Change Preadmit Rezerve To Admit
     [Arguments]    ${fileFormationId}
 
     Connect To HIS Database
@@ -224,6 +225,26 @@ Validate DateBase After Change Preadmit To Admit
 
      
     Set Test Message    Validate DB After Edit Preadmit Pass / Admit_His & Patient_Movment & Tbl_Bed Check    
+
+
+Cancel Preadmit Reserve After Admited
+    [Arguments]    ${fileFormationId}
+
+    Connect To HIS Database
+
+    ${PREADMIT_ADMIT_ID}=    Read State    PREADMIT_ADMIT_ID
+
+    ${query}=    Catenate     
+    ...    UPDATE Admit_HIS
+    ...    SET    Status_AdmitHIS = 2
+    ...    WHERE  ID_Admit = ${PREADMIT_ADMIT_ID}
+
+    Execute Sql String    ${query}
+
+    ${rows}=    Query    SELECT Status_AdmitHIS FROM Admit_HIS WHERE ID_Admit = ${PREADMIT_ADMIT_ID}
+
+    ${row}=    Set Variable    ${rows[0]}
+    Should Be Equal As Integers    ${row[0]}    2
 
 
 Validate DB After Cancel Preadmit Reserve
