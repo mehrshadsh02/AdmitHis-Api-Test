@@ -19,7 +19,7 @@ Connect To HIS Database
     ...    db_user=${DB_USER}
     ...    db_password=${DB_PASS}
     ...    db_host=${DB_HOST} 
-    ...    charset=utf8
+    ...    charset=cp1256
     
 
 
@@ -412,3 +412,45 @@ Validate DB After Admit Emergency Patient
     Should Contain                 ${row[2]}    ${Send_To_Ward_Date}            msg= Send_To_Ward_Date Not Mach
     Should Contain                 ${row[3]}    ${Send_To_Ward_Time}            msg= Send_To_Ward_Time Not Mach
     
+
+Validate DB After Save PreAdmit Pishpardakht
+    [Arguments]    ${fileFormationId}
+
+    Connect To HIS Database
+
+    ${PREADMIT_ADMIT_ID}=    Read State    PREADMIT_ADMIT_ID
+    ${PREADMIT_iD_FileFormation}=    Read State    PREADMIT_FILEFORMATION_ID
+    ${NATIONALCODE}=    Read State    NATIONALCODE
+    ${HOSPITALFILEID}=    Read State    HOSPITALFILEID
+    ${Patient_Insurance_name}=    Read State    Patient_Insurance_name
+    ${FIRSTNAME}=    Read State    FIRSTNAME
+    ${LASTNAME}=    Read State    LASTNAME
+    ${HOSPITALFILEID}=     Read State    HOSPITALFILEID
+    
+
+    ${query}=    Catenate 
+    ...    SELECT        Admit_HIS.ID_Admit, FileFormation.FirstName, FileFormation.LastName, FileFormation.HospitalFileID, Clinic_Cash.ClinicTitleType, Clinic_Cash.PatientPayment, Clinic_Cash.FromPos, Tbl_Insurance.InsuranceName, FileFormation.ID_FileFormation, FileFormation.NCode, Admit_HIS.DischargeStep,Admit_HIS.PishPardaght
+    ...    FROM            dbo.Clinic_Cash AS Clinic_Cash INNER JOIN
+    ...                            dbo.Admit_HIS AS Admit_HIS ON Clinic_Cash.AdmitID = Admit_HIS.ID_Admit INNER JOIN
+    ...                            dbo.FileFormation AS FileFormation ON Admit_HIS.FileFormationID = FileFormation.ID_FileFormation INNER JOIN
+    ...                            dbo.Tbl_Insurance AS Tbl_Insurance ON Admit_HIS.InsuranceID = Tbl_Insurance.ID_Insurance
+    ...    WHERE        (Clinic_Cash.ClinicTitleType = 249) AND  (Admit_HIS.ID_Admit = ${PREADMIT_ADMIT_ID})
+
+    ${rows}=    Query    ${query}
+    Should Not Be Empty    ${rows}
+    ${row}=    Set Variable    ${rows[0]}
+    
+   
+    Should Be Equal As Integers    ${row[0]}    ${PREADMIT_ADMIT_ID}            msg= PREADMIT_ADMIT_ID is Null
+    Should Be Equal As Strings     ${row[1]}    ${FIRSTNAME}                    msg= FIRSTNAME != ${FIRSTNAME}
+    Should Not Be Empty            ${row[2]}                                    msg= LASTNAME != ${LASTNAME}
+    Should Be Equal As Strings     ${row[3]}    ${HOSPITALFILEID}               msg= HOSPITALFILEID != ${HOSPITALFILEID} 
+    Should Be Equal As Integers    ${row[4]}    249                             msg= ClinicTitleType != 249
+    Should Be Equal As Integers    ${row[5]}    ${pishPardaght}                 msg= PatientPayment != ${pishPardaght}
+    # Should Be Equal              ${row[6]}    False                           msg= FromPos is True or Null
+    Should Not Be Empty            ${row[7]}                                    msg= Insurance_name Is Empty
+    Should Be Equal As Integers    ${row[8]}    ${PREADMIT_iD_FileFormation}    msg= FileFormation Not Mach
+    Should Be Equal As Integers    ${row[9]}    ${NATIONALCODE}                 msg= NATIONALCODE Not Mach
+    Should Be Equal As Integers    ${row[10]}   15                              msg= DischargeStep != 15
+    Should Be Equal As Integers    ${row[11]}   0                               msg= PishPardaght In AdmitHis != 0
+

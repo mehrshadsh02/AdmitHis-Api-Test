@@ -2837,7 +2837,7 @@ Suite Setup       Create All Sessions
     Set Test Message
     ...    Response: ${resp.status_code} \n ADMIT_ID saved: ${FOUND_PREADMIT_ADMIT_ID}
 
-045-Save Pay Naghdi From Cash
+045-Save PreAdmit Pishpardakht By Cash Nagdi
     [Documentation]   پرداخت پیش پرداخت بیمار preadmit
     [Tags]    API_Cash    METHOD_POST    Cash      preadmit 
     
@@ -2876,6 +2876,11 @@ Suite Setup       Create All Sessions
     ${Patient_Insurance_name}=    Read State     Patient_Insurance_name
     ${Login_Display_Name}=    Read State     Login_Display_Name
     ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${pishPardaght}=    Convert To Integer    ${pishPardaght}
+    ${cashType}=    Convert To Integer    5
+    ${clinicTitleType}=    Convert To Integer    249
+    ${iD_TotalCash}=    Convert To Integer    0
+    ${id}=    Convert To Integer    1
 
 
     &{headers}=    Create Dictionary
@@ -2886,19 +2891,19 @@ Suite Setup       Create All Sessions
     ...    Accept-Language=fa
 
     ${listAdded}=    Create Dictionary     
-    ...		iD_TotalCash=0
+    ...		iD_TotalCash=${iD_TotalCash}
     ...		admitID=${PREADMIT_ADMIT_ID}
-    ...		clinicTitleType=249
+    ...		clinicTitleType=${clinicTitleType}
     ...		fileFormationID=${PREADMIT_FILEFORMATION_ID}
     ...		patientPayment=${pishPardaght}
     ...		cashPayment=0
     ...		reduction=0
     ...		realPrice=${pishPardaght} 
-    ...		cashType=5
+    ...		cashType=${cashType}
     ...		note=
-    ...		fromPos=false
-    ...		fromBank=false
-    ...		fromInternet=false
+    ...		fromPos=${False}
+    ...		fromBank=${False}
+    ...		fromInternet=${False}
     ...		discountTypeID=0
     ...		iD_ClinicCash=0
     ...		ticketNo=
@@ -2925,14 +2930,14 @@ Suite Setup       Create All Sessions
     ...		freeBedID=0
 
     ${listBastari}=    Create Dictionary
-    ...		id=1
+    ...		id=${id}
     ...		admitID=${PREADMIT_ADMIT_ID}
     ...		fileFormationID=${PREADMIT_FILEFORMATION_ID}
     ...		hospitalID=${HOSPITALFILEID}
     ...		patientName=${FIRSTNAME} ${LASTNAME}
     ...		date=${PREADMIT_ADMIT_DATE}
-    ...		type=249
-    ...		cashType=5
+    ...		type=${clinicTitleType}
+    ...		cashType=${cashType}
     ...		discount=0
     ...		payableForHospital=0
     ...		accountNoForHospital=IR HOS Darman
@@ -2944,7 +2949,7 @@ Suite Setup       Create All Sessions
     ...		payable=${pishPardaght}
     ...		typeString=بستري
     ...		phonenumber=${MOBILE}
-    ...		services=null
+    ...		services=${None}
     ...		fatherName=${FATHERNAME}
     ...		doctorName=${Doctor_NAME}
     ...		insuranceName=${Patient_Insurance_name}
@@ -2954,7 +2959,7 @@ Suite Setup       Create All Sessions
     ...		patientServicePrice=0
     ...		patientPaid=0
     ...		accountNoForDarman=IR HOS Darman
-    ...		darmanID=null
+    ...		darmanID=${None}
     ...		accountNoForDaroo=
     ...		darooID=
     ...		patientStatus=5
@@ -2964,14 +2969,14 @@ Suite Setup       Create All Sessions
     ...		radifNo=1
     ...		clinicTitleName=بستري
     ...		grandPaName=0
-    ...		iD_TotalCash=0
-    ...		checkbox=true
+    ...		iD_TotalCash=${iD_TotalCash}
+    ...		checkbox=${True}
     ...		refund=0
     ...		payment=${pishPardaght}
-    ...		selected=true
-    ...		TodayDate=true
-    ...		clearing=false
-    ...		disabled=true
+    ...		selected=${True}
+    ...		TodayDate=${False}
+    ...		clearing=${False}
+    ...		disabled=${True}
 
     ${nonCash}=    Create Dictionary
     ...		cardNo=
@@ -2993,9 +2998,12 @@ Suite Setup       Create All Sessions
     ...		price=0
     ...		fullName=
 
+    ${listAddedArray}=    Create List    ${listAdded}
+    ${listBastariArray}=    Create List    ${listBastari}
+
     ${body}=    Create Dictionary
-    ...    listAdded=${listAdded}
-    ...    listBastari=${listBastari}
+    ...    listAdded=${listAddedArray}
+    ...    listBastari=${listBastariArray}
     ...    nonCashRePayment=${nonCash}
     ...    ravashPardakht=0
     ...    offline=${False}
@@ -3004,23 +3012,31 @@ Suite Setup       Create All Sessions
     ...    posConfigID=0
     ...    macAddress=70-32-17-60-A8-9B
 
-    ${body_json}=    Evaluate
-    ...    json.dumps($body, ensure_ascii=False)
-    ...   modules=json
-
     ${resp}=    POST On Session
     ...    Cash
     ...    /api/Cash/SavePayNaghdi
     ...    headers=&{headers}
-    ...    data=${body_json}
+    ...    json=${body}
 
     Should Be Equal As Integers    ${resp.status_code}    200 
 
     Set Test Message
-    ...    Response: ${resp.status_code} \n
+    ...    Response: ${resp.status_code} \n Pay Pishpardakht 
+
+046-Validate DataBase After Save PreAdmit Pishpardakht By Cash Nagdi 
+    [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
+    
+    Validate DB After Save PreAdmit Pishpardakht    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n
 
 
-046-Cancel Admit PreAdmit
+047-Cancel Admit PreAdmit
     [Documentation]    کنسل کردن پذیرش بیمار preadmit
     [Tags]    API_FILING    METHOD_POST    preadmit 
 
@@ -3045,7 +3061,7 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
-047-Validate DataBase After Cancel Preadmit Admit
+048-Validate DataBase After Cancel Preadmit Admit
     [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
     [Tags]    DB-Test    preadmit
 
@@ -3054,7 +3070,7 @@ Suite Setup       Create All Sessions
     
     Validate DB After Cancel Preadmit Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
 
-048-Add Filing Emergency Patient
+049-Add Filing Emergency Patient
     [Documentation]   پذیرش بیمار اورژانس تحت نظر
     [Tags]    API_Filing    METHOD_POST    Emergency
 
@@ -3291,7 +3307,7 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ EMERGENCY_ADMIT_ID saved: ${FOUND_EMERGENCY_ADMIT_ID}
 
-049-Validate DataBase After Admit Emergency Patient
+050-Validate DataBase After Admit Emergency Patient
     [Documentation]   تست دیتابیس بعد از پذیرش بیمار تحت نظر
     [Tags]    DB-Test    preadmit
 
@@ -3300,7 +3316,7 @@ Suite Setup       Create All Sessions
     
     Validate DB After Admit Emergency Patient    ${FOUND_PREADMIT_FILEFORMATION_ID}
 
-050-Search Patient Emergency
+051-Search Patient Emergency
     [Documentation]   جستجوی بیماران اورژانس تحت نظر
     [Tags]    API_Patient    METHOD_POST  Emergency 
 
@@ -3336,7 +3352,7 @@ Suite Setup       Create All Sessions
     Should Be True    isinstance($json, list)
 
 
-051-Get Patient By AdmitID
+052-Get Patient By AdmitID
     [Documentation]   دریافت اطلاعات بیمار بستری اورژانش با شماره پذیرش
     [Tags]    API_Patient    METHOD_GET    Emergency    
 
@@ -3358,7 +3374,7 @@ Suite Setup       Create All Sessions
 
     Should Not Be Empty    ${json}
 
-052-Edit Filing Emergency Patient
+053-Edit Filing Emergency Patient
     [Documentation]   ویرایش بیمار بستری اورژانس تحت نظر
     [Tags]    API_Filing    METHOD_POST    Emergency
 
@@ -3586,7 +3602,7 @@ Suite Setup       Create All Sessions
     Should Be Equal As Integers    ${json["statusCode"]}    200
     Should Be Equal    ${json["message"]}    Success
 
-053-Patient Admission Order From Cartable
+054-Patient Admission Order From Cartable
     [Documentation]    بستری بیمار تحت نظر از کارتابل
     [Tags]    API_Patient    METHOD_POST   Catable    Emergency 
 
@@ -3628,7 +3644,7 @@ Suite Setup       Create All Sessions
     Write State    Send_To_Ward_Time    ${expected_time}
 
 
-054-Validate DataBase After Patient Admission Order From Cartable
+055-Validate DataBase After Patient Admission Order From Cartable
     [Documentation]   تست دیتابیس بعد از پذیرش بیمار تحت نظر
     [Tags]    DB-Test    preadmit
 
@@ -3637,7 +3653,7 @@ Suite Setup       Create All Sessions
     
     Validate DB After Patient Admission Order From Cartable    ${FOUND_PREADMIT_FILEFORMATION_ID}
 
-055-Get Information Of Patient Before Sent To Ward
+056-Get Information Of Patient Before Sent To Ward
     [Documentation]      دریافت اطلاعات بیمار  اورژانس جهت انتقال به بخش
     [Tags]    API_Patient    METHOD_GET    Emergency    
 
@@ -3663,7 +3679,7 @@ Suite Setup       Create All Sessions
 
     Write State    UNIQUEMERGENCYNO    ${EMERGENCY_UNIQUE_NO}
 
-056-1-Get All Bed Number For Send To Ward
+057-1-Get All Bed Number For Send To Ward
     [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 201
     [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST    Emergency
 
@@ -3731,7 +3747,7 @@ Suite Setup       Create All Sessions
     Write State    INPATIONT_BED_NO    ${SELECTED_INPATIONT_BED_NO}
     Log To Console    💾 BED_ID saved to state: ${SELECTED_INPATIONT_BED_ID}
 
-056-2-Get All Names Inpatient Wards For Send To Ward
+058-2-Get All Names Inpatient Wards For Send To Ward
     [Documentation]    دریافت لیست بخش‌های بستری
     [Tags]    API_GeneralVariables    METHOD_GET    Emergency
 
@@ -3797,7 +3813,7 @@ Suite Setup       Create All Sessions
     Log To Console    ✅ INPATIONT_WARD_NAME saved: ${FOUND_INPATIONT_WARD_NAME}
 
 
-056-3-Send To Ward Emergency Patient
+059-3-Send To Ward Emergency Patient
     [Documentation]     انتقال بیمار اورژانس به بخش 
     [Tags]    API_FILING    METHOD_POST    Emergency
 
@@ -4035,7 +4051,7 @@ Suite Setup       Create All Sessions
     Write State    INPATIENT_FILEFORMATION_ID    ${FOUND_INPATIENT_FILEFORMATION_ID}  
 
     
-057-Changing Sheba No
+060-Changing Sheba No
     [Documentation]    عوض کردن شماره شبای وارد شده برای بیمار 
     [Tags]    API_FILING    METHOD_POST    PUBLIC    
 
@@ -4064,7 +4080,7 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
-058-Send To His Live
+061-Send To His Live
     [Documentation]    ارسال پذیرش برای His Live
     [Tags]    API_FILING    METHOD_POST    PUBLIC    
 
