@@ -136,6 +136,7 @@ Suite Setup       Create All Sessions
             ${FOUND_Fileformation_Id}=    Set Variable    ${item["iD_FileFormation"]}
             ${FOUND_lastInsurance_ID}=    Set Variable    ${item["lastInsuranceID"]}
             ${FOUND_lastInsurance_ExpDate}=    Set Variable    ${item["lastInsuranceExpDate"]}
+            ${FOUND_Birth_Date}=    Set Variable    ${item["birthDate"]}
             
             Exit For Loop
         END
@@ -163,6 +164,7 @@ Suite Setup       Create All Sessions
     Write State    FATHERNAME        ${FOUND_Father_Name}  
     Write State    lastInsurance_ID        ${FOUND_lastInsurance_ID}
     Write State    lastInsurance_ExpDate        ${FOUND_lastInsurance_ExpDate}
+    Write State    BirthDate        ${FOUND_Birth_Date}
 
     Set Test Message
     ...    Response: ${resp.status_code}\n  
@@ -503,6 +505,8 @@ Suite Setup       Create All Sessions
             ${FOUND_inquiryUId}=             Evaluate    $json['data']['hisAdmitDto']["inquiryUId"]
             ${FOUND_lastInsurance_ExpDate}=    Evaluate     $json['data']['hisAdmitDto']["insuranceExpDate"]
             ${FOUND_lastInsurance_ID}=    Evaluate     $json['data']['hisAdmitDto']["insuranceID"]
+            ${FOUND_Birth_Date}=    Evaluate     $json['data']['fileFormation']["birthDate"]
+            
             Exit For Loop
         END
     END
@@ -527,6 +531,7 @@ Suite Setup       Create All Sessions
     Write State    NATIONALCODE      ${FOUND_National_Code}
     Write State    lastInsurance_ID        ${FOUND_lastInsurance_ID}
     Write State    lastInsurance_ExpDate        ${FOUND_lastInsurance_ExpDate}
+    Write State    BirthDate        ${FOUND_Birth_Date}
 
     Set Test Message
     ...    Response: ${resp.status_code}\n
@@ -1741,14 +1746,17 @@ Suite Setup       Create All Sessions
     ${Relationship_Name}=    Read State    Relationship_Name
     ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
     ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${Birth_Date}=    Read State    BirthDate
+    ${BirthDate}=    Convert Jalali To Gregorian    ${Birth_Date}
     ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
-    ...    charset=utf-8
+    ...    Accept-Language=fa
 
     ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
@@ -1777,7 +1785,7 @@ Suite Setup       Create All Sessions
     ...    mobileNo=${MOBILE}
     ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
-    ...    birthDate=2002/07/07
+    ...    birthDate=${BirthDate}
 	...    maritalStatusString=${Marital_Status_Name}
     ...    nationalityTitle=${Nationality_Name}
     ...    birthPlaceString=${city_Base_Name}
@@ -1849,7 +1857,7 @@ Suite Setup       Create All Sessions
     ...    doctorTotalCost=0
     ...    referenceDoctorID=0
     ...    insuranceNO=${LASTINSURANCENO}
-    ...    insuranceExpDate=2028/04/04
+    ...    insuranceExpDate=${insuranceExpDate}
     ...    sponsor=خود فرد
     ...    degree=0         
     ...    shebaNo=
@@ -2061,7 +2069,11 @@ Suite Setup       Create All Sessions
     ${Diagnosis-Name-Edit}=    Read State    Diagnosis-Name-Edit
     ${Diagnosis-ID-Edit}=    Read State    Diagnosis-ID-Edit
     ${lastInsurance_ID}=    Read State    lastInsurance_ID
+    ${Birth_Date}=    Read State    BirthDate
+    ${BirthDate}=    Convert Jalali To Gregorian    ${Birth_Date}
     ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
+    
     
 
     &{headers}=    Create Dictionary
@@ -2098,7 +2110,7 @@ Suite Setup       Create All Sessions
     ...    mobileNo=${MOBILE}
     ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
-    ...    birthDate=2002/07/07
+    ...    birthDate=${BirthDate}
 	...    maritalStatusString=${Marital_Status_Name}
     ...    nationalityTitle=${Nationality_Name}
     ...    birthPlaceString=${city_Base_Name}
@@ -2168,8 +2180,8 @@ Suite Setup       Create All Sessions
     ...    pishPardaghtDoctor=0
     ...    doctorTotalCost=0
     ...    referenceDoctorID=0
-    ...    insuranceNO=0019208291
-    ...    insuranceExpDate=2028/04/04
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=${insuranceExpDate}
     ...    sponsor=شوهر        # new sponsor
     ...    degree=0         
     ...    shebaNo=
@@ -2309,7 +2321,7 @@ Suite Setup       Create All Sessions
     ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
 
     
-    Validate DateBase After Change Preadmit Rezerve To Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+    Validate DB After Change Preadmit Rezerve To Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
     
     Cancel Preadmit Reserve After Admited    ${FOUND_PREADMIT_FILEFORMATION_ID}
 
@@ -2352,13 +2364,17 @@ Suite Setup       Create All Sessions
     ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
     ${Relationship_Name}=    Read State    Relationship_Name
     ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${Birth_Date}=    Read State    BirthDate
+    ${BirthDate}=    Convert Jalali To Gregorian    ${Birth_Date}
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
-    ...    Accept-Language=en
+    ...    Accept-Language=fa
 
     ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
@@ -2387,7 +2403,7 @@ Suite Setup       Create All Sessions
     ...    mobileNo=${MOBILE}
     ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
-    ...    birthDate=2002/07/07
+    ...    birthDate=${BirthDate}
 	...    maritalStatusString=${Marital_Status_Name}
     ...    nationalityTitle=${Nationality_Name}
     ...    birthPlaceString=${city_Base_Name}
@@ -2459,7 +2475,7 @@ Suite Setup       Create All Sessions
     ...    doctorTotalCost=0
     ...    referenceDoctorID=0
     ...    insuranceNO=${LASTINSURANCENO}
-    ...    insuranceExpDate=2028/04/04
+    ...    insuranceExpDate=${insuranceExpDate}
     ...    sponsor=خود فرد
     ...    degree=0         
     ...    shebaNo=
@@ -2566,6 +2582,7 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
 
     &{body}=    Create Dictionary     
     ...    admitId=${PREADMIT_ADMIT_ID}
@@ -2632,6 +2649,10 @@ Suite Setup       Create All Sessions
     ${Inpationt_Admission_Type_Name}=    Read State    Inpationt_Admission_Type_Name
     ${Relationship_Name}=    Read State    Relationship_Name
     ${LASTINSURBOX_SEPASID}=    Read State    LASTINSURBOX_SEPASID
+    ${Birth_Date}=    Read State    BirthDate
+    ${BirthDate}=    Convert Jalali To Gregorian    ${Birth_Date}
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
 
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
@@ -2668,7 +2689,7 @@ Suite Setup       Create All Sessions
     ...    mobileNo=${MOBILE}
     ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
-    ...    birthDate=2002/07/07
+    ...    birthDate=${BirthDate}
 	...    maritalStatusString=${Marital_Status_Name}
     ...    nationalityTitle=${Nationality_Name}
     ...    birthPlaceString=${city_Base_Name}
@@ -2740,7 +2761,7 @@ Suite Setup       Create All Sessions
     ...    doctorTotalCost=0
     ...    referenceDoctorID=0
     ...    insuranceNO=${LASTINSURANCENO}
-    ...    insuranceExpDate=2028/04/04
+    ...    insuranceExpDate=${insuranceExpDate}
     ...    sponsor=خود فرد
     ...    degree=0         
     ...    shebaNo=
@@ -3046,10 +3067,11 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
+    ...    charset=utf-8
 
     &{body}=    Create Dictionary     
     ...    admitId=${PREADMIT_ADMIT_ID}
-
 
     ${resp}=    POST On Session    
     ...    HIS
@@ -3061,6 +3083,9 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n PreAdmit Cancel
+
 048-Validate DataBase After Cancel Preadmit Admit
     [Documentation]   تست دیتابیس بعد از پذیرش پری ادمیت
     [Tags]    DB-Test    preadmit
@@ -3069,6 +3094,9 @@ Suite Setup       Create All Sessions
 
     
     Validate DB After Cancel Preadmit Admit    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n
 
 049-Add Filing Emergency Patient
     [Documentation]   پذیرش بیمار اورژانس تحت نظر
@@ -3108,6 +3136,8 @@ Suite Setup       Create All Sessions
     ${lastInsurance_ID}=    Read State    lastInsurance_ID
     ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
     ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
+    ${Birth_Date}=    Read State    BirthDate
+    ${BirthDate}=    Convert Jalali To Gregorian    ${Birth_Date}
 
   
     &{headers}=    Create Dictionary
@@ -3115,7 +3145,7 @@ Suite Setup       Create All Sessions
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
-    ...    charset=utf-8
+    ...    Accept-Language=fa
 
     ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
@@ -3144,7 +3174,7 @@ Suite Setup       Create All Sessions
     ...    mobileNo=${MOBILE}
     ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
-    ...    birthDate=2002/07/07
+    ...    birthDate=${BirthDate}
 	...    maritalStatusString=${Marital_Status_Name}
     ...    nationalityTitle=${Nationality_Name}
     ...    birthPlaceString=${city_Base_Name}
@@ -3307,14 +3337,20 @@ Suite Setup       Create All Sessions
 
     Log To Console    ✅ EMERGENCY_ADMIT_ID saved: ${FOUND_EMERGENCY_ADMIT_ID}
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+
 050-Validate DataBase After Admit Emergency Patient
     [Documentation]   تست دیتابیس بعد از پذیرش بیمار تحت نظر
-    [Tags]    DB-Test    preadmit
+    [Tags]    DB-Test    Emergency
 
     ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
 
     
     Validate DB After Admit Emergency Patient    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n
 
 051-Search Patient Emergency
     [Documentation]   جستجوی بیماران اورژانس تحت نظر
@@ -3326,6 +3362,8 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
+    ...    charset=utf-8
     
     ${body}=     Create Dictionary
     ...    firstName=
@@ -3351,6 +3389,9 @@ Suite Setup       Create All Sessions
     ${json}=    Set Variable    ${resp.json()}
     Should Be True    isinstance($json, list)
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+
 
 052-Get Patient By AdmitID
     [Documentation]   دریافت اطلاعات بیمار بستری اورژانش با شماره پذیرش
@@ -3373,6 +3414,9 @@ Suite Setup       Create All Sessions
     ${json}=    Set Variable    ${resp.json()}
 
     Should Not Be Empty    ${json}
+
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
 
 053-Edit Filing Emergency Patient
     [Documentation]   ویرایش بیمار بستری اورژانس تحت نظر
@@ -3414,6 +3458,8 @@ Suite Setup       Create All Sessions
     ${lastInsurance_ID}=    Read State    lastInsurance_ID
     ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
     ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
+    ${Birth_Date}=    Read State    BirthDate
+    ${BirthDate}=    Convert Jalali To Gregorian    ${Birth_Date}
     
 
     &{headers}=    Create Dictionary
@@ -3421,7 +3467,7 @@ Suite Setup       Create All Sessions
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
-    ...    charset=utf-8
+    ...    Accept-Language=fa
 
     ${fileFormation}=    Create Dictionary
     ...    name=${FIRSTNAME}
@@ -3450,7 +3496,7 @@ Suite Setup       Create All Sessions
     ...    mobileNo=${MOBILE}
     ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
-    ...    birthDate=2002/07/07
+    ...    birthDate=${BirthDate}
 	...    maritalStatusString=${Marital_Status_Name}
     ...    nationalityTitle=${Nationality_Name}
     ...    birthPlaceString=${city_Base_Name}
@@ -3602,6 +3648,9 @@ Suite Setup       Create All Sessions
     Should Be Equal As Integers    ${json["statusCode"]}    200
     Should Be Equal    ${json["message"]}    Success
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+
 054-Patient Admission Order From Cartable
     [Documentation]    بستری بیمار تحت نظر از کارتابل
     [Tags]    API_Patient    METHOD_POST   Catable    Emergency 
@@ -3612,6 +3661,7 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
 
     &{body}=    Create Dictionary     
     ...    admitId=${EMERGENCY_ADMIT_ID}
@@ -3643,8 +3693,11 @@ Suite Setup       Create All Sessions
     Write State    Send_To_Ward_Date    ${expected_date}
     Write State    Send_To_Ward_Time    ${expected_time}
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
 
-055-Validate DataBase After Patient Admission Order From Cartable
+
+055-Validate DataBase After Patient Admission Order From Cartable 
     [Documentation]   تست دیتابیس بعد از پذیرش بیمار تحت نظر
     [Tags]    DB-Test    preadmit
 
@@ -3652,6 +3705,9 @@ Suite Setup       Create All Sessions
 
     
     Validate DB After Patient Admission Order From Cartable    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n
 
 056-Get Information Of Patient Before Sent To Ward
     [Documentation]      دریافت اطلاعات بیمار  اورژانس جهت انتقال به بخش
@@ -3663,6 +3719,7 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
 
     ${resp}=    GET On Session
     ...    HIS
@@ -3679,6 +3736,9 @@ Suite Setup       Create All Sessions
 
     Write State    UNIQUEMERGENCYNO    ${EMERGENCY_UNIQUE_NO}
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+
 057-1-Get All Bed Number For Send To Ward
     [Documentation]    لیست تخت های خالی بر اساس id بخش مثلا بخش 201
     [Tags]    API_GeneralVariables  METHOD_GET  BED_LIST    Emergency
@@ -3687,6 +3747,7 @@ Suite Setup       Create All Sessions
     ...    Accept=application/json
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept-Language=fa
 
     ${resp}=    GET On Session
     ...    HIS
@@ -3747,7 +3808,10 @@ Suite Setup       Create All Sessions
     Write State    INPATIONT_BED_NO    ${SELECTED_INPATIONT_BED_NO}
     Log To Console    💾 BED_ID saved to state: ${SELECTED_INPATIONT_BED_ID}
 
-058-2-Get All Names Inpatient Wards For Send To Ward
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+
+057-2-Get All Names Inpatient Wards For Send To Ward
     [Documentation]    دریافت لیست بخش‌های بستری
     [Tags]    API_GeneralVariables    METHOD_GET    Emergency
 
@@ -3813,7 +3877,7 @@ Suite Setup       Create All Sessions
     Log To Console    ✅ INPATIONT_WARD_NAME saved: ${FOUND_INPATIONT_WARD_NAME}
 
 
-059-3-Send To Ward Emergency Patient
+057-3-Send To Ward Emergency Patient
     [Documentation]     انتقال بیمار اورژانس به بخش 
     [Tags]    API_FILING    METHOD_POST    Emergency
 
@@ -3854,12 +3918,15 @@ Suite Setup       Create All Sessions
     ${lastInsurance_ID}=    Read State    lastInsurance_ID
     ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
     ${insuranceExpDate}=    Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
+    ${Birth_Date}=    Read State    BirthDate
+    ${BirthDate}=    Convert Jalali To Gregorian    ${Birth_Date}
   
     &{headers}=    Create Dictionary
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
     ...    Content-Type=application/json
+    ...    Accept-Language=fa
     ...    charset=utf-8
 
     ${fileFormation}=    Create Dictionary
@@ -3889,7 +3956,7 @@ Suite Setup       Create All Sessions
     ...    mobileNo=${MOBILE}
     ...    birthPlace=${city_Base_ID}
     ...    birthPlaceOut=
-    ...    birthDate=2002/07/07
+    ...    birthDate=${BirthDate}
 	...    maritalStatusString=${Marital_Status_Name}
     ...    nationalityTitle=${Nationality_Name}
     ...    birthPlaceString=${city_Base_Name}
@@ -4050,8 +4117,25 @@ Suite Setup       Create All Sessions
     Write State    INPATIENT_TITLE_TYPE          ${FOUND_INPATIENT_TITLE_TYPE}
     Write State    INPATIENT_FILEFORMATION_ID    ${FOUND_INPATIENT_FILEFORMATION_ID}  
 
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+
+
+058-Validate DataBase After Send To Ward Emergency Patient And Cancel
+    [Documentation]   تست دیتابیس بعد از رزرو preadmit
+    [Tags]    DB-Test    preadmit
+
+    ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID
+
     
-060-Changing Sheba No
+    Validate DB After Send To Ward Emergency Patient    ${FOUND_PREADMIT_FILEFORMATION_ID}
+    
+    Cancel Admit Patient After Send To Ward    ${FOUND_PREADMIT_FILEFORMATION_ID}
+
+    Set Test Message
+    ...    Response: 200 \n Admit Cancel
+    
+059-Changing Sheba No
     [Documentation]    عوض کردن شماره شبای وارد شده برای بیمار 
     [Tags]    API_FILING    METHOD_POST    PUBLIC    
 
@@ -4061,6 +4145,8 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
+    ...    charset=utf-8
 
     ${changingShebaNoDto}=    Create Dictionary
     ...    shebaNo=1425100000015236251
@@ -4080,7 +4166,7 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
-061-Send To His Live
+060-Send To His Live
     [Documentation]    ارسال پذیرش برای His Live
     [Tags]    API_FILING    METHOD_POST    PUBLIC    
 
@@ -4090,14 +4176,17 @@ Suite Setup       Create All Sessions
     ...    Authorization=${AUTH_BEARER}
     ...    Cookie=${COOKIE_TOKEN}
     ...    Accept=application/json
+    ...    Accept-Language=fa
+    ...    charset=utf-8
 
     ${body}=    Create Dictionary
-    ...    changingShebaNoDto=${changingShebaNoDto}
+    ...    admitId=${INPATIENT_ADMIT_ID}
 
     ${resp}=    POST On Session    
     ...    HIS
-    ...    /api/Filing/ChangingShebaNo
+    ...    /api/Filing/SendToHisLive
     ...    headers=&{headers}
-    ...    json=${body}
+    ...    json=${body} 
+
 34-
 35-

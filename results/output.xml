@@ -1,765 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-05-13T00:38:22.448530" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-05-15T15:32:53.741201" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
 <suite id="s1-s1" name="AdmitHis-Api" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis-Api.robot">
 <kw name="Create All Sessions" owner="AdmitHis-keywords" type="SETUP">
 <kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-05-13T00:38:22.947582" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-05-15T15:32:54.178962" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-05-13T00:38:22.947253" elapsed="0.000684"/>
+<status status="PASS" start="2026-05-15T15:32:54.178216" elapsed="0.001268"/>
 </kw>
-<status status="PASS" start="2026-05-13T00:38:22.946403" elapsed="0.001701"/>
+<status status="PASS" start="2026-05-15T15:32:54.177334" elapsed="0.002288"/>
 </kw>
 <kw name="Create Cartable Session" owner="AdmitHis-keywords">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-05-13T00:38:22.948697" level="INFO">Creating Session using : alias=Cartable, url=http://192.168.5.19:8020, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-05-15T15:32:54.180177" level="INFO">Creating Session using : alias=Cartable, url=http://192.168.5.19:8020, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>Cartable</arg>
 <arg>${Cartable_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-05-13T00:38:22.948467" elapsed="0.000425"/>
+<status status="PASS" start="2026-05-15T15:32:54.179958" elapsed="0.000408"/>
 </kw>
-<status status="PASS" start="2026-05-13T00:38:22.948233" elapsed="0.000750"/>
+<status status="PASS" start="2026-05-15T15:32:54.179750" elapsed="0.000715"/>
 </kw>
 <kw name="Create Cash Session" owner="AdmitHis-keywords">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-05-13T00:38:22.949528" level="INFO">Creating Session using : alias=Cash, url=http://192.168.5.19:8074, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-05-15T15:32:54.180920" level="INFO">Creating Session using : alias=Cash, url=http://192.168.5.19:8074, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>Cash</arg>
 <arg>${Cash_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-05-13T00:38:22.949295" elapsed="0.000423"/>
+<status status="PASS" start="2026-05-15T15:32:54.180744" elapsed="0.000306"/>
 </kw>
-<status status="PASS" start="2026-05-13T00:38:22.949092" elapsed="0.000717"/>
+<status status="PASS" start="2026-05-15T15:32:54.180576" elapsed="0.000555"/>
 </kw>
-<status status="PASS" start="2026-05-13T00:38:22.944839" elapsed="0.005056"/>
+<status status="PASS" start="2026-05-15T15:32:54.176840" elapsed="0.004353"/>
 </kw>
-<test id="s1-s1-t1" name="046-Validate DataBase After Cancel Preadmit Reserve" line="3026">
+<test id="s1-s1-t1" name="059-Send To His Live" line="4169">
 <kw name="Read State" owner="AdmitHis-keywords">
 <kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:22.955663" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<msg time="2026-05-15T15:32:54.187184" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
 <arg>${STATE_FILE}</arg>
 <doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:22.955380" elapsed="0.000527"/>
+<status status="PASS" start="2026-05-15T15:32:54.186902" elapsed="0.000441"/>
 </kw>
 <kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:22.956689" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:22.957810" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
+<msg time="2026-05-15T15:32:54.187693" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-05-15T15:32:54.188363" level="INFO">${content} = {
+  "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
+  "SEX": "مرد       ",
   "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
+  "MOBILE": "09383509316",
+  "LASTHOMECITY": "363",
   "LASTINSURANCENO": "0019208291",
   "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
+  "NAT...</msg>
 <var>${content}</var>
 <arg>${STATE_FILE}</arg>
 <doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:22.956189" elapsed="0.002123"/>
+<status status="PASS" start="2026-05-15T15:32:54.187492" elapsed="0.000995"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:22.959261" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
+<msg time="2026-05-15T15:32:54.189152" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
 <var>${state}</var>
 <arg>json.loads('''${content}''')</arg>
 <arg>json</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:22.958563" elapsed="0.000873"/>
+<status status="PASS" start="2026-05-15T15:32:54.188680" elapsed="0.000565"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:22.960128" level="INFO">${value} = 683676</msg>
+<msg time="2026-05-15T15:32:54.189617" level="INFO">${value} = 356450</msg>
 <var>${value}</var>
 <arg>${state}</arg>
 <arg>${key}</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:22.959684" elapsed="0.000658"/>
+<status status="PASS" start="2026-05-15T15:32:54.189384" elapsed="0.000391"/>
 </kw>
 <kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:22.960887" level="INFO">Argument types are:
+<msg time="2026-05-15T15:32:54.190398" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'NoneType'&gt;</msg>
 <arg>${value}</arg>
 <arg>${None}</arg>
 <arg>❌ ${key} not found in state file</arg>
 <doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:22.960509" elapsed="0.000622"/>
+<status status="PASS" start="2026-05-15T15:32:54.190030" elapsed="0.000577"/>
 </kw>
 <return>
 <value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:22.961276" elapsed="0.000141"/>
+<status status="PASS" start="2026-05-15T15:32:54.190782" elapsed="0.000162"/>
 </return>
-<msg time="2026-05-13T00:38:22.961597" level="INFO">${FOUND_PREADMIT_FILEFORMATION_ID} = 683676</msg>
-<var>${FOUND_PREADMIT_FILEFORMATION_ID}</var>
-<arg>PREADMIT_FILEFORMATION_ID</arg>
-<status status="PASS" start="2026-05-13T00:38:22.954910" elapsed="0.007019"/>
-</kw>
-<kw name="Validate DB After Save PayNagdi" owner="AdmitHis-DB-keywords">
-<kw name="Connect To HIS Database" owner="AdmitHis-DB-keywords">
-<kw name="Connect To Database" owner="DatabaseLibrary">
-<msg time="2026-05-13T00:38:22.963960" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
-<msg time="2026-05-13T00:38:22.964150" level="INFO">Configuration file doesn't exist</msg>
-<msg time="2026-05-13T00:38:22.964490" level="INFO">Connect to DB using : pymssql.connect(database='His1_Payvand', user='sa', password=***, host='192.168.5.17', port=1433, charset='cp1256')</msg>
-<arg>db_module=pymssql</arg>
-<arg>db_name=${DB_NAME}</arg>
-<arg>db_user=${DB_USER}</arg>
-<arg>db_password=${DB_PASS}</arg>
-<arg>db_host=${DB_HOST}</arg>
-<arg>charset=cp1256</arg>
-<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
-Along with listed commonly used arguments (`db_name`, `db_host` etc.)
-you can set any other DB module specific parameters as key/value pairs.</doc>
-<status status="PASS" start="2026-05-13T00:38:22.963481" elapsed="0.578116"/>
-</kw>
-<status status="PASS" start="2026-05-13T00:38:22.963083" elapsed="0.579359"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.544672" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.544082" elapsed="0.000930"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.545819" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.547022" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.545365" elapsed="0.001915"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.549161" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.548171" elapsed="0.001179"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.550043" level="INFO">${value} = 356440</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.549615" elapsed="0.000572"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.550867" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.550447" elapsed="0.000593"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.551194" elapsed="0.000171"/>
-</return>
-<msg time="2026-05-13T00:38:23.551576" level="INFO">${PREADMIT_ADMIT_ID} = 356440</msg>
-<var>${PREADMIT_ADMIT_ID}</var>
-<arg>PREADMIT_ADMIT_ID</arg>
-<status status="PASS" start="2026-05-13T00:38:23.543179" elapsed="0.008523"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.552778" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.552449" elapsed="0.000502"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.553456" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.554345" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.553172" elapsed="0.001285"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.555236" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.554624" elapsed="0.000745"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.556106" level="INFO">${value} = 683676</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.555755" elapsed="0.000471"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.556753" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.556396" elapsed="0.000529"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.557044" elapsed="0.000128"/>
-</return>
-<msg time="2026-05-13T00:38:23.557329" level="INFO">${PREADMIT_iD_FileFormation} = 683676</msg>
-<var>${PREADMIT_iD_FileFormation}</var>
-<arg>PREADMIT_FILEFORMATION_ID</arg>
-<status status="PASS" start="2026-05-13T00:38:23.551985" elapsed="0.005446"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.558542" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.558204" elapsed="0.000476"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.558999" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.559651" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.558845" elapsed="0.000945"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.560671" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.559997" elapsed="0.000800"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.561439" level="INFO">${value} = 1520554001</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.561000" elapsed="0.000518"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.561836" level="INFO">Argument types are:
-&lt;class 'str'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.561638" elapsed="0.000279"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.561991" elapsed="0.000071"/>
-</return>
-<msg time="2026-05-13T00:38:23.562161" level="INFO">${NATIONALCODE} = 1520554001</msg>
-<var>${NATIONALCODE}</var>
-<arg>NATIONALCODE</arg>
-<status status="PASS" start="2026-05-13T00:38:23.557657" elapsed="0.004564"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.562747" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.562587" elapsed="0.000583"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.563516" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.564068" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.563323" elapsed="0.000922"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.564850" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.564447" elapsed="0.000483"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.565229" level="INFO">${value} = 147979</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.565044" elapsed="0.000248"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.565589" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.565401" elapsed="0.000272"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.565752" elapsed="0.000073"/>
-</return>
-<msg time="2026-05-13T00:38:23.565927" level="INFO">${HOSPITALFILEID} = 147979</msg>
-<var>${HOSPITALFILEID}</var>
-<arg>HOSPITALFILEID</arg>
-<status status="PASS" start="2026-05-13T00:38:23.562364" elapsed="0.003633"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.566802" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.566364" elapsed="0.000553"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.567253" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.567847" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.567047" elapsed="0.000943"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.568750" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.568159" elapsed="0.000706"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.569244" level="INFO">${value} = تامین اجتماعی</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.569025" elapsed="0.000289"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.569751" level="INFO">Argument types are:
-&lt;class 'str'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.569425" elapsed="0.000466"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.569983" elapsed="0.000192"/>
-</return>
-<msg time="2026-05-13T00:38:23.570324" level="INFO">${Patient_Insurance_name} = تامین اجتماعی</msg>
-<var>${Patient_Insurance_name}</var>
-<arg>Patient_Insurance_name</arg>
-<status status="PASS" start="2026-05-13T00:38:23.566141" elapsed="0.004321"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.571242" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.570994" elapsed="0.000911"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.572274" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.572844" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.572032" elapsed="0.000935"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.573593" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.573159" elapsed="0.000545"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.574146" level="INFO">${value} = مهرشاد</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.573868" elapsed="0.000384"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.574709" level="INFO">Argument types are:
-&lt;class 'str'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.574421" elapsed="0.000530"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.575081" elapsed="0.000154"/>
-</return>
-<msg time="2026-05-13T00:38:23.575569" level="INFO">${FIRSTNAME} = مهرشاد</msg>
-<var>${FIRSTNAME}</var>
-<arg>FIRSTNAME</arg>
-<status status="PASS" start="2026-05-13T00:38:23.570659" elapsed="0.005060"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.576881" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.576617" elapsed="0.000388"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.577354" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.578004" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.577137" elapsed="0.000972"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.578911" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.578249" elapsed="0.000818"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.579659" level="INFO">${value} = شیخ الاسلامی</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.579317" elapsed="0.000446"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.580168" level="INFO">Argument types are:
-&lt;class 'str'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.579915" elapsed="0.000364"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.580366" elapsed="0.000099"/>
-</return>
-<msg time="2026-05-13T00:38:23.580581" level="INFO">${LASTNAME} = شیخ الاسلامی</msg>
-<var>${LASTNAME}</var>
-<arg>LASTNAME</arg>
-<status status="PASS" start="2026-05-13T00:38:23.576158" elapsed="0.004498"/>
-</kw>
-<kw name="Read State" owner="AdmitHis-keywords">
-<kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.581302" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
-<arg>${STATE_FILE}</arg>
-<doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.581093" elapsed="0.000443"/>
-</kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-13T00:38:23.581988" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-13T00:38:23.582442" level="INFO">${content} = {
-  "DISPLAYNAME": "",
-  "SEX": "مرد",
-  "SEXID": 365,
-  "MOBILE": "",
-  "LASTHOMECITY": "",
-  "LASTINSURANCENO": "0019208291",
-  "RELIGION": "مسلمان",
-  "NATIONALITYID": 0,
-  "LASTMARITALSTATUS": 0,
-...</msg>
-<var>${content}</var>
-<arg>${STATE_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.581678" elapsed="0.000857"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.583131" level="INFO">${state} = {'DISPLAYNAME': '', 'SEX': 'مرد', 'SEXID': 365, 'MOBILE': '', 'LASTHOMECITY': '', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 0, 'LASTMARITALSTATUS': 0, 'BIRTHCITYID': 0, '...</msg>
-<var>${state}</var>
-<arg>json.loads('''${content}''')</arg>
-<arg>json</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.582680" elapsed="0.000561"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-13T00:38:23.583613" level="INFO">${value} = 147979</msg>
-<var>${value}</var>
-<arg>${state}</arg>
-<arg>${key}</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.583379" elapsed="0.000319"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.584041" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'NoneType'&gt;</msg>
-<arg>${value}</arg>
-<arg>${None}</arg>
-<arg>❌ ${key} not found in state file</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.583822" elapsed="0.000321"/>
-</kw>
-<return>
-<value>${value}</value>
-<status status="PASS" start="2026-05-13T00:38:23.584229" elapsed="0.000093"/>
-</return>
-<msg time="2026-05-13T00:38:23.584438" level="INFO">${HOSPITALFILEID} = 147979</msg>
-<var>${HOSPITALFILEID}</var>
-<arg>HOSPITALFILEID</arg>
-<status status="PASS" start="2026-05-13T00:38:23.580819" elapsed="0.003703"/>
-</kw>
-<kw name="Catenate" owner="BuiltIn">
-<msg time="2026-05-13T00:38:23.584909" level="INFO">${query} = SELECT Admit_HIS.ID_Admit, FileFormation.FirstName, FileFormation.LastName, FileFormation.HospitalFileID, Clinic_Cash.ClinicTitleType, Clinic_Cash.PatientPayment, Clinic_Cash.FromPos, Tbl_Insurance.In...</msg>
-<var>${query}</var>
-<arg>SELECT</arg>
-<arg>Admit_HIS.ID_Admit, FileFormation.FirstName, FileFormation.LastName, FileFormation.HospitalFileID, Clinic_Cash.ClinicTitleType, Clinic_Cash.PatientPayment, Clinic_Cash.FromPos, Tbl_Insurance.InsuranceName, FileFormation.ID_FileFormation, FileFormation.NCode, Admit_HIS.DischargeStep,Admit_HIS.PishPardaght</arg>
-<arg>FROM</arg>
-<arg>dbo.Clinic_Cash AS Clinic_Cash INNER JOIN</arg>
-<arg>dbo.Admit_HIS AS Admit_HIS ON Clinic_Cash.AdmitID = Admit_HIS.ID_Admit INNER JOIN</arg>
-<arg>dbo.FileFormation AS FileFormation ON Admit_HIS.FileFormationID = FileFormation.ID_FileFormation INNER JOIN</arg>
-<arg>dbo.Tbl_Insurance AS Tbl_Insurance ON Admit_HIS.InsuranceID = Tbl_Insurance.ID_Insurance</arg>
-<arg>WHERE</arg>
-<arg>(Clinic_Cash.ClinicTitleType = 249) AND</arg>
-<arg>(Admit_HIS.ID_Admit = ${PREADMIT_ADMIT_ID})</arg>
-<doc>Catenates the given items together and returns the resulted string.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.584650" elapsed="0.000354"/>
-</kw>
-<kw name="Query" owner="DatabaseLibrary">
-<msg time="2026-05-13T00:38:23.585344" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT Admit_HIS.ID_Admit, FileFormation.FirstName, FileFormation.LastName, FileFormation.HospitalFileID, Clinic_Cash.ClinicTitleType, Clinic_Cash.PatientPayment, Clinic_Cash.FromPos, Tbl_Insurance.InsuranceName, FileFormation.ID_FileFormation, FileFormation.NCode, Admit_HIS.DischargeStep,Admit_HIS.PishPardaght FROM dbo.Clinic_Cash AS Clinic_Cash INNER JOIN dbo.Admit_HIS AS Admit_HIS ON Clinic_Cash.AdmitID = Admit_HIS.ID_Admit INNER JOIN dbo.FileFormation AS FileFormation ON Admit_HIS.FileFormationID = FileFormation.ID_FileFormation INNER JOIN dbo.Tbl_Insurance AS Tbl_Insurance ON Admit_HIS.InsuranceID = Tbl_Insurance.ID_Insurance WHERE (Clinic_Cash.ClinicTitleType = 249) AND (Admit_HIS.ID_Admit = 356440)&lt;/code&gt;</msg>
-<msg time="2026-05-13T00:38:25.909151" level="INFO">Commit the transaction</msg>
-<msg time="2026-05-13T00:38:25.997235" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;ID_Admit&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;FirstName&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;LastName&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;HospitalFileID&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;ClinicTitleType&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;PatientPayment&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;FromPos&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;InsuranceName&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;ID_FileFormation&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;NCode&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;DischargeStep&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;PishPardaght&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;356440&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;مهرشاد&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;شيخ الاسلامي&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;147979&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;249&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;10000.0&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;False&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;تامين اجتماعي&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;683676&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;1520554001&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;15&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0.0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
-<msg time="2026-05-13T00:38:25.997949" level="INFO">${rows} = [(356440, 'مهرشاد', 'شيخ الاسلامي', 147979, 249, 10000.0, False, 'تامين اجتماعي', 683676, '1520554001', 15, 0.0)]</msg>
-<var>${rows}</var>
-<arg>${query}</arg>
-<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
-The type of row values depends on the database module -
-usually they are tuples or tuple-like objects.</doc>
-<status status="PASS" start="2026-05-13T00:38:23.585145" elapsed="2.413093"/>
-</kw>
-<kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-05-13T00:38:25.999642" level="INFO">Length is 1.</msg>
-<arg>${rows}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-05-13T00:38:25.998823" elapsed="0.001078"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.001361" level="INFO">${row} = (356440, 'مهرشاد', 'شيخ الاسلامي', 147979, 249, 10000.0, False, 'تامين اجتماعي', 683676, '1520554001', 15, 0.0)</msg>
-<var>${row}</var>
-<arg>${rows[0]}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.000123" elapsed="0.001389"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<arg>${row[0]}</arg>
-<arg>${PREADMIT_ADMIT_ID}</arg>
-<arg>msg= PREADMIT_ADMIT_ID is Null</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.001730" elapsed="0.000844"/>
-</kw>
-<kw name="Should Be Equal As Strings" owner="BuiltIn">
-<arg>${row[1]}</arg>
-<arg>${FIRSTNAME}</arg>
-<arg>msg= FIRSTNAME != ${FIRSTNAME}</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.002744" elapsed="0.000638"/>
-</kw>
-<kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.003962" level="INFO">Length is 12.</msg>
-<arg>${row[2]}</arg>
-<arg>msg= LASTNAME != ${LASTNAME}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.003507" elapsed="0.000561"/>
-</kw>
-<kw name="Should Be Equal As Strings" owner="BuiltIn">
-<arg>${row[3]}</arg>
-<arg>${HOSPITALFILEID}</arg>
-<arg>msg= HOSPITALFILEID != ${HOSPITALFILEID}</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.004203" elapsed="0.000614"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.005544" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${row[4]}</arg>
-<arg>249</arg>
-<arg>msg= ClinicTitleType != 249</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.004964" elapsed="0.000797"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.006697" level="INFO">Argument types are:
-&lt;class 'float'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${row[5]}</arg>
-<arg>${pishPardaght}</arg>
-<arg>msg= PatientPayment != ${pishPardaght}</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.005895" elapsed="0.001183"/>
-</kw>
-<kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.008175" level="INFO">Length is 13.</msg>
-<arg>${row[7]}</arg>
-<arg>msg= Insurance_name Is Empty</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.007295" elapsed="0.001027"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<arg>${row[8]}</arg>
-<arg>${PREADMIT_iD_FileFormation}</arg>
-<arg>msg= FileFormation Not Mach</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.008889" elapsed="0.001164"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<arg>${row[9]}</arg>
-<arg>${NATIONALCODE}</arg>
-<arg>msg= NATIONALCODE Not Mach</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.010265" elapsed="0.000837"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.011817" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${row[10]}</arg>
-<arg>15</arg>
-<arg>msg= DischargeStep != 15</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.011276" elapsed="0.000705"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.012904" level="INFO">Argument types are:
-&lt;class 'float'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${row[11]}</arg>
-<arg>0</arg>
-<arg>msg= PishPardaght In AdmitHis != 0</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.012118" elapsed="0.001336"/>
-</kw>
-<arg>${FOUND_PREADMIT_FILEFORMATION_ID}</arg>
-<status status="PASS" start="2026-05-13T00:38:22.962518" elapsed="3.051441"/>
-</kw>
-<kw name="Set Test Message" owner="BuiltIn">
-<msg time="2026-05-13T00:38:26.014887" level="INFO">Set test message to:
-Response: 200 
-</msg>
-<arg>Response: 200 \n</arg>
-<doc>Sets message for the current test case.</doc>
-<status status="PASS" start="2026-05-13T00:38:26.014598" elapsed="0.000477"/>
-</kw>
-<doc>تست دیتابیس بعد از پذیرش پری ادمیت</doc>
-<tag>DB-Test</tag>
-<tag>preadmit</tag>
-<status status="PASS" start="2026-05-13T00:38:22.949984" elapsed="3.065452">Response: 200 
-</status>
+<msg time="2026-05-15T15:32:54.191093" level="INFO">${INPATIENT_ADMIT_ID} = 356450</msg>
+<var>${INPATIENT_ADMIT_ID}</var>
+<arg>INPATIENT_ADMIT_ID</arg>
+<status status="PASS" start="2026-05-15T15:32:54.186473" elapsed="0.004980"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-05-15T15:32:54.192469" level="INFO">&amp;{headers} = { Authorization=bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3Vz...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<arg>Accept=application/json</arg>
+<arg>Accept-Language=fa</arg>
+<arg>charset=utf-8</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-05-15T15:32:54.191977" elapsed="0.000623"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-05-15T15:32:54.193531" level="INFO">${body} = {'admitId': 356450}</msg>
+<var>${body}</var>
+<arg>admitId=${INPATIENT_ADMIT_ID}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-05-15T15:32:54.193009" elapsed="0.000666"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-05-15T15:32:54.194575" level="FAIL">Resolving variable '${body.message}' failed: AttributeError: message</msg>
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>/api/Filing/SendToHisLive</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>json=${body}</arg>
+<arg>msg=${body.message}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2026-05-15T15:32:54.194018" elapsed="0.008777">Resolving variable '${body.message}' failed: AttributeError: message</status>
+</kw>
+<doc>ارسال پذیرش برای His Live</doc>
+<tag>API_FILING</tag>
+<tag>METHOD_POST</tag>
+<tag>PUBLIC</tag>
+<status status="FAIL" start="2026-05-15T15:32:54.181276" elapsed="0.022156">Resolving variable '${body.message}' failed: AttributeError: message</status>
 </test>
-<status status="PASS" start="2026-05-13T00:38:22.480040" elapsed="3.539250"/>
+<status status="FAIL" start="2026-05-15T15:32:53.768152" elapsed="0.439551"/>
 </suite>
-<status status="PASS" start="2026-05-13T00:38:22.452772" elapsed="3.577204"/>
+<status status="FAIL" start="2026-05-15T15:32:53.746974" elapsed="0.469283"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">DB-Test</stat>
-<stat pass="1" fail="0" skip="0">preadmit</stat>
+<stat pass="0" fail="1" skip="0">API_FILING</stat>
+<stat pass="0" fail="1" skip="0">METHOD_POST</stat>
+<stat pass="0" fail="1" skip="0">PUBLIC</stat>
 </tag>
 <suite>
-<stat name="AdmitHis-Test" id="s1" pass="1" fail="0" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis-Api" id="s1-s1" pass="1" fail="0" skip="0">AdmitHis-Test.AdmitHis-Api</stat>
+<stat name="AdmitHis-Test" id="s1" pass="0" fail="1" skip="0">AdmitHis-Test</stat>
+<stat name="AdmitHis-Api" id="s1-s1" pass="0" fail="1" skip="0">AdmitHis-Test.AdmitHis-Api</stat>
 </suite>
 </statistics>
 <errors>
