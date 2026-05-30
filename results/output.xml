@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-05-15T15:32:53.741201" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-05-30T22:48:03.812289" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
 <suite id="s1-s1" name="AdmitHis-Api" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis-Api.robot">
 <kw name="Create All Sessions" owner="AdmitHis-keywords" type="SETUP">
 <kw name="Create AdmitHIS Session" owner="AdmitHis-keywords">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-05-15T15:32:54.178962" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-05-30T22:48:04.191501" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-05-15T15:32:54.178216" elapsed="0.001268"/>
+<status status="PASS" start="2026-05-30T22:48:04.191236" elapsed="0.000509"/>
 </kw>
-<status status="PASS" start="2026-05-15T15:32:54.177334" elapsed="0.002288"/>
+<status status="PASS" start="2026-05-30T22:48:04.190571" elapsed="0.001310"/>
 </kw>
 <kw name="Create Cartable Session" owner="AdmitHis-keywords">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-05-15T15:32:54.180177" level="INFO">Creating Session using : alias=Cartable, url=http://192.168.5.19:8020, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-05-30T22:48:04.192418" level="INFO">Creating Session using : alias=Cartable, url=http://192.168.5.19:8020, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>Cartable</arg>
 <arg>${Cartable_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-05-15T15:32:54.179958" elapsed="0.000408"/>
+<status status="PASS" start="2026-05-30T22:48:04.192203" elapsed="0.000392"/>
 </kw>
-<status status="PASS" start="2026-05-15T15:32:54.179750" elapsed="0.000715"/>
+<status status="PASS" start="2026-05-30T22:48:04.192003" elapsed="0.000682"/>
 </kw>
 <kw name="Create Cash Session" owner="AdmitHis-keywords">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-05-15T15:32:54.180920" level="INFO">Creating Session using : alias=Cash, url=http://192.168.5.19:8074, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-05-30T22:48:04.193131" level="INFO">Creating Session using : alias=Cash, url=http://192.168.5.19:8074, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>Cash</arg>
 <arg>${Cash_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-05-15T15:32:54.180744" elapsed="0.000306"/>
+<status status="PASS" start="2026-05-30T22:48:04.192953" elapsed="0.000317"/>
 </kw>
-<status status="PASS" start="2026-05-15T15:32:54.180576" elapsed="0.000555"/>
+<status status="PASS" start="2026-05-30T22:48:04.192789" elapsed="0.000572"/>
 </kw>
-<status status="PASS" start="2026-05-15T15:32:54.176840" elapsed="0.004353"/>
+<status status="PASS" start="2026-05-30T22:48:04.190155" elapsed="0.003269"/>
 </kw>
-<test id="s1-s1-t1" name="059-Send To His Live" line="4169">
+<test id="s1-s1-t1" name="061-Send To His Live" line="4419">
 <kw name="Read State" owner="AdmitHis-keywords">
 <kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2026-05-15T15:32:54.187184" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<msg time="2026-05-30T22:48:04.200364" level="INFO" html="true">File '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
 <arg>${STATE_FILE}</arg>
 <doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2026-05-15T15:32:54.186902" elapsed="0.000441"/>
+<status status="PASS" start="2026-05-30T22:48:04.200113" elapsed="0.000417"/>
 </kw>
 <kw name="Get File" owner="OperatingSystem">
-<msg time="2026-05-15T15:32:54.187693" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
-<msg time="2026-05-15T15:32:54.188363" level="INFO">${content} = {
+<msg time="2026-05-30T22:48:04.200911" level="INFO" html="true">Getting file '&lt;a href="file://D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Payvand\Projects\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-05-30T22:48:04.201597" level="INFO">${content} = {
   "DISPLAYNAME": "شيخ الاسلامي - مهرشاد",
   "SEX": "مرد       ",
   "SEXID": 365,
@@ -60,45 +60,45 @@
 <var>${content}</var>
 <arg>${STATE_FILE}</arg>
 <doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-05-15T15:32:54.187492" elapsed="0.000995"/>
+<status status="PASS" start="2026-05-30T22:48:04.200694" elapsed="0.001007"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-15T15:32:54.189152" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
+<msg time="2026-05-30T22:48:04.202343" level="INFO">${state} = {'DISPLAYNAME': 'شيخ الاسلامي - مهرشاد', 'SEX': 'مرد       ', 'SEXID': 365, 'MOBILE': '09383509316', 'LASTHOMECITY': '363', 'LASTINSURANCENO': '0019208291', 'RELIGION': 'مسلمان', 'NATIONALITYID': 912,...</msg>
 <var>${state}</var>
 <arg>json.loads('''${content}''')</arg>
 <arg>json</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-15T15:32:54.188680" elapsed="0.000565"/>
+<status status="PASS" start="2026-05-30T22:48:04.201864" elapsed="0.000581"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2026-05-15T15:32:54.189617" level="INFO">${value} = 356450</msg>
+<msg time="2026-05-30T22:48:04.202816" level="INFO">${value} = 356460</msg>
 <var>${value}</var>
 <arg>${state}</arg>
 <arg>${key}</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2026-05-15T15:32:54.189384" elapsed="0.000391"/>
+<status status="PASS" start="2026-05-30T22:48:04.202589" elapsed="0.000314"/>
 </kw>
 <kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2026-05-15T15:32:54.190398" level="INFO">Argument types are:
+<msg time="2026-05-30T22:48:04.203472" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'NoneType'&gt;</msg>
 <arg>${value}</arg>
 <arg>${None}</arg>
 <arg>❌ ${key} not found in state file</arg>
 <doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2026-05-15T15:32:54.190030" elapsed="0.000577"/>
+<status status="PASS" start="2026-05-30T22:48:04.203038" elapsed="0.000665"/>
 </kw>
 <return>
 <value>${value}</value>
-<status status="PASS" start="2026-05-15T15:32:54.190782" elapsed="0.000162"/>
+<status status="PASS" start="2026-05-30T22:48:04.203866" elapsed="0.000300"/>
 </return>
-<msg time="2026-05-15T15:32:54.191093" level="INFO">${INPATIENT_ADMIT_ID} = 356450</msg>
+<msg time="2026-05-30T22:48:04.204338" level="INFO">${INPATIENT_ADMIT_ID} = 356460</msg>
 <var>${INPATIENT_ADMIT_ID}</var>
 <arg>INPATIENT_ADMIT_ID</arg>
-<status status="PASS" start="2026-05-15T15:32:54.186473" elapsed="0.004980"/>
+<status status="PASS" start="2026-05-30T22:48:04.199684" elapsed="0.004773"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-05-15T15:32:54.192469" level="INFO">&amp;{headers} = { Authorization=bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3Vz...</msg>
+<msg time="2026-05-30T22:48:04.205837" level="INFO">&amp;{headers} = { Authorization=bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3Vz...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=${AUTH_BEARER}</arg>
 <arg>Cookie=${COOKIE_TOKEN}</arg>
@@ -106,35 +106,49 @@
 <arg>Accept-Language=fa</arg>
 <arg>charset=utf-8</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-05-15T15:32:54.191977" elapsed="0.000623"/>
+<status status="PASS" start="2026-05-30T22:48:04.205006" elapsed="0.001165"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-05-15T15:32:54.193531" level="INFO">${body} = {'admitId': 356450}</msg>
+<msg time="2026-05-30T22:48:04.206977" level="INFO">${body} = {'admitId': 356460}</msg>
 <var>${body}</var>
 <arg>admitId=${INPATIENT_ADMIT_ID}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-05-15T15:32:54.193009" elapsed="0.000666"/>
+<status status="PASS" start="2026-05-30T22:48:04.206540" elapsed="0.000551"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-05-15T15:32:54.194575" level="FAIL">Resolving variable '${body.message}' failed: AttributeError: message</msg>
+<msg time="2026-05-30T22:48:10.848426" level="INFO">POST Request : url=http://192.168.5.19:1600/api/Filing/SendToHisLive 
+ path_url=/api/Filing/SendToHisLive 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiUGVyc29uSWQiOjkyMywiTG9naW5QYWdlVXJsIjoiMTcyLjI2LjU5LjE3IiwiTlBJRCI6IiIsInVzaW5mIjoiREVBQStCL0RVVVZjTzNvRkhoU3V0K3lCSWZwcTRIbEU1OGhMSVUxSkN6REtjWmRydVdRRXI5bmpXNEJYUE4rU0tndEFMdnNubENzUmQwa2d5UjZZbGllYmx2OTJGVGNQRTNYc2VMRGhJd2Mva1UrYnJFMzlXd3N3WGxWRUJoOWUiLCJDSUQiOiIiLCJBSUQiOiIxMDAiLCJDZW50ZXJOYW1lIjoi2YXYsdqp2LIg2KrZh9ix2KfZhiIsIlVzZXJFbWFpbEFkZHJlc3MiOiIiLCJEeW5hbWljUGVybWlzc2lvbktleSI6IjMyMzk2MDM4ZmNhMDFjYjY5ZDJjNDRiMDk2NDYyNGQxZmU0NjFjOTc4MGNmZmM3Zjk1NTgyYThhYTk3N2MyYTEiLCJJZGxldGltZSI6IjMyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc4MDE5Njc4MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.imgovfrCPbYmBU3T_IbbuxlTgKKBVwh9hEGoqwXWXRE', 'Cookie': 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiUGVyc29uSWQiOjkyMywiTG9naW5QYWdlVXJsIjoiMTcyLjI2LjU5LjE3IiwiTlBJRCI6IiIsInVzaW5mIjoiREVBQStCL0RVVVZjTzNvRkhoU3V0K3lCSWZwcTRIbEU1OGhMSVUxSkN6REtjWmRydVdRRXI5bmpXNEJYUE4rU0tndEFMdnNubENzUmQwa2d5UjZZbGllYmx2OTJGVGNQRTNYc2VMRGhJd2Mva1UrYnJFMzlXd3N3WGxWRUJoOWUiLCJDSUQiOiIiLCJBSUQiOiIxMDAiLCJDZW50ZXJOYW1lIjoi2YXYsdqp2LIg2KrZh9ix2KfZhiIsIlVzZXJFbWFpbEFkZHJlc3MiOiIiLCJEeW5hbWljUGVybWlzc2lvbktleSI6IjMyMzk2MDM4ZmNhMDFjYjY5ZDJjNDRiMDk2NDYyNGQxZmU0NjFjOTc4MGNmZmM3Zjk1NTgyYThhYTk3N2MyYTEiLCJJZGxldGltZSI6IjMyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc4MDE5Njc4MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.imgovfrCPbYmBU3T_IbbuxlTgKKBVwh9hEGoqwXWXRE', 'Accept-Language': 'fa', 'charset': 'utf-8', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"admitId": 356460}' 
+ </msg>
+<msg time="2026-05-30T22:48:10.849585" level="INFO">POST Response : url=http://192.168.5.19:1600/api/Filing/SendToHisLive 
+ status=500, reason=Internal Server Error 
+ headers={'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json', 'Content-Language': 'fa', 'Expires': '-1', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'Deny', 'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Download-Options': 'noopen', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Security-Policy': "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self';media-src 'self';font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content;report-uri /report", 'Content-Security-Policy-Report-Only': "default-src 'self';img-src 'self';media-src 'self'", 'X-Security': 'on', 'Date': 'Sat, 30 May 2026 19:18:10 GMT'} 
+ body={"isSuccess":false,"statusCode":500,"message":"Error In HisLive_OccupiedBed: An error occurred trying to start process 'C:\\Payvand\\BedService\\BedRegistry.exe' with working directory 'D:\\Published\\HisLive'. The system cannot find the file specified."} 
+ </msg>
+<msg time="2026-05-30T22:48:10.850156" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/SendToHisLive</msg>
 <var>${resp}</var>
 <arg>HIS</arg>
 <arg>/api/Filing/SendToHisLive</arg>
 <arg>headers=&amp;{headers}</arg>
 <arg>json=${body}</arg>
-<arg>msg=${body.message}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="FAIL" start="2026-05-15T15:32:54.194018" elapsed="0.008777">Resolving variable '${body.message}' failed: AttributeError: message</status>
+<status status="FAIL" start="2026-05-30T22:48:04.207523" elapsed="6.652429">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/SendToHisLive</status>
+</kw>
+<kw name="Set Test Message" owner="BuiltIn">
+<arg>Response: ${resp.status_code} \n</arg>
+<doc>Sets message for the current test case.</doc>
+<status status="NOT RUN" start="2026-05-30T22:48:10.860740" elapsed="0.000354"/>
 </kw>
 <doc>ارسال پذیرش برای His Live</doc>
 <tag>API_FILING</tag>
 <tag>METHOD_POST</tag>
 <tag>PUBLIC</tag>
-<status status="FAIL" start="2026-05-15T15:32:54.181276" elapsed="0.022156">Resolving variable '${body.message}' failed: AttributeError: message</status>
+<status status="FAIL" start="2026-05-30T22:48:04.193503" elapsed="6.668101">HTTPError: 500 Server Error: Internal Server Error for url: http://192.168.5.19:1600/api/Filing/SendToHisLive</status>
 </test>
-<status status="FAIL" start="2026-05-15T15:32:53.768152" elapsed="0.439551"/>
+<status status="FAIL" start="2026-05-30T22:48:03.841636" elapsed="7.031855"/>
 </suite>
-<status status="FAIL" start="2026-05-15T15:32:53.746974" elapsed="0.469283"/>
+<status status="FAIL" start="2026-05-30T22:48:03.818510" elapsed="7.059131"/>
 </suite>
 <statistics>
 <total>

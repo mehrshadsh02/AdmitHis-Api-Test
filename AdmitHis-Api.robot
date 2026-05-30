@@ -4166,7 +4166,257 @@ Suite Setup       Create All Sessions
 
     ${json}=    Set Variable    ${resp.json()}
 
-060-Send To His Live
+    Set Test Message
+    ...    Response: ${resp.status_code} \n Shaba Change
+
+
+060-Add Filing Inpatient 
+    [Documentation]   پذیرش بیمار بستری با اطلاعات کامل
+    [Tags]    API_Filing    METHOD_POST    Inpatient
+
+    ${INPATIENT_ward_NAME}=      Read State    INPATIONT_WARD_NAME
+    ${INPATIENT_WARD_ID}=        Read State    INPATIONT_WARD_ID
+    ${INPATIENT_BED_ID}=         Read State    INPATIONT_BED_ID
+    ${INPATIENT_BED_NO}=         Read State    INPATIONT_BED_NO
+    ${HOSPITALFILEID}=           Read State    HOSPITALFILEID
+    ${NATIONALCODE}=             Read State    NATIONALCODE
+    ${FIRSTNAME}=                Read State    FIRSTNAME
+    ${LASTNAME}=                 Read State    LASTNAME
+    ${FATHERNAME}=               Read State    FATHERNAME
+    ${DISPLAYNAME}=              Read State    DISPLAYNAME
+    ${LASTMARITALSTATUS}=        Read State    LASTMARITALSTATUS
+    ${LASTCITYID}=               Read State    LASTCITYID
+    ${RELIGION}=                 Read State    RELIGION
+    ${NATIONALITYID}=            Read State    NATIONALITYID
+    ${SEXID}=                    Read State    SEXID
+    ${SEX}=                      Read State    SEX
+    ${MOBILE}=                   Read State    MOBILE
+    ${BIRTHCITYID}=              Read State    BIRTHCITYID
+    ${LASTINSURANCENO}=          Read State    LASTINSURANCENO
+    ${Marital_Status_ID}=        Read State    Marital_Status_ID
+    ${city_Base_ID}=             Read State    city_Base_ID
+    ${city_Base_Name}=           Read State    city_Base_Name
+    ${Marital_Status_Name}=      Read State    Marital_Status_Name
+    ${Nationality_Name}=         Read State    Nationality_Name
+    ${INQUIRYUID}=               Read State    INQUIRYUID
+    ${Inpationt_Admission_Type_Sepas}=    Read State    Inpationt_Admission_Type_Sepas
+    ${Inpationt_Admission_Type_Name}=     Read State    Inpationt_Admission_Type_Name
+    ${Relationship_Name}=        Read State    Relationship_Name
+    ${LASTINSURBOX_SEPASID}=     Read State    LASTINSURBOX_SEPASID
+    ${Diagnosis_Name}=           Read State    Diagnosis-Name
+    ${Diagnosis_ID}=             Read State    Diagnosis-ID
+    ${lastInsurance_ID}=         Read State    lastInsurance_ID
+    ${lastInsurance_ExpDate}=    Read State    lastInsurance_ExpDate
+    ${insuranceExpDate}=         Convert Jalali To Gregorian    ${lastInsurance_ExpDate}
+    ${Birth_Date}=               Read State    BirthDate
+    ${BirthDate}=                Convert Jalali To Gregorian    ${Birth_Date}
+    ${Cause_Of_Hospitalization_Name}=    Read State    Cause_Of_Hospitalization_Name
+    ${Doctor_ID}=    Read State    Doctor_ID
+    ${Doctor_NAME}=    Read State    Doctor_NAME
+
+  
+    &{headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+    ...    Content-Type=application/json
+    ...    Accept-Language=fa
+
+    ${fileFormation}=    Create Dictionary
+    ...    name=${FIRSTNAME}
+    ...    nameEn=
+    ...    middleName=${DISPLAYNAME}
+    ...    familyName=${LASTNAME}
+    ...    familyEnName=
+    ...    fatherName=${FATHERNAME}
+    ...    grandPaName=
+	...    motherName=
+    ...    momGrandPaName=
+    ...    maritalStatus=${Marital_Status_ID}
+    ...    cityId=${city_Base_ID}
+    ...    relegiousStatus=${RELIGION}
+    ...    unknownType=0
+    ...    passportType=0
+    ...    residencePermit=${False}
+    ...    nationalCode=${nationalCode}
+	...    parentNationalCode=
+    ...    identityCode=
+    ...    nationality=${NATIONALITYID}
+    ...    passportNumber=
+    ...    sex=${SEXID}
+    ...    sexString=${SEX}
+    ...    email=
+    ...    mobileNo=${MOBILE}
+    ...    birthPlace=${city_Base_ID}
+    ...    birthPlaceOut=
+    ...    birthDate=${BirthDate}
+	...    maritalStatusString=${Marital_Status_Name}
+    ...    nationalityTitle=${Nationality_Name}
+    ...    birthPlaceString=${city_Base_Name}
+    ...    image=
+    ...    addressLine=dfgdfgdfgd
+    ...    phoneNo=
+    ...    postalCode=
+    ...    unknown=${False}
+    ...    hospitalFileID=${HOSPITALFILEID}
+    ...    sensitivity=
+    ...    contagion=
+    ...    note1=
+    ...    note2=
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    isDangerous=${False}
+    ...    uniqueEmergencyNo=0
+    ...    fileFormationId=${FileFormationID}
+    ...    husbandName=
+    ...    husbandLastName=
+    ...    triageId=0
+    ...    isNationalCodeRequired=${True}
+  
+
+    ${hisAdmitDto}=    Create Dictionary
+    ...    fileFormationID=${FileFormationID}
+	...    inquiryUId=${INQUIRYUID}
+    ...    admitDate=
+    ...    admitTime=
+    ...    isDischarged=${False}
+    ...    dischargeDate=
+    ...    dischargeTime=
+    ...    dischargeStep=0
+    ...    dischargeDebt=0
+    ...    wardIdIn=${INPATIENT_WARD_ID}
+	...    wardName=${INPATIENT_ward_NAME}
+    ...    physicianID=${Doctor_ID}
+    ...    recommender=
+    ...    admissionType=${Inpationt_Admission_Type_Sepas}
+    ...    patientClass=2
+    ...    priority=3
+	...    ability=0
+    ...    limitation1=${False}
+    ...    limitation2=${False}
+    ...    limitation3=${False}
+    ...    limitation4=${False}
+    ...    limitation5=${False}
+    ...    bPolice=${True}
+    ...    bCutting=${True}
+    ...    bDischarge=${True}
+    ...    bSurgery=${True}
+    ...    bUsingFile=${True}
+    ...    admissionReason=سوختگي
+    ...    entranceType=393
+	...    emsId=0
+    ...    krokiCode=0
+    ...    diagnosis=${Diagnosis_Name}
+    ...    diagnosisId=${Diagnosis_ID}
+    ...    insuranceID=${lastInsurance_ID}
+	...    insurPageNo=0
+    ...    insurSerialNO=
+    ...    recomendationNo=
+    ...    insurMax=0
+    ...    pishPardaght=0
+    ...    pishPardaghtDoctor=0
+    ...    doctorTotalCost=0
+    ...    referenceDoctorID=0
+    ...    insuranceNO=${LASTINSURANCENO}
+    ...    insuranceExpDate=${insuranceExpDate}
+    ...    sponsor=خود فرد
+    ...    degree=0         
+    ...    shebaNo=
+    ...    maritalStatus=${LASTMARITALSTATUS}
+	...    job=
+    ...    jobId=0
+    ...    homeCity=${city_Base_Name}
+    ...    homeZone=
+    ...    homeAddress=dfgdfgdfgd
+    ...    homePhone1=${MOBILE}
+    ...    homePhone2=
+    ...    homePostCode=
+    ...    workPlaceName=
+    ...    workCity=
+    ...    workAddress=
+    ...    workPhone1=
+    ...    workPhone2=
+    ...    workFax=
+    ...    workPostCode=
+    ...    familyFullName=${FATHERNAME}
+    ...    familyRelationship=${Relationship_Name}
+    ...    familyCity=${city_Base_Name}
+    ...    familyAddress=dfgdfgdfgd
+    ...    familyPhone1=09126944812
+    ...    familyPhone2=
+    ...    familyPostCode=
+    ...    husbandNCode=
+    ...    husbandFirstName=
+    ...    husbandLastName=
+    ...    husbandBirthDate=
+    ...    husbandIdentityNo=
+    ...    husbandIssuePlaceID=0
+    ...    husbandJobID=0
+    ...    husbandNationalityID=0
+    ...    husbandPassportID=
+    ...    tourismId=0
+    ...    isPregnant=false
+    ...    iD_Admit=0
+    ...    bedId=${INPATIENT_BED_ID}
+    ...    bedNo=${INPATIENT_BED_NO}
+    ...    referal=
+    ...    referalCenter=0
+    ...    operationDate=
+    ...    operationTime=
+    ...    sendToWardDate=
+    ...    sendToWardTime=
+    ...    followUpAdmitId=0
+    ...    isInfantUnder28Days=${False}
+    ...    supRecomendationNo=
+
+    ${filingDto}=    Create Dictionary
+    ...    fileFormation=${fileFormation}
+    ...    hisAdmitDto=${hisAdmitDto}
+	...    insuranceNote=
+    ...    insur_Relation=18
+    ...    lastInsuranceKind=${LASTINSURBOX_SEPASID}
+	...    lastInsuranceDate=
+    ...    insur2ID=0
+    ...    insur2No=0
+    ...    insur2Max=0
+    ...    wasInEmergency=${False}
+
+    ${body}=    Create Dictionary
+    ...    filingDto=${filingDto}
+
+    ${json_string}=    Evaluate    json.dumps(${body}, ensure_ascii=False)    json
+
+    ${resp}=    POST On Session
+    ...    HIS 
+    ...    url=/api/Filing/AddFiling
+    ...    headers=&{headers} 
+    ...    data=${json_string}
+
+    Should Be Equal As Integers    ${resp.status_code}    200 
+
+    ${json}=    Set Variable    ${resp.json()}
+
+    ${FOUND_INPATIENT_ADMIT_ID}=            Set Variable    ${json["admitId"]}
+    ${FOUND_INPATIENT_ADMIT_DATE}=          Set Variable    ${json["admitDate"]}
+    ${FOUND_INPATIENT_TITLE_TYPE}=          Set Variable    ${json["titleType"]}
+    ${FOUND_INPATIENT_FILEFORMATION_ID}=    Set Variable    ${json["fileFormationId"]}
+
+
+    Write State    INPATIENT_ADMIT_ID            ${FOUND_INPATIENT_ADMIT_ID}  
+    Write State    INPATIENT_ADMIT_DATE          ${FOUND_INPATIENT_ADMIT_DATE}
+    Write State    INPATIENT_TITLE_TYPE          ${FOUND_INPATIENT_TITLE_TYPE}
+    Write State    INPATIENT_FILEFORMATION_ID    ${FOUND_INPATIENT_FILEFORMATION_ID}  
+
+    Log To Console    ✅ INPATIENT_ADMIT_ID saved: ${FOUND_INPATIENT_ADMIT_ID}
+
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+
+
+061-Send To His Live
     [Documentation]    ارسال پذیرش برای His Live
     [Tags]    API_FILING    METHOD_POST    PUBLIC    
 
@@ -4188,5 +4438,8 @@ Suite Setup       Create All Sessions
     ...    headers=&{headers}
     ...    json=${body} 
 
-34-
-35-
+    Set Test Message
+    ...    Response: ${resp.status_code} \n
+062-
+063-
+064-    
