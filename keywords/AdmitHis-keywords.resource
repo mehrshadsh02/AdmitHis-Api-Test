@@ -249,15 +249,33 @@ Write State
     ...    File Should Exist    ${STATE_FILE}
 
     IF    not ${exists}
-        Create File    ${STATE_FILE}    {}
+        Create File    ${STATE_FILE}    {}    encoding=utf-8
     END
 
     ${content}=    Get File    ${STATE_FILE}    encoding=utf-8
-    ${state}=      Evaluate    json.loads('''${content}''')    json    
 
-    Set To Dictionary    ${state}    ${key}    ${value}
+    ${state}=    Evaluate    json.loads('''${content}''')    json
 
-    ${out}=    Evaluate    json.dumps(${state}, indent=2, ensure_ascii=False)
+    ${key_exists}=    Run Keyword And Return Status
+    ...    Dictionary Should Contain Key    ${state}    ${key}
+
+    IF    not ${key_exists}
+        # ✅ اگر وجود ندارد → بساز
+        Set To Dictionary    ${state}    ${key}    ${value}
+
+    ELSE
+        ${old_value}=    Get From Dictionary    ${state}    ${key}
+
+        ${is_null}=    Evaluate    $old_value is None or $old_value == '' or $old_value == 'null'
+
+        IF    ${is_null}
+            # ✅ اگر قبلاً null بوده → آپدیت کن
+            Set To Dictionary    ${state}    ${key}    ${value}
+        END
+    END
+
+    ${out}=    Evaluate    json.dumps(${state}, indent=2, ensure_ascii=False)    json
+
     Create File    ${STATE_FILE}    ${out}    encoding=utf-8
 
 
