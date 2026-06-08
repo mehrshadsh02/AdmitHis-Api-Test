@@ -511,27 +511,27 @@ Suite Setup       Create All Sessions
         END
     END
     
-    Write State    FIRSTNAME         ${FOUND_First_Name}
-    Write State    LASTNAME          ${FOUND_Last_Name}
-    Write State    DISPLAYNAME    ${FOUND_display_Name}
-    Write State    SEX    ${FOUND_sex}
-    Write State    SEXID    ${FOUND_sexId}
-    Write State    MOBILE    ${FOUND_mobile}
-    Write State    LASTHOMECITY    ${FOUND_lastHomeCity}
-    Write State    LASTINSURANCENO    ${FOUND_lastInsuranceNO}
-    # Write State    RELIGION    ${FOUND_religion}
-    Write State    NATIONALITYID    ${FOUND_nationalityID}
-    Write State    LASTMARITALSTATUS    ${FOUND_lastMaritalStatus}
-    Write State    BIRTHCITYID    ${FOUND_birthCityID}
-    # Write State    UNIQUEMERGENCYNO    ${FOUND_uniqueEmergencyNo}
-    Write State    LASTCITYID    ${FOUND_lastCityID}
-    Write State    LASTINSURBOX_SEPASID    ${FOUND_lastInsurBox_SepasID}
-    Write State    INQUIRYUID    ${FOUND_inquiryUId}
-    Write State    HOSPITALFILEID    ${FOUND_Hospital_FileID}  
-    Write State    NATIONALCODE      ${FOUND_National_Code}
-    Write State    lastInsurance_ID        ${FOUND_lastInsurance_ID}
-    Write State    lastInsurance_ExpDate        ${FOUND_lastInsurance_ExpDate}
-    Write State    BirthDate        ${FOUND_Birth_Date}
+    Fileformation Write State    FIRSTNAME         ${FOUND_First_Name}
+    Fileformation Write State    LASTNAME          ${FOUND_Last_Name}
+    Fileformation Write State    DISPLAYNAME    ${FOUND_display_Name}
+    Fileformation Write State    SEX    ${FOUND_sex}
+    Fileformation Write State    SEXID    ${FOUND_sexId}
+    Fileformation Write State    MOBILE    ${FOUND_mobile}
+    Fileformation Write State    LASTHOMECITY    ${FOUND_lastHomeCity}
+    Fileformation Write State    LASTINSURANCENO    ${FOUND_lastInsuranceNO}
+    # Fileformation Write State    RELIGION    ${FOUND_religion}
+    Fileformation Write State   NATIONALITYID    ${FOUND_nationalityID}
+    Fileformation Write State   LASTMARITALSTATUS    ${FOUND_lastMaritalStatus}
+    Fileformation Write State   BIRTHCITYID    ${FOUND_birthCityID}
+    # Fileformation Write State    UNIQUEMERGENCYNO    ${FOUND_uniqueEmergencyNo}
+    Fileformation Write State    LASTCITYID    ${FOUND_lastCityID}
+    Fileformation Write State    LASTINSURBOX_SEPASID    ${FOUND_lastInsurBox_SepasID}
+    Fileformation Write State    INQUIRYUID    ${FOUND_inquiryUId}
+    Fileformation Write State    HOSPITALFILEID    ${FOUND_Hospital_FileID}  
+    Fileformation Write State    NATIONALCODE      ${FOUND_National_Code}
+    Fileformation Write State    lastInsurance_ID        ${FOUND_lastInsurance_ID}
+    Fileformation Write State    lastInsurance_ExpDate        ${FOUND_lastInsurance_ExpDate}
+    Fileformation Write State    BirthDate        ${FOUND_Birth_Date}
 
     Set Test Message
     ...    Response: ${resp.status_code}\n
@@ -4699,7 +4699,7 @@ Suite Setup       Create All Sessions
     Set Test Message
     ...    Response: ${resp.status_code} \n
 064-Validate DataBase After Edit Inpatient And Cancel
-    [Documentation]   تست دیتابیس بعد از رزرو preadmit
+    [Documentation]   تست دیتابیس بعد  از ویرایش پذیرش بستری
     [Tags]    DB-Test    Inpatient
 
     ${FOUND_PREADMIT_FILEFORMATION_ID}=      Read State    PREADMIT_FILEFORMATION_ID

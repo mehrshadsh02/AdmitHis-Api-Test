@@ -249,6 +249,25 @@ Write State
     ...    File Should Exist    ${STATE_FILE}
 
     IF    not ${exists}
+        Create File    ${STATE_FILE}    {}
+    END
+
+    ${content}=    Get File    ${STATE_FILE}    encoding=utf-8
+    ${state}=      Evaluate    json.loads('''${content}''')    json    
+
+    Set To Dictionary    ${state}    ${key}    ${value}
+
+    ${out}=    Evaluate    json.dumps(${state}, indent=2, ensure_ascii=False)
+    Create File    ${STATE_FILE}    ${out}    encoding=utf-8
+
+
+Fileformation Write State
+    [Arguments]    ${key}    ${value}
+
+    ${exists}=    Run Keyword And Return Status
+    ...    File Should Exist    ${STATE_FILE}
+
+    IF    not ${exists}
         Create File    ${STATE_FILE}    {}    encoding=utf-8
     END
 
