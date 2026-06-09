@@ -1,4 +1,9 @@
+*** Settings ***
+Documentation    Global variables for AdmitHis project
+
 *** Variables ***
+
+${Landing_App_URL}       http://192.168.5.19:1201
 
 ${AdmitHis_Api_URL}       http://192.168.5.19:1600
 

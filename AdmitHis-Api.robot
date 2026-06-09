@@ -8,9 +8,9 @@ Library           DatabaseLibrary
 Library           pymssql
 Library           jdatetime
 
-Resource          ../resources/AdmitHis-variables.resource
-Resource          ../keywords/AdmitHis-keywords.resource
-Resource          ../keywords/AdmitHis-DB-keywords.resource
+Resource          ../Resources/Variables/AdmitHis-variables.resource
+Resource          ../Resources/Keywords/AdmitHis-keywords.resource
+Resource          ../Resources/Keywords/AdmitHis-DB-keywords.resource
 
 Suite Setup       Create All Sessions   
     

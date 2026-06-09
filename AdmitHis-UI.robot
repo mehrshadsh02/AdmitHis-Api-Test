@@ -3,20 +3,23 @@ Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
 Library           SeleniumLibrary
-Resource          ../AdmitHis-Test/resources/AdmitHis-variables.resource
-Resource          ../AdmitHis-Test/keywords/AdmitHis-keywords.resource
-Resource          ../keywords/AdmitHis-DB-keywords.resource
+
+Resource          ../Resources/Variables/AdmitHis-variables.resource
+Resource          ../Resources/Keywords/AdmitHis-keywords.resource
+Resource          ../Resources/Keywords/AdmitHis-DB-keywords.resource
 
 Suite Setup       Create AdmitHIS Session
 
 *** Test Cases ***
 
 # PreAdmit Test
-01-UI - Open Filing Page
+TC_EPD_HIS_01 - Open Filing Page
     [Documentation]   باز  کردن صفحه پذیرش بستری
     [Tags]    STEP_01_Open_Browser    UI_Test    step01    preadmit
-
+  
     Disable Screenshots
+    Start Browser Landing With Token
+    Go To Landing Page
     Start Browser AdmitHis With Token
     Go To AdmitHis Page
     Wait For Spinner Hidden
@@ -24,7 +27,7 @@ Suite Setup       Create AdmitHIS Session
 
 # زمانی که کاربر شروع به پذیرش میکنه و کد ملی رو وارد میکنه و استحقاق درمان میکنه
 
-02-UI - Enter national code of preadmit patient
+TC_EPD_HIS_02 - Enter national code of preadmit patient
     [Documentation]   وارد کردن کد ملی بیمار و استعلام کد ملی
     [Tags]    UI_Test    step02    preadmit
 
@@ -39,7 +42,7 @@ Suite Setup       Create AdmitHIS Session
 
 # پر کردن باقی فیلد های مهم در پذیرش 
 
-03-UI - Fill Patient PreAdmit Info
+TC_EPD_HIS_03 - Fill Patient PreAdmit Info
     [Documentation]    پر کردن اطلاعات مورد نیاز بیمار 
     [Tags]    UI_Test    step03    preadmit
 
@@ -64,7 +67,7 @@ Suite Setup       Create AdmitHIS Session
 
 #وقتی که بخش بیمار را برای بستری کردن انتخاب میکنیم
 
-04-UI - Assign Ward And Doctor And Prepayment
+TC_EPD_HIS_04 - Assign Ward And Doctor And Prepayment
     [Documentation]    انتخاب بخش و پزشک بیمار preadmit
     [Tags]    UI_Test    step04    preadmit
 
@@ -76,7 +79,8 @@ Suite Setup       Create AdmitHIS Session
 
     Input Text         //input[@formcontrolname='prepayment']             10000
 
-05-UI - Save Admission Filing
+
+TC_EPD_HIS_05 - Save Admission Filing
     [Documentation]    سیو کردن پذیرش preadmit
     [Tags]    UI_Test    step05    preadmit
 
@@ -87,14 +91,14 @@ Suite Setup       Create AdmitHIS Session
 
 # زدن دکمه لغو صفحه پرینت برگه پذیرش 
 
-06-UI - deny admit print page
+TC_EPD_HIS_06 - deny admit print page
     [Documentation]    لغو پرینت برگه پذیرش 
     [Tags]    UI_Test    step06    preadmit
 
     Disable Screenshots
     Click Element Safe    css=button.swal2-deny.swal2-styled
 
-07-UI - Open Cash Web And Pay
+TC_EPD_HIS07 - Open Cash Web And Pay
     [Documentation]     باز کردن صندوق و دریافت پیش پرداخت بیمار پری ادمیت
     [Tags]    UI_Test    step07    preadmit
     
@@ -102,7 +106,7 @@ Suite Setup       Create AdmitHIS Session
     Cash Pay Patient By National Code    ${nationalCode}
 
 
-08-UI - go to inpatient list
+TC_EPD_HIS08 - go to inpatient list
     [Documentation]    رفتن به لیست بیماران بستری 
     [Tags]    UI_Test    step08    preadmit
     

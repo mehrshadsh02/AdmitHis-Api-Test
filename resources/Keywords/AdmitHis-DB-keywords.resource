@@ -7,8 +7,8 @@ Library           JSONLibrary
 Library           DatabaseLibrary
 Library           pymssql
 
-Resource          ../resources/AdmitHis-variables.resource
-Resource          ../keywords/AdmitHis-keywords.resource
+Resource          ../Variables/AdmitHis-variables.resource
+Resource          AdmitHis-keywords.resource
 
 
 *** Keywords ***

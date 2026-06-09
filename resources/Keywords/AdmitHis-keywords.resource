@@ -5,13 +5,16 @@ Library           OperatingSystem
 Library           SeleniumLibrary
 Library           JSONLibrary
 Library           DatabaseLibrary
-Library           pymssql
+Library           pymssql    
 Library           jdatetime
 
-Resource          ../resources/AdmitHis-variables.resource
+Resource          ${CURDIR}/../Variables/AdmitHis-variables.resource
 
 
 *** Keywords ***
+
+Create Landing Session
+    Create Session    Landing    ${Landing_App_URL}   verify=${False}
 
 Create AdmitHIS Session
     Create Session    HIS    ${AdmitHis_Api_URL}   verify=${False}
@@ -23,13 +26,30 @@ Create Cash Session
     Create Session    Cash    ${Cash_Api_URL}   verify=${False}    
 
 Create All Sessions
+    Create Landing Session
     Create AdmitHIS Session
     Create Cartable Session
     Create Cash Session
 
 Disable Screenshots
     Register Keyword To Run On Failure    NONE    
-    
+
+# Landing App
+
+Start Browser Landing With Token
+    [Documentation]    باز کردن کروم + تزریق کوکی token
+    Open Browser    ${Landing_App_URL}    chrome     executable_path=C:/chromedriver.exe
+    Maximize Browser Window
+    Add Cookie    token    ${COOKIE_TOKEN}
+    Reload Page
+
+
+Go To Landing Page
+    [Documentation]    رفتن مستقیم به صفحه پذیرش بستری
+    Go To    ${Landing_App_URL}
+    Reload Page
+
+
 # َAdmit_His  
 Start Browser AdmitHis With Token
     [Documentation]    باز کردن کروم + تزریق کوکی token
