@@ -34,6 +34,41 @@ Create All Sessions
 Disable Screenshots
     Register Keyword To Run On Failure    NONE    
 
+Get Token Data
+    [Documentation]    دریافت اطلاعات کاربر لاگین کننده
+    [Tags]    API_DynamicRoleClaimsManager    METHOD_GET  
+
+    ${headers}=    Create Dictionary
+    ...    Authorization=${AUTH_BEARER}
+    ...    Cookie=${COOKIE_TOKEN}
+    ...    Accept=application/json
+
+    ${resp}=    GET On Session    
+    ...    HIS    
+    ...    /api/DynamicRoleClaimsManager/GetTokenData    
+    ...    headers=${headers}
+
+    Should Be Equal As Integers    
+    ...    ${resp.status_code}    
+    ...    200    
+
+    ${json}=    Set Variable    ${resp.json()}  
+
+    ${LOGIN_user_name}=           Set Variable    ${json["username"]}
+    ${LOGIN_person_Id}=           Set Variable    ${json["personId"]}
+    ${LOGIN_display_Name}=        Set Variable    ${json["displayName"]}
+    ${LOGIN_ROLES}=               Set Variable    ${json["roles"]}
+
+    Write State    LOGIN_ROLES    ${LOGIN_ROLES}
+    Write State    Login_User_Name    ${LOGIN_user_name} 
+    Write State    Login_Person_Id    ${LOGIN_person_Id} 
+    Write State    Login_Display_Name    ${LOGIN_display_Name} 
+
+
+    
+    Set Test Message
+    ...    Response: ${resp.status_code}\nUser Info:\n${LOGIN_user_name} / ${LOGIN_person_Id} / ${LOGIN_display_Name}    
+
 # Landing App
 
 Start Browser Landing With Token
@@ -45,10 +80,61 @@ Start Browser Landing With Token
 
 
 Go To Landing Page
-    [Documentation]    رفتن مستقیم به صفحه پذیرش بستری
+    [Documentation]    رفتن مستقیم به صفحه لندینگ
     Go To    ${Landing_App_URL}
     Reload Page
 
+Click Admit HIS In Landing
+    [Documentation]   کلیک بر روی گزینه پذیرش بستری
+    [Arguments]    ${timeout}=30
+    Wait Until Element Is Not Visible    css=div.back-spenner.ng-star-inserted    1000
+    Run Keyword And Ignore Error
+    ...    Wait Until Page Contains Element
+    ...    ${GLOBAL_SPINNER}
+    ...    3
+
+    Wait Until Element Is Not Visible
+    ...    ${GLOBAL_SPINNER}
+    ...    ${timeout}      
+    # Click Element    xpath=//div[contains(@class,'child-name') and normalize-space()='پذیرش بستری']
+    Execute JavaScript
+    ...    document.evaluate("//div[contains(@class,'child-name') and contains(.,'پذیرش بستری')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+    Reload Page
+
+Validate Admit Access
+
+    [Documentation]    بررسی دسترسی کاربر به پذیرش بستری
+
+    Get Token Data
+
+    ${roles}=    Read State    LOGIN_ROLES
+
+    Log To Console
+    ...    User Roles: ${roles}
+
+    ${has_access}=    Evaluate
+    ...    1195 in $roles or 777 in $roles
+
+    Skip If
+    ...    not ${has_access}
+    ...    User does not have Admit HIS access role (1195 or 777)
+
+    Log To Console
+    ...    User has valid Admit HIS access
+
+Validate Admit Page Opened
+
+    [Documentation]    بررسی باز شدن صفحه پذیرش بستری
+
+    ${opened}=    Run Keyword And Return Status
+
+    ...    Wait Until Page Contains Element
+    ...    xpath=//*[contains(text(),'پذیرش بستری')]
+    ...    20s
+
+    Should Be True
+    ...    ${opened}
+    ...    User has access role but Admit HIS page did not open    
 
 # َAdmit_His  
 Start Browser AdmitHis With Token

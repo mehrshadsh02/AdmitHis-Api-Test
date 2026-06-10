@@ -8,23 +8,48 @@ Resource          ../Resources/Variables/AdmitHis-variables.resource
 Resource          ../Resources/Keywords/AdmitHis-keywords.resource
 Resource          ../Resources/Keywords/AdmitHis-DB-keywords.resource
 
+
 Suite Setup       Create AdmitHIS Session
 
 *** Test Cases ***
 
 # PreAdmit Test
-TC_EPD_HIS_01 - Open Filing Page
-    [Documentation]   باز  کردن صفحه پذیرش بستری
-    [Tags]    STEP_01_Open_Browser    UI_Test    step01    preadmit
+# TC_EPD_HIS_01 - Open Filing Page
+#     [Documentation]   باز  کردن صفحه پذیرش بستری
+#     [Tags]    STEP_01_Open_Browser    UI_Test    step01    preadmit
   
-    Disable Screenshots
-    Start Browser Landing With Token
-    Go To Landing Page
-    Start Browser AdmitHis With Token
-    Go To AdmitHis Page
-    Wait For Spinner Hidden
-    Log To Console    ---- DONE ----
+#     Disable Screenshots
+#     Start Browser Landing With Token
+#     Go To Landing Page
+#     Click Admit HIS In Landing
 
+#     Log To Console    ---- DONE ----
+
+TC_EPD_HIS_01 - Open Filing Page
+
+    [Documentation]   باز کردن صفحه پذیرش بستری
+
+    [Tags]
+    ...    STEP_01_Open_Browser
+    ...    UI_Test
+    ...    step01
+    ...    preadmit
+
+    Disable Screenshots
+
+    Start Browser Landing With Token
+
+    Go To Landing Page
+
+    Validate Admit Access
+
+    Click Admit HIS In Landing
+
+    Validate Admit Page Opened
+
+    Log To Console
+    ...    ---- DONE ----
+    
 # زمانی که کاربر شروع به پذیرش میکنه و کد ملی رو وارد میکنه و استحقاق درمان میکنه
 
 TC_EPD_HIS_02 - Enter national code of preadmit patient

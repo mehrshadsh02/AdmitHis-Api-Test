@@ -1,79 +1,642 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-06-09T23:31:04.932833" rpa="false" schemaversion="5">
-<suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test">
-<suite id="s1-s1" name="AdmitHis-UI" source="D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitHis-UI.robot">
+<robot generator="Robot 7.4.2 (Python 3.13.13 on win32)" generated="2026-06-10T18:56:43.400853" rpa="false" schemaversion="5">
+<suite id="s1" name="AdmitHis-Test" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test">
+<suite id="s1-s1" name="AdmitHis-UI" source="D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\AdmitHis-UI.robot">
 <kw name="Create AdmitHIS Session" owner="AdmitHis-keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-06-09T23:31:05.358235" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-06-10T18:56:44.095396" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-06-09T23:31:05.357959" elapsed="0.000525"/>
+<status status="PASS" start="2026-06-10T18:56:44.094822" elapsed="0.001120"/>
 </kw>
-<status status="PASS" start="2026-06-09T23:31:05.357116" elapsed="0.001504"/>
+<status status="PASS" start="2026-06-10T18:56:44.092973" elapsed="0.003231"/>
 </kw>
-<test id="s1-s1-t1" name="TC_EPD_HIS_01 - Open Filing Page" line="16">
+<test id="s1-s1-t1" name="TC_EPD_HIS_01 - Open Filing Page" line="28">
 <kw name="Disable Screenshots" owner="AdmitHis-keywords">
 <kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-06-09T23:31:05.369963" level="INFO">No keyword will be run on failure.</msg>
+<msg time="2026-06-10T18:56:44.101956" level="INFO">No keyword will be run on failure.</msg>
 <arg>NONE</arg>
 <doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-06-09T23:31:05.369712" elapsed="0.000418"/>
+<status status="PASS" start="2026-06-10T18:56:44.101351" elapsed="0.001169"/>
 </kw>
-<status status="PASS" start="2026-06-09T23:31:05.369241" elapsed="0.001005"/>
+<status status="PASS" start="2026-06-10T18:56:44.100654" elapsed="0.002203"/>
 </kw>
 <kw name="Start Browser Landing With Token" owner="AdmitHis-keywords">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-06-09T23:31:05.371367" level="WARN">exexcutable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.</msg>
-<msg time="2026-06-09T23:31:05.377174" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:1201'.</msg>
+<msg time="2026-06-10T18:56:44.104800" level="WARN">executable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.</msg>
+<msg time="2026-06-10T18:56:44.120197" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:1201'.</msg>
 <arg>${Landing_App_URL}</arg>
 <arg>chrome</arg>
 <arg>executable_path=C:/chromedriver.exe</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-06-09T23:31:05.371066" elapsed="2.573620"/>
+<status status="PASS" start="2026-06-10T18:56:44.104162" elapsed="1.682391"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-06-09T23:31:07.944966" elapsed="0.038352"/>
+<status status="PASS" start="2026-06-10T18:56:45.787070" elapsed="0.034039"/>
 </kw>
 <kw name="Add Cookie" owner="SeleniumLibrary">
 <arg>token</arg>
 <arg>${COOKIE_TOKEN}</arg>
 <doc>Adds a cookie to your current session.</doc>
-<status status="PASS" start="2026-06-09T23:31:07.983827" elapsed="0.011306"/>
+<status status="PASS" start="2026-06-10T18:56:45.821426" elapsed="0.011280"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-06-09T23:31:07.995443" elapsed="2.405901"/>
+<status status="PASS" start="2026-06-10T18:56:45.833126" elapsed="0.168895"/>
 </kw>
 <doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="PASS" start="2026-06-09T23:31:05.370677" elapsed="5.030861"/>
+<status status="PASS" start="2026-06-10T18:56:44.103495" elapsed="1.898951"/>
 </kw>
 <kw name="Go To Landing Page" owner="AdmitHis-keywords">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2026-06-09T23:31:10.402864" level="INFO">Opening url 'http://192.168.5.19:1201'</msg>
+<msg time="2026-06-10T18:56:46.005542" level="INFO">Opening url 'http://192.168.5.19:1201'</msg>
 <arg>${Landing_App_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2026-06-09T23:31:10.402563" elapsed="0.055461"/>
+<status status="PASS" start="2026-06-10T18:56:46.005025" elapsed="0.111472"/>
 </kw>
 <kw name="Reload Page" owner="SeleniumLibrary">
 <doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-06-09T23:31:10.458996" elapsed="2.373645"/>
+<status status="PASS" start="2026-06-10T18:56:46.116781" elapsed="0.084325"/>
 </kw>
-<doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
-<status status="PASS" start="2026-06-09T23:31:10.402016" elapsed="2.431143"/>
+<doc>رفتن مستقیم به صفحه لندینگ</doc>
+<status status="PASS" start="2026-06-10T18:56:46.004023" elapsed="0.197384"/>
 </kw>
-<doc>باز  کردن صفحه پذیرش بستری</doc>
+<kw name="Validate Admit Access" owner="AdmitHis-keywords">
+<kw name="Get Token Data" owner="AdmitHis-keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-06-10T18:56:46.204696" level="INFO">${headers} = {'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL...</msg>
+<var>${headers}</var>
+<arg>Authorization=${AUTH_BEARER}</arg>
+<arg>Cookie=${COOKIE_TOKEN}</arg>
+<arg>Accept=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-06-10T18:56:46.203497" elapsed="0.001540"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-06-10T18:56:47.456121" level="INFO">GET Request : url=http://192.168.5.19:1600/api/DynamicRoleClaimsManager/GetTokenData 
+ path_url=/api/DynamicRoleClaimsManager/GetTokenData 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiUGVyc29uSWQiOjkyMywiTG9naW5QYWdlVXJsIjoiMTkyLjE2OC41LjY2IiwiTlBJRCI6IiIsInVzaW5mIjoiL0RaWXlIZGVCR1lETFdueVhVaml4NTJFSmZzZWRBaEp1bUIxRGFadGtqMjVhdWo0clo1T1NpTjJ4NGVPYWdrWENGTmxhOFB6V3huV0l6QXNhbjd0Z2VKNXZoNS8zVStFRkFxRStoZjQxRjFJYnNKSUZyenBVbStDelVCUHBkNTAiLCJDSUQiOiIiLCJBSUQiOiIxMDAiLCJDZW50ZXJOYW1lIjoi2YXYsdqp2LIg2KrZh9ix2KfZhiIsIlVzZXJFbWFpbEFkZHJlc3MiOiIiLCJEeW5hbWljUGVybWlzc2lvbktleSI6IjMyMzk2MDM4ZmNhMDFjYjY5ZDJjNDRiMDk2NDYyNGQxZmU0NjFjOTc4MGNmZmM3Zjk1NTgyYThhYTk3N2MyYTEiLCJJZGxldGltZSI6IjMyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc4MTEzMzgxNSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.cEXlXWvx4wGnyDHJCe2x8o4mjC-ob3Mt08CWd9uFGJ0', 'Cookie': 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoiOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIzMDYyNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvc2VyaWFsbnVtYmVyIjoiMzhmMTZmMWNmNjNlODJlZjM1YTU5MTg4YWExYWFhZWQzNTg2M2YxNTgzYTY3NTJmMmYxNWMyNmUwNDIzNzEwNyIsIlVzZXJJZCI6IjkiLCJVc2VyRGlzcGxheU5hbWUiOiLYotiy24zYqtinINmB2LTYp9ix2qnbjCDZhtuM2KciLCJUZW5hbnRJZCI6IjEwMDE1IiwiUGVyc29uSWQiOjkyMywiTG9naW5QYWdlVXJsIjoiMTkyLjE2OC41LjY2IiwiTlBJRCI6IiIsInVzaW5mIjoiL0RaWXlIZGVCR1lETFdueVhVaml4NTJFSmZzZWRBaEp1bUIxRGFadGtqMjVhdWo0clo1T1NpTjJ4NGVPYWdrWENGTmxhOFB6V3huV0l6QXNhbjd0Z2VKNXZoNS8zVStFRkFxRStoZjQxRjFJYnNKSUZyenBVbStDelVCUHBkNTAiLCJDSUQiOiIiLCJBSUQiOiIxMDAiLCJDZW50ZXJOYW1lIjoi2YXYsdqp2LIg2KrZh9ix2KfZhiIsIlVzZXJFbWFpbEFkZHJlc3MiOiIiLCJEeW5hbWljUGVybWlzc2lvbktleSI6IjMyMzk2MDM4ZmNhMDFjYjY5ZDJjNDRiMDk2NDYyNGQxZmU0NjFjOTc4MGNmZmM3Zjk1NTgyYThhYTk3N2MyYTEiLCJJZGxldGltZSI6IjMyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbImNoZWNrIiwicm9sZSJdLCJSb2xlSWQiOjExOTUsImV4cCI6MTc4MTEzMzgxNSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3NzQwLyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MjY1OC8ifQ.cEXlXWvx4wGnyDHJCe2x8o4mjC-ob3Mt08CWd9uFGJ0'} 
+ body=None 
+ </msg>
+<msg time="2026-06-10T18:56:47.456800" level="INFO">GET Response : url=http://192.168.5.19:1600/api/DynamicRoleClaimsManager/GetTokenData 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '371', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'Deny', 'X-XSS-Protection': '1; mode=block', 'X-Content-Type-Options': 'nosniff', 'X-Download-Options': 'noopen', 'X-Robots-Tag': 'noindex, nofollow', 'Content-Security-Policy': "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self';media-src 'self';font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content;report-uri /report", 'Content-Security-Policy-Report-Only': "default-src 'self';img-src 'self';media-src 'self'", 'X-Security': 'on', 'Date': 'Wed, 10 Jun 2026 15:26:46 GMT'} 
+ body={"username":"30627","userId":9,"userEmailAddress":"","centerName":"مرکز تهران","tenantId":10015,"personId":923,"loginUrlPage":null,"npid":null,"cid":null,"idleTime":32,"aid":"777","displayName":"آزیتا فشارکی نیا","dynamicPermissionKey":"32396038fca01cb69d2c44b0964624d1fe461c9780cffc7f95582a8aa977c2a1","roles":[1195],"codes":[],"wh":[],"exp":null} 
+ </msg>
+<msg time="2026-06-10T18:56:47.457560" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>HIS</arg>
+<arg>/api/DynamicRoleClaimsManager/GetTokenData</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-06-10T18:56:46.205322" elapsed="1.252558"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.459582" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.458389" elapsed="0.001611"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.461934" level="INFO">${json} = {'username': '30627', 'userId': 9, 'userEmailAddress': '', 'centerName': 'مرکز تهران', 'tenantId': 10015, 'personId': 923, 'loginUrlPage': None, 'npid': None, 'cid': None, 'idleTime': 32, 'aid': '777'...</msg>
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.460537" elapsed="0.001697"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.463993" level="INFO">${LOGIN_user_name} = 30627</msg>
+<var>${LOGIN_user_name}</var>
+<arg>${json["username"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.462736" elapsed="0.001557"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.465974" level="INFO">${LOGIN_person_Id} = 923</msg>
+<var>${LOGIN_person_Id}</var>
+<arg>${json["personId"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.464781" elapsed="0.001463"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.467920" level="INFO">${LOGIN_display_Name} = آزیتا فشارکی نیا</msg>
+<var>${LOGIN_display_Name}</var>
+<arg>${json["displayName"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.466731" elapsed="0.001508"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.469977" level="INFO">${LOGIN_ROLES} = [1195]</msg>
+<var>${LOGIN_ROLES}</var>
+<arg>${json["roles"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.468733" elapsed="0.001545"/>
+</kw>
+<kw name="Write State" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.476202" level="INFO" html="true">File '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.475190" elapsed="0.001634"/>
+</kw>
+<msg time="2026-06-10T18:56:47.477279" level="INFO">${exists} = True</msg>
+<var>${exists}</var>
+<arg>File Should Exist</arg>
+<arg>${STATE_FILE}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.471968" elapsed="0.005591"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${exists}">
+<kw name="Create File" owner="OperatingSystem">
+<arg>${STATE_FILE}</arg>
+<arg>{}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="NOT RUN" start="2026-06-10T18:56:47.478675" elapsed="0.000358"/>
+</kw>
+<status status="NOT RUN" start="2026-06-10T18:56:47.478002" elapsed="0.001253"/>
+</branch>
+<status status="PASS" start="2026-06-10T18:56:47.477946" elapsed="0.001417"/>
+</if>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.480291" level="INFO" html="true">Getting file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-06-10T18:56:47.485077" level="INFO">${content} = {
+}</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.479558" elapsed="0.005995"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.487314" level="INFO">${state} = {}</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.486022" elapsed="0.001635"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${state}</arg>
+<arg>${key}</arg>
+<arg>${value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.488078" elapsed="0.001147"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.490822" level="INFO">${out} = {
+  "LOGIN_ROLES": [
+    1195
+  ]
+}</msg>
+<var>${out}</var>
+<arg>json.dumps(${state}, indent=2, ensure_ascii=False)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.489526" elapsed="0.001716"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.492962" level="INFO" html="true">Created file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<arg>${STATE_FILE}</arg>
+<arg>${out}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.491630" elapsed="0.002239"/>
+</kw>
+<arg>LOGIN_ROLES</arg>
+<arg>${LOGIN_ROLES}</arg>
+<status status="PASS" start="2026-06-10T18:56:47.470903" elapsed="0.023398"/>
+</kw>
+<kw name="Write State" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.497160" level="INFO" html="true">File '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.496683" elapsed="0.000874"/>
+</kw>
+<msg time="2026-06-10T18:56:47.497783" level="INFO">${exists} = True</msg>
+<var>${exists}</var>
+<arg>File Should Exist</arg>
+<arg>${STATE_FILE}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.495950" elapsed="0.002028"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${exists}">
+<kw name="Create File" owner="OperatingSystem">
+<arg>${STATE_FILE}</arg>
+<arg>{}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="NOT RUN" start="2026-06-10T18:56:47.499040" elapsed="0.000366"/>
+</kw>
+<status status="NOT RUN" start="2026-06-10T18:56:47.498280" elapsed="0.001411"/>
+</branch>
+<status status="PASS" start="2026-06-10T18:56:47.498222" elapsed="0.001642"/>
+</if>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.500815" level="INFO" html="true">Getting file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-06-10T18:56:47.501545" level="INFO">${content} = {
+  "LOGIN_ROLES": [
+    1195
+  ]
+}</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.500162" elapsed="0.001570"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.503733" level="INFO">${state} = {'LOGIN_ROLES': [1195]}</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.502122" elapsed="0.001884"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${state}</arg>
+<arg>${key}</arg>
+<arg>${value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.504273" elapsed="0.000775"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.506840" level="INFO">${out} = {
+  "LOGIN_ROLES": [
+    1195
+  ],
+  "Login_User_Name": "30627"
+}</msg>
+<var>${out}</var>
+<arg>json.dumps(${state}, indent=2, ensure_ascii=False)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.505563" elapsed="0.001518"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.508712" level="INFO" html="true">Created file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<arg>${STATE_FILE}</arg>
+<arg>${out}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.507478" elapsed="0.001752"/>
+</kw>
+<arg>Login_User_Name</arg>
+<arg>${LOGIN_user_name}</arg>
+<status status="PASS" start="2026-06-10T18:56:47.494953" elapsed="0.014477"/>
+</kw>
+<kw name="Write State" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.513200" level="INFO" html="true">File '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.512388" elapsed="0.001264"/>
+</kw>
+<msg time="2026-06-10T18:56:47.514271" level="INFO">${exists} = True</msg>
+<var>${exists}</var>
+<arg>File Should Exist</arg>
+<arg>${STATE_FILE}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.511261" elapsed="0.003278"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${exists}">
+<kw name="Create File" owner="OperatingSystem">
+<arg>${STATE_FILE}</arg>
+<arg>{}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="NOT RUN" start="2026-06-10T18:56:47.515681" elapsed="0.000388"/>
+</kw>
+<status status="NOT RUN" start="2026-06-10T18:56:47.514943" elapsed="0.001399"/>
+</branch>
+<status status="PASS" start="2026-06-10T18:56:47.514887" elapsed="0.001607"/>
+</if>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.517148" level="INFO" html="true">Getting file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-06-10T18:56:47.518161" level="INFO">${content} = {
+  "LOGIN_ROLES": [
+    1195
+  ],
+  "Login_User_Name": "30627"
+}</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.516686" elapsed="0.002793"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.521647" level="INFO">${state} = {'LOGIN_ROLES': [1195], 'Login_User_Name': '30627'}</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.520302" elapsed="0.001787"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${state}</arg>
+<arg>${key}</arg>
+<arg>${value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.522538" elapsed="0.001001"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.525193" level="INFO">${out} = {
+  "LOGIN_ROLES": [
+    1195
+  ],
+  "Login_User_Name": "30627",
+  "Login_Person_Id": 923
+}</msg>
+<var>${out}</var>
+<arg>json.dumps(${state}, indent=2, ensure_ascii=False)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.523985" elapsed="0.001454"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.527110" level="INFO" html="true">Created file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<arg>${STATE_FILE}</arg>
+<arg>${out}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.525685" elapsed="0.003395"/>
+</kw>
+<arg>Login_Person_Id</arg>
+<arg>${LOGIN_person_Id}</arg>
+<status status="PASS" start="2026-06-10T18:56:47.509777" elapsed="0.020595"/>
+</kw>
+<kw name="Write State" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.532922" level="INFO" html="true">File '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.532255" elapsed="0.001536"/>
+</kw>
+<msg time="2026-06-10T18:56:47.534169" level="INFO">${exists} = True</msg>
+<var>${exists}</var>
+<arg>File Should Exist</arg>
+<arg>${STATE_FILE}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.531595" elapsed="0.003325"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${exists}">
+<kw name="Create File" owner="OperatingSystem">
+<arg>${STATE_FILE}</arg>
+<arg>{}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="NOT RUN" start="2026-06-10T18:56:47.536433" elapsed="0.000405"/>
+</kw>
+<status status="NOT RUN" start="2026-06-10T18:56:47.535627" elapsed="0.001464"/>
+</branch>
+<status status="PASS" start="2026-06-10T18:56:47.535501" elapsed="0.001728"/>
+</if>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.538088" level="INFO" html="true">Getting file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-06-10T18:56:47.538902" level="INFO">${content} = {
+  "LOGIN_ROLES": [
+    1195
+  ],
+  "Login_User_Name": "30627",
+  "Login_Person_Id": 923
+}</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.537463" elapsed="0.002276"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.541470" level="INFO">${state} = {'LOGIN_ROLES': [1195], 'Login_User_Name': '30627', 'Login_Person_Id': 923}</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.540292" elapsed="0.001436"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${state}</arg>
+<arg>${key}</arg>
+<arg>${value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.542149" elapsed="0.000962"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.545282" level="INFO">${out} = {
+  "LOGIN_ROLES": [
+    1195
+  ],
+  "Login_User_Name": "30627",
+  "Login_Person_Id": 923,
+  "Login_Display_Name": "آزیتا فشارکی نیا"
+}</msg>
+<var>${out}</var>
+<arg>json.dumps(${state}, indent=2, ensure_ascii=False)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.543927" elapsed="0.001745"/>
+</kw>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.547446" level="INFO" html="true">Created file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<arg>${STATE_FILE}</arg>
+<arg>${out}</arg>
+<arg>encoding=utf-8</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.546104" elapsed="0.001919"/>
+</kw>
+<arg>Login_Display_Name</arg>
+<arg>${LOGIN_display_Name}</arg>
+<status status="PASS" start="2026-06-10T18:56:47.530998" elapsed="0.017364"/>
+</kw>
+<kw name="Set Test Message" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.550057" level="INFO">Set test message to:
+Response: 200
+User Info:
+30627 / 923 / آزیتا فشارکی نیا</msg>
+<arg>Response: ${resp.status_code}\nUser Info:\n${LOGIN_user_name} / ${LOGIN_person_Id} / ${LOGIN_display_Name}</arg>
+<doc>Sets message for the current test case.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.548846" elapsed="0.001659"/>
+</kw>
+<tag>API_DynamicRoleClaimsManager</tag>
+<tag>METHOD_GET</tag>
+<doc>دریافت اطلاعات کاربر لاگین کننده</doc>
+<status status="PASS" start="2026-06-10T18:56:46.202860" elapsed="1.348040"/>
+</kw>
+<kw name="Read State" owner="AdmitHis-keywords">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.553200" level="INFO" html="true">File '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;' exists.</msg>
+<arg>${STATE_FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.552443" elapsed="0.001281"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-10T18:56:47.555044" level="INFO" html="true">Getting file '&lt;a href="file://D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json"&gt;D:\Mehrshad\Test-Project\HisAdmit\AdmitHis-Test\resources\state\runtime_state.json&lt;/a&gt;'.</msg>
+<msg time="2026-06-10T18:56:47.555927" level="INFO">${content} = {
+  "LOGIN_ROLES": [
+    1195
+  ],
+  "Login_User_Name": "30627",
+  "Login_Person_Id": 923,
+  "Login_Display_Name": "آزیتا فشارکی نیا"
+}</msg>
+<var>${content}</var>
+<arg>${STATE_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.554146" elapsed="0.002077"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.558111" level="INFO">${state} = {'LOGIN_ROLES': [1195], 'Login_User_Name': '30627', 'Login_Person_Id': 923, 'Login_Display_Name': 'آزیتا فشارکی نیا'}</msg>
+<var>${state}</var>
+<arg>json.loads('''${content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.556790" elapsed="0.001667"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2026-06-10T18:56:47.561069" level="INFO">${value} = [1195]</msg>
+<var>${value}</var>
+<arg>${state}</arg>
+<arg>${key}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.559338" elapsed="0.002329"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.563915" level="INFO">Argument types are:
+&lt;class 'list'&gt;
+&lt;class 'NoneType'&gt;</msg>
+<arg>${value}</arg>
+<arg>${None}</arg>
+<arg>❌ ${key} not found in state file</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.562530" elapsed="0.001912"/>
+</kw>
+<return>
+<value>${value}</value>
+<status status="PASS" start="2026-06-10T18:56:47.564736" elapsed="0.000453"/>
+</return>
+<msg time="2026-06-10T18:56:47.565653" level="INFO">${roles} = [1195]</msg>
+<var>${roles}</var>
+<arg>LOGIN_ROLES</arg>
+<status status="PASS" start="2026-06-10T18:56:47.551615" elapsed="0.014456"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>User Roles: ${roles}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.566471" elapsed="0.001300"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-10T18:56:47.575097" level="INFO">${has_access} = True</msg>
+<var>${has_access}</var>
+<arg>1195 in $roles or 777 in $roles</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.568259" elapsed="0.007497"/>
+</kw>
+<kw name="Skip If" owner="BuiltIn">
+<arg>not ${has_access}</arg>
+<arg>User does not have Admit HIS access role (1195 or 777)</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.576441" elapsed="0.001779"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>User has valid Admit HIS access</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.578793" elapsed="0.001728"/>
+</kw>
+<doc>بررسی دسترسی کاربر به پذیرش بستری</doc>
+<status status="PASS" start="2026-06-10T18:56:46.201946" elapsed="1.378914"/>
+</kw>
+<kw name="Click Admit HIS In Landing" owner="AdmitHis-keywords">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.back-spenner.ng-star-inserted</arg>
+<arg>1000</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.582486" elapsed="0.019359"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<msg time="2026-06-10T18:56:50.643655" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="FAIL" start="2026-06-10T18:56:47.602759" elapsed="3.062942">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+</kw>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>3</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-06-10T18:56:47.602152" elapsed="3.064295"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>${timeout}</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2026-06-10T18:56:50.667286" elapsed="0.016289"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-06-10T18:56:50.684875" level="INFO">Executing JavaScript:
+document.evaluate("//div[contains(@class,'child-name') and contains(.,'پذیرش بستری')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+Without any arguments.</msg>
+<arg>document.evaluate("//div[contains(@class,'child-name') and contains(.,'پذیرش بستری')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-06-10T18:56:50.684207" elapsed="0.117739"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2026-06-10T18:56:50.802356" elapsed="0.118331"/>
+</kw>
+<doc>کلیک بر روی گزینه پذیرش بستری</doc>
+<status status="PASS" start="2026-06-10T18:56:47.581629" elapsed="3.339435"/>
+</kw>
+<kw name="Validate Admit Page Opened" owner="AdmitHis-keywords">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>xpath=//*[contains(text(),'پذیرش بستری')]</arg>
+<arg>20s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2026-06-10T18:56:50.923794" elapsed="2.377507"/>
+</kw>
+<msg time="2026-06-10T18:56:53.301981" level="INFO">${opened} = True</msg>
+<var>${opened}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>xpath=//*[contains(text(),'پذیرش بستری')]</arg>
+<arg>20s</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-06-10T18:56:50.923251" elapsed="2.378990"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${opened}</arg>
+<arg>User has access role but Admit HIS page did not open</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-06-10T18:56:53.302603" elapsed="0.001119"/>
+</kw>
+<doc>بررسی باز شدن صفحه پذیرش بستری</doc>
+<status status="PASS" start="2026-06-10T18:56:50.922562" elapsed="2.381482"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>---- DONE ----</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-10T18:56:53.304668" elapsed="0.000879"/>
+</kw>
+<doc>باز کردن صفحه پذیرش بستری</doc>
 <tag>preadmit</tag>
 <tag>step01</tag>
 <tag>STEP_01_Open_Browser</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2026-06-09T23:31:05.358716" elapsed="7.475005"/>
+<status status="PASS" start="2026-06-10T18:56:44.096413" elapsed="9.209754">Response: 200
+User Info:
+30627 / 923 / آزیتا فشارکی نیا</status>
 </test>
-<status status="PASS" start="2026-06-09T23:31:04.970141" elapsed="7.868951"/>
+<status status="PASS" start="2026-06-10T18:56:43.475367" elapsed="9.838113"/>
 </suite>
-<status status="PASS" start="2026-06-09T23:31:04.943873" elapsed="7.899588"/>
+<status status="PASS" start="2026-06-10T18:56:43.410949" elapsed="9.909925"/>
 </suite>
 <statistics>
 <total>
@@ -91,8 +654,6 @@
 </suite>
 </statistics>
 <errors>
-<msg time="2026-06-09T23:31:04.923172" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitRis-Api.robot' on line 262: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
-<msg time="2026-06-09T23:31:04.923605" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit\AdmitHis-Test\AdmitRis-Api.robot' on line 277: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
-<msg time="2026-06-09T23:31:05.371367" level="WARN">exexcutable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.</msg>
+<msg time="2026-06-10T18:56:44.104800" level="WARN">executable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.</msg>
 </errors>
 </robot>

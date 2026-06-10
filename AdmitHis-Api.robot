@@ -62,11 +62,14 @@ Suite Setup       Create All Sessions
 
     ${LOGIN_user_name}=           Set Variable    ${json["username"]}
     ${LOGIN_person_Id}=           Set Variable    ${json["personId"]}
-    ${LOGIN_display_Name}=           Set Variable    ${json["displayName"]}
+    ${LOGIN_display_Name}=        Set Variable    ${json["displayName"]}
+    ${LOGIN_ROLES}=               Set Variable    ${json["roles"]}
 
+    Write State    LOGIN_ROLES    ${LOGIN_ROLES}
     Write State    Login_User_Name    ${LOGIN_user_name} 
     Write State    Login_Person_Id    ${LOGIN_person_Id} 
     Write State    Login_Display_Name    ${LOGIN_display_Name} 
+
 
     
     Set Test Message
