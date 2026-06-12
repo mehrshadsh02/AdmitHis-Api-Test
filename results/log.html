@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 7.3.2 (Python 3.13.2 on win32)" name="Generator">
+<meta content="Robot Framework 7.4.2 (Python 3.13.13 on win32)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAqAAAAAAAAAAAAAAAAAAAALIAAAD/AAAA4AAAANwAAADcAAAA3AAAANwAAADcAAAA3AAAANwAAADcAAAA4AAAAP8AAACxAAAAAAAAAKYAAAD/AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAA/wAAAKkAAAD6AAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN8AAAD/AAAA+gAAAMMAAAAAAAAAAgAAAGsAAABrAAAAawAAAGsAAABrAAAAawAAAGsAAABrAAAADAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAIsAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAANEAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAAAAAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAFAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAADwAAAB8AAAAAAAAAGAAAABcAAAAAAAAAH8AAABKAAAAAAAAAAAAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAADCAAAA/wAAACkAAADqAAAA4QAAAAAAAAD7AAAA/wAAALAAAAAGAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAIwAAAP4AAAD/AAAA/wAAAGAAAAAAAAAAAAAAAMkAAAD/AAAAigAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAAAAAAAIAAAAcAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA2gAAAP8AAAD7AAAAywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AAAD/AAAAqwAAAP8AAACvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIAAAD/AAAAsgAAAAAAAAC5AAAA/wAAAMoAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMkAAAD/AAAAvAAAAAAAAAAAAAAAAAAAAKwAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAArQAAAAAAAAAAwAMAAIABAAAf+AAAP/wAAD/8AAAgBAAAP/wAAD/8AAA//AAAJIwAADHEAAA//AAAP/wAAB/4AACAAQAAwAMAAA==">
 <style media="all">
 :root {
@@ -116,15 +116,16 @@ select {
 #header {
     width: 65em;
     height: 3em;
-    margin: 20px 0 6px 0;
+    margin: 1em 0 0 0;
 }
 h1 {
     float: left;
-    margin: 0 0 0.5em 0;
+    margin: 0 0 1em 0;
     width: 75%;
 }
 h2 {
     clear: left;
+    margin: 1.5em 0 0.5em 0;
 }
 #generated {
     float: right;
@@ -168,7 +169,13 @@ h2 {
     background-color: var(--primary-color);
     border-radius: 3px;
 }
-.label.debug, .label.trace, .label.error, .label.keyword {
+/* https://stackoverflow.com/questions/75238633 */
+@supports (-moz-appearance: none) {
+    .label {
+        padding-top: 4px;
+    }
+}
+.label.debug, .label.trace, .label.error {
     letter-spacing: 0;
 }
 .label.pass, .label.fail, .label.error, .label.skip, .label.warn {
@@ -355,19 +362,6 @@ th.stats-col-graph:hover {
 [data-theme="light"] .dark-mode-icon {
     display: block;
 }
-@keyframes highlight {
-    0% {
-        background: var(--primary-color)
-    }
-    100% {
-        background: var(--target-color);
-    }
-}
-:target {
-    background: var(--target-color);
-    transition: background 0.3s;
-    animation: highlight 4s;
-}
 </style>
 <style media="all">
 /* Icons are from Open Iconic <https://useiconic.com/open/>.
@@ -384,36 +378,43 @@ th.stats-col-graph:hover {
     --elapsed-color: #999;
 }
 /* Containers */
-.suite, .test, #errors {
+.suite, .test, #errors, #errors .messages {
     border-color: #ccc; /* Fallback value */
     border-color: var(--secondary-color);
     border-width: 1px;
     border-style: solid;
-    padding: 0.3em 0.2em;
-    margin: 0.2em 0;
+    padding: 5px;
+    margin-top: 5px;
 }
 .test {
     border-style: dashed;
 }
-#errors, .messages {
+.messages {
     width: 100%;
     border-spacing: 0;
+    padding: 0 5px;
 }
 .children {
     display: none;
-    margin-left: 1.4em;
+    margin-left: 18px;
+    margin-top: 2px;
 }
-.suite, .test, .keyword {
-    margin-left: -0.2em;
+#errors .children {
+    margin-left: 22px;
 }
-#s1, .suite > .children > .keyword {
-    margin-left: 0;
+.suite, .test {
+    margin-left: -5px;
+}
+#s1, #errors {
+    margin: 0;
 }
 /* Suite, test and kw headers */
 .element-header {
+    display: flex;
+    align-items: center;
+    padding: 2px;
     border: 1px solid transparent;
     border-radius: 2px;
-    position: relative;
 }
 .element-header:hover {
     cursor: pointer;
@@ -423,17 +424,15 @@ th.stats-col-graph:hover {
     border-color: var(--secondary-color);
 }
 .element-header-toggle {
-    position: absolute;
-    left: 3px;
-    top: 5px;
+    margin: 0 4px 0 2px;
+    height: 11px;
+    width: 11px;
+    min-width: 11px;
+    background-size: 6px 6px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JChSkZz20AAAAGklEQVQI12NgQAKMDKzInP8IDhOqMk4G7AAANQwBE427PYUAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2Mmg4di0yaC04eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAzKSIgLz4KPC9zdmc+), none;
     filter: var(--icon-filter);
-    height: 10px;
-    width: 10px;
-    background-size: 6px 6px;
     border-color: #ccc; /* Fallback value */
     border-color: var(--icon-highlight);
     border-width: 1px;
@@ -441,67 +440,59 @@ th.stats-col-graph:hover {
     border-radius: 2px;
 }
 .closed > .element-header-toggle {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JCDHdVYtxAAAAM0lEQVQI103MMQqAMBQFwVHyITaB3P+W1sKzSBC3mW6hRFw0pUB5DvF1bu9FN0RM3X/wAk98CUnvFTakAAAAAElFTkSuQmCC);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0zIDB2M2gtM3YyaDN2M2gydi0zaDN2LTJoLTN2LTNoLTJ6IiAvPgo8L3N2Zz4=), none;
 }
 .element-header:hover > .element-header-toggle {
     background-color: #ccc; /* Fallback value */
     background-color: var(--icon-highlight);
 }
-.element-header-right:hover ~ .element-header-toggle {
+.element-header-menu:hover ~ .element-header-toggle {
     background-color: transparent;
 }
-.element-header-left {
-    padding: 3px 80px 3px 20px;
-}
-.element-header-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 3px;
+.element-header-menu {
+    margin: 0 2px 0 4px;
     cursor: default;
 }
-.element-header .label {
-    margin-right: 0.5em;
+.name, .arg, .assign {
+    margin-left: 7px;
+    white-space: pre-wrap;
 }
 .name {
     font-weight: bold;
-    white-space: pre-wrap;
-}
-.arg, .assign {
-    white-space: pre-wrap;
 }
 .elapsed {
-    float: right;
+    margin-left: auto;
+    padding-left: 0.5em;
     color: #666; /* Fallback value */
     color: var(--elapsed-color);
-    padding-left: 1em;
+    font-size: 0.9em;
+}
+/* https://stackoverflow.com/questions/75238633 */
+@supports (-moz-appearance: none) {
+    .name, .arg, .assign, .elapsed {
+        padding-top: 3px;
+    }
 }
 .link {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHlJREFUGJVtzrEJwmAQBtCn6ASuIKTIBhY2gmghBiJYB1udwk10B8FJbKMBcQFbtbkfJHrVwfu+4/idJR64Y9H7E3higj5O3S8Y44ApLnjhnXCNGhV2yNGggDJwiC02gavUbpDFvscRo4QdXOMKDHBufz3HLYKzNn4AbSkV3fncGQYAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik01Ljg4LjAzYy0uMTguMDEtLjM2LjAzLS41My4wOS0uMjcuMS0uNTMuMjUtLjc1LjQ3YS41LjUgMCAxIDAgLjY5LjY5Yy4xMS0uMTEuMjQtLjE3LjM4LS4yMi4zNS0uMTIuNzgtLjA3IDEuMDYuMjIuMzkuMzkuMzkgMS4wNCAwIDEuNDRsLTEuNSAxLjVjLS40NC40NC0uOC40OC0xLjA2LjQ3LS4yNi0uMDEtLjQxLS4xMy0uNDEtLjEzYS41LjUgMCAxIDAtLjUuODhzLjM0LjIyLjg0LjI1Yy41LjAzIDEuMi0uMTYgMS44MS0uNzhsMS41LTEuNWMuNzgtLjc4Ljc4LTIuMDQgMC0yLjgxLS4yOC0uMjgtLjYxLS40NS0uOTctLjUzLS4xOC0uMDQtLjM4LS4wNC0uNTYtLjAzem0tMiAyLjMxYy0uNS0uMDItMS4xOS4xNS0xLjc4Ljc1bC0xLjUgMS41Yy0uNzguNzgtLjc4IDIuMDQgMCAyLjgxLjU2LjU2IDEuMzYuNzIgMi4wNi40Ny4yNy0uMS41My0uMjUuNzUtLjQ3YS41LjUgMCAxIDAtLjY5LS42OWMtLjExLjExLS4yNC4xNy0uMzguMjItLjM1LjEyLS43OC4wNy0xLjA2LS4yMi0uMzktLjM5LS4zOS0xLjA0IDAtMS40NGwxLjUtMS41Yy40LS40Ljc1LS40NSAxLjAzLS40NC4yOC4wMS40Ny4wOS40Ny4wOWEuNS41IDAgMSAwIC40NC0uODhzLS4zNC0uMi0uODQtLjIyeiIKICAvPgo8L3N2Zz4=), none;
-    filter: var(--icon-filter);
 }
 .expand {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAADtJREFUGJVjYCACKDAwMByA0ljFDjAwMPxnYGB4ABVQgLL/Q+VQBB6gseGmIivCkERXhFUSWRFOSawAAEl7E3uv1iMcAAAAAElFTkSuQmCC);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0xLjUgMGwtMS41IDEuNSA0IDQgNC00LTEuNS0xLjUtMi41IDIuNS0yLjUtMi41eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz4KPC9zdmc+), none;
-    filter: var(--icon-filter);
 }
 .collapse {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAC5JREFUGJVjYCARNEAxTsn/UIyhCFkSQxG6ThQ+C5IpjWhG1yNb4YDFTdjEMAEACi8Q++9Y9TAAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik00IDBsLTQgNCAxLjUgMS41IDIuNS0yLjUgMi41IDIuNSAxLjUtMS41LTQtNHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMSkiIC8+Cjwvc3ZnPg==), none;
-    filter: var(--icon-filter);
 }
 .expand, .collapse, .link {
     float: left;
     display: block;
     visibility: hidden;
-    margin: 0 4px;
+    margin: 0 3px;
     height: 14px;
     width: 14px;
     background-size: 8px 8px;
     background-repeat: no-repeat;
     background-position: center;
+    filter: var(--icon-filter);
     border-color: #ccc; /* Fallback value */
     border-color: var(--icon-highlight);
     border-width: 1px;
@@ -519,23 +510,18 @@ th.stats-col-graph:hover {
     background-color: var(--icon-highlight);
 }
 /* Messages and errors */
+.message-row {
+    height: 20px;
+}
 .messages .time, .messages .message {
     font-family: monospace;
     font-size: 1.1em;
 }
-#errors .message {
-    font-family: monospace;
-    font-size: 1.2em;
-}
-.message-row {
-    height: 20px;
-}
-.time {
+.messages .time {
     width: 7.5em;
 }
-.error-time {
-    width: 11em;
-    font-size: 0.9em;
+#errors .time {
+    width: 12.5em;
     white-space: nowrap;
 }
 .level {
@@ -555,7 +541,6 @@ th.stats-col-graph:hover {
     background-position: center;
 }
 .message-row:hover .select-message div {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0MOzhWKZQOAAAASUlEQVQY032PsRHAIAwDX9BkicD+W8UMEqegAQJWKZ/+3sLZJhFGQEZzNaIa4ibh66En867VNaIeoP5WppNuIGoAlOm3g5VC1AdYeQv1BZPRSgAAAABJRU5ErkJggg==);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2MWg4di0xaC04em0wIDJ2MWg2di0xaC02em0wIDJ2MWg4di0xaC04em0wIDJ2MWg2di0xaC02eiIgLz4KPC9zdmc+), none;
     filter: var(--icon-filter);
     border-color: #ccc; /* Fallback value */
@@ -577,7 +562,6 @@ th.stats-col-graph:hover {
 .debug-message {
     display: table;
 }
-/* Metadata */
 .metadata {
     width: 100%;
     border-spacing: 0.2em;
@@ -596,6 +580,20 @@ th.stats-col-graph:hover {
 /* Custom styles for statistics */
 #total-stats tr:hover, #tag-stats tr:hover {
     cursor: default;
+}
+/* Target highlight */
+@keyframes highlight {
+    0% {
+        background: var(--primary-color)
+    }
+    100% {
+        background: var(--target-color);
+    }
+}
+:target {
+    background: var(--target-color);
+    transition: background 0.3s;
+    animation: highlight 4s;
 }
 </style>
 <style media="print">
@@ -741,7 +739,8 @@ function toggleElement(elementId, childrenNames) {
     children.toggle(100, '', function () {
         element.children('.element-header').toggleClass('closed');
     });
-    populateChildren(elementId, children, childrenNames);
+    if (childrenNames)
+        populateChildren(elementId, children, childrenNames);
 }
 function populateChildren(elementId, childElement, childrenNames) {
     if (!childElement.hasClass('populated')) {
@@ -1144,7 +1143,7 @@ window.model = (function () {
         kw.type = data.type;
         kw.template = 'keywordTemplate';
         kw.arguments = data.args;
-        kw.assign = data.assign + (data.assign ? ' =  ' : '');
+        kw.assign = data.assign;
         kw.tags = data.tags;
         kw.timeout = data.timeout;
         kw.populateKeywords = createIterablePopulator('Keyword');
@@ -1883,7 +1882,7 @@ function addStatistics() {
         '<th class="stats-col-elapsed">Elapsed</th>' +
         '<th class="stats-col-graph">Pass / Fail / Skip</th>';
     var statTable =
-        '<h2>{Test} Statistics</h2>' +
+        '<h2>Statistics</h2>' +
         '<table class="statistics" id="total-stats"><thead><tr>' +
         '<th class="stats-col-name">Total Statistics</th>' + statHeaders +
         '</tr></thead></table>' +
@@ -1893,7 +1892,7 @@ function addStatistics() {
         '<table class="statistics" id="suite-stats"><thead><tr>' +
         '<th class="stats-col-name">Statistics by Suite</th>' + statHeaders +
         '</tr></thead></table>';
-    $(testOrTask(statTable)).appendTo('#statistics-container');
+    $(statTable).appendTo('#statistics-container');
     util.map(['total', 'tag', 'suite'], addStatTable);
     addTooltipsToElapsedTimes();
     enableStatisticsSorter();
@@ -2074,25 +2073,25 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[0,0,15113],[[4,5,6,0,[],[0,25,15077],[],[[7,0,8,[9,10],[0,333,14754,11],[[0,12,13,0,0,0,0,0,[1,345,1],[[0,14,15,0,16,17,0,0,[1,346,0],[[346,2,18]]]]],[0,19,13,0,20,0,0,0,[1,347,7952],[[0,21,15,0,22,23,0,0,[1,347,3942],[[348,3,25],[353,2,26]]],[0,27,15,0,28,0,0,0,[1,4290,35],[]],[0,29,15,0,30,31,0,0,[1,4325,6],[]],[0,32,15,0,33,0,0,0,[1,4332,3967],[]]]],[0,34,13,0,35,0,0,0,[1,8299,266],[[0,36,15,0,37,38,0,0,[1,8300,59],[[8300,2,39]]],[0,32,15,0,33,0,0,0,[1,8359,206],[]]]],[0,40,13,0,0,0,0,0,[1,8566,3234],[[0,41,42,0,43,44,0,0,[1,8567,3217],[[0,45,15,0,46,47,0,0,[0,8567,3216],[[11770,5,48]]]]],[0,49,15,0,50,51,0,0,[1,11784,16],[]]]],[0,52,13,0,53,0,0,0,[1,11801,13],[[0,49,15,0,50,54,0,0,[1,11803,11],[]]]],[0,55,13,0,56,0,0,0,[0,11814,3273],[[0,57,13,0,0,0,0,0,[0,11815,3271],[[0,40,13,0,0,0,0,0,[1,11815,3232],[[0,41,42,0,43,44,0,0,[1,11816,3218],[[0,45,15,0,46,47,0,0,[0,11817,3217],[[15024,5,48]]]]],[0,49,15,0,50,51,0,0,[1,15034,13],[]]]],[0,52,13,0,53,0,0,0,[1,15048,13],[[0,49,15,0,50,54,0,0,[1,15048,12],[]]]],[0,58,15,0,59,60,0,0,[0,15061,23],[[15062,2,61],[15077,5,11]]],[0,62,15,0,63,64,0,0,[3,15084,0],[]],[0,58,15,0,59,65,0,0,[3,15085,0],[]]]],[0,66,13,0,0,67,0,0,[3,15086,0],[]],[0,68,13,0,0,0,0,0,[3,15086,0],[]],[0,69,42,0,70,71,0,0,[3,15086,0],[]]]]]]],[[1,72,13,0,0,0,0,0,[1,332,1],[[0,73,74,0,75,76,0,0,[1,332,1],[[333,2,77]]]]]],[1,0,1,0]]],[],[],[1,0,1,0]];
+window.output["suite"] = [1,2,3,0,[],[1,0,29878],[[4,5,6,0,[],[1,58,29795],[],[[7,0,8,[9,10],[1,925,28917],[[0,11,12,0,0,0,0,0,[1,929,2],[[0,13,14,0,15,16,0,0,[1,930,1],[[931,2,17]]]]],[0,18,12,0,19,0,0,0,[1,932,2494],[[0,20,14,0,21,22,0,0,[1,933,2243],[[934,3,24],[948,2,25]]],[0,26,14,0,27,0,0,0,[1,3177,67],[]],[0,28,14,0,29,30,0,0,[1,3244,28],[]],[0,31,14,0,32,0,0,0,[1,3272,153],[]]]],[0,33,12,0,34,0,0,0,[1,3427,260],[[0,35,14,0,36,37,0,0,[1,3428,129],[[3429,2,38]]],[0,31,14,0,32,0,0,0,[1,3558,129],[]]]],[0,39,12,0,0,0,0,0,[1,3692,3178],[[0,40,41,0,42,43,0,0,[1,3693,3167],[[0,44,14,0,45,46,0,0,[0,3695,3166],[[6852,5,47]]]]],[0,48,14,0,49,50,0,0,[1,6861,9],[]]]],[0,51,12,0,52,0,0,0,[1,6870,13],[[0,48,14,0,49,53,0,0,[1,6871,12],[]]]],[0,54,12,0,55,0,0,0,[1,6884,13624],[[0,39,12,0,0,0,0,0,[1,6885,3318],[[0,40,41,0,42,43,0,0,[1,6885,3215],[[0,44,14,0,45,46,0,0,[0,6886,3214],[[10087,5,47]]]]],[0,48,14,0,49,50,0,0,[1,10101,101],[]]]],[0,51,12,0,52,0,0,0,[1,10203,10],[[0,48,14,0,49,53,0,0,[1,10204,9],[]]]],[0,56,14,0,57,58,0,0,[1,10213,1082],[]],[0,59,12,0,0,60,0,0,[1,11296,3981],[[0,51,12,0,52,0,0,0,[1,11297,3167],[[0,48,14,0,49,53,0,0,[1,11297,3166],[]]]],[0,56,14,0,57,61,0,0,[1,14464,20],[]],[0,62,14,0,63,61,0,0,[1,14485,117],[[14485,2,64]]],[0,56,14,0,57,65,0,0,[1,14602,24],[]],[0,66,14,0,67,68,0,0,[1,14627,180],[[14627,2,69]]],[0,56,14,0,57,70,0,0,[1,14807,29],[]],[0,62,14,0,63,70,0,0,[1,14838,87],[[14839,2,71]]],[0,72,14,0,73,74,0,0,[1,14925,351],[[14926,2,75],[15235,2,76],[15235,2,77]]]]],[0,66,14,0,67,78,0,0,[1,15277,287],[[15278,2,79]]],[0,62,14,0,63,80,0,0,[1,15565,164],[[15566,2,81]]],[0,56,14,0,57,82,0,0,[1,15730,3665],[]],[0,83,14,0,84,85,86,0,[1,19395,33],[[19427,2,87]]],[5,88,0,0,0,0,0,0,[1,19428,3],[[0,89,41,0,90,91,0,0,[1,19429,1],[]]]],[7,0,0,0,0,0,0,0,[3,19431,1],[[0,92,41,0,93,94,0,0,[3,19432,0],[]]]],[0,95,14,0,96,97,0,0,[1,19432,70],[]],[0,66,14,0,67,98,0,0,[1,19503,288],[[19503,2,99]]],[0,62,14,0,63,100,0,0,[1,19791,204],[[19794,2,101]]],[0,102,14,0,103,104,0,0,[1,19995,20],[]],[0,89,41,0,90,105,0,0,[1,20015,3],[]],[0,95,14,0,96,97,0,0,[1,20019,88],[]],[0,66,14,0,67,98,0,0,[1,20107,358],[[20108,2,99]]],[0,106,14,0,107,97,108,0,[1,20466,25],[[20491,2,109]]],[0,110,41,0,111,112,0,0,[1,20492,3],[[20495,2,113]]],[0,89,41,0,90,114,0,0,[1,20496,8],[]],[0,89,41,0,90,115,0,0,[1,20505,3],[]]]],[0,116,12,0,117,0,0,0,[1,20509,9332],[[0,39,12,0,0,0,0,0,[1,20510,3213],[[0,40,41,0,42,43,0,0,[1,20512,3201],[[0,44,14,0,45,46,0,0,[0,20513,3199],[[23701,5,47]]]]],[0,48,14,0,49,50,0,0,[1,23713,9],[]]]],[0,51,12,0,52,0,0,0,[1,23723,15],[[0,48,14,0,49,53,0,0,[1,23724,14],[]]]],[0,95,14,0,96,97,0,0,[1,23739,47],[]],[0,56,14,0,57,58,0,0,[1,23786,34],[]],[0,59,12,0,0,60,0,0,[1,23820,784],[[0,51,12,0,52,0,0,0,[1,23821,20],[[0,48,14,0,49,53,0,0,[1,23822,19],[]]]],[0,56,14,0,57,61,0,0,[1,23842,15],[]],[0,62,14,0,63,61,0,0,[1,23857,114],[[23860,2,64]]],[0,56,14,0,57,65,0,0,[1,23972,30],[]],[0,66,14,0,67,68,0,0,[1,24002,108],[[24003,2,69]]],[0,56,14,0,57,70,0,0,[1,24112,22],[]],[0,62,14,0,63,70,0,0,[1,24134,117],[[24134,2,71]]],[0,72,14,0,73,74,0,0,[1,24252,352],[[24253,2,75],[24574,2,76],[24574,2,77]]]]],[0,59,12,0,0,118,0,0,[1,24605,762],[[0,51,12,0,52,0,0,0,[1,24606,9],[[0,48,14,0,49,53,0,0,[1,24607,7],[]]]],[0,56,14,0,57,61,0,0,[1,24615,25],[]],[0,62,14,0,63,61,0,0,[1,24640,120],[[24640,2,119]]],[0,56,14,0,57,65,0,0,[1,24760,29],[]],[0,66,14,0,67,68,0,0,[1,24790,141],[[24790,2,120]]],[0,56,14,0,57,70,0,0,[1,24931,26],[]],[0,62,14,0,63,70,0,0,[1,24957,64],[[24958,2,121]]],[0,72,14,0,73,74,0,0,[1,25021,345],[[25022,2,122],[25340,2,76],[25340,2,77]]]]],[0,123,12,0,0,124,0,0,[1,25367,4431],[[0,51,12,0,52,0,0,0,[1,25368,3950],[[0,48,14,0,49,53,0,0,[1,25369,3949],[]]]],[0,56,14,0,57,125,0,0,[1,29319,24],[]],[0,126,14,0,127,125,0,0,[1,29343,29],[]],[0,128,14,0,129,125,0,0,[1,29373,276],[]],[0,62,14,0,63,125,0,0,[1,29650,148],[[29651,2,130]]]]],[0,131,14,0,132,133,134,0,[1,29798,14],[[29813,2,135]]],[0,136,41,0,137,138,0,0,[1,29813,1],[]],[0,131,14,0,132,139,140,0,[1,29814,23],[[29837,2,141]]],[0,136,41,0,137,142,0,0,[1,29838,1],[]],[0,89,41,0,90,143,0,0,[1,29840,1],[]]]]]]],[[1,144,12,0,0,0,0,0,[1,921,4],[[0,145,146,0,147,148,0,0,[1,923,1],[[924,2,149]]]]]],[1,1,0,0]]],[],[],[1,1,0,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis-Test","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test","*..","*AdmitHis-UI","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitHis-UI.robot","*../AdmitHis-UI.robot","*TC_EPD_HIS_02_SC_02_01 - Creating a patient file without a history","*<p>Scenario 01\x3c/p>","*TC_EPD_HIS_02","*UI_Test","*Element with locator 'xpath=//ng-select[@formcontrolname='nationality']' not found.","*Disable Screenshots","*AdmitHis-UI-keywords","*Register Keyword To Run On Failure","*SeleniumLibrary","*<p>Sets the keyword to execute, when a SeleniumLibrary keyword fails.\x3c/p>","*NONE","*No keyword will be run on failure.","*Start Browser AdmitHis With Token","*<p>باز کردن کروم + تزریق کوکی token\x3c/p>","*Open Browser","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}    chrome    executable_path=C:/chromedriver.exe","*s1-s1-t1-k2-k1","*exexcutable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.","*Opening browser 'chrome' to base url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'.","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Add Cookie","*<p>Adds a cookie to your current session.\x3c/p>","*token    ${COOKIE_TOKEN}","*Reload Page","*<p>Simulates user reloading page.\x3c/p>","*Go To AdmitHis Page","*<p>رفتن مستقیم به صفحه پذیرش بستری\x3c/p>","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}","*Opening url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'","*Wait For Page Ready","*Run Keyword And Ignore Error","*BuiltIn","*<p>Runs the given keyword with the given arguments and ignores possible error.\x3c/p>","*Wait Until Page Contains Element    ${GLOBAL_SPINNER}    3","*Wait Until Page Contains Element","*<p>Waits until the element <code>locator\x3c/code> appears on the current page.\x3c/p>","*${GLOBAL_SPINNER}    3","*Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.","*Wait Until Element Is Not Visible","*<p>Waits until the element <code>locator\x3c/code> is not visible.\x3c/p>","*${GLOBAL_SPINNER}    ${timeout}","*Wait For Spinner Hidden","*<p>صبر کردن تا loading Angular ناپدید شود\x3c/p>","*css=div.back-spenner.ng-star-inserted    1000","*Step01 - Verify National Code Format","*<p>Verify valid national code can be entered and inquiry button is enabled for Iranian nationality\x3c/p>","*Select Iranian Nationality","*Click Element","*<p>Click the element identified by <code>locator\x3c/code>.\x3c/p>","*xpath=//ng-select[@formcontrolname='nationality']","*Clicking element 'xpath=//ng-select[@formcontrolname='nationality']'.","*Wait Until Element Is Enabled","*<p>Waits until the element <code>locator\x3c/code> is enabled.\x3c/p>","*xpath=//span[normalize-space()='ایرانی']    visible","*xpath=//span[normalize-space()='ایرانی']","*Enter National Code","*1234567891","*Verify Identity Inquiry Button Is Enabled","*Log To Console","*<p>Logs the given message to the console.\x3c/p>","*Step01 Passed","*Create AdmitHIS Session","*Create Session","*RequestsLibrary","*<p>Create Session: create a HTTP session to a server\x3c/p>","*HIS    ${AdmitHis_Api_URL}    verify=${False}","*Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 ","*Error in file 'D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitRis-Api.robot' on line 262: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.","*Error in file 'D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitRis-Api.robot' on line 277: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.","*Error in file 'D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\Resources\\Keywords\\AdmitHis-DB-keywords.resource' on line 11: Resource file 'AdmitHis-keywords.resource' does not exist."]);
+window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis-Test","*D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test","*..","*AdmitHis-UI","*D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test\\AdmitHis-UI.robot","*../AdmitHis-UI.robot","*TC_EPD_HIS_02_SC_02_01 - Creating a patient file without a history","*<p>Scenario 01\x3c/p>","*TC_EPD_HIS_02","*UI_Test","*Disable Screenshots","*AdmitHis-UI-keywords","*Register Keyword To Run On Failure","*SeleniumLibrary","*<p>Sets the keyword to execute, when a SeleniumLibrary keyword fails.\x3c/p>","*NONE","*No keyword will be run on failure.","*Start Browser AdmitHis With Token","*<p>باز کردن کروم + تزریق کوکی token\x3c/p>","*Open Browser","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}    chrome    executable_path=C:/chromedriver.exe","*s1-s1-t1-k2-k1","*executable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.","*Opening browser 'chrome' to base url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'.","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Add Cookie","*<p>Adds a cookie to your current session.\x3c/p>","*token    ${COOKIE_TOKEN}","*Reload Page","*<p>Simulates user reloading page.\x3c/p>","*Go To AdmitHis Page","*<p>رفتن مستقیم به صفحه پذیرش بستری\x3c/p>","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${AdmitHis_App_URL}","*Opening url '<a href=\"http://192.168.5.19:8019/filing\">http://192.168.5.19:8019/filing\x3c/a>'","*Wait For Page Ready","*Run Keyword And Ignore Error","*BuiltIn","*<p>Runs the given keyword with the given arguments and ignores possible error.\x3c/p>","*Wait Until Page Contains Element    ${GLOBAL_SPINNER}    3","*Wait Until Page Contains Element","*<p>Waits until the element <code>locator\x3c/code> appears on the current page.\x3c/p>","*${GLOBAL_SPINNER}    3","*Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.","*Wait Until Element Is Not Visible","*<p>Waits until the element <code>locator\x3c/code> is not visible.\x3c/p>","*${GLOBAL_SPINNER}    ${timeout}","*Wait For Spinner Hidden","*<p>صبر کردن تا loading Angular ناپدید شود\x3c/p>","*css=div.back-spenner.ng-star-inserted    1000","*Step01 - Verify National Code Format","*<p>Verify national code format validation and inquiry buttons behavior\x3c/p>","*Wait Until Element Is Visible","*<p>Waits until the element <code>locator\x3c/code> is visible.\x3c/p>","*xpath=//ng-select[@formcontrolname='nationality']    30","*Select From Ng Select","*nationality    ایرانی","*css=ng-select[formcontrolname='${formcontrol}']","*Click Element","*<p>Click the element identified by <code>locator\x3c/code>.\x3c/p>","*Clicking element 'css=ng-select[formcontrolname='nationality']'.","*css=ng-select[formcontrolname='${formcontrol}'] input[type='text']","*Input Text","*<p>Types the given <code>text\x3c/code> into the text field identified by <code>locator\x3c/code>.\x3c/p>","*css=ng-select[formcontrolname='${formcontrol}'] input[type='text']    ${value}","*Typing text 'ایرانی' into text field 'css=ng-select[formcontrolname='nationality'] input[type='text']'.","*xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), '${value}')]","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'ایرانی')]'.","*Press Keys","*<p>Simulates the user pressing key(s) to an element or on the active browser.\x3c/p>","*css=ng-select[formcontrolname='${formcontrol}'] input[type='text']    TAB","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='nationality'] input[type='text'] element.","*Pressing special key TAB to element.","*Releasing special key TAB.","*xpath=//input[@formcontrolname='nationalCode']    152055400","*Typing text '152055400' into text field 'xpath=//input[@formcontrolname='nationalCode']'.","*xpath=//button[.//span[contains(text(),'استحقاق درمان')]]","*Clicking element 'xpath=//button[.//span[contains(text(),'استحقاق درمان')]]'.","*xpath=//div[contains(@class,'toast-message')]    30","*Get Text","*<p>Returns the text value of the element identified by <code>locator\x3c/code>.\x3c/p>","*xpath=//div[contains(@class,'toast-message')]","*${message}","*${message} = ارتباط با سرویس استعلام برقرار نشد.","*'ارتباط با سرویس استعلام برقرار نشد.' in '${message}'","*Log To Console","*<p>Logs the given message to the console.\x3c/p>","*Service Is Unavailable","*Should Contain","*<p>Fails if <code>container\x3c/code> does not contain <code>item\x3c/code> one or more times.\x3c/p>","*${message}    کد ملی نامعتبر است","*Clear Element Text","*<p>Clears the value of the text-input-element identified by <code>locator\x3c/code>.\x3c/p>","*xpath=//input[@formcontrolname='nationalCode']","*xpath=//input[@formcontrolname='nationalCode']    ${nationalCode}","*Typing text '1520554001' into text field 'xpath=//input[@formcontrolname='nationalCode']'.","*xpath=//button[.//span[contains(text(),'استعلام هویت')]]","*Clicking element 'xpath=//button[.//span[contains(text(),'استعلام هویت')]]'.","*Wait Until Page Contains","*<p>Waits until <code>text\x3c/code> appears on the current page.\x3c/p>","*تاریخ تولد","*Identity Inquiry BirthDate Validation Passed","*Get Value","*<p>Returns the value attribute of the element identified by <code>locator\x3c/code>.\x3c/p>","*${value}","*${value} = 1520554001","*Length Should Be","*<p>Verifies that the length of the given item is correct.\x3c/p>","*${value}    10","*Length is 10.","*National Code Length Validation Passed","*Step01 Passed","*Step02 - Verify National Code Required For Iranian","*<p>National code should be mandatory for Iranian nationality with social security insurance\x3c/p>","*insuranceName    تامین اجتماعی","*Clicking element 'css=ng-select[formcontrolname='insuranceName']'.","*Typing text 'تامین اجتماعی' into text field 'css=ng-select[formcontrolname='insuranceName'] input[type='text']'.","*Clicking element 'xpath=//div[contains(@class,'ng-option') and contains(normalize-space(.), 'تامین اجتماعی')]'.","*Sending key(s) ('TAB',) to css=ng-select[formcontrolname='insuranceName'] input[type='text'] element.","*Click Element Safe","*css=button.btn-saveFile","*${locator}","*Wait Until Element Is Enabled","*<p>Waits until the element <code>locator\x3c/code> is enabled.\x3c/p>","*Scroll Element Into View","*<p>Scrolls the element identified by <code>locator\x3c/code> into view.\x3c/p>","*Clicking element 'css=button.btn-saveFile'.","*Get Element Attribute","*<p>Returns the value of <code>attribute\x3c/code> from the element <code>locator\x3c/code>.\x3c/p>","*xpath=//input[@formcontrolname='nationalCode']    required","*${required}","*${required} = true","*Should Be Equal","*<p>Fails if the given objects are unequal.\x3c/p>","*${required}    true","*xpath=//input[@formcontrolname='nationalCode']    aria-required","*${aria_required}","*${aria_required} = true","*${aria_required}    true","*National Code Is Mandatory","*Create AdmitHIS Session","*Create Session","*RequestsLibrary","*<p>Create Session: create a HTTP session to a server\x3c/p>","*HIS    ${AdmitHis_Api_URL}    verify=${False}","*Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 ","*Error in file 'D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test\\AdmitRis-Api.robot' on line 262: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.","*Error in file 'D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test\\AdmitRis-Api.robot' on line 277: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.","*Error in file 'D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test\\Resources\\Keywords\\AdmitHis-DB-keywords.resource' on line 11: Resource file 'AdmitHis-keywords.resource' does not exist."]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:15","fail":1,"label":"All Tests","pass":0,"skip":0}],[{"elapsed":"00:00:15","fail":1,"label":"TC_EPD_HIS_02","pass":0,"skip":0},{"elapsed":"00:00:15","fail":1,"label":"UI_Test","pass":0,"skip":0}],[{"elapsed":"00:00:15","fail":1,"id":"s1","label":"AdmitHis-Test","name":"AdmitHis-Test","pass":0,"skip":0},{"elapsed":"00:00:15","fail":1,"id":"s1-s1","label":"AdmitHis-Test.AdmitHis-UI","name":"AdmitHis-UI","pass":0,"skip":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:29","fail":0,"label":"All Tests","pass":1,"skip":0}],[{"elapsed":"00:00:29","fail":0,"label":"TC_EPD_HIS_02","pass":1,"skip":0},{"elapsed":"00:00:29","fail":0,"label":"UI_Test","pass":1,"skip":0}],[{"elapsed":"00:00:30","fail":0,"id":"s1","label":"AdmitHis-Test","name":"AdmitHis-Test","pass":1,"skip":0},{"elapsed":"00:00:30","fail":0,"id":"s1-s1","label":"AdmitHis-Test.AdmitHis-UI","name":"AdmitHis-UI","pass":1,"skip":0}]];
 </script>
 <script type="text/javascript">
-window.output["errors"] = [[-26,3,78],[-25,3,79],[323,4,80],[348,3,25,24]];
+window.output["errors"] = [[-52,3,150],[-52,3,151],[904,4,152],[934,3,24,23]];
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1781274875638;
+window.output["baseMillis"] = 1781299830580;
 </script>
 <script type="text/javascript">
-window.output["generated"] = 15126;
+window.output["generated"] = 29914;
 </script>
 <script type="text/javascript">
 window.output["expand_keywords"] = null;
@@ -2154,8 +2153,9 @@ function addErrors() {
     var errors = window.testdata.errorIterator();
     if (errors.hasNext()) {
         $.tmpl('errorHeaderTemplate').appendTo($('body'));
-        drawErrorsRecursively(errors, $('#errors'));
+        drawErrorsRecursively(errors, $('#errors .messages'));
     }
+    toggleElement('errors');
 }
 
 function drawErrorsRecursively(errors, target) {
@@ -2189,7 +2189,7 @@ function makeElementVisible(id) {
 }
 
 function addExecutionLog(main) {
-    $('body').append($(testOrTask('<h2>{Test} Execution Log</h2>')),
+    $('body').append('<h2>Execution Log</h2>',
                      $.tmpl('suiteTemplate', main));
 }
 </script>
@@ -2234,20 +2234,31 @@ function addExecutionLog(main) {
 </script>
 
 <script type="text/x-jquery-tmpl" id="errorHeaderTemplate">
-  <h2>{{= testOrTask('{Test}')}} Execution Errors</h2>
-  <table id="errors"></table>
+  <h2>Execution Errors</h2>
+  <div id="errors">
+    <div class="element-header closed" onclick="toggleElement('errors')">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label error">ERRORS</div>
+      <div class="name">Errors and warnings during execution</div>
+    </div>
+    <div class="children">
+      <table class="messages"></table>
+    </div>
+  </div>
 </script>
 
 <script type="text/x-jquery-tmpl" id="errorTemplate">
   <tr id="${id}" class="message-row">
-    <td class="error-time">
+    <td class="time">
       {{if link}}
       <a onclick="makeElementVisible('${link}')" href="#${link}" title="Link to details">${date} ${time}</a>
       {{else}}
       ${date} ${time}
       {{/if}}
     </td>
-    <td class="${level.toLowerCase()} level"><span class="label ${level.toLowerCase()}">${level}</span></td>
+    <td class="${level.toLowerCase()} level">
+      <span class="label ${level.toLowerCase()}">${level}</span>
+    </td>
     <td class="message">{{html text}}</td>
     <td class="select-message" onclick="javascript:selectMessage('${id}')" title="Select message text">
       <div></div>
@@ -2257,18 +2268,18 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="suiteTemplate">
   <div id="${id}" class="suite">
-    <div class="element-header closed" onclick="toggleSuite('${id}')">
-      <div class="element-header-left" title="SUITE  {{html name}}  [${status}]">
-        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="label ${status.toLowerCase()}">SUITE</span>
-        <span class="name">{{html name}}</span>
-      </div>
-      <div class="element-header-right" onclick="stopPropagation(event)" title="">
+    <div class="element-header closed" onclick="toggleSuite('${id}')"
+         title="SUITE  {{html name}}  [${status}]">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label ${status.toLowerCase()}">SUITE</div>
+      <div class="name">{{html name}}</div>
+      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
+      <div class="element-header-menu" onclick="stopPropagation(event)" title="">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" title="Link to this suite" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+        <a class="link" onclick="makeElementVisible('${id}')"
+           title="Link to this suite" href="#${id}"></a>
       </div>
-      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -2319,18 +2330,18 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="testTemplate">
   <div id="${id}" class="test">
-    <div class="element-header closed" onclick="toggleTest('${id}')">
-      <div class="element-header-left" title="{{= testOrTask('{TEST}')}}  {{html name}}  [${status}]">
-        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="label ${status.toLowerCase()}">{{= testOrTask('{TEST}')}}</span>
-        <span class="name">{{html name}}</span>
-      </div>
-      <div class="element-header-right" onclick="stopPropagation(event)" title="">
+    <div class="element-header closed" onclick="toggleTest('${id}')"
+         title="{{= testOrTask('{TEST}')}}  {{html name}}  [${status}]">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label ${status.toLowerCase()}">{{= testOrTask('{TEST}')}}</div>
+      <div class="name">{{html name}}</div>
+      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
+      <div class="element-header-menu" onclick="stopPropagation(event)" title="">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" title="Link to this {{= testOrTask('{test}')}}" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+        <a class="link" href="#${id}" onclick="makeElementVisible('${id}')"
+           title="Link to this {{= testOrTask('{test}')}}"></a>
       </div>
-      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -2377,21 +2388,20 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="keywordTemplate">
   <div id="${id}" class="keyword">
-    <div class="element-header closed" onclick="toggleKeyword('${id}')">
-      <div class="element-header-left" title="${type}  {{if name}}{{html fullName}}  {{/if}}[${status}]">
-        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
-        <span class="label ${status.toLowerCase()}">${type}</span>
-        <span class="assign">{{html assign}}</span>
-        <span class="name"><span class="parent-name">{{html libname}}{{if libname}} . {{/if}}</span>{{html name}}</span>
-        &nbsp;
-        <span class="arg">{{html arguments}}</span>
-      </div>
-      <div class="element-header-right" onclick="stopPropagation(event)">
+    <div class="element-header closed" onclick="toggleKeyword('${id}')"
+         title="${type}  {{if name}}{{html fullName}}  {{/if}}[${status}]">
+      <div class="element-header-toggle" title="Toggle visibility"></div>
+      <div class="label ${status.toLowerCase()}">${type}</div>
+      {{if assign}}<div class="assign">{{html assign}}&nbsp;=</div>{{/if}}
+      <div class="name">{{if libname}}<span class="parent-name">{{html libname}} . </span>{{/if}}{{html name}}</div>
+      <div class="arg">{{html arguments}}</div>
+      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
+      <div class="element-header-menu" onclick="stopPropagation(event)">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" title="Link to this item" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+        <a class="link" onclick="makeElementVisible('${id}')"
+           title="Link to this item" href="#${id}"></a>
       </div>
-      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata keyword-metadata">

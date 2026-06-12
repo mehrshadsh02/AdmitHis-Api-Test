@@ -4,9 +4,8 @@ Library           Collections
 Library           OperatingSystem
 Library           SeleniumLibrary
 
-Resource          ../Resources/Variables/AdmitHis-variables.resource
-Resource          ../Resources/Keywords/AdmitHis-UI-keywords.resource
-Resource          ../Resources/Keywords/AdmitHis-DB-keywords.resource
+Resource          Resources/Variables/AdmitHis-variables.resource
+Resource          Resources/Keywords/AdmitHis-UI-keywords.resource
 
 
 Suite Setup       Create AdmitHIS Session
@@ -66,7 +65,7 @@ TC_EPD_HIS_02_SC_02_01 - Creating a patient file without a history
     Wait For Spinner Hidden
 
     Step01 - Verify National Code Format
-    # Step02 - Verify National Code Required For Iranian
+    Step02 - Verify National Code Required For Iranian
     # Step03 - Verify Passport For Foreign Nationality
     # Step04 - Verify Unknown Person Behaviour
     # Step05 - Verify Infant Under 28 Days Behaviour
