@@ -34,6 +34,9 @@ Create All Sessions
 Disable Screenshots
     Register Keyword To Run On Failure    NONE    
 
+
+###    TC_EPD_HIS_01_SC_01_01
+
 Get Token Data
     [Documentation]    دریافت اطلاعات کاربر لاگین کننده
     [Tags]    API_DynamicRoleClaimsManager    METHOD_GET  
@@ -148,7 +151,8 @@ Validate Admit Page Opened
     ...    Open Admit Page : ${opened}     
 
 
-# َAdmit_His  
+###    TC_EPD_HIS_02_SC_02_01  
+
 Start Browser AdmitHis With Token
     [Documentation]    باز کردن کروم + تزریق کوکی token
     Open Browser    ${AdmitHis_App_URL}    chrome     executable_path=C:/chromedriver.exe
@@ -160,6 +164,53 @@ Go To AdmitHis Page
     [Documentation]    رفتن مستقیم به صفحه پذیرش بستری
     Go To    ${AdmitHis_App_URL}
     Reload Page
+
+Step01 - Verify National Code Format
+    [Documentation]    Verify valid national code can be entered and inquiry button is enabled for Iranian nationality
+
+    Select Iranian Nationality
+
+    Enter National Code
+    ...    1234567891
+
+    Verify Identity Inquiry Button Is Enabled
+
+    Log To Console    Step01 Passed
+
+Select Iranian Nationality
+
+    Wait For Page Ready
+    Wait For Spinner Hidden
+
+    Click Element    xpath=//ng-select[@formcontrolname='nationality']
+
+    Wait Until Element Is Enabled
+    ...    xpath=//span[normalize-space()='ایرانی']
+    ...    visible
+
+    Click Element    xpath=//span[normalize-space()='ایرانی']
+
+Enter National Code
+    [Arguments]    ${NationalCode}
+
+    Wait For Page Ready
+    Wait For Spinner Hidden
+    Input Text
+    ...    xpath=//input[@formcontrolname='nationalCode']
+    ...    ${NationalCode}
+
+
+Verify Identity Inquiry Button Is Enabled
+
+    Wait Until Element Is Visible
+    ...    xpath=//button[contains(.,'استعلام هویت')]
+    ...    visible
+
+    Element Should Be Enabled 
+    ...    xpath=//button[contains(.,'استعلام هویت')]
+
+    Element Should Be Enabled
+    ...    xpath=//button[contains(.,'استعلام هویت')]            
 
 Switch To AdmitHis App
     Go To    ${AdmitHis_App_URL}
@@ -432,32 +483,6 @@ Read State
     RETURN    ${value}
 
     
-Get Empty Bed From API
-    [Documentation]    برگردوندن یک تخت خالی معتبر
-
-    Create AdmitHIS Session
-
-    &{headers}=    Create Dictionary
-    ...    Accept=application/json, text/plain, */*
-    ...    Authorization=${AUTH_BEARER}
-    ...    Cookie=${COOKIE_TOKEN}
-
-    ${resp}=    GET On Session
-    ...    HIS
-    ...    /api/GeneralVariables/GetAllNamesInpatientWards
-    ...    headers=&{headers}
-
-    Should Be Equal As Integers    ${resp.status_code}    200
-
-    ${json}=    Set Variable    ${resp.json()}
-
-    # فرض: اولین تخت خالی
-    ${bed_id}=    Get From Dictionary    ${json}[0]    standardVariableId
-
-    # Should Not Be Empty    ${bed_id}    ❌ No empty bed found
-
-    RETURN    ${bed_id}
-
 Convert Jalali To Gregorian
     [Arguments]    ${jalali_date}
     ${gdate}=    Evaluate    __import__('jdatetime').datetime.strptime("${jalali_date}", "%Y/%m/%d").togregorian().strftime("%Y/%m/%d")

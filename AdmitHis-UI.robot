@@ -56,16 +56,32 @@ TC_EPD_HIS_01_SC_01_01 - Open Filing Page
 # زمانی که کاربر شروع به پذیرش میکنه و کد ملی رو وارد میکنه و استحقاق درمان میکنه
 
 TC_EPD_HIS_02_SC_02_01 - Creating a patient file without a history
-    [Documentation]  
-    [Tags]    UI_Test    step02    
+    [Documentation]    Scenario 01
+    [Tags]    UI_Test    TC_EPD_HIS_02
 
     Disable Screenshots
     Start Browser AdmitHis With Token
     Go To AdmitHis Page
     Wait For Page Ready
-    # Switch To AdmitHis App
     Wait For Spinner Hidden
-    Log To Console    ---- DONE ----
+
+    Step01 - Verify National Code Format
+    # Step02 - Verify National Code Required For Iranian
+    # Step03 - Verify Passport For Foreign Nationality
+    # Step04 - Verify Unknown Person Behaviour
+    # Step05 - Verify Infant Under 28 Days Behaviour
+    # Step06 - Verify Inquiry Service
+    # Step07 - Verify Fields Disabled After Inquiry
+    # Step08 - Verify Insurance Restrictions
+    # Step09 - Verify National Code Locked After Inquiry 
+
+    # Disable Screenshots
+    # Start Browser AdmitHis With Token
+    # Go To AdmitHis Page
+    # Wait For Page Ready
+    # # Switch To AdmitHis App
+    # Wait For Spinner Hidden
+    # Log To Console    ---- DONE ----
 
 
 # پر کردن باقی فیلد های مهم در پذیرش 
