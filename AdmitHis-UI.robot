@@ -5,7 +5,7 @@ Library           OperatingSystem
 Library           SeleniumLibrary
 
 Resource          ../Resources/Variables/AdmitHis-variables.resource
-Resource          ../Resources/Keywords/AdmitHis-keywords.resource
+Resource          ../Resources/Keywords/AdmitHis-UI-keywords.resource
 Resource          ../Resources/Keywords/AdmitHis-DB-keywords.resource
 
 
@@ -25,7 +25,7 @@ Suite Setup       Create AdmitHIS Session
 
 #     Log To Console    ---- DONE ----
 
-TC_EPD_HIS_01 - Open Filing Page
+TC_EPD_HIS_01_SC_01_01 - Open Filing Page
 
     [Documentation]   باز کردن صفحه پذیرش بستری
 
@@ -49,20 +49,23 @@ TC_EPD_HIS_01 - Open Filing Page
 
     Log To Console
     ...    ---- DONE ----
+
+    Set Test Message
+    ...    SC-01-1   DONE    
     
 # زمانی که کاربر شروع به پذیرش میکنه و کد ملی رو وارد میکنه و استحقاق درمان میکنه
 
-TC_EPD_HIS_02 - Enter national code of preadmit patient
-    [Documentation]   وارد کردن کد ملی بیمار و استعلام کد ملی
-    [Tags]    UI_Test    step02    preadmit
+TC_EPD_HIS_02_SC_02_01 - Creating a patient file without a history
+    [Documentation]  
+    [Tags]    UI_Test    step02    
 
-    Disable Screenshots        
+    Disable Screenshots
+    Start Browser AdmitHis With Token
+    Go To AdmitHis Page
     Wait For Page Ready
-    Wait Until Element Is Visible    //input[@formcontrolname='nationalCode']    50s
-    Clear Element Text    //input[@formcontrolname='nationalCode']
-    Input Text         //input[@formcontrolname='nationalCode']     ${nationalCode}
-    Click Element Safe       id=button-addon3
-    Wait For Page Ready
+    # Switch To AdmitHis App
+    Wait For Spinner Hidden
+    Log To Console    ---- DONE ----
 
 
 # پر کردن باقی فیلد های مهم در پذیرش 

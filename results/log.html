@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 7.4.2 (Python 3.13.13 on win32)" name="Generator">
+<meta content="Robot Framework 7.3.2 (Python 3.13.2 on win32)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAqAAAAAAAAAAAAAAAAAAAALIAAAD/AAAA4AAAANwAAADcAAAA3AAAANwAAADcAAAA3AAAANwAAADcAAAA4AAAAP8AAACxAAAAAAAAAKYAAAD/AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAA/wAAAKkAAAD6AAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN8AAAD/AAAA+gAAAMMAAAAAAAAAAgAAAGsAAABrAAAAawAAAGsAAABrAAAAawAAAGsAAABrAAAADAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAIsAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAANEAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAAAAAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAFAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAADwAAAB8AAAAAAAAAGAAAABcAAAAAAAAAH8AAABKAAAAAAAAAAAAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAADCAAAA/wAAACkAAADqAAAA4QAAAAAAAAD7AAAA/wAAALAAAAAGAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAIwAAAP4AAAD/AAAA/wAAAGAAAAAAAAAAAAAAAMkAAAD/AAAAigAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAAAAAAAIAAAAcAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA2gAAAP8AAAD7AAAAywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AAAD/AAAAqwAAAP8AAACvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIAAAD/AAAAsgAAAAAAAAC5AAAA/wAAAMoAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMkAAAD/AAAAvAAAAAAAAAAAAAAAAAAAAKwAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAArQAAAAAAAAAAwAMAAIABAAAf+AAAP/wAAD/8AAAgBAAAP/wAAD/8AAA//AAAJIwAADHEAAA//AAAP/wAAB/4AACAAQAAwAMAAA==">
 <style media="all">
 :root {
@@ -116,16 +116,15 @@ select {
 #header {
     width: 65em;
     height: 3em;
-    margin: 1em 0 0 0;
+    margin: 20px 0 6px 0;
 }
 h1 {
     float: left;
-    margin: 0 0 1em 0;
+    margin: 0 0 0.5em 0;
     width: 75%;
 }
 h2 {
     clear: left;
-    margin: 1.5em 0 0.5em 0;
 }
 #generated {
     float: right;
@@ -169,13 +168,7 @@ h2 {
     background-color: var(--primary-color);
     border-radius: 3px;
 }
-/* https://stackoverflow.com/questions/75238633 */
-@supports (-moz-appearance: none) {
-    .label {
-        padding-top: 4px;
-    }
-}
-.label.debug, .label.trace, .label.error {
+.label.debug, .label.trace, .label.error, .label.keyword {
     letter-spacing: 0;
 }
 .label.pass, .label.fail, .label.error, .label.skip, .label.warn {
@@ -362,6 +355,19 @@ th.stats-col-graph:hover {
 [data-theme="light"] .dark-mode-icon {
     display: block;
 }
+@keyframes highlight {
+    0% {
+        background: var(--primary-color)
+    }
+    100% {
+        background: var(--target-color);
+    }
+}
+:target {
+    background: var(--target-color);
+    transition: background 0.3s;
+    animation: highlight 4s;
+}
 </style>
 <style media="all">
 /* Icons are from Open Iconic <https://useiconic.com/open/>.
@@ -378,43 +384,36 @@ th.stats-col-graph:hover {
     --elapsed-color: #999;
 }
 /* Containers */
-.suite, .test, #errors, #errors .messages {
+.suite, .test, #errors {
     border-color: #ccc; /* Fallback value */
     border-color: var(--secondary-color);
     border-width: 1px;
     border-style: solid;
-    padding: 5px;
-    margin-top: 5px;
+    padding: 0.3em 0.2em;
+    margin: 0.2em 0;
 }
 .test {
     border-style: dashed;
 }
-.messages {
+#errors, .messages {
     width: 100%;
     border-spacing: 0;
-    padding: 0 5px;
 }
 .children {
     display: none;
-    margin-left: 18px;
-    margin-top: 2px;
+    margin-left: 1.4em;
 }
-#errors .children {
-    margin-left: 22px;
+.suite, .test, .keyword {
+    margin-left: -0.2em;
 }
-.suite, .test {
-    margin-left: -5px;
-}
-#s1, #errors {
-    margin: 0;
+#s1, .suite > .children > .keyword {
+    margin-left: 0;
 }
 /* Suite, test and kw headers */
 .element-header {
-    display: flex;
-    align-items: center;
-    padding: 2px;
     border: 1px solid transparent;
     border-radius: 2px;
+    position: relative;
 }
 .element-header:hover {
     cursor: pointer;
@@ -424,15 +423,17 @@ th.stats-col-graph:hover {
     border-color: var(--secondary-color);
 }
 .element-header-toggle {
-    margin: 0 4px 0 2px;
-    height: 11px;
-    width: 11px;
-    min-width: 11px;
-    background-size: 6px 6px;
+    position: absolute;
+    left: 3px;
+    top: 5px;
     background-repeat: no-repeat;
     background-position: center;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JChSkZz20AAAAGklEQVQI12NgQAKMDKzInP8IDhOqMk4G7AAANQwBE427PYUAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2Mmg4di0yaC04eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAzKSIgLz4KPC9zdmc+), none;
     filter: var(--icon-filter);
+    height: 10px;
+    width: 10px;
+    background-size: 6px 6px;
     border-color: #ccc; /* Fallback value */
     border-color: var(--icon-highlight);
     border-width: 1px;
@@ -440,59 +441,67 @@ th.stats-col-graph:hover {
     border-radius: 2px;
 }
 .closed > .element-header-toggle {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JCDHdVYtxAAAAM0lEQVQI103MMQqAMBQFwVHyITaB3P+W1sKzSBC3mW6hRFw0pUB5DvF1bu9FN0RM3X/wAk98CUnvFTakAAAAAElFTkSuQmCC);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0zIDB2M2gtM3YyaDN2M2gydi0zaDN2LTJoLTN2LTNoLTJ6IiAvPgo8L3N2Zz4=), none;
 }
 .element-header:hover > .element-header-toggle {
     background-color: #ccc; /* Fallback value */
     background-color: var(--icon-highlight);
 }
-.element-header-menu:hover ~ .element-header-toggle {
+.element-header-right:hover ~ .element-header-toggle {
     background-color: transparent;
 }
-.element-header-menu {
-    margin: 0 2px 0 4px;
+.element-header-left {
+    padding: 3px 80px 3px 20px;
+}
+.element-header-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px;
     cursor: default;
 }
-.name, .arg, .assign {
-    margin-left: 7px;
-    white-space: pre-wrap;
+.element-header .label {
+    margin-right: 0.5em;
 }
 .name {
     font-weight: bold;
+    white-space: pre-wrap;
+}
+.arg, .assign {
+    white-space: pre-wrap;
 }
 .elapsed {
-    margin-left: auto;
-    padding-left: 0.5em;
+    float: right;
     color: #666; /* Fallback value */
     color: var(--elapsed-color);
-    font-size: 0.9em;
-}
-/* https://stackoverflow.com/questions/75238633 */
-@supports (-moz-appearance: none) {
-    .name, .arg, .assign, .elapsed {
-        padding-top: 3px;
-    }
+    padding-left: 1em;
 }
 .link {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHlJREFUGJVtzrEJwmAQBtCn6ASuIKTIBhY2gmghBiJYB1udwk10B8FJbKMBcQFbtbkfJHrVwfu+4/idJR64Y9H7E3higj5O3S8Y44ApLnjhnXCNGhV2yNGggDJwiC02gavUbpDFvscRo4QdXOMKDHBufz3HLYKzNn4AbSkV3fncGQYAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik01Ljg4LjAzYy0uMTguMDEtLjM2LjAzLS41My4wOS0uMjcuMS0uNTMuMjUtLjc1LjQ3YS41LjUgMCAxIDAgLjY5LjY5Yy4xMS0uMTEuMjQtLjE3LjM4LS4yMi4zNS0uMTIuNzgtLjA3IDEuMDYuMjIuMzkuMzkuMzkgMS4wNCAwIDEuNDRsLTEuNSAxLjVjLS40NC40NC0uOC40OC0xLjA2LjQ3LS4yNi0uMDEtLjQxLS4xMy0uNDEtLjEzYS41LjUgMCAxIDAtLjUuODhzLjM0LjIyLjg0LjI1Yy41LjAzIDEuMi0uMTYgMS44MS0uNzhsMS41LTEuNWMuNzgtLjc4Ljc4LTIuMDQgMC0yLjgxLS4yOC0uMjgtLjYxLS40NS0uOTctLjUzLS4xOC0uMDQtLjM4LS4wNC0uNTYtLjAzem0tMiAyLjMxYy0uNS0uMDItMS4xOS4xNS0xLjc4Ljc1bC0xLjUgMS41Yy0uNzguNzgtLjc4IDIuMDQgMCAyLjgxLjU2LjU2IDEuMzYuNzIgMi4wNi40Ny4yNy0uMS41My0uMjUuNzUtLjQ3YS41LjUgMCAxIDAtLjY5LS42OWMtLjExLjExLS4yNC4xNy0uMzguMjItLjM1LjEyLS43OC4wNy0xLjA2LS4yMi0uMzktLjM5LS4zOS0xLjA0IDAtMS40NGwxLjUtMS41Yy40LS40Ljc1LS40NSAxLjAzLS40NC4yOC4wMS40Ny4wOS40Ny4wOWEuNS41IDAgMSAwIC40NC0uODhzLS4zNC0uMi0uODQtLjIyeiIKICAvPgo8L3N2Zz4=), none;
+    filter: var(--icon-filter);
 }
 .expand {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAADtJREFUGJVjYCACKDAwMByA0ljFDjAwMPxnYGB4ABVQgLL/Q+VQBB6gseGmIivCkERXhFUSWRFOSawAAEl7E3uv1iMcAAAAAElFTkSuQmCC);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0xLjUgMGwtMS41IDEuNSA0IDQgNC00LTEuNS0xLjUtMi41IDIuNS0yLjUtMi41eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz4KPC9zdmc+), none;
+    filter: var(--icon-filter);
 }
 .collapse {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAC5JREFUGJVjYCARNEAxTsn/UIyhCFkSQxG6ThQ+C5IpjWhG1yNb4YDFTdjEMAEACi8Q++9Y9TAAAAAASUVORK5CYII=);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik00IDBsLTQgNCAxLjUgMS41IDIuNS0yLjUgMi41IDIuNSAxLjUtMS41LTQtNHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMSkiIC8+Cjwvc3ZnPg==), none;
+    filter: var(--icon-filter);
 }
 .expand, .collapse, .link {
     float: left;
     display: block;
     visibility: hidden;
-    margin: 0 3px;
+    margin: 0 4px;
     height: 14px;
     width: 14px;
     background-size: 8px 8px;
     background-repeat: no-repeat;
     background-position: center;
-    filter: var(--icon-filter);
     border-color: #ccc; /* Fallback value */
     border-color: var(--icon-highlight);
     border-width: 1px;
@@ -510,18 +519,23 @@ th.stats-col-graph:hover {
     background-color: var(--icon-highlight);
 }
 /* Messages and errors */
-.message-row {
-    height: 20px;
-}
 .messages .time, .messages .message {
     font-family: monospace;
     font-size: 1.1em;
 }
-.messages .time {
+#errors .message {
+    font-family: monospace;
+    font-size: 1.2em;
+}
+.message-row {
+    height: 20px;
+}
+.time {
     width: 7.5em;
 }
-#errors .time {
-    width: 12.5em;
+.error-time {
+    width: 11em;
+    font-size: 0.9em;
     white-space: nowrap;
 }
 .level {
@@ -541,6 +555,7 @@ th.stats-col-graph:hover {
     background-position: center;
 }
 .message-row:hover .select-message div {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0MOzhWKZQOAAAASUlEQVQY032PsRHAIAwDX9BkicD+W8UMEqegAQJWKZ/+3sLZJhFGQEZzNaIa4ibh66En867VNaIeoP5WppNuIGoAlOm3g5VC1AdYeQv1BZPRSgAAAABJRU5ErkJggg==);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2MWg4di0xaC04em0wIDJ2MWg2di0xaC02em0wIDJ2MWg4di0xaC04em0wIDJ2MWg2di0xaC02eiIgLz4KPC9zdmc+), none;
     filter: var(--icon-filter);
     border-color: #ccc; /* Fallback value */
@@ -562,6 +577,7 @@ th.stats-col-graph:hover {
 .debug-message {
     display: table;
 }
+/* Metadata */
 .metadata {
     width: 100%;
     border-spacing: 0.2em;
@@ -580,20 +596,6 @@ th.stats-col-graph:hover {
 /* Custom styles for statistics */
 #total-stats tr:hover, #tag-stats tr:hover {
     cursor: default;
-}
-/* Target highlight */
-@keyframes highlight {
-    0% {
-        background: var(--primary-color)
-    }
-    100% {
-        background: var(--target-color);
-    }
-}
-:target {
-    background: var(--target-color);
-    transition: background 0.3s;
-    animation: highlight 4s;
 }
 </style>
 <style media="print">
@@ -739,8 +741,7 @@ function toggleElement(elementId, childrenNames) {
     children.toggle(100, '', function () {
         element.children('.element-header').toggleClass('closed');
     });
-    if (childrenNames)
-        populateChildren(elementId, children, childrenNames);
+    populateChildren(elementId, children, childrenNames);
 }
 function populateChildren(elementId, childElement, childrenNames) {
     if (!childElement.hasClass('populated')) {
@@ -1143,7 +1144,7 @@ window.model = (function () {
         kw.type = data.type;
         kw.template = 'keywordTemplate';
         kw.arguments = data.args;
-        kw.assign = data.assign;
+        kw.assign = data.assign + (data.assign ? ' =  ' : '');
         kw.tags = data.tags;
         kw.timeout = data.timeout;
         kw.populateKeywords = createIterablePopulator('Keyword');
@@ -1882,7 +1883,7 @@ function addStatistics() {
         '<th class="stats-col-elapsed">Elapsed</th>' +
         '<th class="stats-col-graph">Pass / Fail / Skip</th>';
     var statTable =
-        '<h2>Statistics</h2>' +
+        '<h2>{Test} Statistics</h2>' +
         '<table class="statistics" id="total-stats"><thead><tr>' +
         '<th class="stats-col-name">Total Statistics</th>' + statHeaders +
         '</tr></thead></table>' +
@@ -1892,7 +1893,7 @@ function addStatistics() {
         '<table class="statistics" id="suite-stats"><thead><tr>' +
         '<th class="stats-col-name">Statistics by Suite</th>' + statHeaders +
         '</tr></thead></table>';
-    $(statTable).appendTo('#statistics-container');
+    $(testOrTask(statTable)).appendTo('#statistics-container');
     util.map(['total', 'tag', 'suite'], addStatTable);
     addTooltipsToElapsedTimes();
     enableStatisticsSorter();
@@ -2073,25 +2074,25 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[1,0,9910],[[4,5,6,0,[],[1,64,9838],[],[[7,0,8,[9,10,11,12],[1,685,9210,13],[[0,14,15,0,0,0,0,0,[1,690,2],[[0,16,17,0,18,19,0,0,[1,690,1],[[691,2,20]]]]],[0,21,15,0,22,0,0,0,[1,692,1899],[[0,23,17,0,24,25,0,0,[1,693,1682],[[694,3,27],[709,2,28]]],[0,29,17,0,30,0,0,0,[1,2376,34],[]],[0,31,17,0,32,33,0,0,[1,2410,11],[]],[0,34,17,0,35,0,0,0,[1,2422,169],[]]]],[0,36,15,0,37,0,0,0,[1,2593,197],[[0,38,17,0,39,40,0,0,[1,2594,111],[[2595,2,41]]],[0,34,17,0,35,0,0,0,[1,2706,84],[]]]],[0,42,15,0,43,0,0,0,[1,2791,1379],[[0,44,15,0,45,0,0,46,[1,2792,1348],[[0,47,48,0,49,50,51,0,[1,2792,2],[[2794,2,52]]],[0,53,54,0,55,56,57,0,[1,2794,1253],[[4045,2,58],[4046,2,59],[4047,2,60]]],[0,61,48,0,62,63,0,0,[1,4047,2],[[4049,2,64]]],[0,65,48,0,66,67,68,0,[1,4050,2],[[4051,2,69]]],[0,65,48,0,66,70,71,0,[1,4052,2],[[4053,2,72]]],[0,65,48,0,66,73,74,0,[1,4054,1],[[4055,2,75]]],[0,65,48,0,66,76,77,0,[1,4056,2],[[4057,2,78]]],[0,65,48,0,66,79,80,0,[1,4058,2],[[4059,2,81]]],[0,82,15,0,0,83,0,0,[1,4060,23],[[0,84,48,0,85,86,87,0,[1,4061,6],[[0,88,89,0,90,91,0,0,[1,4064,2],[[4065,2,92]]],[4066,2,93]]],[5,94,0,0,0,0,0,0,[3,4067,1],[[0,95,89,0,96,97,0,0,[3,4068,0],[]]]],[0,98,89,0,99,100,101,0,[1,4069,6],[[4069,2,102],[4074,2,103]]],[0,104,48,0,105,106,107,0,[1,4075,2],[[4076,2,108]]],[0,109,110,0,111,112,0,0,[1,4077,1],[]],[0,104,48,0,105,113,114,0,[1,4079,2],[[4080,2,115]]],[0,95,89,0,96,116,0,0,[1,4081,2],[[4082,2,117]]]]],[0,82,15,0,0,118,0,0,[1,4084,14],[[0,84,48,0,85,86,87,0,[1,4085,2],[[0,88,89,0,90,91,0,0,[1,4086,1],[[4086,2,92]]],[4087,2,93]]],[5,94,0,0,0,0,0,0,[3,4087,1],[[0,95,89,0,96,97,0,0,[3,4088,0],[]]]],[0,98,89,0,99,100,101,0,[1,4089,2],[[4090,2,102],[4091,2,119]]],[0,104,48,0,105,106,107,0,[1,4091,2],[[4093,2,120]]],[0,109,110,0,111,112,0,0,[1,4093,1],[]],[0,104,48,0,105,113,114,0,[1,4095,2],[[4096,2,121]]],[0,95,89,0,96,116,0,0,[1,4096,2],[[4098,2,117]]]]],[0,82,15,0,0,122,0,0,[1,4099,21],[[0,84,48,0,85,86,87,0,[1,4100,3],[[0,88,89,0,90,91,0,0,[1,4101,1],[[4102,2,92]]],[4103,2,93]]],[5,94,0,0,0,0,0,0,[3,4104,1],[[0,95,89,0,96,97,0,0,[3,4105,0],[]]]],[0,98,89,0,99,100,101,0,[1,4106,3],[[4106,2,102],[4107,2,123]]],[0,104,48,0,105,106,107,0,[1,4109,2],[[4111,2,124]]],[0,109,110,0,111,112,0,0,[1,4112,1],[]],[0,104,48,0,105,113,114,0,[1,4113,1],[[4114,2,125]]],[0,95,89,0,96,116,0,0,[1,4115,3],[[4116,2,117]]]]],[0,82,15,0,0,126,0,0,[1,4120,17],[[0,84,48,0,85,86,87,0,[1,4121,3],[[0,88,89,0,90,91,0,0,[1,4121,2],[[4122,2,92]]],[4123,2,93]]],[5,94,0,0,0,0,0,0,[3,4125,1],[[0,95,89,0,96,97,0,0,[3,4125,0],[]]]],[0,98,89,0,99,100,101,0,[1,4126,2],[[4127,2,102],[4128,2,127]]],[0,104,48,0,105,106,107,0,[1,4129,1],[[4130,2,128]]],[0,109,110,0,111,112,0,0,[1,4131,1],[]],[0,104,48,0,105,113,114,0,[1,4133,2],[[4134,2,129]]],[0,95,89,0,96,116,0,0,[1,4135,2],[[4136,2,117]]]]],[0,130,48,0,131,132,0,0,[1,4138,2],[[4139,2,133]]]]],[0,134,15,0,0,135,136,0,[1,4141,14],[[0,88,89,0,90,91,0,0,[1,4141,1],[[4142,2,92]]],[0,98,89,0,99,91,101,0,[1,4143,2],[[4144,2,102],[4145,2,137]]],[0,104,48,0,105,106,107,0,[1,4146,2],[[4147,2,138]]],[0,139,110,0,140,141,142,0,[1,4148,2],[[4150,2,143]]],[0,144,48,0,145,146,0,0,[1,4152,2],[[4153,2,147]]],[8,0,0,0,0,142,0,0,[1,4154,0],[]],[4155,2,148]]],[0,149,48,0,150,151,0,0,[1,4155,1],[]],[0,104,48,0,105,152,153,0,[1,4157,7],[[4164,2,154]]],[0,155,48,0,156,157,0,0,[1,4165,2],[]],[0,149,48,0,150,158,0,0,[1,4168,2],[]]]],[0,159,15,0,160,0,0,0,[1,4171,3339],[[0,161,17,0,162,163,0,0,[1,4171,19],[]],[0,164,48,0,165,166,0,0,[1,4191,3064],[[0,167,17,0,168,169,0,0,[0,4192,3063],[[7233,5,170]]]]],[0,161,17,0,162,171,0,0,[1,7256,16],[]],[0,172,17,0,173,174,0,0,[1,7273,118],[[7274,2,175]]],[0,34,17,0,35,0,0,0,[1,7391,118],[]]]],[0,176,15,0,177,0,0,0,[1,7512,2381],[[0,84,48,0,85,178,179,0,[1,7512,2379],[[0,167,17,0,168,180,0,0,[1,7513,2378],[]],[9891,2,181]]],[0,182,48,0,183,184,0,0,[1,9892,1],[]]]],[0,149,48,0,150,185,0,0,[1,9894,1],[]]]]],[[1,186,15,0,0,0,0,0,[1,682,3],[[0,187,54,0,188,189,0,0,[1,684,1],[[684,2,190]]]]]],[1,1,0,0]]],[],[],[1,1,0,0]];
+window.output["suite"] = [1,2,3,0,[],[1,0,32702],[[4,5,6,0,[],[1,29,32668],[],[[7,0,8,[9,10,11,12],[1,433,32259,13],[[0,14,15,0,0,0,0,0,[1,439,1],[[0,16,17,0,18,19,0,0,[1,439,0],[[439,2,20]]]]],[0,21,15,0,22,0,0,0,[1,440,4943],[[0,23,17,0,24,25,0,0,[1,441,1203],[[441,3,27],[452,2,28]]],[0,29,17,0,30,0,0,0,[1,1644,1305],[]],[0,31,17,0,32,33,0,0,[1,2950,15],[]],[0,34,17,0,35,0,0,0,[1,2965,2417],[]]]],[0,36,15,0,37,0,0,0,[1,5383,278],[[0,38,17,0,39,40,0,0,[1,5384,53],[[5385,2,41]]],[0,34,17,0,35,0,0,0,[1,5438,223],[]]]],[0,42,15,0,43,0,0,0,[1,5662,9625],[[0,44,15,0,45,0,0,46,[1,5662,9614],[[0,47,48,0,49,50,51,0,[1,5663,1],[[5665,2,52]]],[0,53,54,0,55,56,57,0,[1,5665,9548],[[15211,2,58],[15212,2,59],[15213,2,60]]],[0,61,48,0,62,63,0,0,[1,15214,2],[[15215,2,64]]],[0,65,48,0,66,67,68,0,[1,15216,1],[[15217,2,69]]],[0,65,48,0,66,70,71,0,[1,15217,0],[[15218,2,72]]],[0,65,48,0,66,73,74,0,[1,15218,0],[[15218,2,75]]],[0,65,48,0,66,76,77,0,[1,15218,1],[[15219,2,78]]],[0,65,48,0,66,79,80,0,[1,15220,1],[[15220,2,81]]],[0,82,15,0,0,83,0,0,[1,15221,19],[[0,84,48,0,85,86,87,0,[1,15223,3],[[0,88,89,0,90,91,0,0,[1,15224,1],[[15225,2,92]]],[15226,2,93]]],[5,94,0,0,0,0,0,0,[3,15226,2],[[0,95,89,0,96,97,0,0,[3,15227,1],[]]]],[0,98,89,0,99,100,101,0,[1,15229,2],[[15230,2,102],[15231,2,103]]],[0,104,48,0,105,106,107,0,[1,15232,2],[[15233,2,108]]],[0,109,110,0,111,112,0,0,[1,15234,1],[]],[0,104,48,0,105,113,114,0,[1,15235,2],[[15236,2,115]]],[0,95,89,0,96,116,0,0,[1,15237,3],[[15239,2,117]]]]],[0,82,15,0,0,118,0,0,[1,15241,13],[[0,84,48,0,85,86,87,0,[1,15242,1],[[0,88,89,0,90,91,0,0,[1,15242,0],[[15243,2,92]]],[15243,2,93]]],[5,94,0,0,0,0,0,0,[3,15243,1],[[0,95,89,0,96,97,0,0,[3,15244,0],[]]]],[0,98,89,0,99,100,101,0,[1,15244,2],[[15245,2,102],[15246,2,103]]],[0,104,48,0,105,106,107,0,[1,15247,1],[[15247,2,108]]],[0,109,110,0,111,112,0,0,[1,15248,1],[]],[0,104,48,0,105,113,114,0,[1,15249,2],[[15249,2,115]]],[0,95,89,0,96,116,0,0,[1,15251,2],[[15253,2,117]]]]],[0,82,15,0,0,119,0,0,[1,15254,11],[[0,84,48,0,85,86,87,0,[1,15255,3],[[0,88,89,0,90,91,0,0,[1,15256,2],[[15257,2,92]]],[15258,2,93]]],[5,94,0,0,0,0,0,0,[3,15259,1],[[0,95,89,0,96,97,0,0,[3,15259,0],[]]]],[0,98,89,0,99,100,101,0,[1,15260,1],[[15260,2,102],[15261,2,103]]],[0,104,48,0,105,106,107,0,[1,15261,1],[[15262,2,108]]],[0,109,110,0,111,112,0,0,[1,15262,0],[]],[0,104,48,0,105,113,114,0,[1,15263,1],[[15263,2,115]]],[0,95,89,0,96,116,0,0,[1,15264,1],[[15264,2,117]]]]],[0,82,15,0,0,120,0,0,[1,15265,9],[[0,84,48,0,85,86,87,0,[1,15266,1],[[0,88,89,0,90,91,0,0,[1,15266,0],[[15267,2,92]]],[15267,2,93]]],[5,94,0,0,0,0,0,0,[3,15267,1],[[0,95,89,0,96,97,0,0,[3,15268,0],[]]]],[0,98,89,0,99,100,101,0,[1,15268,1],[[15269,2,102],[15269,2,103]]],[0,104,48,0,105,106,107,0,[1,15270,1],[[15270,2,108]]],[0,109,110,0,111,112,0,0,[1,15271,0],[]],[0,104,48,0,105,113,114,0,[1,15271,0],[[15272,2,115]]],[0,95,89,0,96,116,0,0,[1,15272,2],[[15273,2,117]]]]],[0,121,48,0,122,123,0,0,[1,15274,1],[]],[0,124,48,0,125,123,0,0,[1,15276,1],[[15276,2,126]]]]],[0,127,15,0,0,128,129,0,[1,15277,7],[[0,88,89,0,90,91,0,0,[1,15277,1],[[15278,2,92]]],[0,98,89,0,99,91,101,0,[1,15278,1],[[15278,2,102],[15279,2,103]]],[0,104,48,0,105,106,107,0,[1,15279,1],[[15280,2,108]]],[0,130,110,0,131,132,133,0,[1,15280,0],[[15281,2,134]]],[0,135,48,0,136,137,0,0,[1,15281,2],[[15283,2,138]]],[8,0,0,0,0,133,0,0,[1,15283,0],[]],[15283,2,139]]],[0,121,48,0,122,140,0,0,[1,15284,1],[]],[0,104,48,0,105,141,142,0,[1,15284,1],[[15285,2,143]]],[0,144,48,0,145,146,0,0,[1,15285,0],[]],[0,121,48,0,122,147,0,0,[1,15286,0],[]],[0,124,48,0,125,148,0,0,[1,15286,0],[[15287,2,149]]]]],[0,150,15,0,151,0,0,0,[1,15287,5575],[[0,152,17,0,153,154,0,0,[1,15288,2075],[]],[0,155,48,0,156,157,0,0,[1,17364,3209],[[0,158,17,0,159,160,0,0,[0,17365,3208],[[20560,5,161]]]]],[0,152,17,0,153,162,0,0,[1,20573,11],[]],[0,163,17,0,164,165,0,0,[1,20584,53],[[20585,2,166]]],[0,34,17,0,35,0,0,0,[1,20637,225],[]]]],[0,167,15,0,168,0,0,0,[1,20863,11827],[[0,84,48,0,85,169,170,0,[1,20863,11822],[[0,158,17,0,159,171,0,0,[1,20863,11821],[]],[32685,2,172]]],[0,173,48,0,174,175,0,0,[1,32686,1],[]],[0,121,48,0,122,176,0,0,[1,32687,1],[]],[0,124,48,0,125,176,0,0,[1,32689,1],[[32689,2,177]]]]],[0,121,48,0,122,178,0,0,[1,32690,1],[]],[0,124,48,0,125,179,0,0,[1,32692,0],[[32692,2,180]]]]]],[[1,181,15,0,0,0,0,0,[1,431,2],[[0,182,54,0,183,184,0,0,[1,432,1],[[433,2,185]]]]]],[1,1,0,0]]],[],[],[1,1,0,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis-Test","*D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test","*..","*AdmitHis-UI","*D:\\Mehrshad\\Test-Project\\HisAdmit\\AdmitHis-Test\\AdmitHis-UI.robot","*../AdmitHis-UI.robot","*TC_EPD_HIS_01 - Open Filing Page","*<p>باز کردن صفحه پذیرش بستری\x3c/p>","*preadmit","*step01","*STEP_01_Open_Browser","*UI_Test","*Response: 200\nUser Info:\n30627 / 923 / آزیتا فشارکی نیا","*Disable Screenshots","*AdmitHis-keywords","*Register Keyword To Run On Failure","*SeleniumLibrary","*<p>Sets the keyword to execute, when a SeleniumLibrary keyword fails.\x3c/p>","*NONE","*No keyword will be run on failure.","*Start Browser Landing With Token","*<p>باز کردن کروم + تزریق کوکی token\x3c/p>","*Open Browser","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*${Landing_App_URL}    chrome    executable_path=C:/chromedriver.exe","*s1-s1-t1-k2-k1","*executable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.","*Opening browser 'chrome' to base url '<a href=\"http://192.168.5.19:1201\">http://192.168.5.19:1201\x3c/a>'.","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Add Cookie","*<p>Adds a cookie to your current session.\x3c/p>","*token    ${COOKIE_TOKEN}","*Reload Page","*<p>Simulates user reloading page.\x3c/p>","*Go To Landing Page","*<p>رفتن مستقیم به صفحه لندینگ\x3c/p>","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${Landing_App_URL}","*Opening url '<a href=\"http://192.168.5.19:1201\">http://192.168.5.19:1201\x3c/a>'","*Validate Admit Access","*<p>بررسی دسترسی کاربر به پذیرش بستری\x3c/p>","*Get Token Data","*<p>دریافت اطلاعات کاربر لاگین کننده\x3c/p>","*API_DynamicRoleClaimsManager, METHOD_GET","*Create Dictionary","*BuiltIn","*<p>Creates and returns a dictionary based on the given <code>items\x3c/code>.\x3c/p>","*Authorization=${AUTH_BEARER}    Cookie=${COOKIE_TOKEN}    Accept=application/json","*${headers}","*${headers} = {'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL...","*GET On Session","*RequestsLibrary","*<p>Sends a GET request on a previously created HTTP Session.\x3c/p>","*HIS    /api/DynamicRoleClaimsManager/GetTokenData    headers=${headers}","*${resp}","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","*${resp} = &lt;Response [200]&gt;","*Should Be Equal As Integers","*<p>Fails if objects are unequal after converting them to integers.\x3c/p>","*${resp.status_code}    200","*Argument types are:\n&lt;class 'int'&gt;\n&lt;class 'str'&gt;","*Set Variable","*<p>Returns the given values which can then be assigned to a variables.\x3c/p>","*${resp.json()}","*${json}","*${json} = {'username': '30627', 'userId': 9, 'userEmailAddress': '', 'centerName': 'مرکز تهران', 'tenantId': 10015, 'personId': 923, 'loginUrlPage': None, 'npid': None, 'cid': None, 'idleTime': 32, 'aid': '777'...","*${json[\"username\"]}","*${LOGIN_user_name}","*${LOGIN_user_name} = 30627","*${json[\"personId\"]}","*${LOGIN_person_Id}","*${LOGIN_person_Id} = 923","*${json[\"displayName\"]}","*${LOGIN_display_Name}","*${LOGIN_display_Name} = آزیتا فشارکی نیا","*${json[\"roles\"]}","*${LOGIN_ROLES}","*${LOGIN_ROLES} = [1195]","*Write State","*LOGIN_ROLES    ${LOGIN_ROLES}","*Run Keyword And Return Status","*<p>Runs the specified keyword and returns the status as a Boolean value.\x3c/p>","*File Should Exist    ${STATE_FILE}","*${exists}","*File Should Exist","*OperatingSystem","*<p>Fails unless the given <code>path\x3c/code> points to an existing file.\x3c/p>","*${STATE_FILE}","eNpzy8xJVVC3SVTIKEpNs1VKA3Kt9PVdrGJ8UzOKijMSU2JCUotLdAOK8rNSk0tiPDKLHVNyM0tiwCSQpwuSjilKLc4vLUpOLY4pLkksSY0pKs0rycxNjQfz9LKK8/OU7Khvpo1+op26QmpFZnFJsR4ARftLmg==","*${exists} = True","*not ${exists}","*Create File","*<p>Creates a file with the given content and encoding.\x3c/p>","*${STATE_FILE}    {}","*Get File","*<p>Returns the contents of a specified file.\x3c/p>","*${STATE_FILE}    encoding=utf-8","*${content}","eNpzTy0pycxLV0jLzElVULdJVMgoSk2zVQJxrfT1XaxifFMzioozElNiQlKLS3QDivKzUpNLYjwyix1TcjNLYsAkkKcLko4pSi3OLy1KTi2OKS5JLEmNKSrNK8nMTY0H8/SyivPzlOyob6aNfqKduh4AnhhL7A==","*${content} = {\n}","*Evaluate","*<p>Evaluates the given expression in Python and returns the result.\x3c/p>","*json.loads('''${content}''')    json","*${state}","*${state} = {}","*Set To Dictionary","*Collections","*<p>Adds the given <code>key_value_pairs\x3c/code> and/or <code>items\x3c/code> to the <code>dictionary\x3c/code>.\x3c/p>","*${state}    ${key}    ${value}","*json.dumps(${state}, indent=2, ensure_ascii=False)","*${out}","*${out} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ]\n}","*${STATE_FILE}    ${out}    encoding=utf-8","eNqtzLEKhDAQhOFXCTZWml48QbSwESwsF45gRhJRA7vr+5/6DNcMfAz8HcMpvFnjDpPXzgTG+skeVtb2FY0ILMF5miFaTJw2LEpDlNYfUendW8VzE0PSxQuERO8s8XVqPPB9VW6Szqz5f7O2rsnLH4nxS9I=","*Login_User_Name    ${LOGIN_user_name}","*${content} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ]\n}","*${state} = {'LOGIN_ROLES': [1195]}","*${out} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\"\n}","*Login_Person_Id    ${LOGIN_person_Id}","*${content} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\"\n}","*${state} = {'LOGIN_ROLES': [1195], 'Login_User_Name': '30627'}","*${out} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\",\n  \"Login_Person_Id\": 923\n}","*Login_Display_Name    ${LOGIN_display_Name}","*${content} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\",\n  \"Login_Person_Id\": 923\n}","*${state} = {'LOGIN_ROLES': [1195], 'Login_User_Name': '30627', 'Login_Person_Id': 923}","*${out} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\",\n  \"Login_Person_Id\": 923,\n  \"Login_Display_Name\": \"آزیتا فشارکی نیا\"\n}","*Set Test Message","*<p>Sets message for the current test case.\x3c/p>","*Response: ${resp.status_code}\\nUser Info:\\n${LOGIN_user_name} / ${LOGIN_person_Id} / ${LOGIN_display_Name}","*Set test message to:\nResponse: 200\nUser Info:\n30627 / 923 / آزیتا فشارکی نیا","*Read State","*LOGIN_ROLES","*${roles}","*${content} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\",\n  \"Login_Person_Id\": 923,\n  \"Login_Display_Name\": \"آزیتا فشارکی نیا\"\n}","*${state} = {'LOGIN_ROLES': [1195], 'Login_User_Name': '30627', 'Login_Person_Id': 923, 'Login_Display_Name': 'آزیتا فشارکی نیا'}","*Get From Dictionary","*<p>Returns a value from the given <code>dictionary\x3c/code> based on the given <code>key\x3c/code>.\x3c/p>","*${state}    ${key}","*${value}","*${value} = [1195]","*Should Not Be Equal","*<p>Fails if the given objects are equal.\x3c/p>","*${value}    ${None}    ❌ ${key} not found in state file","*Argument types are:\n&lt;class 'list'&gt;\n&lt;class 'NoneType'&gt;","*${roles} = [1195]","*Log To Console","*<p>Logs the given message to the console.\x3c/p>","*User Roles: ${roles}","*1195 in $roles or 777 in $roles","*${has_access}","*${has_access} = True","*Skip If","*<p>Skips the rest of the current test if the <code>condition\x3c/code> is True.\x3c/p>","*not ${has_access}    User does not have Admit HIS access role (1195 or 777)","*User has valid Admit HIS access","*Click Admit HIS In Landing","*<p>کلیک بر روی گزینه پذیرش بستری\x3c/p>","*Wait Until Element Is Not Visible","*<p>Waits until the element <code>locator\x3c/code> is not visible.\x3c/p>","*css=div.back-spenner.ng-star-inserted    1000","*Run Keyword And Ignore Error","*<p>Runs the given keyword with the given arguments and ignores possible error.\x3c/p>","*Wait Until Page Contains Element    ${GLOBAL_SPINNER}    3","*Wait Until Page Contains Element","*<p>Waits until the element <code>locator\x3c/code> appears on the current page.\x3c/p>","*${GLOBAL_SPINNER}    3","*Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.","*${GLOBAL_SPINNER}    ${timeout}","*Execute Javascript","*<p>Executes the given JavaScript code with possible arguments.\x3c/p>","*document.evaluate(\"//div[contains(@class,'child-name') and contains(.,'پذیرش بستری')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();","*Executing JavaScript:\ndocument.evaluate(\"//div[contains(@class,'child-name') and contains(.,'پذیرش بستری')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();\nWithout any arguments.","*Validate Admit Page Opened","*<p>بررسی باز شدن صفحه پذیرش بستری\x3c/p>","*Wait Until Page Contains Element    xpath=//*[contains(text(),'پذیرش بستری')]    20s","*${opened}","*xpath=//*[contains(text(),'پذیرش بستری')]    20s","*${opened} = True","*Should Be True","*<p>Fails if the given condition is not true.\x3c/p>","*${opened}    User has access role but Admit HIS page did not open","*---- DONE ----","*Create AdmitHIS Session","*Create Session","*<p>Create Session: create a HTTP session to a server\x3c/p>","*HIS    ${AdmitHis_Api_URL}    verify=${False}","*Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 "]);
+window.output["strings"] = window.output["strings"].concat(["*","*AdmitHis-Test","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test","*..","*AdmitHis-UI","*D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitHis-UI.robot","*../AdmitHis-UI.robot","*TC_EPD_HIS_01_SC_01_01 - Open Filing Page","*<p>باز کردن صفحه پذیرش بستری\x3c/p>","*preadmit","*step01","*STEP_01_Open_Browser","*UI_Test","*Open Admit Page : True SC-01-1","*Disable Screenshots","*AdmitHis-UI-keywords","*Register Keyword To Run On Failure","*SeleniumLibrary","*<p>Sets the keyword to execute, when a SeleniumLibrary keyword fails.\x3c/p>","*NONE","*No keyword will be run on failure.","*Start Browser Landing With Token","*<p>باز کردن کروم + تزریق کوکی token\x3c/p>","*Open Browser","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*${Landing_App_URL}    chrome    executable_path=C:/chromedriver.exe","*s1-s1-t1-k2-k1","*exexcutable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.","*Opening browser 'chrome' to base url '<a href=\"http://192.168.5.19:1201\">http://192.168.5.19:1201\x3c/a>'.","*Maximize Browser Window","*<p>Maximizes current browser window.\x3c/p>","*Add Cookie","*<p>Adds a cookie to your current session.\x3c/p>","*token    ${COOKIE_TOKEN}","*Reload Page","*<p>Simulates user reloading page.\x3c/p>","*Go To Landing Page","*<p>رفتن مستقیم به صفحه لندینگ\x3c/p>","*Go To","*<p>Navigates the current browser window to the provided <code>url\x3c/code>.\x3c/p>","*${Landing_App_URL}","*Opening url '<a href=\"http://192.168.5.19:1201\">http://192.168.5.19:1201\x3c/a>'","*Validate Admit Access","*<p>بررسی دسترسی کاربر به پذیرش بستری\x3c/p>","*Get Token Data","*<p>دریافت اطلاعات کاربر لاگین کننده\x3c/p>","*API_DynamicRoleClaimsManager, METHOD_GET","*Create Dictionary","*BuiltIn","*<p>Creates and returns a dictionary based on the given <code>items\x3c/code>.\x3c/p>","*Authorization=${AUTH_BEARER}    Cookie=${COOKIE_TOKEN}    Accept=application/json","*${headers}","*${headers} = {'Authorization': 'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL...","*GET On Session","*RequestsLibrary","*<p>Sends a GET request on a previously created HTTP Session.\x3c/p>","*HIS    /api/DynamicRoleClaimsManager/GetTokenData    headers=${headers}","*${resp}","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","*${resp} = &lt;Response [200]&gt;","*Should Be Equal As Integers","*<p>Fails if objects are unequal after converting them to integers.\x3c/p>","*${resp.status_code}    200","*Argument types are:\n&lt;class 'int'&gt;\n&lt;class 'str'&gt;","*Set Variable","*<p>Returns the given values which can then be assigned to a variables.\x3c/p>","*${resp.json()}","*${json}","*${json} = {'username': '30627', 'userId': 9, 'userEmailAddress': '', 'centerName': 'مرکز تهران', 'tenantId': 10015, 'personId': 923, 'loginUrlPage': None, 'npid': None, 'cid': None, 'idleTime': 32, 'aid': '777'...","*${json[\"username\"]}","*${LOGIN_user_name}","*${LOGIN_user_name} = 30627","*${json[\"personId\"]}","*${LOGIN_person_Id}","*${LOGIN_person_Id} = 923","*${json[\"displayName\"]}","*${LOGIN_display_Name}","*${LOGIN_display_Name} = آزیتا فشارکی نیا","*${json[\"roles\"]}","*${LOGIN_ROLES}","*${LOGIN_ROLES} = [1195]","*Write State","*LOGIN_ROLES    ${LOGIN_ROLES}","*Run Keyword And Return Status","*<p>Runs the given keyword with given arguments and returns the status as a Boolean value.\x3c/p>","*File Should Exist    ${STATE_FILE}","*${exists}","*File Should Exist","*OperatingSystem","*<p>Fails unless the given <code>path\x3c/code> points to an existing file.\x3c/p>","*${STATE_FILE}","eNpzy8xJVVC3SVTIKEpNs1VKA3Kt9PVdrGICEivLEvNSYgKK8rNSk0uKYzwyix1TcjNLYsAkkKcbklpcElOUWpxfWpScWhxTXJJYkhpTVJpXkpmbGg/m6WUV5+cp2VHVOBv9RDt1hdSKzOKSYj0AmSZINA==","*${exists} = True","*not ${exists}","*Create File","*<p>Creates a file with the given content and encoding.\x3c/p>","*${STATE_FILE}    {}","*Get File","*<p>Returns the contents of a specified file.\x3c/p>","*${STATE_FILE}    encoding=utf-8","*${content}","eNpzTy0pycxLV0jLzElVULdJVMgoSk2zVQJxrfT1XaxiAhIryxLzUmICivKzUpNLimM8MosdU3IzS2LAJJCnG5JaXBJTlFqcX1qUnFocU1ySWJIaU1SaV5KZmxoP5ullFefnKdlR1Tgb/UQ7dT0A6llIhg==","*${content} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\",\n  \"Login_Person_Id\": 923,\n  \"Login_Display_Name\": \"آزیتا فشارکی نیا\"\n}","*Evaluate","*<p>Evaluates the given expression in Python and returns the result.\x3c/p>","*json.loads('''${content}''')    json","*${state}","*${state} = {'LOGIN_ROLES': [1195], 'Login_User_Name': '30627', 'Login_Person_Id': 923, 'Login_Display_Name': 'آزیتا فشارکی نیا'}","*Set To Dictionary","*Collections","*<p>Adds the given <code>key_value_pairs\x3c/code> and/or <code>items\x3c/code> to the <code>dictionary\x3c/code>.\x3c/p>","*${state}    ${key}    ${value}","*json.dumps(${state}, indent=2, ensure_ascii=False)","*${out}","*${out} = {\n  \"LOGIN_ROLES\": [\n    1195\n  ],\n  \"Login_User_Name\": \"30627\",\n  \"Login_Person_Id\": 923,\n  \"Login_Display_Name\": \"آزیتا فشارکی نیا\"\n}","*${STATE_FILE}    ${out}    encoding=utf-8","eNpzLkpNLElNUUjLzElVULdJVMgoSk2zVQJxrfT1XaxiAhIryxLzUmICivKzUpNLimM8MosdU3IzS2LAJJCnG5JaXBJTlFqcX1qUnFocU1wCNDGmqDSvJDM3NR7M08sqzs9TsqOqcTb6iXbqegDXNkhs","*Login_User_Name    ${LOGIN_user_name}","*Login_Person_Id    ${LOGIN_person_Id}","*Login_Display_Name    ${LOGIN_display_Name}","*Log To Console","*<p>Logs the given message to the console.\x3c/p>","*User Role:${LOGIN_ROLES}","*Set Test Message","*<p>Sets message for the current test case.\x3c/p>","*Set test message to:\nUser Role:[1195]","*Read State","*LOGIN_ROLES","*${roles}","*Get From Dictionary","*<p>Returns a value from the given <code>dictionary\x3c/code> based on the given <code>key\x3c/code>.\x3c/p>","*${state}    ${key}","*${value}","*${value} = [1195]","*Should Not Be Equal","*<p>Fails if the given objects are equal.\x3c/p>","*${value}    ${None}    ❌ ${key} not found in state file","*Argument types are:\n&lt;class 'list'&gt;\n&lt;class 'NoneType'&gt;","*${roles} = [1195]","*User Roles: ${roles}","*1195 in $roles or 777 in $roles","*${has_access}","*${has_access} = True","*Skip If","*<p>Skips the rest of the current test if the <code>condition\x3c/code> is True.\x3c/p>","*not ${has_access}    User does not have Admit HIS access role (1195 or 777)","*User has valid Admit HIS access","*User Access:${has_access}","*Set test message to:\nUser Access:True","*Click Admit HIS In Landing","*<p>کلیک بر روی گزینه پذیرش بستری\x3c/p>","*Wait Until Element Is Not Visible","*<p>Waits until the element <code>locator\x3c/code> is not visible.\x3c/p>","*css=div.back-spenner.ng-star-inserted    80000","*Run Keyword And Ignore Error","*<p>Runs the given keyword with the given arguments and ignores possible error.\x3c/p>","*Wait Until Page Contains Element    ${GLOBAL_SPINNER}    3","*Wait Until Page Contains Element","*<p>Waits until the element <code>locator\x3c/code> appears on the current page.\x3c/p>","*${GLOBAL_SPINNER}    3","*Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.","*${GLOBAL_SPINNER}    ${timeout}","*Execute Javascript","*<p>Executes the given JavaScript code with possible arguments.\x3c/p>","*document.evaluate(\"//div[contains(@class,'child-name') and contains(.,'پذیرش بستری')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();","*Executing JavaScript:\ndocument.evaluate(\"//div[contains(@class,'child-name') and contains(.,'پذیرش بستری')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();\nWithout any arguments.","*Validate Admit Page Opened","*<p>بررسی باز شدن صفحه پذیرش بستری\x3c/p>","*Wait Until Page Contains Element    xpath=//*[contains(text(),'پذیرش بستری')]    20s","*${opened}","*xpath=//*[contains(text(),'پذیرش بستری')]    20s","*${opened} = True","*Should Be True","*<p>Fails if the given condition is not true.\x3c/p>","*${opened}    User has access role but Admit HIS page did not open","*Open Admit Page : ${opened}","*Set test message to:\nOpen Admit Page : True","*---- DONE ----","*SC-01-1    DONE","*Set test message to:\nOpen Admit Page : True SC-01-1","*Create AdmitHIS Session","*Create Session","*<p>Create Session: create a HTTP session to a server\x3c/p>","*HIS    ${AdmitHis_Api_URL}    verify=${False}","*Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 ","*Error in file 'D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitRis-Api.robot' on line 262: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.","*Error in file 'D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\AdmitRis-Api.robot' on line 277: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.","*Error in file 'D:\\Payvand\\Projects\\HisAdmit\\AdmitHis-Test\\Resources\\Keywords\\AdmitHis-DB-keywords.resource' on line 11: Resource file 'AdmitHis-keywords.resource' does not exist."]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:09","fail":0,"label":"All Tests","pass":1,"skip":0}],[{"elapsed":"00:00:09","fail":0,"label":"preadmit","pass":1,"skip":0},{"elapsed":"00:00:09","fail":0,"label":"step01","pass":1,"skip":0},{"elapsed":"00:00:09","fail":0,"label":"STEP_01_Open_Browser","pass":1,"skip":0},{"elapsed":"00:00:09","fail":0,"label":"UI_Test","pass":1,"skip":0}],[{"elapsed":"00:00:10","fail":0,"id":"s1","label":"AdmitHis-Test","name":"AdmitHis-Test","pass":1,"skip":0},{"elapsed":"00:00:10","fail":0,"id":"s1-s1","label":"AdmitHis-Test.AdmitHis-UI","name":"AdmitHis-UI","pass":1,"skip":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:32","fail":0,"label":"All Tests","pass":1,"skip":0}],[{"elapsed":"00:00:32","fail":0,"label":"preadmit","pass":1,"skip":0},{"elapsed":"00:00:32","fail":0,"label":"step01","pass":1,"skip":0},{"elapsed":"00:00:32","fail":0,"label":"STEP_01_Open_Browser","pass":1,"skip":0},{"elapsed":"00:00:32","fail":0,"label":"UI_Test","pass":1,"skip":0}],[{"elapsed":"00:00:33","fail":0,"id":"s1","label":"AdmitHis-Test","name":"AdmitHis-Test","pass":1,"skip":0},{"elapsed":"00:00:33","fail":0,"id":"s1-s1","label":"AdmitHis-Test.AdmitHis-UI","name":"AdmitHis-UI","pass":1,"skip":0}]];
 </script>
 <script type="text/javascript">
-window.output["errors"] = [[694,3,27,26]];
+window.output["errors"] = [[-23,3,186],[-23,3,187],[422,4,188],[441,3,27,26]];
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1781105203411;
+window.output["baseMillis"] = 1781267526241;
 </script>
 <script type="text/javascript">
-window.output["generated"] = 9934;
+window.output["generated"] = 32718;
 </script>
 <script type="text/javascript">
 window.output["expand_keywords"] = null;
@@ -2153,9 +2154,8 @@ function addErrors() {
     var errors = window.testdata.errorIterator();
     if (errors.hasNext()) {
         $.tmpl('errorHeaderTemplate').appendTo($('body'));
-        drawErrorsRecursively(errors, $('#errors .messages'));
+        drawErrorsRecursively(errors, $('#errors'));
     }
-    toggleElement('errors');
 }
 
 function drawErrorsRecursively(errors, target) {
@@ -2189,7 +2189,7 @@ function makeElementVisible(id) {
 }
 
 function addExecutionLog(main) {
-    $('body').append('<h2>Execution Log</h2>',
+    $('body').append($(testOrTask('<h2>{Test} Execution Log</h2>')),
                      $.tmpl('suiteTemplate', main));
 }
 </script>
@@ -2234,31 +2234,20 @@ function addExecutionLog(main) {
 </script>
 
 <script type="text/x-jquery-tmpl" id="errorHeaderTemplate">
-  <h2>Execution Errors</h2>
-  <div id="errors">
-    <div class="element-header closed" onclick="toggleElement('errors')">
-      <div class="element-header-toggle" title="Toggle visibility"></div>
-      <div class="label error">ERRORS</div>
-      <div class="name">Errors and warnings during execution</div>
-    </div>
-    <div class="children">
-      <table class="messages"></table>
-    </div>
-  </div>
+  <h2>{{= testOrTask('{Test}')}} Execution Errors</h2>
+  <table id="errors"></table>
 </script>
 
 <script type="text/x-jquery-tmpl" id="errorTemplate">
   <tr id="${id}" class="message-row">
-    <td class="time">
+    <td class="error-time">
       {{if link}}
       <a onclick="makeElementVisible('${link}')" href="#${link}" title="Link to details">${date} ${time}</a>
       {{else}}
       ${date} ${time}
       {{/if}}
     </td>
-    <td class="${level.toLowerCase()} level">
-      <span class="label ${level.toLowerCase()}">${level}</span>
-    </td>
+    <td class="${level.toLowerCase()} level"><span class="label ${level.toLowerCase()}">${level}</span></td>
     <td class="message">{{html text}}</td>
     <td class="select-message" onclick="javascript:selectMessage('${id}')" title="Select message text">
       <div></div>
@@ -2268,18 +2257,18 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="suiteTemplate">
   <div id="${id}" class="suite">
-    <div class="element-header closed" onclick="toggleSuite('${id}')"
-         title="SUITE  {{html name}}  [${status}]">
-      <div class="element-header-toggle" title="Toggle visibility"></div>
-      <div class="label ${status.toLowerCase()}">SUITE</div>
-      <div class="name">{{html name}}</div>
-      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
-      <div class="element-header-menu" onclick="stopPropagation(event)" title="">
+    <div class="element-header closed" onclick="toggleSuite('${id}')">
+      <div class="element-header-left" title="SUITE  {{html name}}  [${status}]">
+        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
+        <span class="label ${status.toLowerCase()}">SUITE</span>
+        <span class="name">{{html name}}</span>
+      </div>
+      <div class="element-header-right" onclick="stopPropagation(event)" title="">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" onclick="makeElementVisible('${id}')"
-           title="Link to this suite" href="#${id}"></a>
+        <a class="link" title="Link to this suite" href="#${id}" onclick="makeElementVisible('${id}')"></a>
       </div>
+      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -2330,18 +2319,18 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="testTemplate">
   <div id="${id}" class="test">
-    <div class="element-header closed" onclick="toggleTest('${id}')"
-         title="{{= testOrTask('{TEST}')}}  {{html name}}  [${status}]">
-      <div class="element-header-toggle" title="Toggle visibility"></div>
-      <div class="label ${status.toLowerCase()}">{{= testOrTask('{TEST}')}}</div>
-      <div class="name">{{html name}}</div>
-      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
-      <div class="element-header-menu" onclick="stopPropagation(event)" title="">
+    <div class="element-header closed" onclick="toggleTest('${id}')">
+      <div class="element-header-left" title="{{= testOrTask('{TEST}')}}  {{html name}}  [${status}]">
+        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
+        <span class="label ${status.toLowerCase()}">{{= testOrTask('{TEST}')}}</span>
+        <span class="name">{{html name}}</span>
+      </div>
+      <div class="element-header-right" onclick="stopPropagation(event)" title="">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" href="#${id}" onclick="makeElementVisible('${id}')"
-           title="Link to this {{= testOrTask('{test}')}}"></a>
+        <a class="link" title="Link to this {{= testOrTask('{test}')}}" href="#${id}" onclick="makeElementVisible('${id}')"></a>
       </div>
+      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -2388,20 +2377,21 @@ function addExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="keywordTemplate">
   <div id="${id}" class="keyword">
-    <div class="element-header closed" onclick="toggleKeyword('${id}')"
-         title="${type}  {{if name}}{{html fullName}}  {{/if}}[${status}]">
-      <div class="element-header-toggle" title="Toggle visibility"></div>
-      <div class="label ${status.toLowerCase()}">${type}</div>
-      {{if assign}}<div class="assign">{{html assign}}&nbsp;=</div>{{/if}}
-      <div class="name">{{if libname}}<span class="parent-name">{{html libname}} . </span>{{/if}}{{html name}}</div>
-      <div class="arg">{{html arguments}}</div>
-      <div class="elapsed" title="Elapsed time">${times.elapsedTime}</div>
-      <div class="element-header-menu" onclick="stopPropagation(event)">
+    <div class="element-header closed" onclick="toggleKeyword('${id}')">
+      <div class="element-header-left" title="${type}  {{if name}}{{html fullName}}  {{/if}}[${status}]">
+        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
+        <span class="label ${status.toLowerCase()}">${type}</span>
+        <span class="assign">{{html assign}}</span>
+        <span class="name"><span class="parent-name">{{html libname}}{{if libname}} . {{/if}}</span>{{html name}}</span>
+        &nbsp;
+        <span class="arg">{{html arguments}}</span>
+      </div>
+      <div class="element-header-right" onclick="stopPropagation(event)">
         <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
         <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
-        <a class="link" onclick="makeElementVisible('${id}')"
-           title="Link to this item" href="#${id}"></a>
+        <a class="link" title="Link to this item" href="#${id}" onclick="makeElementVisible('${id}')"></a>
       </div>
+      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata keyword-metadata">
