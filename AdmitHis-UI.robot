@@ -12,80 +12,36 @@ Suite Setup       Create AdmitHIS Session
 
 *** Test Cases ***
 
+
 # PreAdmit Test
-# TC_EPD_HIS_01 - Open Filing Page
-#     [Documentation]   باز  کردن صفحه پذیرش بستری
-#     [Tags]    STEP_01_Open_Browser    UI_Test    step01    preadmit
-  
-#     Disable Screenshots
-#     Start Browser Landing With Token
-#     Go To Landing Page
-#     Click Admit HIS In Landing
-
-#     Log To Console    ---- DONE ----
-
-TC_EPD_HIS_01_SC_01_01 - Open Filing Page
-
-    [Documentation]   باز کردن صفحه پذیرش بستری
-
-    [Tags]
-    ...    STEP_01_Open_Browser
-    ...    UI_Test
-    ...    step01
-    ...    preadmit
-
-    Disable Screenshots
-
-    Start Browser Landing With Token
-
-    Go To Landing Page
-
-    Validate Admit Access
-
-    Click Admit HIS In Landing
-
-    Validate Admit Page Opened
-
-    Log To Console
-    ...    ---- DONE ----
-
-    Set Test Message
-    ...    SC-01-1   DONE    
-    
-# زمانی که کاربر شروع به پذیرش میکنه و کد ملی رو وارد میکنه و استحقاق درمان میکنه
-
-TC_EPD_HIS_02_SC_02_01 - Creating a patient file without a history
-    [Documentation]    Scenario 01
-    [Tags]    UI_Test    TC_EPD_HIS_02
+01-UI - Open Filing Page
+    [Documentation]   باز  کردن صفحه پذیرش بستری
+    [Tags]    STEP_01_Open_Browser    UI_Test    step01    preadmit
 
     Disable Screenshots
     Start Browser AdmitHis With Token
     Go To AdmitHis Page
-    Wait For Page Ready
     Wait For Spinner Hidden
+    Log To Console    ---- DONE ----
 
-    Step01 - Verify National Code Format
-    Step02 - Verify National Code Required For Iranian
-    # Step03 - Verify Passport For Foreign Nationality
-    # Step04 - Verify Unknown Person Behaviour
-    # Step05 - Verify Infant Under 28 Days Behaviour
-    # Step06 - Verify Inquiry Service
-    # Step07 - Verify Fields Disabled After Inquiry
-    # Step08 - Verify Insurance Restrictions
-    # Step09 - Verify National Code Locked After Inquiry 
+# زمانی که کاربر شروع به پذیرش میکنه و کد ملی رو وارد میکنه و استحقاق درمان میکنه
 
-    # Disable Screenshots
-    # Start Browser AdmitHis With Token
-    # Go To AdmitHis Page
-    # Wait For Page Ready
-    # # Switch To AdmitHis App
-    # Wait For Spinner Hidden
-    # Log To Console    ---- DONE ----
+02-UI - Enter national code of preadmit patient
+    [Documentation]   وارد کردن کد ملی بیمار و استعلام کد ملی
+    [Tags]    UI_Test    step02    preadmit
+
+    Disable Screenshots        
+    Wait For Page Ready
+    Wait Until Element Is Visible    //input[@formcontrolname='nationalCode']    50s
+    Clear Element Text    //input[@formcontrolname='nationalCode']
+    Input Text         //input[@formcontrolname='nationalCode']     ${nationalCode}
+    Click Element Safe       id=button-addon3
+    Wait For Page Ready
 
 
 # پر کردن باقی فیلد های مهم در پذیرش 
 
-TC_EPD_HIS_03 - Fill Patient PreAdmit Info
+03-UI - Fill Patient PreAdmit Info
     [Documentation]    پر کردن اطلاعات مورد نیاز بیمار 
     [Tags]    UI_Test    step03    preadmit
 
@@ -110,7 +66,7 @@ TC_EPD_HIS_03 - Fill Patient PreAdmit Info
 
 #وقتی که بخش بیمار را برای بستری کردن انتخاب میکنیم
 
-TC_EPD_HIS_04 - Assign Ward And Doctor And Prepayment
+04-UI - Assign Ward And Doctor And Prepayment
     [Documentation]    انتخاب بخش و پزشک بیمار preadmit
     [Tags]    UI_Test    step04    preadmit
 
@@ -122,8 +78,7 @@ TC_EPD_HIS_04 - Assign Ward And Doctor And Prepayment
 
     Input Text         //input[@formcontrolname='prepayment']             10000
 
-
-TC_EPD_HIS_05 - Save Admission Filing
+05-UI - Save Admission Filing
     [Documentation]    سیو کردن پذیرش preadmit
     [Tags]    UI_Test    step05    preadmit
 
@@ -134,14 +89,14 @@ TC_EPD_HIS_05 - Save Admission Filing
 
 # زدن دکمه لغو صفحه پرینت برگه پذیرش 
 
-TC_EPD_HIS_06 - deny admit print page
+06-UI - deny admit print page
     [Documentation]    لغو پرینت برگه پذیرش 
     [Tags]    UI_Test    step06    preadmit
 
     Disable Screenshots
     Click Element Safe    css=button.swal2-deny.swal2-styled
 
-TC_EPD_HIS07 - Open Cash Web And Pay
+07-UI - Open Cash Web And Pay
     [Documentation]     باز کردن صندوق و دریافت پیش پرداخت بیمار پری ادمیت
     [Tags]    UI_Test    step07    preadmit
     
@@ -149,7 +104,7 @@ TC_EPD_HIS07 - Open Cash Web And Pay
     Cash Pay Patient By National Code    ${nationalCode}
 
 
-TC_EPD_HIS08 - go to inpatient list
+08-UI - go to inpatient list
     [Documentation]    رفتن به لیست بیماران بستری 
     [Tags]    UI_Test    step08    preadmit
     

@@ -403,7 +403,7 @@ Fileformation Write State
     ELSE
         ${old_value}=    Get From Dictionary    ${state}    ${key}
 
-        ${is_null}=    Evaluate    $old_value is None or $old_value == '' or $old_value == 'null'
+        ${is_null}=    Evaluate    $old_value is None or $old_value == '' or $old_value == 'null' or $old_value == 0 or $old_value == 1
 
         IF    ${is_null}
             # ✅ اگر قبلاً null بوده → آپدیت کن

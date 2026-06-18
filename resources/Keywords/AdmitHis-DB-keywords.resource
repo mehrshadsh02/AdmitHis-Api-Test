@@ -8,8 +8,7 @@ Library           DatabaseLibrary
 Library           pymssql
 
 Resource          ../Variables/AdmitHis-variables.resource
-Resource          AdmitHis-keywords.resource
-
+Resource          AdmitHis-Api-keywords.resource
 
 *** Keywords ***
 Connect To HIS Database
@@ -122,8 +121,7 @@ Validate DB After Edit Preadmit
     ${PREADMIT_ADMIT_DATE}=    Read State    PREADMIT_ADMIT_DATE
 
     ${query}=    Catenate     
-    ...    SELECT ${PREADMIT_ADMIT_ID}  AS AdmitId, ISNULL(id_bed,0) as BedId, ISNULL(ID_PatientMovement, 0) AS PatientMovementId, dbo.Fn_GetPatientInfo(${PREADMIT_iD_FileFormation}) AS Name,
-    ...    ISNULL(ID_HospitalFileID,0) AS HospitalFileID ,ISNULL(ID_Triage, 0) AS TriageID, ${PREADMIT_iD_FileFormation} AS FileFormationId, 
+    ...    SELECT ${PREADMIT_ADMIT_ID}  AS AdmitId, ISNULL(id_bed,0) as BedId, ISNULL(ID_PatientMovement, 0) AS PatientMovementId, CAST(dbo.Fn_GetPatientInfo(${PREADMIT_iD_FileFormation}) AS NVARCHAR(500)) AS PatientInfo,ISNULL(ID_Triage, 0) AS TriageID, ${PREADMIT_iD_FileFormation} AS FileFormationId, 
     ...    AdmitDate, Sepas_Code, ID_ICDMadarek AS ICDMadarekId  
     ...    FROM  admit_his INNER JOIN
     ...    fileformation on FileFormationID = ID_FileFormation INNER JOIN 
