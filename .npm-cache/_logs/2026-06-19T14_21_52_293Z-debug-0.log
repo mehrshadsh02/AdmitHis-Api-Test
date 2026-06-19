@@ -1,0 +1,283 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.13.0
+2 info using node@v24.17.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 warn config production Use `--omit=dev` instead.
+5 silly config load:file:D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\.venv\Lib\site-packages\Browser\wrapper\.npmrc
+6 silly config load:file:C:\Users\mehrs\.npmrc
+7 silly config load:file:C:\Users\mehrs\AppData\Roaming\npm\etc\npmrc
+8 verbose title npm ci
+9 verbose argv "ci" "--production" "--parseable" "true" "--progress" "false"
+10 verbose logfile logs-max:10 dir:D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\.npm-cache\_logs\2026-06-19T14_21_52_293Z-
+11 verbose logfile D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\.npm-cache\_logs\2026-06-19T14_21_52_293Z-debug-0.log
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+14 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+15 silly idealTree buildDeps
+16 silly reify moves {}
+17 silly audit bulk request {
+17 silly audit   semver: [ '7.8.0' ],
+17 silly audit   '@bufbuild/protobuf': [ '2.12.0' ],
+17 silly audit   '@grpc/grpc-js': [ '1.14.4' ],
+17 silly audit   '@grpc/proto-loader': [ '0.8.1' ],
+17 silly audit   '@js-sdsl/ordered-map': [ '4.4.2' ],
+17 silly audit   '@medv/finder': [ '4.0.2' ],
+17 silly audit   '@pinojs/redact': [ '0.4.0' ],
+17 silly audit   '@protobufjs/aspromise': [ '1.1.2' ],
+17 silly audit   '@protobufjs/base64': [ '1.1.2' ],
+17 silly audit   '@protobufjs/codegen': [ '2.0.5' ],
+17 silly audit   '@protobufjs/eventemitter': [ '1.1.0' ],
+17 silly audit   '@protobufjs/fetch': [ '1.1.0' ],
+17 silly audit   '@protobufjs/float': [ '1.0.2' ],
+17 silly audit   '@protobufjs/inquire': [ '1.1.1' ],
+17 silly audit   '@protobufjs/path': [ '1.1.2' ],
+17 silly audit   '@protobufjs/pool': [ '1.1.0' ],
+17 silly audit   '@protobufjs/utf8': [ '1.1.1' ],
+17 silly audit   '@types/node': [ '25.7.0' ],
+17 silly audit   'ansi-regex': [ '5.0.1' ],
+17 silly audit   cliui: [ '8.0.1' ],
+17 silly audit   'is-fullwidth-code-point': [ '3.0.0' ],
+17 silly audit   'string-width': [ '4.2.3' ],
+17 silly audit   'strip-ansi': [ '6.0.1' ],
+17 silly audit   'wrap-ansi': [ '7.0.0' ],
+17 silly audit   yargs: [ '17.7.2' ],
+17 silly audit   'yargs-parser': [ '21.1.1' ],
+17 silly audit   acorn: [ '8.16.0' ],
+17 silly audit   'acorn-loose': [ '8.5.2' ],
+17 silly audit   'acorn-walk': [ '8.3.5' ],
+17 silly audit   'ansi-styles': [ '4.3.0' ],
+17 silly audit   'atomic-sleep': [ '1.0.0' ],
+17 silly audit   'color-convert': [ '2.0.1' ],
+17 silly audit   'color-name': [ '1.1.4' ],
+17 silly audit   commander: [ '14.0.3' ],
+17 silly audit   'console-grid': [ '2.2.4' ],
+17 silly audit   'eight-colors': [ '1.3.3' ],
+17 silly audit   'emoji-regex': [ '8.0.0' ],
+17 silly audit   escalade: [ '3.2.0' ],
+17 silly audit   'foreground-child': [ '4.0.3' ],
+17 silly audit   'signal-exit': [ '4.1.0' ],
+17 silly audit   fsevents: [ '2.3.2' ],
+17 silly audit   'get-caller-file': [ '2.0.5' ],
+17 silly audit   'has-flag': [ '4.0.0' ],
+17 silly audit   'html-escaper': [ '2.0.2' ],
+17 silly audit   'istanbul-lib-coverage': [ '3.2.2' ],
+17 silly audit   'istanbul-lib-report': [ '3.0.1' ],
+17 silly audit   'istanbul-reports': [ '3.2.0' ],
+17 silly audit   'supports-color': [ '7.2.0' ],
+17 silly audit   'lodash.camelcase': [ '4.3.0' ],
+17 silly audit   long: [ '5.3.2' ],
+17 silly audit   'lz-utils': [ '2.1.1' ],
+17 silly audit   'make-dir': [ '4.0.0' ],
+17 silly audit   'monocart-coverage-reports': [ '2.12.12' ],
+17 silly audit   'monocart-locator': [ '1.0.3' ],
+17 silly audit   'on-exit-leak-free': [ '2.1.2' ],
+17 silly audit   pino: [ '10.3.1' ],
+17 silly audit   'pino-abstract-transport': [ '3.0.0' ],
+17 silly audit   'pino-std-serializers': [ '7.1.0' ],
+17 silly audit   playwright: [ '1.60.0' ],
+17 silly audit   'playwright-core': [ '1.60.0' ],
+17 silly audit   'process-warning': [ '5.0.0' ],
+17 silly audit   protobufjs: [ '7.5.8' ],
+17 silly audit   'quick-format-unescaped': [ '4.0.4' ],
+17 silly audit   'real-require': [ '0.2.0', '1.0.0' ],
+17 silly audit   'require-directory': [ '2.1.1' ],
+17 silly audit   'safe-stable-stringify': [ '2.5.0' ],
+17 silly audit   'sonic-boom': [ '4.2.1' ],
+17 silly audit   split2: [ '4.2.0' ],
+17 silly audit   'strip-comments': [ '2.0.1' ],
+17 silly audit   'thread-stream': [ '4.1.0' ],
+17 silly audit   'undici-types': [ '7.21.0' ],
+17 silly audit   uuid: [ '14.0.0' ],
+17 silly audit   y18n: [ '5.0.8' ]
+17 silly audit }
+18 http cache yargs@https://registry.npmjs.org/yargs/-/yargs-17.7.2.tgz 2ms (cache hit)
+19 http cache y18n@https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz 0ms (cache hit)
+20 http cache uuid@https://registry.npmjs.org/uuid/-/uuid-14.0.0.tgz 0ms (cache hit)
+21 http cache yargs-parser@https://registry.npmjs.org/yargs-parser/-/yargs-parser-21.1.1.tgz 0ms (cache hit)
+22 http cache undici-types@https://registry.npmjs.org/undici-types/-/undici-types-7.21.0.tgz 0ms (cache hit)
+23 http cache thread-stream@https://registry.npmjs.org/thread-stream/-/thread-stream-4.1.0.tgz 0ms (cache hit)
+24 http cache supports-color@https://registry.npmjs.org/supports-color/-/supports-color-7.2.0.tgz 1ms (cache hit)
+25 http cache split2@https://registry.npmjs.org/split2/-/split2-4.2.0.tgz 0ms (cache hit)
+26 http cache strip-comments@https://registry.npmjs.org/strip-comments/-/strip-comments-2.0.1.tgz 0ms (cache hit)
+27 http cache sonic-boom@https://registry.npmjs.org/sonic-boom/-/sonic-boom-4.2.1.tgz 0ms (cache hit)
+28 http cache semver@https://registry.npmjs.org/semver/-/semver-7.8.0.tgz 1ms (cache hit)
+29 http cache require-directory@https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz 0ms (cache hit)
+30 http cache safe-stable-stringify@https://registry.npmjs.org/safe-stable-stringify/-/safe-stable-stringify-2.5.0.tgz 0ms (cache hit)
+31 http cache real-require@https://registry.npmjs.org/real-require/-/real-require-0.2.0.tgz 0ms (cache hit)
+32 http cache process-warning@https://registry.npmjs.org/process-warning/-/process-warning-5.0.0.tgz 0ms (cache hit)
+33 http cache protobufjs@https://registry.npmjs.org/protobufjs/-/protobufjs-7.5.8.tgz 0ms (cache hit)
+34 http cache playwright-core@https://registry.npmjs.org/playwright-core/-/playwright-core-1.60.0.tgz 1ms (cache hit)
+35 http cache pino-std-serializers@https://registry.npmjs.org/pino-std-serializers/-/pino-std-serializers-7.1.0.tgz 0ms (cache hit)
+36 http cache quick-format-unescaped@https://registry.npmjs.org/quick-format-unescaped/-/quick-format-unescaped-4.0.4.tgz 0ms (cache hit)
+37 http cache pino-abstract-transport@https://registry.npmjs.org/pino-abstract-transport/-/pino-abstract-transport-3.0.0.tgz 0ms (cache hit)
+38 http cache playwright@https://registry.npmjs.org/playwright/-/playwright-1.60.0.tgz 0ms (cache hit)
+39 http cache pino@https://registry.npmjs.org/pino/-/pino-10.3.1.tgz 0ms (cache hit)
+40 http cache monocart-locator@https://registry.npmjs.org/monocart-locator/-/monocart-locator-1.0.3.tgz 0ms (cache hit)
+41 http cache monocart-coverage-reports@https://registry.npmjs.org/monocart-coverage-reports/-/monocart-coverage-reports-2.12.12.tgz 0ms (cache hit)
+42 http cache long@https://registry.npmjs.org/long/-/long-5.3.2.tgz 0ms (cache hit)
+43 http cache make-dir@https://registry.npmjs.org/make-dir/-/make-dir-4.0.0.tgz 0ms (cache hit)
+44 http cache lz-utils@https://registry.npmjs.org/lz-utils/-/lz-utils-2.1.1.tgz 0ms (cache hit)
+45 http cache on-exit-leak-free@https://registry.npmjs.org/on-exit-leak-free/-/on-exit-leak-free-2.1.2.tgz 0ms (cache hit)
+46 http cache istanbul-reports@https://registry.npmjs.org/istanbul-reports/-/istanbul-reports-3.2.0.tgz 0ms (cache hit)
+47 http cache istanbul-lib-coverage@https://registry.npmjs.org/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.2.tgz 0ms (cache hit)
+48 http cache istanbul-lib-report@https://registry.npmjs.org/istanbul-lib-report/-/istanbul-lib-report-3.0.1.tgz 0ms (cache hit)
+49 http cache html-escaper@https://registry.npmjs.org/html-escaper/-/html-escaper-2.0.2.tgz 0ms (cache hit)
+50 http cache has-flag@https://registry.npmjs.org/has-flag/-/has-flag-4.0.0.tgz 0ms (cache hit)
+51 http cache get-caller-file@https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz 0ms (cache hit)
+52 http cache foreground-child@https://registry.npmjs.org/foreground-child/-/foreground-child-4.0.3.tgz 0ms (cache hit)
+53 http cache lodash.camelcase@https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz 0ms (cache hit)
+54 http cache escalade@https://registry.npmjs.org/escalade/-/escalade-3.2.0.tgz 0ms (cache hit)
+55 http cache emoji-regex@https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz 0ms (cache hit)
+56 http cache commander@https://registry.npmjs.org/commander/-/commander-14.0.3.tgz 0ms (cache hit)
+57 http cache color-name@https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz 0ms (cache hit)
+58 http cache console-grid@https://registry.npmjs.org/console-grid/-/console-grid-2.2.4.tgz 0ms (cache hit)
+59 http cache eight-colors@https://registry.npmjs.org/eight-colors/-/eight-colors-1.3.3.tgz 0ms (cache hit)
+60 http cache atomic-sleep@https://registry.npmjs.org/atomic-sleep/-/atomic-sleep-1.0.0.tgz 0ms (cache hit)
+61 http cache cliui@https://registry.npmjs.org/cliui/-/cliui-8.0.1.tgz 0ms (cache hit)
+62 http cache color-convert@https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz 0ms (cache hit)
+63 http cache acorn-walk@https://registry.npmjs.org/acorn-walk/-/acorn-walk-8.3.5.tgz 0ms (cache hit)
+64 http cache acorn-loose@https://registry.npmjs.org/acorn-loose/-/acorn-loose-8.5.2.tgz 0ms (cache hit)
+65 http cache @types/node@https://registry.npmjs.org/@types/node/-/node-25.7.0.tgz 0ms (cache hit)
+66 http cache acorn@https://registry.npmjs.org/acorn/-/acorn-8.16.0.tgz 0ms (cache hit)
+67 http cache ansi-styles@https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz 0ms (cache hit)
+68 http cache @protobufjs/utf8@https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.1.tgz 0ms (cache hit)
+69 http cache @protobufjs/path@https://registry.npmjs.org/@protobufjs/path/-/path-1.1.2.tgz 0ms (cache hit)
+70 http cache @protobufjs/pool@https://registry.npmjs.org/@protobufjs/pool/-/pool-1.1.0.tgz 0ms (cache hit)
+71 http cache @protobufjs/float@https://registry.npmjs.org/@protobufjs/float/-/float-1.0.2.tgz 0ms (cache hit)
+72 http cache @protobufjs/eventemitter@https://registry.npmjs.org/@protobufjs/eventemitter/-/eventemitter-1.1.0.tgz 0ms (cache hit)
+73 http cache @protobufjs/fetch@https://registry.npmjs.org/@protobufjs/fetch/-/fetch-1.1.0.tgz 0ms (cache hit)
+74 http cache @protobufjs/codegen@https://registry.npmjs.org/@protobufjs/codegen/-/codegen-2.0.5.tgz 0ms (cache hit)
+75 http cache @protobufjs/inquire@https://registry.npmjs.org/@protobufjs/inquire/-/inquire-1.1.1.tgz 0ms (cache hit)
+76 http cache @protobufjs/base64@https://registry.npmjs.org/@protobufjs/base64/-/base64-1.1.2.tgz 0ms (cache hit)
+77 http cache @medv/finder@https://registry.npmjs.org/@medv/finder/-/finder-4.0.2.tgz 0ms (cache hit)
+78 http cache @pinojs/redact@https://registry.npmjs.org/@pinojs/redact/-/redact-0.4.0.tgz 0ms (cache hit)
+79 http cache @js-sdsl/ordered-map@https://registry.npmjs.org/@js-sdsl/ordered-map/-/ordered-map-4.4.2.tgz 0ms (cache hit)
+80 http cache @protobufjs/aspromise@https://registry.npmjs.org/@protobufjs/aspromise/-/aspromise-1.1.2.tgz 0ms (cache hit)
+81 http cache string-width@https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz 1ms (cache hit)
+82 http cache @grpc/grpc-js@https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.14.4.tgz 0ms (cache hit)
+83 http cache strip-ansi@https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz 0ms (cache hit)
+84 http cache @grpc/proto-loader@https://registry.npmjs.org/@grpc/proto-loader/-/proto-loader-0.8.1.tgz 0ms (cache hit)
+85 http cache @bufbuild/protobuf@https://registry.npmjs.org/@bufbuild/protobuf/-/protobuf-2.12.0.tgz 0ms (cache hit)
+86 http cache ansi-regex@https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz 0ms (cache hit)
+87 http cache is-fullwidth-code-point@https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz 0ms (cache hit)
+88 http cache real-require@https://registry.npmjs.org/real-require/-/real-require-1.0.0.tgz 0ms (cache hit)
+89 http cache wrap-ansi@https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz 0ms (cache hit)
+90 http cache signal-exit@https://registry.npmjs.org/signal-exit/-/signal-exit-4.1.0.tgz 0ms (cache hit)
+91 http cache is-fullwidth-code-point@https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz 0ms (cache hit)
+92 http cache strip-ansi@https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz 0ms (cache hit)
+93 http cache string-width@https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz 0ms (cache hit)
+94 http cache ansi-regex@https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz 0ms (cache hit)
+95 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 2710ms
+96 silly audit report {
+96 silly audit report   protobufjs: [
+96 silly audit report     {
+96 silly audit report       id: 1120742,
+96 silly audit report       url: 'https://github.com/advisories/GHSA-f38q-mgvj-vph7',
+96 silly audit report       title: 'protobufjs : Schema-derived names can shadow runtime-significant properties',
+96 silly audit report       severity: 'moderate',
+96 silly audit report       vulnerable_versions: '<=7.6.2',
+96 silly audit report       cwe: [Array],
+96 silly audit report       cvss: [Object]
+96 silly audit report     },
+96 silly audit report     {
+96 silly audit report       id: 1120799,
+96 silly audit report       url: 'https://github.com/advisories/GHSA-wcpc-wj8m-hjx6',
+96 silly audit report       title: 'protobufjs: Denial of service through unbounded Any expansion during JSON conversion',
+96 silly audit report       severity: 'high',
+96 silly audit report       vulnerable_versions: '<=7.6.0',
+96 silly audit report       cwe: [Array],
+96 silly audit report       cvss: [Object]
+96 silly audit report     }
+96 silly audit report   ]
+96 silly audit report }
+97 silly packumentCache corgi:https://registry.npmjs.org/protobufjs cache-miss
+98 http cache https://registry.npmjs.org/protobufjs 455ms (cache hit)
+99 silly packumentCache corgi:https://registry.npmjs.org/protobufjs set size:283012 disposed:false
+100 silly packumentCache corgi:https://registry.npmjs.org/@grpc%2fproto-loader cache-miss
+101 http cache https://registry.npmjs.org/@grpc%2fproto-loader 261ms (cache hit)
+102 silly packumentCache corgi:https://registry.npmjs.org/@grpc%2fproto-loader set size:103824 disposed:false
+103 info run protobufjs@7.5.8 postinstall node_modules/protobufjs node scripts/postinstall
+104 info run protobufjs@7.5.8 postinstall { code: 0, signal: null }
+105 silly ADD node_modules/yargs-parser
+106 silly ADD node_modules/yargs
+107 silly ADD node_modules/yargs/node_modules/strip-ansi
+108 silly ADD node_modules/yargs/node_modules/string-width
+109 silly ADD node_modules/yargs/node_modules/is-fullwidth-code-point
+110 silly ADD node_modules/yargs/node_modules/ansi-regex
+111 silly ADD node_modules/y18n
+112 silly ADD node_modules/uuid
+113 silly ADD node_modules/undici-types
+114 silly ADD node_modules/thread-stream
+115 silly ADD node_modules/thread-stream/node_modules/real-require
+116 silly ADD node_modules/supports-color
+117 silly ADD node_modules/strip-comments
+118 silly ADD node_modules/split2
+119 silly ADD node_modules/sonic-boom
+120 silly ADD node_modules/semver
+121 silly ADD node_modules/safe-stable-stringify
+122 silly ADD node_modules/require-directory
+123 silly ADD node_modules/real-require
+124 silly ADD node_modules/quick-format-unescaped
+125 silly ADD node_modules/protobufjs
+126 silly ADD node_modules/process-warning
+127 silly ADD node_modules/playwright-core
+128 silly ADD node_modules/playwright
+129 silly ADD node_modules/pino-std-serializers
+130 silly ADD node_modules/pino-abstract-transport
+131 silly ADD node_modules/pino
+132 silly ADD node_modules/on-exit-leak-free
+133 silly ADD node_modules/monocart-locator
+134 silly ADD node_modules/monocart-coverage-reports
+135 silly ADD node_modules/make-dir
+136 silly ADD node_modules/lz-utils
+137 silly ADD node_modules/long
+138 silly ADD node_modules/lodash.camelcase
+139 silly ADD node_modules/istanbul-reports
+140 silly ADD node_modules/istanbul-lib-report
+141 silly ADD node_modules/istanbul-lib-coverage
+142 silly ADD node_modules/html-escaper
+143 silly ADD node_modules/has-flag
+144 silly ADD node_modules/get-caller-file
+145 silly ADD node_modules/foreground-child
+146 silly ADD node_modules/foreground-child/node_modules/signal-exit
+147 silly ADD node_modules/escalade
+148 silly ADD node_modules/emoji-regex
+149 silly ADD node_modules/eight-colors
+150 silly ADD node_modules/console-grid
+151 silly ADD node_modules/commander
+152 silly ADD node_modules/color-name
+153 silly ADD node_modules/color-convert
+154 silly ADD node_modules/cliui
+155 silly ADD node_modules/cliui/node_modules/wrap-ansi
+156 silly ADD node_modules/cliui/node_modules/strip-ansi
+157 silly ADD node_modules/cliui/node_modules/string-width
+158 silly ADD node_modules/cliui/node_modules/is-fullwidth-code-point
+159 silly ADD node_modules/cliui/node_modules/ansi-regex
+160 silly ADD node_modules/atomic-sleep
+161 silly ADD node_modules/ansi-styles
+162 silly ADD node_modules/acorn-walk
+163 silly ADD node_modules/acorn-loose
+164 silly ADD node_modules/acorn
+165 silly ADD node_modules/@types/node
+166 silly ADD node_modules/@protobufjs/utf8
+167 silly ADD node_modules/@protobufjs/pool
+168 silly ADD node_modules/@protobufjs/path
+169 silly ADD node_modules/@protobufjs/inquire
+170 silly ADD node_modules/@protobufjs/float
+171 silly ADD node_modules/@protobufjs/fetch
+172 silly ADD node_modules/@protobufjs/eventemitter
+173 silly ADD node_modules/@protobufjs/codegen
+174 silly ADD node_modules/@protobufjs/base64
+175 silly ADD node_modules/@protobufjs/aspromise
+176 silly ADD node_modules/@pinojs/redact
+177 silly ADD node_modules/@medv/finder
+178 silly ADD node_modules/@js-sdsl/ordered-map
+179 silly ADD node_modules/@grpc/proto-loader
+180 silly ADD node_modules/@grpc/grpc-js
+181 silly ADD node_modules/@bufbuild/protobuf
+182 verbose cwd D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\.venv\Lib\site-packages\Browser\wrapper
+183 verbose os Windows_NT 10.0.26200
+184 verbose node v24.17.0
+185 verbose npm  v11.13.0
+186 verbose exit 0
+187 info ok

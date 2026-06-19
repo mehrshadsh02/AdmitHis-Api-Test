@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-06-19T15:08:06.220823" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.2 on win32)" generated="2026-06-19T16:38:55.227553" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-UI-Playwright" source="D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\AdmitHis-UI-Playwright.robot">
 <kw name="Create AdmitHIS Session" owner="AdmitHis-Playwright-keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-06-19T15:08:06.511591" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-06-19T16:38:55.502673" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-06-19T15:08:06.511356" elapsed="0.000397"/>
+<status status="PASS" start="2026-06-19T16:38:55.502455" elapsed="0.000351"/>
 </kw>
-<status status="PASS" start="2026-06-19T15:08:06.510836" elapsed="0.001010"/>
+<status status="PASS" start="2026-06-19T16:38:55.501993" elapsed="0.000892"/>
 </kw>
 <test id="s1-t1" name="01-PW - Open Filing Page" line="10">
 <kw name="Disable Screenshots" owner="AdmitHis-Playwright-keywords">
 <kw name="No Operation" owner="BuiltIn">
 <doc>Does absolutely nothing.</doc>
-<status status="PASS" start="2026-06-19T15:08:06.512796" elapsed="0.000113"/>
+<status status="PASS" start="2026-06-19T16:38:55.503595" elapsed="0.000104"/>
 </kw>
-<status status="PASS" start="2026-06-19T15:08:06.512560" elapsed="0.000402"/>
+<status status="PASS" start="2026-06-19T16:38:55.503403" elapsed="0.000350"/>
 </kw>
 <kw name="PW Start Browser AdmitHis With Token" owner="AdmitHis-Playwright-keywords">
 <kw name="New Browser" owner="Browser">
-<msg time="2026-06-19T15:08:06.514163" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "D:\\Payvand\\Projects\\HisAdmit-Playwright\\AdmitHis-Test\\results-playwright\\browser\\traces\\temp\\08f71eaa-68bb-430c-ad84-8ed4a91da03e"}</msg>
-<msg time="2026-06-19T15:08:06.515200" level="FAIL">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
+<msg time="2026-06-19T16:38:55.504649" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "D:\\Payvand\\Projects\\HisAdmit-Playwright\\AdmitHis-Test\\results-playwright\\browser\\traces\\temp\\6563454b-2b64-4a3d-93ab-e0b2c57ff630"}</msg>
+<msg time="2026-06-19T16:38:55.505614" level="FAIL">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
 <arg>${PW_BROWSER}</arg>
 <arg>headless=${PW_HEADLESS}</arg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Create a new playwright Browser with specified options.</doc>
-<status status="FAIL" start="2026-06-19T15:08:06.513576" elapsed="0.005312">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.504160" elapsed="0.003429">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </kw>
 <kw name="New Context" owner="Browser">
 <arg>viewport={'width': 1920, 'height': 1080}</arg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Create a new BrowserContext with specified options.</doc>
-<status status="NOT RUN" start="2026-06-19T15:08:06.519090" elapsed="0.000083"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.507718" elapsed="0.000058"/>
 </kw>
 <kw name="New Page" owner="Browser">
 <arg>${AdmitHis_App_URL}</arg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Open a new Page.</doc>
-<status status="NOT RUN" start="2026-06-19T15:08:06.519273" elapsed="0.000051"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.507853" elapsed="0.000041"/>
 </kw>
 <kw name="Add Cookie" owner="Browser">
 <arg>token</arg>
@@ -52,87 +52,87 @@
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Adds a cookie to currently active browser context.</doc>
-<status status="NOT RUN" start="2026-06-19T15:08:06.519404" elapsed="0.000044"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.507961" elapsed="0.000037"/>
 </kw>
 <kw name="Reload" owner="Browser">
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Reloads current active page.</doc>
-<status status="NOT RUN" start="2026-06-19T15:08:06.519528" elapsed="0.000043"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.508063" elapsed="0.000035"/>
 </kw>
 <kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
-<status status="NOT RUN" start="2026-06-19T15:08:06.519692" elapsed="0.000051"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.508189" elapsed="0.000044"/>
 </kw>
 <doc>Opens Admit HIS with Playwright and injects token cookie.</doc>
-<status status="FAIL" start="2026-06-19T15:08:06.513317" elapsed="0.006538">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.503979" elapsed="0.004332">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </kw>
 <kw name="PW Go To AdmitHis Page" owner="AdmitHis-Playwright-keywords">
-<status status="NOT RUN" start="2026-06-19T15:08:06.520415" elapsed="0.000124"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.508585" elapsed="0.000056"/>
 </kw>
 <kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
-<status status="NOT RUN" start="2026-06-19T15:08:06.520861" elapsed="0.000081"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.509189" elapsed="0.000201"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>---- PLAYWRIGHT DONE ----</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="NOT RUN" start="2026-06-19T15:08:06.521157" elapsed="0.000093"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.509686" elapsed="0.000075"/>
 </kw>
 <doc>Playwright smoke test for Admit HIS filing page.</doc>
 <tag>playwright</tag>
 <tag>preadmit</tag>
 <tag>smoke</tag>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T15:08:06.511905" elapsed="0.009629">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.502944" elapsed="0.007123">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </test>
 <test id="s1-t2" name="02-PW - Enter National Code Of Preadmit Patient" line="20">
 <kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
 <kw name="Wait For Load State" owner="Browser">
-<msg time="2026-06-19T15:08:06.529129" level="INFO">Waiting page load to state to receive domcontentloaded in 10000.0</msg>
-<msg time="2026-06-19T15:08:06.530102" level="FAIL">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
+<msg time="2026-06-19T16:38:55.515783" level="INFO">Waiting page load to state to receive domcontentloaded in 10000.0</msg>
+<msg time="2026-06-19T16:38:55.518273" level="FAIL">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
 <arg>domcontentloaded</arg>
 <tag>PageContent</tag>
 <tag>Wait</tag>
 <doc>Waits that the page reaches the required load state.</doc>
-<status status="FAIL" start="2026-06-19T15:08:06.528532" elapsed="0.002901">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.515096" elapsed="0.004287">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </kw>
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <arg>PW Wait For Spinner Hidden</arg>
 <arg>${timeout}</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="NOT RUN" start="2026-06-19T15:08:06.531682" elapsed="0.000125"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.519542" elapsed="0.000081"/>
 </kw>
-<status status="FAIL" start="2026-06-19T15:08:06.528007" elapsed="0.003974">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.514618" elapsed="0.005099">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </kw>
 <kw name="PW Input Text" owner="AdmitHis-Playwright-keywords">
 <arg>xpath=//input[@formcontrolname='nationalCode']</arg>
 <arg>${nationalCode}</arg>
-<status status="NOT RUN" start="2026-06-19T15:08:06.532364" elapsed="0.000119"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.520106" elapsed="0.000096"/>
 </kw>
 <kw name="PW Click Element Safe" owner="AdmitHis-Playwright-keywords">
 <arg>id=button-addon3</arg>
-<status status="NOT RUN" start="2026-06-19T15:08:06.532904" elapsed="0.000096"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.520511" elapsed="0.000101"/>
 </kw>
 <kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
-<status status="NOT RUN" start="2026-06-19T15:08:06.533326" elapsed="0.000081"/>
+<status status="NOT RUN" start="2026-06-19T16:38:55.520832" elapsed="0.000113"/>
 </kw>
 <doc>Playwright version of the national code inquiry step.</doc>
 <tag>playwright</tag>
 <tag>preadmit</tag>
 <tag>step02</tag>
 <tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T15:08:06.527169" elapsed="0.006604">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.513953" elapsed="0.007308">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </test>
 <kw name="PW Close Browser" owner="AdmitHis-Playwright-keywords" type="TEARDOWN">
 <kw name="Close Browser" owner="Browser">
-<msg time="2026-06-19T15:08:06.541127" level="FAIL">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
+<msg time="2026-06-19T16:38:55.525694" level="FAIL">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Closes the current browser.</doc>
-<status status="FAIL" start="2026-06-19T15:08:06.538277" elapsed="0.003732">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.524306" elapsed="0.002026">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </kw>
-<status status="FAIL" start="2026-06-19T15:08:06.537402" elapsed="0.004862">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
+<status status="FAIL" start="2026-06-19T16:38:55.524113" elapsed="0.002404">Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </kw>
-<status status="FAIL" start="2026-06-19T15:08:06.222491" elapsed="0.319844">Suite teardown failed:
+<status status="FAIL" start="2026-06-19T16:38:55.228680" elapsed="0.297891">Suite teardown failed:
 Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</status>
 </suite>
 <statistics>
@@ -151,8 +151,8 @@ Couldn't execute node. Please ensure you have node.js installed and in PATH. See
 </suite>
 </statistics>
 <errors>
-<msg time="2026-06-19T15:08:06.525659" level="ERROR">Calling method '_end_test' of listener 'Browser' failed: Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
-<msg time="2026-06-19T15:08:06.535606" level="ERROR">Calling method '_end_test' of listener 'Browser' failed: Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
-<msg time="2026-06-19T15:08:06.544270" level="ERROR">Calling method '_end_suite' of listener 'Browser' failed: Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
+<msg time="2026-06-19T16:38:55.513030" level="ERROR">Calling method '_end_test' of listener 'Browser' failed: Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
+<msg time="2026-06-19T16:38:55.522907" level="ERROR">Calling method '_end_test' of listener 'Browser' failed: Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
+<msg time="2026-06-19T16:38:55.528053" level="ERROR">Calling method '_end_suite' of listener 'Browser' failed: Couldn't execute node. Please ensure you have node.js installed and in PATH. See https://nodejs.org/ for instructions. Original error is [WinError 2] The system cannot find the file specified</msg>
 </errors>
 </robot>

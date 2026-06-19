@@ -1,0 +1,10 @@
+allure-robotframework
+jdatetime
+pymssql
+robotframework
+robotframework-browser
+robotframework-databaselibrary
+robotframework-jsonlibrary
+robotframework-requests
+robotframework-seleniumlibrary
+

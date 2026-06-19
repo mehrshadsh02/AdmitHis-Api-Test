@@ -6,6 +6,17 @@ beside them through Robot Framework Browser.
 
 ## Install
 
+Robot Framework Browser needs Node.js and npm before `rfbrowser init` can
+finish. Check them first:
+
+```powershell
+node -v
+npm -v
+```
+
+If either command is not recognized, install Node.js LTS and open a new
+PowerShell window so PATH is refreshed.
+
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-playwright.txt
 .\.venv\Scripts\rfbrowser.exe init
@@ -13,6 +24,43 @@ beside them through Robot Framework Browser.
 
 If the virtual environment is not healthy, recreate it first and then install
 the normal project dependencies plus `requirements-playwright.txt`.
+
+## Common Setup Errors
+
+### npm is not recognized
+
+`rfbrowser init` installs the JavaScript wrapper for Robot Framework Browser.
+It cannot complete unless `npm` is available in PATH.
+
+Fix:
+
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+Then close and reopen PowerShell, activate the venv again, and run:
+
+```powershell
+node -v
+npm -v
+.\.venv\Scripts\rfbrowser.exe init
+```
+
+### venv points to another project path
+
+If the traceback mentions a different folder, recreate the virtual environment
+inside this project instead of copying an existing `.venv`:
+
+```powershell
+deactivate
+Rename-Item .venv .venv_old
+py -3.13 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install robotframework robotframework-seleniumlibrary robotframework-requests robotframework-jsonlibrary robotframework-databaselibrary pymssql jdatetime allure-robotframework
+python -m pip install -r requirements-playwright.txt
+rfbrowser init
+```
 
 ## Run The Playwright Smoke Suite
 

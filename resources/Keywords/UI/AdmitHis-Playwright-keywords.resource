@@ -20,7 +20,7 @@ Disable Screenshots
 
 PW Start Browser AdmitHis With Token
     [Documentation]    Opens Admit HIS with Playwright and injects token cookie.
-    New Browser    ${PW_BROWSER}    headless=${PW_HEADLESS}
+    New Browser    ${PW_BROWSER}    headless=${PW_HEADLESS}    channel=chrome
     New Context    viewport={'width': 1920, 'height': 1080}
     New Page       ${AdmitHis_App_URL}
     Add Cookie     token    ${COOKIE_TOKEN}    url=${AdmitHis_App_URL}
