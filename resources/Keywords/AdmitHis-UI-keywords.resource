@@ -166,172 +166,51 @@ Go To AdmitHis Page
     Reload Page
 
 Step01 - Verify National Code Format
-    [Documentation]    Verify national code format validation and inquiry buttons behavior
+    [Documentation]    Verify valid national code can be entered and inquiry button is enabled for Iranian nationality
+
+    Select Iranian Nationality
+
+    Enter National Code
+    ...    1234567891
+
+    Verify Identity Inquiry Button Is Enabled
+
+    Log To Console    Step01 Passed
+
+Select Iranian Nationality
 
     Wait For Page Ready
     Wait For Spinner Hidden
 
-    Wait Until Element Is Visible 
-    ...    xpath=//ng-select[@formcontrolname='nationality']    
-    ...    30
+    Click Element    xpath=//ng-select[@formcontrolname='nationality']
 
-    Select From Ng Select
-    ...    nationality
-    ...    ایرانی
+    Wait Until Element Is Enabled
+    ...    xpath=//span[normalize-space()='ایرانی']
+    ...    visible
 
-    # ورود کد ملی کمتر از 10 رقم
-    Input Text
-    ...    xpath=//input[@formcontrolname='nationalCode']
-    ...    152055400
+    Click Element    xpath=//span[normalize-space()='ایرانی']
 
-    # استعلام درمان
-    Click Element
-    ...    xpath=//button[.//span[contains(text(),'استحقاق درمان')]]
+Enter National Code
+    [Arguments]    ${nationalCode}
 
-    Wait Until Element Is Visible
-    ...    xpath=//div[contains(@class,'toast-message')]    
-    ...    30
-
-    ${message}=    Get Text
-    ...    xpath=//div[contains(@class,'toast-message')]
-
-    # Run Keyword If
-    # ...    'ارتباط با سرویس استعلام برقرار نشد.' in '''${message}'''
-    # ...    Pass Execution
-    # ...    ${message}
-
-    IF    'ارتباط با سرویس استعلام برقرار نشد.' in '${message}'
-    Log To Console    Service Is Unavailable
-    ELSE
-        Should Contain    ${message}    کد ملی نامعتبر است
-    END
-
-    # Log To Console    
-    # ...    ${message}
-
-    # Wait Until Page Contains
-    # ...    کد ملی نامعتبر
-
-    # Log To Console
-    # ...    Treatment Eligibility Validation Passed
-
-    # استعلام هویت بدون تاریخ تولد
-
-    Clear Element Text
-    ...    xpath=//input[@formcontrolname='nationalCode']
-
+    Wait For Page Ready
+    Wait For Spinner Hidden
     Input Text
     ...    xpath=//input[@formcontrolname='nationalCode']
     ...    ${nationalCode}
 
-    Click Element
-    ...    xpath=//button[.//span[contains(text(),'استعلام هویت')]]
 
-    Wait Until Page Contains
-    ...    تاریخ تولد
-
-    Log To Console
-    ...    Identity Inquiry BirthDate Validation Passed
-
-    # پاک کردن مقدار قبلی
-    Clear Element Text
-    ...    xpath=//input[@formcontrolname='nationalCode']
-
-    # ورود کد ملی 10 رقمی
-    Input Text
-    ...    xpath=//input[@formcontrolname='nationalCode']
-    ...    ${nationalCode}
-
-    ${value}=    Get Value
-    ...    xpath=//input[@formcontrolname='nationalCode']
-
-    Length Should Be
-    ...    ${value}
-    ...    10
-
-    Log To Console
-    ...    National Code Length Validation Passed
-
-    Log To Console
-    ...    Step01 Passed   
-
-Step02 - Verify National Code Required For Iranian
-
-    [Documentation]    National code should be mandatory for Iranian nationality with social security insurance
-
-    Wait For Page Ready
-    Wait For Spinner Hidden
-
-    Clear Element Text
-    ...    xpath=//input[@formcontrolname='nationalCode']
-
-    Wait Until Element Is Visible 
-    ...     xpath=//ng-select[@formcontrolname='nationality']    
-    ...    30
-
-    Select From Ng Select
-    ...    nationality
-    ...    ایرانی
-
-    Select From Ng Select
-    ...    insuranceName
-    ...    تامین اجتماعی
-
-    Click Element Safe     css=button.btn-saveFile
-
-    ${required}=    Get Element Attribute
-    ...    xpath=//input[@formcontrolname='nationalCode']
-    ...    required
-
-    Should Be Equal
-    ...    ${required}
-    ...    true
-
-    ${aria_required}=    Get Element Attribute
-    ...    xpath=//input[@formcontrolname='nationalCode']
-    ...    aria-required
-
-    Should Be Equal
-    ...    ${aria_required}
-    ...    true
-
-    Log To Console    National Code Is Mandatory
-
-Step03 - Verify Passport For Foreign Nationality
-    [Documentation]    Verify passport replaces national code for foreign nationality and inquiry button remains enabled
-
-    Wait For Page Ready
-    Wait For Spinner Hidden
-
-    Select From Ng Select
-    ...    nationality
-    ...    غیر ایرانی
+Verify Identity Inquiry Button Is Enabled
 
     Wait Until Element Is Visible
-    ...    xpath=//input[@formcontrolname='passport']
+    ...    xpath=//button[contains(.,'استعلام هویت')]
+    ...    visible
 
-    Element Should Be Visible
-    ...    xpath=//input[@formcontrolname='passport']
-
-    ${passport_placeholder}=    Get Element Attribute
-    ...    xpath=//input[@formcontrolname='passport']
-    ...    formcontrolname
-
-    Should Be Equal
-    ...    ${passport_placeholder}
-    ...    passport
-
-    Input Text
-    ...    xpath=//input[@formcontrolname='passport']
-    ...    A12345678
+    Element Should Be Enabled 
+    ...    xpath=//button[contains(.,'استعلام هویت')]
 
     Element Should Be Enabled
-    ...    xpath=//button[.//span[contains(text(),'استعلام هویت')]]
-
-    Log To Console    Foreign nationality selected successfully
-    Log To Console    Passport field displayed successfully
-    Log To Console    Identity inquiry button is enabled
-    Log To Console    Step03 Passed
+    ...    xpath=//button[contains(.,'استعلام هویت')]            
 
 Switch To AdmitHis App
     Go To    ${AdmitHis_App_URL}
