@@ -1,5 +1,5 @@
 *** Settings ***
-Library           Browser
+Library           Browser     auto_closing_level=SUITE
 Library           RequestsLibrary
 
 Resource          ../../Variables/AdmitHis-variables.resource
@@ -7,6 +7,7 @@ Resource          ../../Variables/AdmitHis-variables.resource
 
 *** Variables ***
 ${PW_BROWSER}             chromium
+${PW_CHANNEL}             chrome
 ${PW_HEADLESS}            ${False}
 ${PW_TIMEOUT}             30s
 
@@ -20,8 +21,8 @@ Disable Screenshots
 
 PW Start Browser AdmitHis With Token
     [Documentation]    Opens Admit HIS with Playwright and injects token cookie.
-    New Browser    ${PW_BROWSER}    headless=${PW_HEADLESS}    channel=chrome
-    New Context    viewport={'width': 1920, 'height': 1080}
+    New Browser    ${PW_BROWSER}    headless=${PW_HEADLESS}    channel=${PW_CHANNEL}
+    # New Context    viewport={'width': 1920, 'height': 1080}
     New Page       ${AdmitHis_App_URL}
     Add Cookie     token    ${COOKIE_TOKEN}    url=${AdmitHis_App_URL}
     Reload
@@ -29,7 +30,7 @@ PW Start Browser AdmitHis With Token
 
 PW Start Browser Cash With Token
     [Documentation]    Opens Cash app with Playwright and injects token cookie.
-    New Browser    ${PW_BROWSER}    headless=${PW_HEADLESS}
+    New Browser    ${PW_BROWSER}    headless=${PW_HEADLESS}    channel=${PW_CHANNEL}
     New Context    viewport={'width': 1920, 'height': 1080}
     New Page       ${Cash_App_URL}
     Add Cookie     token    ${COOKIE_TOKEN}    url=${Cash_App_URL}
@@ -38,7 +39,7 @@ PW Start Browser Cash With Token
 
 PW Go To AdmitHis Page
     Go To    ${AdmitHis_App_URL}
-    Reload
+    # Reload
     PW Wait For Page Ready
 
 PW Switch To AdmitHis App

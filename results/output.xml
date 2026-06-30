@@ -1,493 +1,313 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.12.13 on win32)" generated="2026-06-19T20:44:39.666316" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.2 (Python 3.12.13 on win32)" generated="2026-06-26T02:34:26.560407" rpa="false" schemaversion="5">
 <suite id="s1" name="AdmitHis-Test" source="D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test">
-<suite id="s1-s1" name="AdmitHis-UI" source="D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\AdmitHis-UI.robot">
-<kw name="Create AdmitHIS Session" owner="AdmitHis-UI-keywords" type="SETUP">
+<suite id="s1-s1" name="AdmitHis-UI-Playwright" source="D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\AdmitHis-UI-Playwright.robot">
+<kw name="Create AdmitHIS Session" owner="AdmitHis-Playwright-keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-06-19T20:44:40.569955" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-06-26T02:34:26.964374" level="INFO">Creating Session using : alias=HIS, url=http://192.168.5.19:1600, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>HIS</arg>
 <arg>${AdmitHis_Api_URL}</arg>
 <arg>verify=${False}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-06-19T20:44:40.569955" elapsed="0.001306"/>
+<status status="PASS" start="2026-06-26T02:34:26.963360" elapsed="0.001014"/>
 </kw>
-<status status="PASS" start="2026-06-19T20:44:40.566712" elapsed="0.005082"/>
+<status status="PASS" start="2026-06-26T02:34:26.963360" elapsed="0.001014"/>
 </kw>
-<test id="s1-s1-t1" name="01-UI - Open Filing Page" line="17">
-<kw name="Disable Screenshots" owner="AdmitHis-UI-keywords">
-<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:44:40.578395" level="INFO">No keyword will be run on failure.</msg>
-<arg>NONE</arg>
-<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-06-19T20:44:40.578395" elapsed="0.000000"/>
+<test id="s1-s1-t1" name="01-PW - Open Filing Page" line="10">
+<kw name="Disable Screenshots" owner="AdmitHis-Playwright-keywords">
+<kw name="No Operation" owner="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="PASS" start="2026-06-26T02:34:26.972996" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2026-06-19T20:44:40.577386" elapsed="0.001009"/>
+<status status="PASS" start="2026-06-26T02:34:26.972996" elapsed="0.000000"/>
 </kw>
-<kw name="Start Browser AdmitHis With Token" owner="AdmitHis-UI-keywords">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:44:40.580402" level="WARN">executable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.</msg>
-<msg time="2026-06-19T20:44:40.601115" level="INFO">Opening browser 'chrome' to base url 'http://192.168.5.19:8019/filing'.</msg>
+<kw name="PW Start Browser AdmitHis With Token" owner="AdmitHis-Playwright-keywords">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-06-26T02:34:26.972996" level="INFO">{"browser": "chromium", "headless": false, "channel": "chrome", "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "D:\\Payvand\\Projects\\HisAdmit-Playwright\\AdmitHis-Test\\results\\browser\\traces\\temp\\05d89767-ccaa-4812-a1bf-84ebce7c8083"}</msg>
+<msg time="2026-06-26T02:34:27.002642" level="INFO">Starting Browser process D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:65262</msg>
+<msg time="2026-06-26T02:34:27.741145" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"channel":"chrome","chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"D:\\Payvand\\Projects\\HisAdmit-Playwright\\AdmitHis-Test\\results\\browser\\traces\\temp\\05d89767-ccaa-4812-a1bf-84ebce7c8083"}</msg>
+<arg>${PW_BROWSER}</arg>
+<arg>headless=${PW_HEADLESS}</arg>
+<arg>channel=${PW_CHANNEL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-06-26T02:34:26.972996" elapsed="0.770154"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-06-26T02:34:28.994663" level="INFO">Successfully initialized new page object and opened url: http://192.168.5.19:8019/filing</msg>
+<msg time="2026-06-26T02:34:28.994663" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
 <arg>${AdmitHis_App_URL}</arg>
-<arg>chrome</arg>
-<arg>executable_path=C:/chromedriver.exe</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-06-19T20:44:40.580402" elapsed="1.665968"/>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-06-26T02:34:27.743150" elapsed="1.252514"/>
 </kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-06-19T20:44:42.246370" elapsed="2.453568"/>
-</kw>
-<kw name="Add Cookie" owner="SeleniumLibrary">
+<kw name="Add Cookie" owner="Browser">
+<msg time="2026-06-26T02:34:29.000163" level="INFO">Cookie "token" added.</msg>
 <arg>token</arg>
 <arg>${COOKIE_TOKEN}</arg>
-<doc>Adds a cookie to your current session.</doc>
-<status status="PASS" start="2026-06-19T20:44:44.699938" elapsed="0.012590"/>
+<arg>url=${AdmitHis_App_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Adds a cookie to currently active browser context.</doc>
+<status status="PASS" start="2026-06-26T02:34:28.995664" elapsed="0.004499"/>
 </kw>
-<kw name="Reload Page" owner="SeleniumLibrary">
-<doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-06-19T20:44:44.712528" elapsed="2.592959"/>
+<kw name="Reload" owner="Browser">
+<msg time="2026-06-26T02:34:29.203293" level="INFO">Reloaded page with options: {"waitUntil": "load"}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Reloads current active page.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.001245" elapsed="0.202048"/>
 </kw>
-<doc>باز کردن کروم + تزریق کوکی token</doc>
-<status status="PASS" start="2026-06-19T20:44:40.580402" elapsed="6.725697"/>
+<kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Load State" owner="Browser">
+<msg time="2026-06-26T02:34:29.205291" level="INFO">Waiting page load to state to receive domcontentloaded in 10000.0</msg>
+<msg time="2026-06-26T02:34:29.211038" level="INFO">Load state domcontentloaded got in 10000</msg>
+<arg>domcontentloaded</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits that the page reaches the required load state.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.204293" elapsed="0.008228"/>
 </kw>
-<kw name="Go To AdmitHis Page" owner="AdmitHis-UI-keywords">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:44:47.308470" level="INFO">Opening url 'http://192.168.5.19:8019/filing'</msg>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="PW Wait For Spinner Hidden" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-06-26T02:34:29.250367" level="INFO">Waited for Element with selector css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop at state hidden</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>hidden</arg>
+<arg>timeout=${timeout}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.214021" elapsed="0.036962"/>
+</kw>
+<arg>${timeout}</arg>
+<status status="PASS" start="2026-06-26T02:34:29.214021" elapsed="0.036962"/>
+</kw>
+<arg>PW Wait For Spinner Hidden</arg>
+<arg>${timeout}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.212521" elapsed="0.038462"/>
+</kw>
+<status status="PASS" start="2026-06-26T02:34:29.203293" elapsed="0.047690"/>
+</kw>
+<doc>Opens Admit HIS with Playwright and injects token cookie.</doc>
+<status status="PASS" start="2026-06-26T02:34:26.972996" elapsed="2.277987"/>
+</kw>
+<kw name="PW Go To AdmitHis Page" owner="AdmitHis-Playwright-keywords">
+<kw name="Go To" owner="Browser">
+<msg time="2026-06-26T02:34:29.308605" level="INFO">Successfully opened URL http://192.168.5.19:8019/filing</msg>
 <arg>${AdmitHis_App_URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2026-06-19T20:44:47.308043" elapsed="0.030800"/>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.252530" elapsed="0.056075"/>
 </kw>
-<kw name="Reload Page" owner="SeleniumLibrary">
-<doc>Simulates user reloading page.</doc>
-<status status="PASS" start="2026-06-19T20:44:47.339457" elapsed="0.277056"/>
+<kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Load State" owner="Browser">
+<msg time="2026-06-26T02:34:29.310972" level="INFO">Waiting page load to state to receive domcontentloaded in 10000.0</msg>
+<msg time="2026-06-26T02:34:29.313485" level="INFO">Load state domcontentloaded got in 10000</msg>
+<arg>domcontentloaded</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits that the page reaches the required load state.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.308605" elapsed="0.004880"/>
 </kw>
-<doc>رفتن مستقیم به صفحه پذیرش بستری</doc>
-<status status="PASS" start="2026-06-19T20:44:47.307289" elapsed="0.309224"/>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="PW Wait For Spinner Hidden" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-06-26T02:34:29.331253" level="INFO">Waited for Element with selector css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop at state hidden</msg>
+<arg>${GLOBAL_SPINNER}</arg>
+<arg>hidden</arg>
+<arg>timeout=${timeout}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.313485" elapsed="0.017768"/>
 </kw>
-<kw name="Wait For Spinner Hidden" owner="AdmitHis-UI-keywords">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-06-19T20:44:47.618663" elapsed="0.032831"/>
+<arg>${timeout}</arg>
+<status status="PASS" start="2026-06-26T02:34:29.313485" elapsed="0.018728"/>
 </kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-06-19T20:44:47.618663" elapsed="0.032831"/>
+<arg>PW Wait For Spinner Hidden</arg>
+<arg>${timeout}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.313485" elapsed="0.018728"/>
+</kw>
+<status status="PASS" start="2026-06-26T02:34:29.308605" elapsed="0.023608"/>
+</kw>
+<status status="PASS" start="2026-06-26T02:34:29.250983" elapsed="0.081230"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
-<arg>---- DONE ----</arg>
+<arg>---- PLAYWRIGHT DONE ----</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-06-19T20:44:47.651494" elapsed="0.002210"/>
+<status status="PASS" start="2026-06-26T02:34:29.332213" elapsed="0.001050"/>
 </kw>
-<doc>باز  کردن صفحه پذیرش بستری</doc>
+<doc>Playwright smoke test for Admit HIS filing page.</doc>
+<tag>playwright</tag>
 <tag>preadmit</tag>
-<tag>step01</tag>
-<tag>STEP_01_Open_Browser</tag>
+<tag>smoke</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2026-06-19T20:44:40.572174" elapsed="7.082544"/>
+<status status="PASS" start="2026-06-26T02:34:26.964374" elapsed="2.368889"/>
 </test>
-<test id="s1-s1-t2" name="02-UI - Enter national code of preadmit patient" line="29">
-<kw name="Disable Screenshots" owner="AdmitHis-UI-keywords">
-<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:44:47.674261" level="INFO">No keyword will be run on failure.</msg>
-<arg>NONE</arg>
-<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-06-19T20:44:47.674261" elapsed="0.000000"/>
+<test id="s1-s1-t2" name="02-PW - Enter National Code Of Preadmit Patient" line="20">
+<kw name="PW Input Text" owner="AdmitHis-Playwright-keywords">
+<kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Load State" owner="Browser">
+<msg time="2026-06-26T02:34:29.349973" level="INFO">Waiting page load to state to receive domcontentloaded in 10000.0</msg>
+<msg time="2026-06-26T02:34:29.354552" level="INFO">Load state domcontentloaded got in 10000</msg>
+<arg>domcontentloaded</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits that the page reaches the required load state.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.349973" elapsed="0.004579"/>
 </kw>
-<status status="PASS" start="2026-06-19T20:44:47.666010" elapsed="0.010294"/>
-</kw>
-<kw name="Wait For Page Ready" owner="AdmitHis-UI-keywords">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:44:50.716752" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<kw name="PW Wait For Spinner Hidden" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-06-26T02:34:29.366709" level="INFO">Waited for Element with selector css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop at state hidden</msg>
 <arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-06-19T20:44:47.676304" elapsed="3.048768">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<arg>hidden</arg>
+<arg>timeout=${timeout}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.356597" elapsed="0.011104"/>
 </kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-06-19T20:44:47.676304" elapsed="3.049761"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-06-19T20:44:50.726065" elapsed="0.016106"/>
+<status status="PASS" start="2026-06-26T02:34:29.355597" elapsed="0.012104"/>
 </kw>
-<status status="PASS" start="2026-06-19T20:44:47.676304" elapsed="3.065867"/>
+<arg>PW Wait For Spinner Hidden</arg>
+<arg>${timeout}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.354552" elapsed="0.013149"/>
 </kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='nationalCode']</arg>
-<arg>50s</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-06-19T20:44:50.742171" elapsed="40.802262"/>
+<status status="PASS" start="2026-06-26T02:34:29.348934" elapsed="0.018767"/>
 </kw>
-<kw name="Clear Element Text" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='nationalCode']</arg>
-<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2026-06-19T20:45:31.546445" elapsed="0.078618"/>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-06-26T02:34:40.458427" level="INFO">Waited for Element with selector xpath=//input[@formcontrolname='nationalCode'] at state visible</msg>
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=${PW_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-06-26T02:34:29.367701" elapsed="11.090726"/>
 </kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:45:31.629123" level="INFO">Typing text '1520554001' into text field '//input[@formcontrolname='nationalCode']'.</msg>
-<arg>//input[@formcontrolname='nationalCode']</arg>
+<kw name="Fill Text" owner="Browser">
+<msg time="2026-06-26T02:34:40.459428" level="INFO">Fills the text '1520554001' in the given field.</msg>
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-06-26T02:34:40.459428" elapsed="0.024929"/>
+</kw>
+<arg>xpath=//input[@formcontrolname='nationalCode']</arg>
 <arg>${nationalCode}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-06-19T20:45:31.627119" elapsed="0.312217"/>
+<status status="PASS" start="2026-06-26T02:34:29.348934" elapsed="11.135423"/>
 </kw>
-<kw name="Click Element Safe" owner="AdmitHis-UI-keywords">
-<kw name="Wait For Spinner Hidden" owner="AdmitHis-UI-keywords">
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>css=div.back-spenner.ng-star-inserted</arg>
-<arg>1000</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-06-19T20:45:31.942409" elapsed="5.476182"/>
+<kw name="PW Click Element Safe" owner="AdmitHis-Playwright-keywords">
+<kw name="PW Wait For Page Ready" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Load State" owner="Browser">
+<msg time="2026-06-26T02:34:40.486852" level="INFO">Waiting page load to state to receive domcontentloaded in 10000.0</msg>
+<msg time="2026-06-26T02:34:40.489860" level="INFO">Load state domcontentloaded got in 10000</msg>
+<arg>domcontentloaded</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits that the page reaches the required load state.</doc>
+<status status="PASS" start="2026-06-26T02:34:40.486852" elapsed="0.003008"/>
 </kw>
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="PASS" start="2026-06-19T20:45:31.940899" elapsed="5.477692"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-06-19T20:45:37.421887" elapsed="0.033379"/>
-</kw>
-<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2026-06-19T20:45:37.457273" elapsed="0.036612"/>
-</kw>
-<kw name="Scroll Element Into View" owner="SeleniumLibrary">
-<arg>${locator}</arg>
-<doc>Scrolls the element identified by ``locator`` into view.</doc>
-<status status="PASS" start="2026-06-19T20:45:37.493885" elapsed="0.308587"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:45:37.802472" level="INFO">Clicking element 'id=button-addon3'.</msg>
-<arg>${locator}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-06-19T20:45:37.802472" elapsed="0.119862"/>
-</kw>
-<arg>id=button-addon3</arg>
-<status status="PASS" start="2026-06-19T20:45:31.939336" elapsed="5.986997"/>
-</kw>
-<kw name="Wait For Page Ready" owner="AdmitHis-UI-keywords">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:45:41.038134" level="FAIL">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</msg>
+<kw name="PW Wait For Spinner Hidden" owner="AdmitHis-Playwright-keywords">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-06-26T02:34:40.499879" level="INFO">Waited for Element with selector css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop at state hidden</msg>
 <arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-06-19T20:45:37.928290" elapsed="3.118295">Element 'css=.ngx-spinner-overlay,.loading-overlay,.spinner,.mat-progress-spinner,.cdk-overlay-backdrop' did not appear in 3 seconds.</status>
+<arg>hidden</arg>
+<arg>timeout=${timeout}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-06-26T02:34:40.491858" elapsed="0.009018"/>
 </kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-06-19T20:45:37.928290" elapsed="3.120304"/>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>${GLOBAL_SPINNER}</arg>
 <arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" start="2026-06-19T20:45:41.048594" elapsed="0.019630"/>
+<status status="PASS" start="2026-06-26T02:34:40.490859" elapsed="0.010017"/>
 </kw>
-<status status="PASS" start="2026-06-19T20:45:37.927728" elapsed="3.140496"/>
+<arg>PW Wait For Spinner Hidden</arg>
+<arg>${timeout}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2026-06-26T02:34:40.490859" elapsed="0.010017"/>
 </kw>
-<doc>وارد کردن کد ملی بیمار و استعلام کد ملی</doc>
+<status status="PASS" start="2026-06-26T02:34:40.485960" elapsed="0.014916"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-06-26T02:34:40.508359" level="INFO">Waited for Element with selector xpath=//button[contains(@class,'btn btn-success btn-filing mt-1')] at state visible</msg>
+<arg>${locator}</arg>
+<arg>visible</arg>
+<arg>timeout=${PW_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-06-26T02:34:40.500876" elapsed="0.007483"/>
+</kw>
+<kw name="Scroll To Element" owner="Browser">
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>This method waits for actionability checks, then tries to scroll element into view,
+unless it is completely visible.</doc>
+<status status="PASS" start="2026-06-26T02:34:40.508359" elapsed="0.419997"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-06-26T02:34:40.929348" level="INFO">Clicks the element 'xpath=//button[contains(@class,'btn btn-success btn-filing mt-1')]'.</msg>
+<arg>${locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-06-26T02:34:40.928356" elapsed="3.743192"/>
+</kw>
+<arg>xpath=//button[contains(@class,'btn btn-success btn-filing mt-1')]</arg>
+<status status="PASS" start="2026-06-26T02:34:40.485646" elapsed="4.186897"/>
+</kw>
+<doc>Playwright version of the national code inquiry step.</doc>
+<tag>playwright</tag>
 <tag>preadmit</tag>
 <tag>step02</tag>
 <tag>UI_Test</tag>
-<status status="PASS" start="2026-06-19T20:44:47.666010" elapsed="53.402214"/>
+<status status="PASS" start="2026-06-26T02:34:29.342980" elapsed="15.329563"/>
 </test>
-<test id="s1-s1-t3" name="03-UI - Fill Patient PreAdmit Info" line="44">
-<kw name="Disable Screenshots" owner="AdmitHis-UI-keywords">
-<kw name="Register Keyword To Run On Failure" owner="SeleniumLibrary">
-<msg time="2026-06-19T20:45:41.093378" level="INFO">No keyword will be run on failure.</msg>
-<arg>NONE</arg>
-<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
-<status status="PASS" start="2026-06-19T20:45:41.093378" elapsed="0.002015"/>
+<kw name="PW Close Browser" owner="AdmitHis-Playwright-keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2026-06-26T02:34:44.986820" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-06-26T02:34:44.680926" elapsed="0.305894"/>
 </kw>
-<status status="PASS" start="2026-06-19T20:45:41.091362" elapsed="0.004031"/>
+<status status="PASS" start="2026-06-26T02:34:44.679922" elapsed="0.308198"/>
 </kw>
-<kw name="Wait For Page Ready" owner="AdmitHis-UI-keywords">
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="FAIL" start="2026-06-19T20:45:41.099601" elapsed="2.668993">Execution terminated by signal</status>
-</kw>
-<arg>Wait Until Page Contains Element</arg>
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>3</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="FAIL" start="2026-06-19T20:45:41.098589" elapsed="2.670005">Execution terminated by signal</status>
-</kw>
-<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
-<arg>${GLOBAL_SPINNER}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.768594" elapsed="0.000000"/>
-</kw>
-<status status="FAIL" start="2026-06-19T20:45:41.097401" elapsed="2.671193">Execution terminated by signal</status>
-</kw>
-<kw name="Select From Ng Select" owner="AdmitHis-UI-keywords">
-<arg>maritalStatus</arg>
-<arg>مجرد</arg>
-<status status="NOT RUN" start="2026-06-19T20:45:43.768594" elapsed="0.000000"/>
-</kw>
-<kw name="Select From Ng Select" owner="AdmitHis-UI-keywords">
-<arg>insurRelation</arg>
-<arg>خود فرد</arg>
-<status status="NOT RUN" start="2026-06-19T20:45:43.771692" elapsed="0.000000"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='mobileNumber']</arg>
-<arg>09383509316</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.771692" elapsed="0.000000"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='address']</arg>
-<arg>dfgdfgdfgd</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.771692" elapsed="0.001740"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='accompanyfullName']</arg>
-<arg>مهرشاد شیخ الاسلامی</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.776768" elapsed="0.003108"/>
-</kw>
-<kw name="Select From Ng Select" owner="AdmitHis-UI-keywords">
-<arg>relation</arg>
-<arg>خود فرد</arg>
-<status status="NOT RUN" start="2026-06-19T20:45:43.781844" elapsed="0.000000"/>
-</kw>
-<kw name="Input Text" owner="SeleniumLibrary">
-<arg>//input[@formcontrolname='accompanyMobileNumber']</arg>
-<arg>09383586316</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.782651" elapsed="0.000000"/>
-</kw>
-<kw name="Wait For Spinner Hidden" owner="AdmitHis-UI-keywords">
-<doc>صبر کردن تا loading Angular ناپدید شود</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.783392" elapsed="0.001160"/>
-</kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>id=button-addon2</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.784552" elapsed="0.000000"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<arg>id=button-addon2</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-06-19T20:45:43.784552" elapsed="0.000000"/>
-</kw>
-<kw name="Select From Ng Select" owner="AdmitHis-UI-keywords">
-<arg>firstRecognition</arg>
-<arg>شکستگی</arg>
-<status status="NOT RUN" start="2026-06-19T20:45:43.784552" elapsed="0.002007"/>
-</kw>
-<kw name="Select From Ng Select" owner="AdmitHis-UI-keywords">
-<arg>howToRefer</arg>
-<arg>وسیله شخصی</arg>
-<status status="NOT RUN" start="2026-06-19T20:45:43.790319" elapsed="0.000000"/>
-</kw>
-<kw name="Select From Ng Select" owner="AdmitHis-UI-keywords">
-<arg>causeOfHospitalization</arg>
-<arg>دل درد</arg>
-<status status="NOT RUN" start="2026-06-19T20:45:43.790319" elapsed="0.002014"/>
-</kw>
-<doc>پر کردن اطلاعات مورد نیاز بیمار</doc>
-<tag>preadmit</tag>
-<tag>step03</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:41.086000" elapsed="2.710359">Execution terminated by signal</status>
-</test>
-<test id="s1-s1-t4" name="04-UI - Assign Ward And Doctor And Prepayment" line="69">
-<doc>انتخاب بخش و پزشک بیمار preadmit</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step04</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:43.853086" elapsed="0.012168">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t5" name="05-UI - Save Admission Filing" line="81">
-<doc>سیو کردن پذیرش preadmit</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step05</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:43.868987" elapsed="0.032517">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t6" name="06-UI - deny admit print page" line="92">
-<doc>لغو پرینت برگه پذیرش</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step06</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:43.915108" elapsed="0.005195">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t7" name="07-UI - Open Cash Web And Pay" line="99">
-<doc>باز کردن صندوق و دریافت پیش پرداخت بیمار پری ادمیت</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step07</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:43.947695" elapsed="0.017550">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t8" name="08-UI - go to inpatient list" line="107">
-<doc>رفتن به لیست بیماران بستری</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step08</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:43.982933" elapsed="0.015128">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t9" name="09-UI - Load Preadmit Patient List" line="120">
-<doc>لیست بیماران preadmit</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step09</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.013465" elapsed="0.009113">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t10" name="10-UI - Edit Preadmit Patient" line="133">
-<doc>ویرایش بیمار preadmit</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step10</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.029649" elapsed="0.008401">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t11" name="11-UI - Cancel Preadmit" line="162">
-<doc>لغو پذیرش preadmit</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step11</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.062948" elapsed="0.011612">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t12" name="12-UI - Open Cash Web And Refund" line="182">
-<doc>بازپرداخت به بیمار در صندوق</doc>
-<tag>preadmit</tag>
-<tag>robot:exit</tag>
-<tag>step12</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.086137" elapsed="0.005535">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t13" name="13-UI - Open Filling Page" line="193">
-<doc>باز  کردن صفحه پذیرش بستری</doc>
-<tag>inpatient</tag>
-<tag>Open_Browser</tag>
-<tag>robot:exit</tag>
-<tag>step13</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.103548" elapsed="0.014452">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t14" name="14-UI - Enter national code of inpatient" line="205">
-<doc>وارد کردن کد ملی بیمار و استعلام کد ملی</doc>
-<tag>inpatient</tag>
-<tag>robot:exit</tag>
-<tag>step14</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.128360" elapsed="0.008752">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t15" name="15-UI - Fill inpatient Info" line="217">
-<doc>پر کردن اطلاعات مورد نیاز بیمار</doc>
-<tag>inpatient</tag>
-<tag>robot:exit</tag>
-<tag>step15</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.148503" elapsed="0.049780">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t16" name="16-UI - Assign Ward And Doctor" line="241">
-<doc>انتخاب بخش و پزشک بیمار preadmit</doc>
-<tag>inpatient</tag>
-<tag>robot:exit</tag>
-<tag>step16</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.211571" elapsed="0.010057">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t17" name="17-UI - Save Admission Filing" line="254">
-<doc>سیو کردن پذیرش preadmit</doc>
-<tag>inpatient</tag>
-<tag>robot:exit</tag>
-<tag>step17</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.239729" elapsed="0.013980">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t18" name="18-UI - deny admit print page" line="263">
-<doc>لغو پرینت برگه پذیرش</doc>
-<tag>inpatient</tag>
-<tag>robot:exit</tag>
-<tag>step18</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.262423" elapsed="0.013091">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t19" name="19-UI - go to inpatient list" line="270">
-<doc>رفتن به لیست بیماران بستری</doc>
-<tag>inpatient</tag>
-<tag>robot:exit</tag>
-<tag>step19</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.280527" elapsed="0.014201">Test execution stopped due to a fatal error.</status>
-</test>
-<test id="s1-s1-t20" name="20-UI - Edit Preadmit Patient" line="282">
-<doc>ویرایش بیمار بستری</doc>
-<tag>inpatient</tag>
-<tag>robot:exit</tag>
-<tag>step20</tag>
-<tag>UI_Test</tag>
-<status status="FAIL" start="2026-06-19T20:45:44.300500" elapsed="0.008380">Test execution stopped due to a fatal error.</status>
-</test>
-<status status="FAIL" start="2026-06-19T20:44:39.740827" elapsed="64.590331"/>
+<status status="PASS" start="2026-06-26T02:34:26.607961" elapsed="18.380159"/>
 </suite>
-<status status="FAIL" start="2026-06-19T20:44:39.689722" elapsed="64.659647"/>
+<status status="PASS" start="2026-06-26T02:34:26.578840" elapsed="18.418986"/>
 </suite>
 <statistics>
 <total>
-<stat pass="2" fail="18" skip="0">All Tests</stat>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat info="combined" combined="NOT robot:exit" pass="2" fail="1" skip="0">NOT robot:exit</stat>
-<stat pass="0" fail="8" skip="0">inpatient</stat>
-<stat pass="0" fail="1" skip="0">Open_Browser</stat>
-<stat pass="2" fail="10" skip="0">preadmit</stat>
-<stat pass="1" fail="0" skip="0">step01</stat>
-<stat pass="1" fail="0" skip="0">STEP_01_Open_Browser</stat>
+<stat pass="2" fail="0" skip="0">playwright</stat>
+<stat pass="2" fail="0" skip="0">preadmit</stat>
+<stat pass="1" fail="0" skip="0">smoke</stat>
 <stat pass="1" fail="0" skip="0">step02</stat>
-<stat pass="0" fail="1" skip="0">step03</stat>
-<stat pass="0" fail="1" skip="0">step04</stat>
-<stat pass="0" fail="1" skip="0">step05</stat>
-<stat pass="0" fail="1" skip="0">step06</stat>
-<stat pass="0" fail="1" skip="0">step07</stat>
-<stat pass="0" fail="1" skip="0">step08</stat>
-<stat pass="0" fail="1" skip="0">step09</stat>
-<stat pass="0" fail="1" skip="0">step10</stat>
-<stat pass="0" fail="1" skip="0">step11</stat>
-<stat pass="0" fail="1" skip="0">step12</stat>
-<stat pass="0" fail="1" skip="0">step13</stat>
-<stat pass="0" fail="1" skip="0">step14</stat>
-<stat pass="0" fail="1" skip="0">step15</stat>
-<stat pass="0" fail="1" skip="0">step16</stat>
-<stat pass="0" fail="1" skip="0">step17</stat>
-<stat pass="0" fail="1" skip="0">step18</stat>
-<stat pass="0" fail="1" skip="0">step19</stat>
-<stat pass="0" fail="1" skip="0">step20</stat>
-<stat pass="2" fail="18" skip="0">UI_Test</stat>
+<stat pass="2" fail="0" skip="0">UI_Test</stat>
 </tag>
 <suite>
-<stat name="AdmitHis-Test" id="s1" pass="2" fail="18" skip="0">AdmitHis-Test</stat>
-<stat name="AdmitHis-UI" id="s1-s1" pass="2" fail="18" skip="0">AdmitHis-Test.AdmitHis-UI</stat>
+<stat name="AdmitHis-Test" id="s1" pass="2" fail="0" skip="0">AdmitHis-Test</stat>
+<stat name="AdmitHis-UI-Playwright" id="s1-s1" pass="2" fail="0" skip="0">AdmitHis-Test.AdmitHis-UI-Playwright</stat>
 </suite>
 </statistics>
 <errors>
-<msg time="2026-06-19T20:44:39.649900" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\AdmitRis-Api.robot' on line 262: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
-<msg time="2026-06-19T20:44:39.649900" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\AdmitRis-Api.robot' on line 277: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
-<msg time="2026-06-19T20:44:40.580402" level="WARN">executable_path is being deprecated. Please use service to configure the driver's executable_path as per documentation.</msg>
+<msg time="2026-06-26T02:34:26.547866" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\AdmitRis-Api.robot' on line 262: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2026-06-26T02:34:26.547866" level="WARN">Error in file 'D:\Payvand\Projects\HisAdmit-Playwright\AdmitHis-Test\AdmitRis-Api.robot' on line 277: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
 </errors>
 </robot>

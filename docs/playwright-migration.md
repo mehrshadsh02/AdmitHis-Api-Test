@@ -18,8 +18,8 @@ If either command is not recognized, install Node.js LTS and open a new
 PowerShell window so PATH is refreshed.
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-playwright.txt
-.\.venv\Scripts\rfbrowser.exe init
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\rfbrowser.exe init --skip-browsers
 ```
 
 If the virtual environment is not healthy, recreate it first and then install
@@ -59,14 +59,27 @@ py -3.13 -m venv .venv
 python -m pip install --upgrade pip
 python -m pip install robotframework robotframework-seleniumlibrary robotframework-requests robotframework-jsonlibrary robotframework-databaselibrary pymssql jdatetime allure-robotframework
 python -m pip install -r requirements-playwright.txt
-rfbrowser init
+rfbrowser init --skip-browsers
+```
+
+### Playwright browser download returns 403
+
+The official Playwright browser CDN can be blocked by location. This project is
+configured to use the installed Google Chrome channel instead of downloading
+Chromium. Use:
+
+```powershell
+rfbrowser init --skip-browsers
 ```
 
 ## Run The Playwright Smoke Suite
 
 ```powershell
-robot -d results-playwright .\AdmitHis-UI-Playwright.robot
+.\scripts\run-playwright.ps1
 ```
+
+The script adds `C:\Program Files\nodejs` to PATH for this run and keeps npm
+cache inside `.npm-cache`.
 
 ## Suggested Structure
 
