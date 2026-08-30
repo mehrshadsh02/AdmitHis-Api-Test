@@ -1,0 +1,87 @@
+================================================================================
+           HIS AUTOMATION TEST SUITE - QUICK COMMANDS & CHEATSHEET
+================================================================================
+
+--------------------------------------------------------------------------------
+1. SETUP & ENVIRONMENT PREPARATION
+--------------------------------------------------------------------------------
+# راه‌اندازی اولیه و ساخت خودکار محیط مجازی (توصیه شده)
+.\setup_env.bat
+
+# فعال‌سازی دسترسی اجرای اسکریپت‌ها در پاورشل (در صورت بروز خطای Execution Policy)
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+# فعال‌سازی دستی محیط مجازی در پاورشل
+.\venv\Scripts\Activate.ps1
+
+# نصب تمام پیش‌نیازها به صورت دستی از فایل requirements.txt
+.\venv\Scripts\pip.exe install -r requirements.txt
+
+# تست سلامت پکیج Allure در پایتون
+.\venv\Scripts\python.exe -c "import allure_robotframework; print('Allure is Ready!')"
+
+
+--------------------------------------------------------------------------------
+2. QUICK RUNNERS (BATCH & POWERSHELL SCRIPTS)
+--------------------------------------------------------------------------------
+# اجرای سریع تمام تست‌ها و باز شدن داشبورد Allure (با فایل Batch)
+.\run_tests.bat
+
+# اجرای تمام تست‌ها با پاورشل
+.\run_tests.ps1
+
+# اجرای تست‌های یک تگ خاص (مثال: متغیرهای عمومی API)
+.\run_tests.ps1 -Tag API_GeneralVariables
+
+# اجرای تست‌های لیست پزشکان
+.\run_tests.ps1 -Tag DOCTORS_LIST
+
+# اجرای یک سوئیت تستی خاص با تگ مشخص
+.\run_tests.ps1 -Suite AdmitHis-Api.robot -Tag SMOKE
+
+# اجرای تست‌ها برای CI/CD یا جنکینز (بدون باز شدن خودکار مرورگر)
+.\run_tests.ps1 -Tag API_GeneralVariables -OpenReport:$false
+
+
+--------------------------------------------------------------------------------
+3. DIRECT ROBOT FRAMEWORK COMMANDS (CMD / POWERSHELL)
+--------------------------------------------------------------------------------
+# اجرای مستقیم تمام تست‌ها به همراه خروجی Allure
+.\venv\Scripts\robot.exe --listener "allure_robotframework:results\allure-results" -d results -L INFO AdmitHis-Api.robot
+
+# اجرای فقط یک تگ خاص با تولید گزارش Allure
+.\venv\Scripts\robot.exe --listener "allure_robotframework:results\allure-results" -i API_GeneralVariables -d results -L INFO AdmitHis-Api.robot
+
+# اجرای چند تگ با هم (OR منطقی: تگ A یا تگ B)
+.\venv\Scripts\robot.exe --listener "allure_robotframework:results\allure-results" -i API_GeneralVariablesORDOCTORS_LIST -d results AdmitHis-Api.robot
+
+# اجرای فقط یک تست کیس تکی بر اساس نام دقیق آن
+.\venv\Scripts\robot.exe --listener "allure_robotframework:results\allure-results" -t "012-Get Doctors By Ward Id" -d results AdmitHis-Api.robot
+
+# اجرای تست‌ها به صورت ماژولار با Python
+.\venv\Scripts\python.exe -m robot --listener "allure_robotframework:results\allure-results" -d results AdmitHis-Api.robot
+
+
+--------------------------------------------------------------------------------
+4. ALLURE REPORT SERVER & VISUALIZATION
+--------------------------------------------------------------------------------
+# اجرای سرور لوکال Allure و باز کردن آنی داشبورد در مرورگر
+npx allure serve results/allure-results
+
+# ساخت پوشه گزارش استاتیک HTML آلور (مناسب برای آرشیو و جنکینز)
+npx allure generate results/allure-results -o results/allure-report --clean
+
+# باز کردن گزارش استاتیک تولید شده در پورت جدید
+npx allure open results/allure-report
+
+
+--------------------------------------------------------------------------------
+5. TROUBLESHOOTING & MAINTENANCE
+--------------------------------------------------------------------------------
+# پاک‌سازی نتایج و کش گزارش‌های قبلی
+Remove-Item -Path "results\*" -Recurse -Force
+
+# آپدیت کتابخانه‌ها به آخرین نسخه
+.\venv\Scripts\pip.exe install --upgrade robotframework allure-robotframework requests pymssql
+
+================================================================================

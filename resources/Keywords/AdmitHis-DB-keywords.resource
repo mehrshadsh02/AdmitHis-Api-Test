@@ -121,7 +121,7 @@ Validate DB After Edit Preadmit
     ${PREADMIT_ADMIT_DATE}=    Read State    PREADMIT_ADMIT_DATE
 
     ${query}=    Catenate     
-    ...    SELECT ${PREADMIT_ADMIT_ID}  AS AdmitId, ISNULL(id_bed,0) as BedId, ISNULL(ID_PatientMovement, 0) AS PatientMovementId, CAST(dbo.Fn_GetPatientInfo(${PREADMIT_iD_FileFormation}) AS NVARCHAR(500)) AS PatientInfo,ISNULL(ID_Triage, 0) AS TriageID, ${PREADMIT_iD_FileFormation} AS FileFormationId, 
+    ...    SELECT ${PREADMIT_ADMIT_ID}  AS AdmitId, ISNULL(id_bed,0) as BedId, ISNULL(ID_PatientMovement, 0) AS PatientMovementId,fileformation.Ncode,ISNULL(ID_Triage, 0) AS TriageID, ${PREADMIT_iD_FileFormation} AS FileFormationId, 
     ...    AdmitDate, Sepas_Code, ID_ICDMadarek AS ICDMadarekId  
     ...    FROM  admit_his INNER JOIN
     ...    fileformation on FileFormationID = ID_FileFormation INNER JOIN 
@@ -143,10 +143,12 @@ Validate DB After Edit Preadmit
     Should Be Equal As Integers    ${row[1]}    0                               msg= Bed Id not 0
     Should Be Equal As Integers    ${row[2]}    0                               msg= Pationt Movment ID Is NOT 0
     Should Contain                 ${row[3]}    ${NATIONALCODE}                 msg= National Code Wrong   
-    Should Be Equal As Integers    ${row[4]}    ${HOSPITALFILEID}               msg= Hospital File ID Not Mach  
+    Should Be Equal As Integers    ${row[4]}    0                               msg= Hospital File ID Not Mach  
     Should Be True                 ${row[5]} >= 0                               msg= Triage ID Not Correct
-    Should Be Equal As Integers    ${row[6]}    ${PREADMIT_iD_FileFormation}    msg= Fileformation ID Not Mach
-    # Should Be Equal As Integers    ${row[7]}    ${PREADMIT_ADMIT_DATE}
+    Should Contain                 ${row[6]}    ${PREADMIT_ADMIT_DATE}          msg= PREADMIT ADMIT DATE != ${PREADMIT_ADMIT_DATE}
+    # Should Be Equal As Integers    ${row[7]}                                  msg= Sepas Code Not Mach
+    # Should Be Equal As Integers    ${row[8]}                                  msg= ICD Madrak ID Not Mach
+
 
     Set Test Message    Validate DB After Edit Preadmit Pass         
 

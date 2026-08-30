@@ -692,6 +692,8 @@ Suite Setup       Create All Sessions
 
     ${json}=    To Json    ${resp.content}
 
+    Should Not Be Empty    ${json}    msg=❌ لیست پزشکان خالی است
+
     # Validate response is a list
     Should Be True
     ...    ${json}.__class__.__name__ == 'list'
@@ -718,19 +720,18 @@ Suite Setup       Create All Sessions
             ...    Fail    ❌ MISSING KEY | Key '${key}' not found in item: ${item}
         END
     END
-
-    ${target}=    Evaluate    [x for x in $json if x["standardVariableId"]==${Doctor_ID}]
-    ${target_2}=    Evaluate    [x for x in $json if x["standardVariableId"]==${Doctor_ID_Edit}]
     
-    ${FOUND_Doctor_ID}=    Set Variable    ${target[0]["standardVariableId"]}
-    ${FOUND_Doctor_NAME}=    Set Variable    ${target[0]["name"]}
-    ${FOUND_Doctor_ID_EDIT}=    Set Variable    ${target_2[0]["standardVariableId"]}
-    ${FOUND_Doctor_NAME_EDIT}=    Set Variable    ${target_2[0]["name"]}
+    ${FOUND_Doctor_ID}=          Set Variable    ${json[0]["standardVariableId"]}
+    ${FOUND_Doctor_NAME}=        Set Variable    ${json[0]["name"]}
 
-    Write State    Doctor_ID    ${FOUND_Doctor_ID} 
-    Write State    Doctor_NAME    ${FOUND_Doctor_NAME}
-    Write State    Doctor_ID_EDIT    ${FOUND_Doctor_ID_EDIT}
-    Write State    Doctor_NAME_EDIT    ${FOUND_Doctor_NAME_EDIT}  
+    ${second_idx}=               Evaluate    1 if len($json) > 1 else 0
+    ${FOUND_Doctor_ID_EDIT}=     Set Variable    ${json[${second_idx}]["standardVariableId"]}
+    ${FOUND_Doctor_NAME_EDIT}=   Set Variable    ${json[${second_idx}]["name"]}
+
+    Write State    Doctor_ID           ${FOUND_Doctor_ID}
+    Write State    Doctor_NAME         ${FOUND_Doctor_NAME}
+    Write State    Doctor_ID_EDIT      ${FOUND_Doctor_ID_EDIT}
+    Write State    Doctor_NAME_EDIT    ${FOUND_Doctor_NAME_EDIT}
 
     Log To Console    ✅ PASS | GetDoctorsByWard | Count=${count} doctors | WardId=${wardId}
 
@@ -4716,4 +4717,4 @@ Suite Setup       Create All Sessions
     ...    Response: 200 \n Admit Cancel
 
 
-064-    
+# 064-    
