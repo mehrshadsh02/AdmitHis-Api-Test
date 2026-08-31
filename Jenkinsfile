@@ -14,101 +14,98 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout Source Code') {
             steps {
-                echo 'Pulling latest code from GitHub repository...'
+                echo 'Pulling latest code from Git repository...'
                 checkout scm
             }
         }
 
-        stage('Setup Environment (Inline)') {
+        stage('Setup Environment') {
             steps {
-                echo 'Creating venv and installing dependencies (inline, no setup_env.bat)...'
-                bat '''
-                    @echo off
-                    chcp 65001 > nul
+                echo 'Creating venv and installing dependencies...'
+                bat '''@echo off
+chcp 65001 > nul
+echo ========================================================
+echo   HIS Test Environment Setup
+echo ========================================================
 
-                    echo ========================================================
-                    echo   HIS Test Environment Setup
-                    echo ========================================================
+REM 1. Check Python
+python --version > nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] Python is not installed or not in PATH!
+    exit /b 1
+)
 
-                    REM 1. Check Python
-                    python --version > nul 2>&1
-                    if %ERRORLEVEL% NEQ 0 (
-                        echo [ERROR] Python is not installed or not in PATH!
-                        exit /b 1 Create v )
+REM 2. Create venv
+if not exist "venv\\Scripts\\python.exe" (
+    echo [*] Creating fresh virtual environment (venv)...
+    python -m venv venv
+    if %ERRORLEVEL% NEQ 0 (
+        echo [ERROR] Failed to create virtual environment!
+        exit /b 1
+    )
+) else (
+    echo [*] Virtual environment already exists.
+)
 
-                    REM 2. Create venv
-                    if not exist "venv\\Scripts\\python.exe" (
-                        echo [*] Creating fresh virtual environment (venv)...
-                        python -m venv venv
-                        if %ERRORLEVEL% NEQ 0 exit /b 1
-                    ) else (
-                        echo [*] Virtual environment already exists.
-                    )
-
-                    REM 3. Install requirements
-                    if exist "requirements.txt" (
-                        echo [*] Installing/Updating dependencies from requirements.txt...
-                        call "venv\\Scripts\\python.exe" -m pip install --upgrade pip
-                        call "venv\\Scripts\\python.exe" -m pip install -r requirements.txt
-
-                        if %ERRORLEVEL% EQU 0 (
-                            echo.
-                            echo ========================================================
-                            echo   [ to install requirements is ready!
-                            echo ========================================================
-                        ) else (
-                            echo [ERROR] Failed to install requirements!
-                            exit /b 1
-                        )
-                    ) else (
-                        echo [ERROR] requirements.txt not found in the current directory!
-                        exit /b 1
-                    )
-                '''
+REM 3. Install requirements
+if exist "requirements.txt" (
+    echo [*] Installing/Updating dependencies from requirements.txt...
+    call "venv\\Scripts\\python.exe" -m pip install --upgrade pip
+    call "venv\\Scripts\\python.exe" -m pip install -r requirements.txt
+    if %ERRORLEVEL% NEQ 0 (
+        echo [ERROR] Failed to install requirements!
+        exit /b 1
+    )
+    echo ========================================================
+    echo   [SUCCESS] Environment is ready!
+    echo ========================================================
+) else (
+    echo [ERROR] requirements.txt not found!
+    exit /b 1
+)
+'''
             }
         }
 
-        stage('Execute Automation Tests (Inline)') {
+        stage('Execute Automation Tests') {
             steps {
-                echo 'Running Robot Framework tests (inline, no run_tests.bat)...'
-                bat '''
-                    @echo off
-                    chcp 65001 > nul
+                echo 'Running Robot Framework tests...'
+                bat '''@echo off
+chcp 65001 > nul
+echo ========================================================
+echo   [RUNNER] Running HIS Automation Tests (Robot Framework)
+echo ========================================================
 
-                    echo ========================================================
-                    echo   [RUNNER] Running   [RUNNER] Running HIS Automation Tests (Robot Framework)
-                    echo ========================================================
-                    echo Check venv
-                    if not exist "venv\\Scripts\\robot.exe" (
-                        echo [ERROR] Virtual environment venv or robot.exe was not found!
-                        exit /b 1
-                    )
+REM 1. Check venv and robot.exe
+if not exist "venv\\Scripts\\robot.exe" (
+    echo [ERROR] Virtual environment venv or robot.exe was not found!
+    exit /b 1
+)
 
-                    REM 2. Ensure results folder exists
-                    if not exist "results\\allure-results" (
-                        mkdir "results\\allure-results" > nul 2>&1
-                    )
+REM 2. Ensure results folder exists
+if not exist "results\\allure-results" (
+    mkdir "results\\allure-results" > nul 2>&1
+)
 
-                    REM 3. Execute tests with Allure Listener
-                    echo [*] Executing AdmitHis-Api.robot with Allure Listener...
-                    call venv\\Scripts\\robot.exe --listener "allure_robotframework:results\\allure-results" -d results -L INFO --consolecolors on AdmitHis-Api.robot
+REM 3. Execute tests with Allure Listener
+echo [*] Executing AdmitHis-Api.robot with Allure Listener...
+call "venv\\Scripts\\robot.exe" --listener "allure_robotframework:results\\allure-results" -d results -L INFO --consolecolors on AdmitHis-Api.robot
 
-                    set TEST_EXIT_CODE=%ERRORLEVEL%
+set TEST_EXIT_CODE=%ERRORLEVEL%
 
-                    echo.
-                    echo ========================================================
-                    if %TEST_EXIT_CODE% EQU 0 (
-                        echo   [RESULT: PASS] All tests finished successfully!
-                    ) else (
-                        echo   [RESULT: FAIL] Some tests failed (Exit Code: %TEST_EXIT_CODE%^).
-                    )
-                    echo ========================================================
+echo.
+echo ========================================================
+if %TEST_EXIT_CODE% EQU 0 (
+    echo   [RESULT: PASS] All tests finished successfully!
+) else (
+    echo   [RESULT: FAIL] Some tests failed with exit code %TEST_EXIT_CODE%.
+)
+echo ========================================================
 
-                    exit /b %TEST_EXIT_CODE%
-                '''
+exit /b %TEST_EXIT_CODE%
+'''
             }
         }
     }
@@ -119,7 +116,7 @@ pipeline {
             echo '  Publishing Reports & Artifacts'
             echo '========================================================'
 
-            // 1. گزارش استاندارد Robot Framework
+            // ۱. گزارش و لاگ استاندارد Robot Framework
             publishHTML(target: [
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
@@ -138,7 +135,7 @@ pipeline {
                 reportName: 'Robot Framework Log'
             ])
 
-            // 2. داش allureورد Allure (در صورت نصب Allure Plugin)
+            // ۲. تولید داشبورد Allure Report
             script {
                 try {
                     allure([
@@ -148,21 +145,19 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'results/allure-results']]
                     ])
-}"
-                }
-           Exception e) {
-                    echo "Allure Report Step Note: ${e.message}"
+                } catch (Exception e) {
+                    echo "Allure publication step info: ${e.message}"
                 }
             }
 
-            // 3. آرشیو نتایج
+            // ۳. آرشیو فایل‌های خروجی
             archiveArtifacts artifacts: 'results/**/*', allowEmptyArchive: true
         }
         success {
-            echo 'All tests executed and passed successfully!'
+            echo '🎉 All tests executed and passed successfully!'
         }
         failure {
-            echo 'Some tests failed or the pipeline execution had an error.'
+            echo '⚠️ Pipeline completed with test failures or errors.'
         }
     }
 }
