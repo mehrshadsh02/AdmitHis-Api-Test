@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     options {
+        skipDefaultCheckout(true)
         timeout(time: 30, unit: 'MINUTES')
         buildDiscarder(logRotator(numToKeepStr: '20'))
         timestamps()
@@ -26,21 +27,27 @@ pipeline {
                 echo 'Creating venv and installing dependencies...'
                 bat '''@echo off
 chcp 65001 > nul
+setlocal
+
 echo ========================================================
 echo   HIS Test Environment Setup
 echo ========================================================
 
-REM 1. Check Python
-python --version > nul 2>&1
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERROR] Python is not installed or not in PATH!
+REM 1. Set explicit Python path
+set "PY_BIN=C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python314\\python.exe"
+
+if not exist "%PY_BIN%" (
+    echo [ERROR] Python executable was not found at: %PY_BIN%
     exit /b 1
 )
+
+echo [*] Using Python: %PY_BIN%
+"%PY_BIN%" --version
 
 REM 2. Create venv
 if not exist "venv\\Scripts\\python.exe" (
     echo [*] Creating fresh virtual environment (venv)...
-    python -m venv venv
+    "%PY_BIN%" -m venv venv
     if %ERRORLEVEL% NEQ 0 (
         echo [ERROR] Failed to create virtual environment!
         exit /b 1
@@ -51,7 +58,7 @@ if not exist "venv\\Scripts\\python.exe" (
 
 REM 3. Install requirements
 if exist "requirements.txt" (
-    echo [*] Installing/Updating dependencies from requirements.txt...
+    echo [*] Upgrading pip and installing requirements...
     call "venv\\Scripts\\python.exe" -m pip install --upgrade pip
     call "venv\\Scripts\\python.exe" -m pip install -r requirements.txt
     if %ERRORLEVEL% NEQ 0 (
@@ -65,6 +72,8 @@ if exist "requirements.txt" (
     echo [ERROR] requirements.txt not found!
     exit /b 1
 )
+
+endlocal
 '''
             }
         }
