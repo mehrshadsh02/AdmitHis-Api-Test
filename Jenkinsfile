@@ -25,96 +25,100 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 echo 'Creating venv and installing dependencies...'
-                bat '''@echo off
-chcp 65001 > nul
-setlocal
+                bat '''
+                @echo off
+                chcp 65001 > nul
+                setlocal enabledelayedexpansion
 
-echo ========================================================
-echo   HIS Test Environment Setup
-echo ========================================================
+                echo ========================================================
+                echo   HIS Test Environment Setup
+                echo ========================================================
 
-REM 1. Set explicit Python path
-set "PY_BIN=C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python314\\python.exe"
+                REM 1. Set explicit Python path
+                set "PY_BIN=C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python314\\python.exe"
 
-if not exist "%PY_BIN%" (
-    echo [ERROR] Python executable was not found at: %PY_BIN%
-    exit /b 1
-)
+                if not exist "!PY_BIN!" (
+                    echo [ERROR] Python executable was not found at: !PY_BIN!
+                    exit /b 1
+                )
 
-echo [*] Using Python: %PY_BIN%
-"%PY_BIN%" --version
+                echo [*] Using Python: !PY_BIN!
+                "!PY_BIN!" --version
 
-REM 2. Create venv
-if not exist "venv\\Scripts\\python.exe" (
-    echo [*] Creating fresh virtual environment (venv)...
-    "%PY_BIN%" -m venv venv
-    if %ERRORLEVEL% NEQ 0 (
-        echo [ERROR] Failed to create virtual environment!
-        exit /b 1
-    )
-) else (
-    echo [*] Virtual environment already exists.
-)
+                REM 2. Create venv
+                if not exist "venv\\Scripts\\python.exe" (
+                    echo [*] Creating fresh virtual environment (venv)...
+                    "!PY_BIN!" -m venv venv
+                    if !ERRORLEVEL! NEQ 0 (
+                        echo [ERROR] Failed to create virtual environment!
+                        exit /b 1
+                    )
+                ) else (
+                    echo [*] Virtual environment already exists.
+                )
 
-REM 3. Install requirements
-if exist "requirements.txt" (
-    echo [*] Upgrading pip and installing requirements...
-    call "venv\\Scripts\\python.exe" -m pip install --upgrade pip
-    call "venv\\Scripts\\python.exe" -m pip install -r requirements.txt
-    if %ERRORLEVEL% NEQ 0 (
-        echo [ERROR] Failed to install requirements!
-        exit /b 1
-    )
-    echo ========================================================
-    echo   [SUCCESS] Environment is ready!
-    echo ========================================================
-) else (
-    echo [ERROR] requirements.txt not found!
-    exit /b 1
-)
+                REM 3. Install requirements
+                if exist "requirements.txt" (
+                    echo [*] Upgrading pip and installing requirements...
+                    call "venv\\Scripts\\python.exe" -m pip install --upgrade pip
+                    call "venv\\Scripts\\python.exe" -m pip install -r requirements.txt
+                    if !ERRORLEVEL! NEQ 0 (
+                        echo [ERROR] Failed to install requirements!
+                        exit /b 1
+                    )
+                    echo ========================================================
+                    echo   [SUCCESS] Environment is ready!
+                    echo ========================================================
+                ) else (
+                    echo [ERROR] requirements.txt not found!
+                    exit /b 1
+                )
 
-endlocal
-'''
+                endlocal
+                '''
             }
         }
 
         stage('Execute Automation Tests') {
             steps {
                 echo 'Running Robot Framework tests...'
-                bat '''@echo off
-chcp 65001 > nul
-echo ========================================================
-echo   [RUNNER] Running HIS Automation Tests (Robot Framework)
-echo ========================================================
+                bat '''
+                @echo off
+                chcp 65001 > nul
+                setlocal enabledelayedexpansion
 
-REM 1. Check venv and robot.exe
-if not exist "venv\\Scripts\\robot.exe" (
-    echo [ERROR] Virtual environment venv or robot.exe was not found!
-    exit /b 1
-)
+                echo ========================================================
+                echo   [RUNNER] Running HIS Automation Tests (Robot Framework)
+                echo ========================================================
 
-REM 2. Ensure results folder exists
-if not exist "results\\allure-results" (
-    mkdir "results\\allure-results" > nul 2>&1
-)
+                REM 1. Check venv and robot.exe
+                if not exist "venv\\Scripts\\robot.exe" (
+                    echo [ERROR] Virtual environment venv or robot.exe was not found!
+                    exit /b 1
+                )
 
-REM 3. Execute tests with Allure Listener
-echo [*] Executing AdmitHis-Api.robot with Allure Listener...
-call "venv\\Scripts\\robot.exe" --listener "allure_robotframework:results\\allure-results" -d results -L INFO --consolecolors on AdmitHis-Api.robot
+                REM 2. Ensure results folder exists
+                if not exist "results\\allure-results" (
+                    mkdir "results\\allure-results"
+                )
 
-set TEST_EXIT_CODE=%ERRORLEVEL%
+                REM 3. Execute tests with Allure Listener
+                echo [*] Executing AdmitHis-Api.robot with Allure Listener...
+                call "venv\\Scripts\\robot.exe" --listener "allure_robotframework:results\\allure-results" -d results -L INFO --consolecolors on AdmitHis-Api.robot
 
-echo.
-echo ========================================================
-if %TEST_EXIT_CODE% EQU 0 (
-    echo   [RESULT: PASS] All tests finished successfully!
-) else (
-    echo   [RESULT: FAIL] Some tests failed with exit code %TEST_EXIT_CODE%.
-)
-echo ========================================================
+                set TEST_EXIT_CODE=!ERRORLEVEL!
 
-exit /b %TEST_EXIT_CODE%
-'''
+                echo.
+                echo ========================================================
+                if !TEST_EXIT_CODE! EQU 0 (
+                    echo   [RESULT: PASS] All tests finished successfully!
+                ) else (
+                    echo   [RESULT: FAIL] Some tests failed with exit code !TEST_EXIT_CODE!.
+                )
+                echo ========================================================
+
+                exit /b !TEST_EXIT_CODE!
+                '''
             }
         }
     }
@@ -125,7 +129,6 @@ exit /b %TEST_EXIT_CODE%
             echo '  Publishing Reports & Artifacts'
             echo '========================================================'
 
-            // ۱. گزارش و لاگ استاندارد Robot Framework
             publishHTML(target: [
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
@@ -144,7 +147,6 @@ exit /b %TEST_EXIT_CODE%
                 reportName: 'Robot Framework Log'
             ])
 
-            // ۲. تولید داشبورد Allure Report
             script {
                 try {
                     allure([
@@ -159,7 +161,6 @@ exit /b %TEST_EXIT_CODE%
                 }
             }
 
-            // ۳. آرشیو فایل‌های خروجی
             archiveArtifacts artifacts: 'results/**/*', allowEmptyArchive: true
         }
         success {
