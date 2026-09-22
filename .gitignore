@@ -1,0 +1,35 @@
+# ==============================================================================
+# HIS Automation Test - Git Ignore Rules
+# ==============================================================================
+
+# 1. پوشه نتایج تست‌ها و آرتیفکت‌های Allure / Robot
+results/
+allure-results/
+allure-report/
+
+# 2. فایل‌های تست در حال توسعه ماژول RIS
+AdmitRis-Api.robot
+AdmitRis.robot
+
+# 3. محیط مجازی پایتون (Virtual Environment)
+venv/
+.venv/
+env/
+
+# 4. فایل‌های موقت پایتون و بایت‌کدها
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 5. فایل‌های تنظیمات محیطی و لاگ‌های سیستمی
+*.log
+.env
+.env.local
+
+# 6. فایل‌های اختصاصی IDEها (VS Code, JetBrains)
+.vscode/
+.idea/
+
+# 7. پوشه‌های پکیج‌منیجر جاوا اسکریپت (در صورت استفاده از ابزارهای NPM)
+node_modules/
+.allure/
